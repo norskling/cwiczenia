@@ -82,104 +82,507 @@ input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1
 .text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
 .text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
 .text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
 </style>
 </head>
 <body>
 <main class="wrap">
   <span class="pill">Norskling · B1 · Lekcja 28</span>
-  <h1>Prawa człowieka: <span>liczba mnoga i słownictwo</span></h1>
+  <h1>Prawa człowieka: <span>pełna powtórka</span></h1>
   <div class="bar"></div>
-  <p class="intro">Powtórka po lekcji „Menneskerettigheter”: nieregularna liczba mnoga, nazwy praw, strona bierna i mowa zależna.</p>
-  <div class="meta"><span>Gramatyka + słownictwo</span><span>ok. 20 min</span><span>10 zadań</span></div>
-  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 10</b></div>
+  <p class="intro">Duży zestaw po lekcji „Menneskerettigheter”: słownictwo, przekształcenia, liczba mnoga, szyk, poprawianie błędów i tekst. Możesz robić go w kilku podejściach.</p>
+  <div class="meta"><span>Gramatyka + słownictwo</span><span>ok. 40 min</span><span>60 zadań</span><span>6 części</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 60</b></div>
   
+<h2 class="part">Część A: Słownictwo</h2><p class="partintro">Synonimy, przeciwieństwa i definicje ze słownictwa lekcji.</p>
 <section class="task" data-id="1">
-<h2>1. Liczba mnoga</h2>
-<p class="hint">en rettighet → ?</p>
-<div class="inline sent">Kvinner og menn skal ha like <input type="text" id="t1" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">.</div>
-<div class="row"><button class="btn" onclick="checkText(1,[&quot;rettigheter&quot;],&quot;Dobrze. En rettighet → rettigheter.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(1)">Pokaż odpowiedź</button></div>
+<h2>1. Wybierz synonim</h2>
+<p class="hint">„<b>uavhengig av</b> kjønn og alder”</p>
+<div class="opts" data-q="1" data-correct="uansett" data-ok="Dobrze. Uavhengig av = uansett.">
+<button class="opt">uansett</button><button class="opt">på grunn av</button><button class="opt">i stedet for</button>
+</div>
 <div class="fb" id="f1"></div>
-<div class="sol" id="s1">Wzorcowa odpowiedź: <b>rettigheter</b></div>
 </section>
 <section class="task" data-id="2">
-<h2>2. Liczba mnoga</h2>
-<p class="hint">et menneske → ?</p>
-<div class="inline sent">Alle <input type="text" id="t2" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> har de samme grunnleggende rettighetene.</div>
-<div class="row"><button class="btn" onclick="checkText(2,[&quot;mennesker&quot;],&quot;Dobrze. Et menneske → mennesker.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(2)">Pokaż odpowiedź</button></div>
+<h2>2. Co to znaczy?</h2>
+<p class="hint">„Kvinner skal ikke være <b>sårbare</b>.”</p>
+<div class="opts" data-q="2" data-correct="lett å skade, trenger beskyttelse" data-ok="Dobrze. Sårbar = wrażliwy, narażony.">
+<button class="opt">lett å skade, trenger beskyttelse</button><button class="opt">veldig sterke</button><button class="opt">sinte</button>
+</div>
 <div class="fb" id="f2"></div>
-<div class="sol" id="s2">Wzorcowa odpowiedź: <b>mennesker</b></div>
 </section>
 <section class="task" data-id="3">
-<h2>3. Liczba mnoga</h2>
-<p class="hint">et barn → ?</p>
-<div class="inline sent">Alle <input type="text" id="t3" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> har rett til utdanning.</div>
-<div class="row"><button class="btn" onclick="checkText(3,[&quot;barn&quot;],&quot;Dobrze. Et barn → barn: jednosylabowe rzeczowniki nijakie nie mają końcówki.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(3)">Pokaż odpowiedź</button></div>
+<h2>3. Wybierz synonim</h2>
+<p class="hint">„<b>sikre</b> at ingen blir torturert”</p>
+<div class="opts" data-q="3" data-correct="sørge for" data-ok="Dobrze. Sikre at = sørge for at.">
+<button class="opt">sørge for</button><button class="opt">hindre</button><button class="opt">glemme</button>
+</div>
 <div class="fb" id="f3"></div>
-<div class="sol" id="s3">Wzorcowa odpowiedź: <b>barn</b></div>
 </section>
 <section class="task" data-id="4">
-<h2>4. Liczba mnoga</h2>
-<p class="hint">ei bok → ?</p>
-<div class="inline sent">Mange <input type="text" id="t4" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> handler om ytringsfrihet.</div>
-<div class="row"><button class="btn" onclick="checkText(4,[&quot;bøker&quot;],&quot;Dobrze. Ei bok → bøker, z przegłosem o → ø.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(4)">Pokaż odpowiedź</button></div>
+<h2>4. Co to znaczy?</h2>
+<p class="hint">„et liv i frihet og <b>verdighet</b>”</p>
+<div class="opts" data-q="4" data-correct="respekt for menneskets verdi" data-ok="Dobrze. Verdighet = godność.">
+<button class="opt">respekt for menneskets verdi</button><button class="opt">rikdom</button><button class="opt">makt</button>
+</div>
 <div class="fb" id="f4"></div>
-<div class="sol" id="s4">Wzorcowa odpowiedź: <b>bøker</b></div>
 </section>
 <section class="task" data-id="5">
-<h2>5. Wybierz synonim</h2>
-<p class="hint">„Alle har rettigheter, <b>uavhengig av</b> kjønn og alder.”</p>
-<div class="opts" data-q="5" data-correct="uansett" data-ok="Dobrze. Uavhengig av = niezależnie od = uansett.">
-<button class="opt">uansett</button><button class="opt">på grunn av</button><button class="opt">i stedet for</button>
+<h2>5. Wybierz przeciwieństwo</h2>
+<p class="hint">Przeciwieństwo słowa <b>urettferdig</b>:</p>
+<div class="opts" data-q="5" data-correct="rettferdig" data-ok="Dobrze.">
+<button class="opt">rettferdig</button><button class="opt">ulovlig</button><button class="opt">farlig</button>
 </div>
 <div class="fb" id="f5"></div>
 </section>
 <section class="task" data-id="6">
-<h2>6. Dopasuj prawa</h2>
-<p class="hint">Wybierz norweską definicję każdego prawa.</p>
-<div class="match">
-<span class="w">ytringsfrihet</span><select id="m6_0"><option value="">wybierz…</option><option>retten til å si hva du mener</option><option>retten til å starte og være med i foreninger</option><option>retten til å stemme ved valg</option><option>retten til å tro på det du vil</option></select>
-<span class="w">stemmerett</span><select id="m6_1"><option value="">wybierz…</option><option>retten til å si hva du mener</option><option>retten til å starte og være med i foreninger</option><option>retten til å stemme ved valg</option><option>retten til å tro på det du vil</option></select>
-<span class="w">religionsfrihet</span><select id="m6_2"><option value="">wybierz…</option><option>retten til å si hva du mener</option><option>retten til å starte og være med i foreninger</option><option>retten til å stemme ved valg</option><option>retten til å tro på det du vil</option></select>
-<span class="w">organisasjonsfrihet</span><select id="m6_3"><option value="">wybierz…</option><option>retten til å si hva du mener</option><option>retten til å starte og være med i foreninger</option><option>retten til å stemme ved valg</option><option>retten til å tro på det du vil</option></select>
+<h2>6. Co to znaczy?</h2>
+<p class="hint">„<b>I utgangspunktet</b> handler menneskerettigheter om respekt.”</p>
+<div class="opts" data-q="6" data-correct="w zasadzie" data-ok="Dobrze.">
+<button class="opt">w zasadzie</button><button class="opt">na końcu</button><button class="opt">przypadkiem</button>
 </div>
-<button class="btn" onclick='checkMatch(6,{&quot;m6_0&quot;: &quot;retten til å si hva du mener&quot;, &quot;m6_1&quot;: &quot;retten til å stemme ved valg&quot;, &quot;m6_2&quot;: &quot;retten til å tro på det du vil&quot;, &quot;m6_3&quot;: &quot;retten til å starte og være med i foreninger&quot;})'>Sprawdź</button>
 <div class="fb" id="f6"></div>
 </section>
 <section class="task" data-id="7">
-<h2>7. Strona bierna (-s)</h2>
-<p class="given">Man må respektere alle religioner.</p>
-<div class="rw"><span>Alle religioner må</span><input type="text" id="t7" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
-<div class="row"><button class="btn" onclick="checkText(7,[&quot;respekteres&quot;, &quot;bli respektert&quot;],&quot;Dobrze. Po czasowniku modalnym: bezokolicznik + -s.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(7)">Pokaż odpowiedź</button></div>
+<h2>7. Dopasuj prawa</h2>
+<p class="hint">Wybierz norweską definicję.</p>
+<div class="match">
+<span class="w">ytringsfrihet</span><select id="m7_0"><option value="">wybierz…</option><option>retten til å si hva du mener</option><option>retten til å starte og være med i foreninger</option><option>retten til å stemme ved valg</option><option>retten til å tro på det du vil</option></select>
+<span class="w">stemmerett</span><select id="m7_1"><option value="">wybierz…</option><option>retten til å si hva du mener</option><option>retten til å starte og være med i foreninger</option><option>retten til å stemme ved valg</option><option>retten til å tro på det du vil</option></select>
+<span class="w">religionsfrihet</span><select id="m7_2"><option value="">wybierz…</option><option>retten til å si hva du mener</option><option>retten til å starte og være med i foreninger</option><option>retten til å stemme ved valg</option><option>retten til å tro på det du vil</option></select>
+<span class="w">organisasjonsfrihet</span><select id="m7_3"><option value="">wybierz…</option><option>retten til å si hva du mener</option><option>retten til å starte og være med i foreninger</option><option>retten til å stemme ved valg</option><option>retten til å tro på det du vil</option></select>
+</div>
+<button class="btn" onclick='checkMatch(7,{&quot;m7_0&quot;: &quot;retten til å si hva du mener&quot;, &quot;m7_1&quot;: &quot;retten til å stemme ved valg&quot;, &quot;m7_2&quot;: &quot;retten til å tro på det du vil&quot;, &quot;m7_3&quot;: &quot;retten til å starte og være med i foreninger&quot;})'>Sprawdź</button>
 <div class="fb" id="f7"></div>
-<div class="sol" id="s7">Wzorcowa odpowiedź: <b>Alle religioner må respekteres.</b></div>
 </section>
 <section class="task" data-id="8">
-<h2>8. Mowa zależna</h2>
-<p class="given">Hun sa: «Jeg har blitt diskriminert på jobben.»</p>
-<div class="rw"><span>Hun sa at</span><input type="text" id="t8" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
-<div class="row"><button class="btn" onclick="checkText(8,[&quot;hun hadde blitt diskriminert på jobben&quot;, &quot;hun har blitt diskriminert på jobben&quot;],&quot;Dobrze. Perfektum cofa się do pluskwamperfektum: har blitt → hadde blitt.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(8)">Pokaż odpowiedź</button></div>
+<h2>8. Dopasuj tłumaczenie</h2>
+<p class="hint">Wybierz polskie tłumaczenie.</p>
+<div class="match">
+<span class="w">legning</span><select id="m8_0"><option value="">wybierz…</option><option>naruszenie</option><option>orientacja</option><option>płeć</option><option>uwięziony</option></select>
+<span class="w">kjønn</span><select id="m8_1"><option value="">wybierz…</option><option>naruszenie</option><option>orientacja</option><option>płeć</option><option>uwięziony</option></select>
+<span class="w">fengslet</span><select id="m8_2"><option value="">wybierz…</option><option>naruszenie</option><option>orientacja</option><option>płeć</option><option>uwięziony</option></select>
+<span class="w">et brudd</span><select id="m8_3"><option value="">wybierz…</option><option>naruszenie</option><option>orientacja</option><option>płeć</option><option>uwięziony</option></select>
+</div>
+<button class="btn" onclick='checkMatch(8,{&quot;m8_0&quot;: &quot;orientacja&quot;, &quot;m8_1&quot;: &quot;płeć&quot;, &quot;m8_2&quot;: &quot;uwięziony&quot;, &quot;m8_3&quot;: &quot;naruszenie&quot;})'>Sprawdź</button>
 <div class="fb" id="f8"></div>
-<div class="sol" id="s8">Wzorcowa odpowiedź: <b>Hun sa at hun hadde blitt diskriminert på jobben.</b></div>
 </section>
 <section class="task" data-id="9">
-<h2>9. Co to znaczy?</h2>
-<p class="hint">„Kvinner skal ikke være <b>sårbare</b>.”</p>
-<div class="opts" data-q="9" data-correct="lett å skade, trenger beskyttelse" data-ok="Dobrze. Sårbar = wrażliwy, narażony na zranienie.">
-<button class="opt">lett å skade, trenger beskyttelse</button><button class="opt">veldig sterke</button><button class="opt">sinte</button>
+<h2>9. Które słowo nie pasuje?</h2>
+<p class="hint">Trzy słowa to prawa. Co nie jest prawem?</p>
+<div class="opts" data-q="9" data-correct="tortur" data-ok="Dobrze. Tortur jest zakazana.">
+<button class="opt">ytringsfrihet</button><button class="opt">religionsfrihet</button><button class="opt">stemmerett</button><button class="opt">tortur</button>
 </div>
 <div class="fb" id="f9"></div>
 </section>
 <section class="task" data-id="10">
-<h2>10. Popraw błąd</h2>
-<div class="inline sent">Det er mange hvite <b>husene</b> i nabolaget. → <input type="text" id="t10" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
-<div class="row"><button class="btn" onclick="checkText(10,[&quot;hus&quot;],&quot;Dobrze. Po „mange” forma nieokreślona: et hus → hus.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(10)">Pokaż odpowiedź</button></div>
+<h2>10. Uzupełnij wyrażenie</h2>
+<div class="inline sent">Ingen skal bli fengslet uten lov og <input type="text" id="t10" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">.</div>
+<div class="row"><button class="btn" onclick="checkText(10,[&quot;dom&quot;],&quot;Dobrze. Uten lov og dom = bez sądu i wyroku.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(10)">Pokaż odpowiedź</button></div>
 <div class="fb" id="f10"></div>
-<div class="sol" id="s10">Wzorcowa odpowiedź: <b>hus</b></div>
+<div class="sol" id="s10">Wzorcowa odpowiedź: <b>dom</b></div>
 </section>
-  <div class="done" id="done"><h2>Wszystko zrobione: 10 / 10</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+<h2 class="part">Część B: Przekształcanie zdań</h2><p class="partintro">Przepisz zdanie tak, żeby znaczyło to samo. Początek jest podany, dopisz resztę.</p>
+<section class="task" data-id="11">
+<h2>11. Strona bierna (-s)</h2>
+<p class="given">Man må respektere alle religioner.</p>
+<div class="rw"><span>Alle religioner må</span><input type="text" id="t11" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(11,[&quot;respekteres&quot;, &quot;bli respektert&quot;],&quot;Dobrze. Respekteres.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(11)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f11"></div>
+<div class="sol" id="s11">Wzorcowa odpowiedź: <b>Alle religioner må respekteres</b></div>
+</section>
+<section class="task" data-id="12">
+<h2>12. Mowa zależna</h2>
+<p class="given">Hun sa: «Jeg har blitt diskriminert på jobben.»</p>
+<div class="rw"><span>Hun sa at</span><input type="text" id="t12" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(12,[&quot;hun hadde blitt diskriminert på jobben&quot;, &quot;hun har blitt diskriminert på jobben&quot;],&quot;Dobrze. Har blitt → hadde blitt.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(12)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f12"></div>
+<div class="sol" id="s12">Wzorcowa odpowiedź: <b>Hun sa at hun hadde blitt diskriminert på jobben</b></div>
+</section>
+<section class="task" data-id="13">
+<h2>13. Strona bierna</h2>
+<p class="given">Politiet fengslet journalisten uten dom.</p>
+<div class="rw"><span>Journalisten ble</span><input type="text" id="t13" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(13,[&quot;fengslet uten dom&quot;, &quot;fengslet av politiet uten dom&quot;, &quot;fengslet uten dom av politiet&quot;],&quot;Dobrze. Ble fengslet.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(13)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f13"></div>
+<div class="sol" id="s13">Wzorcowa odpowiedź: <b>Journalisten ble fengslet uten dom</b></div>
+</section>
+<section class="task" data-id="14">
+<h2>14. Połącz zdania (som)</h2>
+<p class="given">Menneskerettighetene gjelder for alle. De ble vedtatt i 1948.</p>
+<div class="rw"><span>Menneskerettighetene, som</span><input type="text" id="t14" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(14,[&quot;ble vedtatt i 1948 gjelder for alle&quot;],&quot;Dobrze. Zdanie z „som” wtrącone, orzeczenie (gjelder) po nim.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(14)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f14"></div>
+<div class="sol" id="s14">Wzorcowa odpowiedź: <b>Menneskerettighetene, som ble vedtatt i 1948 gjelder for alle</b></div>
+</section>
+<section class="task" data-id="15">
+<h2>15. Fordi → derfor</h2>
+<p class="given">Mange flykter fordi de blir forfulgt.</p>
+<div class="rw"><span>Mange blir forfulgt. Derfor</span><input type="text" id="t15" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(15,[&quot;flykter de&quot;],&quot;Dobrze. Inwersja: flykter de.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(15)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f15"></div>
+<div class="sol" id="s15">Wzorcowa odpowiedź: <b>Mange blir forfulgt. Derfor flykter de</b></div>
+</section>
+<section class="task" data-id="16">
+<h2>16. Men → selv om</h2>
+<p class="given">Ytringsfrihet er viktig, men den har grenser.</p>
+<div class="rw"><span>Selv om ytringsfrihet er viktig,</span><input type="text" id="t16" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(16,[&quot;har den grenser&quot;],&quot;Dobrze. Inwersja: har den.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(16)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f16"></div>
+<div class="sol" id="s16">Wzorcowa odpowiedź: <b>Selv om ytringsfrihet er viktig, har den grenser</b></div>
+</section>
+<section class="task" data-id="17">
+<h2>17. Pytanie zależne</h2>
+<p class="given">Eleven spurte: «Hva er menneskerettigheter?»</p>
+<div class="rw"><span>Eleven spurte hva</span><input type="text" id="t17" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(17,[&quot;menneskerettigheter var&quot;, &quot;menneskerettigheter er&quot;],&quot;Dobrze. Szyk prosty.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(17)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f17"></div>
+<div class="sol" id="s17">Wzorcowa odpowiedź: <b>Eleven spurte hva menneskerettigheter var</b></div>
+</section>
+<section class="task" data-id="18">
+<h2>18. Pytanie zależne z „om”</h2>
+<p class="given">Journalisten spurte: «Har alle stemmerett?»</p>
+<div class="rw"><span>Journalisten spurte om</span><input type="text" id="t18" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(18,[&quot;alle hadde stemmerett&quot;, &quot;alle har stemmerett&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(18)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f18"></div>
+<div class="sol" id="s18">Wzorcowa odpowiedź: <b>Journalisten spurte om alle hadde stemmerett</b></div>
+</section>
+<section class="task" data-id="19">
+<h2>19. Inwersja</h2>
+<p class="given">Alle har rett til utdanning i Norge.</p>
+<div class="rw"><span>I Norge</span><input type="text" id="t19" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(19,[&quot;har alle rett til utdanning&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(19)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f19"></div>
+<div class="sol" id="s19">Wzorcowa odpowiedź: <b>I Norge har alle rett til utdanning</b></div>
+</section>
+<section class="task" data-id="20">
+<h2>20. Inwersja (hvis)</h2>
+<p class="given">Du kan klage hvis du blir diskriminert.</p>
+<div class="rw"><span>Hvis du blir diskriminert,</span><input type="text" id="t20" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(20,[&quot;kan du klage&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(20)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f20"></div>
+<div class="sol" id="s20">Wzorcowa odpowiedź: <b>Hvis du blir diskriminert, kan du klage</b></div>
+</section>
+<h2 class="part">Część C: Liczba mnoga</h2><p class="partintro">Najważniejsza gramatyka lekcji 28. Wpisz rzeczownik w podanej formie.</p>
+<section class="task" data-id="21">
+<h2>21. Liczba mnoga</h2>
+<p class="hint">en rettighet</p>
+<div class="inline sent">Kvinner og menn skal ha like <input type="text" id="t21" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">.</div>
+<div class="row"><button class="btn" onclick="checkText(21,[&quot;rettigheter&quot;],&quot;Dobrze. En rettighet → rettigheter.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(21)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f21"></div>
+<div class="sol" id="s21">Wzorcowa odpowiedź: <b>rettigheter</b></div>
+</section>
+<section class="task" data-id="22">
+<h2>22. Liczba mnoga</h2>
+<p class="hint">et menneske</p>
+<div class="inline sent">Alle <input type="text" id="t22" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> har de samme grunnleggende rettighetene.</div>
+<div class="row"><button class="btn" onclick="checkText(22,[&quot;mennesker&quot;],&quot;Dobrze. Et menneske → mennesker.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(22)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f22"></div>
+<div class="sol" id="s22">Wzorcowa odpowiedź: <b>mennesker</b></div>
+</section>
+<section class="task" data-id="23">
+<h2>23. Liczba mnoga</h2>
+<p class="hint">et barn</p>
+<div class="inline sent">Alle <input type="text" id="t23" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> har rett til utdanning.</div>
+<div class="row"><button class="btn" onclick="checkText(23,[&quot;barn&quot;],&quot;Dobrze. Et barn → barn.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(23)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f23"></div>
+<div class="sol" id="s23">Wzorcowa odpowiedź: <b>barn</b></div>
+</section>
+<section class="task" data-id="24">
+<h2>24. Liczba mnoga</h2>
+<p class="hint">ei bok</p>
+<div class="inline sent">Mange <input type="text" id="t24" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> handler om ytringsfrihet.</div>
+<div class="row"><button class="btn" onclick="checkText(24,[&quot;bøker&quot;],&quot;Dobrze. Ei bok → bøker.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(24)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f24"></div>
+<div class="sol" id="s24">Wzorcowa odpowiedź: <b>bøker</b></div>
+</section>
+<section class="task" data-id="25">
+<h2>25. Forma określona, liczba mnoga</h2>
+<p class="hint">ei kvinne</p>
+<div class="inline sent"><input type="text" id="t25" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> og mennene skal ha lik lønn.</div>
+<div class="row"><button class="btn" onclick="checkText(25,[&quot;kvinnene&quot;],&quot;Dobrze. Ei kvinne → kvinnene.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(25)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f25"></div>
+<div class="sol" id="s25">Wzorcowa odpowiedź: <b>kvinnene</b></div>
+</section>
+<section class="task" data-id="26">
+<h2>26. Liczba mnoga</h2>
+<p class="hint">en mann</p>
+<div class="inline sent">Kvinner og <input type="text" id="t26" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> skal ha like muligheter.</div>
+<div class="row"><button class="btn" onclick="checkText(26,[&quot;menn&quot;],&quot;Dobrze. En mann → menn.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(26)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f26"></div>
+<div class="sol" id="s26">Wzorcowa odpowiedź: <b>menn</b></div>
+</section>
+<section class="task" data-id="27">
+<h2>27. Liczba mnoga</h2>
+<p class="hint">et hus</p>
+<div class="inline sent">I nabolaget er det mange hvite <input type="text" id="t27" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">.</div>
+<div class="row"><button class="btn" onclick="checkText(27,[&quot;hus&quot;],&quot;Dobrze. Et hus → hus.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(27)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f27"></div>
+<div class="sol" id="s27">Wzorcowa odpowiedź: <b>hus</b></div>
+</section>
+<section class="task" data-id="28">
+<h2>28. Liczba mnoga</h2>
+<p class="hint">en lærer</p>
+<div class="inline sent"><input type="text" id="t28" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> spiller en viktig rolle i samfunnet.</div>
+<div class="row"><button class="btn" onclick="checkText(28,[&quot;lærere&quot;, &quot;lærerne&quot;],&quot;Dobrze. En lærer → lærere.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(28)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f28"></div>
+<div class="sol" id="s28">Wzorcowa odpowiedź: <b>lærere</b></div>
+</section>
+<section class="task" data-id="29">
+<h2>29. Forma określona, liczba mnoga</h2>
+<p class="hint">en drøm</p>
+<div class="inline sent">Hun følger <input type="text" id="t29" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> sine.</div>
+<div class="row"><button class="btn" onclick="checkText(29,[&quot;drømmene&quot;],&quot;Dobrze. En drøm → drømmene (podwójne m).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(29)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f29"></div>
+<div class="sol" id="s29">Wzorcowa odpowiedź: <b>drømmene</b></div>
+</section>
+<section class="task" data-id="30">
+<h2>30. Liczba mnoga</h2>
+<p class="hint">et land</p>
+<div class="inline sent">Mange <input type="text" id="t30" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> bryter menneskerettighetene.</div>
+<div class="row"><button class="btn" onclick="checkText(30,[&quot;land&quot;],&quot;Dobrze. Et land → land.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(30)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f30"></div>
+<div class="sol" id="s30">Wzorcowa odpowiedź: <b>land</b></div>
+</section>
+<h2 class="part">Część D: Spójniki i szyk zdania</h2><p class="partintro">Wybierz spójnik albo poprawny szyk, potem połącz zdania samodzielnie.</p>
+<section class="task" data-id="31">
+<h2>31. Wybierz wyrażenie</h2>
+<p class="sent">Alle har rett til å si meningen sin, ___ de ikke sprer hat.</p>
+<div class="opts" data-q="31" data-correct="så lenge" data-ok="Dobrze. Så lenge = dopóki.">
+<button class="opt">så lenge</button><button class="opt">derfor</button><button class="opt">likevel</button>
+</div>
+<div class="fb" id="f31"></div>
+</section>
+<section class="task" data-id="32">
+<h2>32. Wybierz spójnik</h2>
+<p class="sent">Kvinner skal ha samme lønn som menn ___ de gjør samme jobb.</p>
+<div class="opts" data-q="32" data-correct="når" data-ok="Dobrze.">
+<button class="opt">når</button><button class="opt">derfor</button><button class="opt">likevel</button>
+</div>
+<div class="fb" id="f32"></div>
+</section>
+<section class="task" data-id="33">
+<h2>33. Wybierz spójnik</h2>
+<p class="sent">Han ble fengslet, ___ han ikke hadde gjort noe galt.</p>
+<div class="opts" data-q="33" data-correct="selv om" data-ok="Dobrze.">
+<button class="opt">selv om</button><button class="opt">derfor</button><button class="opt">slik at</button>
+</div>
+<div class="fb" id="f33"></div>
+</section>
+<section class="task" data-id="34">
+<h2>34. Które zdanie jest poprawne?</h2>
+<div class="opts" data-q="34" data-correct="Det er viktig at ingen blir diskriminert." data-ok="Dobrze.">
+<button class="opt">Det er viktig at ingen blir diskriminert.</button><button class="opt">Det er viktig at blir ingen diskriminert.</button><button class="opt">Det er viktig at ingen diskriminert blir.</button>
+</div>
+<div class="fb" id="f34"></div>
+</section>
+<section class="task" data-id="35">
+<h2>35. Wybierz poprawny szyk</h2>
+<p class="sent">I mange land ___ stemmerett.</p>
+<div class="opts" data-q="35" data-correct="har ikke kvinner" data-ok="Dobrze. „I mange land” na początku → inwersja.">
+<button class="opt">har ikke kvinner</button><button class="opt">kvinner har ikke</button><button class="opt">ikke har kvinner</button>
+</div>
+<div class="fb" id="f35"></div>
+</section>
+<section class="task" data-id="36">
+<h2>36. Dokończ zdanie</h2>
+<p class="sent">Fordi hun var kvinne, ___</p>
+<div class="opts" data-q="36" data-correct="fikk hun lavere lønn." data-ok="Dobrze. Inwersja.">
+<button class="opt">fikk hun lavere lønn.</button><button class="opt">hun fikk lavere lønn.</button><button class="opt">lavere lønn hun fikk.</button>
+</div>
+<div class="fb" id="f36"></div>
+</section>
+<section class="task" data-id="37">
+<h2>37. Wybierz formę</h2>
+<p class="sent">Mange mennesker ___ fordi de har en annen tro.</p>
+<div class="opts" data-q="37" data-correct="blir forfulgt" data-ok="Dobrze. Strona bierna: blir forfulgt.">
+<button class="opt">blir forfulgt</button><button class="opt">forfølger</button><button class="opt">forfulgte</button>
+</div>
+<div class="fb" id="f37"></div>
+</section>
+<section class="task" data-id="38">
+<h2>38. Połącz zdania (fordi)</h2>
+<p class="given">Han ble arrestert. Han hadde kritisert regjeringen.</p>
+<div class="rw"><span>Han ble arrestert fordi</span><input type="text" id="t38" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(38,[&quot;han hadde kritisert regjeringen&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(38)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f38"></div>
+<div class="sol" id="s38">Wzorcowa odpowiedź: <b>Han ble arrestert fordi han hadde kritisert regjeringen</b></div>
+</section>
+<section class="task" data-id="39">
+<h2>39. Połącz zdania (at)</h2>
+<p class="given">Ingen skal bli torturert. Det står i erklæringen.</p>
+<div class="rw"><span>Det står i erklæringen at</span><input type="text" id="t39" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(39,[&quot;ingen skal bli torturert&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(39)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f39"></div>
+<div class="sol" id="s39">Wzorcowa odpowiedź: <b>Det står i erklæringen at ingen skal bli torturert</b></div>
+</section>
+<section class="task" data-id="40">
+<h2>40. Inwersja z „ikke”</h2>
+<p class="given">Vi kan ikke akseptere diskriminering i dag.</p>
+<div class="rw"><span>I dag</span><input type="text" id="t40" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(40,[&quot;kan vi ikke akseptere diskriminering&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(40)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f40"></div>
+<div class="sol" id="s40">Wzorcowa odpowiedź: <b>I dag kan vi ikke akseptere diskriminering</b></div>
+</section>
+<h2 class="part">Część E: Znajdź i popraw błąd</h2><p class="partintro">W każdym zdaniu jest jeden błąd w pogrubionym fragmencie. Wpisz poprawną wersję fragmentu.</p>
+<section class="task" data-id="41">
+<h2>41. Popraw błąd</h2>
+<div class="inline sent">Det er mange hvite <b>husene</b> i nabolaget. → <input type="text" id="t41" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(41,[&quot;hus&quot;],&quot;Dobrze. Po „mange” forma nieokreślona.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(41)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f41"></div>
+<div class="sol" id="s41">Wzorcowa odpowiedź: <b>hus</b></div>
+</section>
+<section class="task" data-id="42">
+<h2>42. Popraw błąd</h2>
+<div class="inline sent">Alle <b>menneske</b> har rettigheter. → <input type="text" id="t42" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(42,[&quot;mennesker&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(42)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f42"></div>
+<div class="sol" id="s42">Wzorcowa odpowiedź: <b>mennesker</b></div>
+</section>
+<section class="task" data-id="43">
+<h2>43. Popraw błąd</h2>
+<div class="inline sent">Mange <b>bok</b> handler om frihet. → <input type="text" id="t43" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(43,[&quot;bøker&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(43)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f43"></div>
+<div class="sol" id="s43">Wzorcowa odpowiedź: <b>bøker</b></div>
+</section>
+<section class="task" data-id="44">
+<h2>44. Popraw błąd</h2>
+<div class="inline sent">Hun er <b>interessert for</b> menneskerettigheter. → <input type="text" id="t44" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(44,[&quot;interessert i&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(44)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f44"></div>
+<div class="sol" id="s44">Wzorcowa odpowiedź: <b>interessert i</b></div>
+</section>
+<section class="task" data-id="45">
+<h2>45. Popraw błąd</h2>
+<div class="inline sent">Det er viktig å <b>beskytter</b> sårbare grupper. → <input type="text" id="t45" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(45,[&quot;beskytte&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(45)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f45"></div>
+<div class="sol" id="s45">Wzorcowa odpowiedź: <b>beskytte</b></div>
+</section>
+<section class="task" data-id="46">
+<h2>46. Popraw błąd</h2>
+<div class="inline sent">Hvis du blir diskriminert, <b>du bør</b> klage. → <input type="text" id="t46" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(46,[&quot;bør du&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(46)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f46"></div>
+<div class="sol" id="s46">Wzorcowa odpowiedź: <b>bør du</b></div>
+</section>
+<section class="task" data-id="47">
+<h2>47. Popraw błąd</h2>
+<div class="inline sent">Han sa at han <b>hadde ikke</b> stemt. → <input type="text" id="t47" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(47,[&quot;ikke hadde&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(47)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f47"></div>
+<div class="sol" id="s47">Wzorcowa odpowiedź: <b>ikke hadde</b></div>
+</section>
+<section class="task" data-id="48">
+<h2>48. Popraw błąd</h2>
+<div class="inline sent">Kvinner og menn skal ha <b>lik</b> rettigheter. → <input type="text" id="t48" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(48,[&quot;like&quot;],&quot;Dobrze. L. mn. → like.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(48)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f48"></div>
+<div class="sol" id="s48">Wzorcowa odpowiedź: <b>like</b></div>
+</section>
+<section class="task" data-id="49">
+<h2>49. Popraw błąd</h2>
+<div class="inline sent">Barn har rett <b>på</b> utdanning. → <input type="text" id="t49" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(49,[&quot;til&quot;],&quot;Dobrze. Rett til noe.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(49)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f49"></div>
+<div class="sol" id="s49">Wzorcowa odpowiedź: <b>til</b></div>
+</section>
+<section class="task" data-id="50">
+<h2>50. Popraw błąd</h2>
+<div class="inline sent">Alle <b>landet</b> må respektere menneskerettighetene. → <input type="text" id="t50" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(50,[&quot;land&quot;],&quot;Dobrze. Alle + l. mn. nieokreślona: alle land.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(50)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f50"></div>
+<div class="sol" id="s50">Wzorcowa odpowiedź: <b>land</b></div>
+</section>
+<h2 class="part">Część F: Tekst i mini-test</h2><p class="partintro">Przeczytaj tekst i zrób zadania do niego.</p>
+<article class="text"><h2>Ytringsfrihet på nett</h2><p>I Norge har alle rett til å si hva de mener. Ytringsfriheten står i Grunnloven, og den er en viktig del av demokratiet. Likevel betyr ikke ytringsfrihet at man kan si hva som helst.</p><p>På sosiale medier ser vi ofte hatefulle kommentarer mot mennesker på grunn av hudfarge, religion eller legning. Slike ytringer kan i noen tilfeller være straffbare. Mange som blir utsatt for hat på nett, slutter å delta i debatten fordi de blir redde.</p><p>Eksperter mener at både plattformene og brukerne har et ansvar. Plattformene må fjerne ulovlig innhold raskt, og brukerne bør tenke seg om før de skriver noe. Skoler kan også lære barn og unge hvordan de kan diskutere på en respektfull måte.</p></article>
+<section class="task" data-id="51">
+<h2>51. Riktig eller galt?</h2>
+<p class="sent">Ytringsfriheten står i Grunnloven.</p>
+<div class="opts" data-q="51" data-correct="Riktig" data-ok="Dobrze.">
+<button class="opt">Riktig</button><button class="opt">Galt</button>
+</div>
+<div class="fb" id="f51"></div>
+</section>
+<section class="task" data-id="52">
+<h2>52. Riktig eller galt?</h2>
+<p class="sent">Ytringsfrihet betyr at man kan si hva som helst.</p>
+<div class="opts" data-q="52" data-correct="Galt" data-ok="Dobrze.">
+<button class="opt">Riktig</button><button class="opt">Galt</button>
+</div>
+<div class="fb" id="f52"></div>
+</section>
+<section class="task" data-id="53">
+<h2>53. Riktig eller galt?</h2>
+<p class="sent">Noen slutter å delta i debatten på grunn av hat.</p>
+<div class="opts" data-q="53" data-correct="Riktig" data-ok="Dobrze.">
+<button class="opt">Riktig</button><button class="opt">Galt</button>
+</div>
+<div class="fb" id="f53"></div>
+</section>
+<section class="task" data-id="54">
+<h2>54. Riktig eller galt?</h2>
+<p class="sent">Bare plattformene har et ansvar.</p>
+<div class="opts" data-q="54" data-correct="Galt" data-ok="Dobrze. Både plattformene og brukerne.">
+<button class="opt">Riktig</button><button class="opt">Galt</button>
+</div>
+<div class="fb" id="f54"></div>
+</section>
+<section class="task" data-id="55">
+<h2>55. Co to znaczy?</h2>
+<p class="hint">„Slike ytringer kan være <b>straffbare</b>.”</p>
+<div class="opts" data-q="55" data-correct="karalne" data-ok="Dobrze.">
+<button class="opt">karalne</button><button class="opt">darmowe</button><button class="opt">popularne</button>
+</div>
+<div class="fb" id="f55"></div>
+</section>
+<section class="task" data-id="56">
+<h2>56. Co to znaczy?</h2>
+<p class="hint">„Brukerne bør <b>tenke seg om</b>.”</p>
+<div class="opts" data-q="56" data-correct="zastanowić się" data-ok="Dobrze.">
+<button class="opt">zastanowić się</button><button class="opt">zapomnieć</button><button class="opt">pośpieszyć się</button>
+</div>
+<div class="fb" id="f56"></div>
+</section>
+<section class="task" data-id="57">
+<h2>57. Wybierz synonim</h2>
+<p class="hint">„Plattformene må <b>fjerne</b> ulovlig innhold.”</p>
+<div class="opts" data-q="57" data-correct="slette" data-ok="Dobrze.">
+<button class="opt">slette</button><button class="opt">legge ut</button><button class="opt">dele</button>
+</div>
+<div class="fb" id="f57"></div>
+</section>
+<section class="task" data-id="58">
+<h2>58. Strona bierna (-s)</h2>
+<p class="given">Plattformene må fjerne ulovlig innhold raskt.</p>
+<div class="rw"><span>Ulovlig innhold må</span><input type="text" id="t58" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(58,[&quot;fjernes raskt&quot;, &quot;bli fjernet raskt&quot;, &quot;fjernes raskt av plattformene&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(58)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f58"></div>
+<div class="sol" id="s58">Wzorcowa odpowiedź: <b>Ulovlig innhold må fjernes raskt</b></div>
+</section>
+<section class="task" data-id="59">
+<h2>59. Mowa zależna</h2>
+<p class="given">Eksperten sa: «Brukerne har også et ansvar.»</p>
+<div class="rw"><span>Eksperten sa at</span><input type="text" id="t59" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(59,[&quot;brukerne også hadde et ansvar&quot;, &quot;brukerne også har et ansvar&quot;],&quot;Dobrze. „Også” stoi przed czasownikiem w zdaniu z „at”.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(59)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f59"></div>
+<div class="sol" id="s59">Wzorcowa odpowiedź: <b>Eksperten sa at brukerne også hadde et ansvar</b></div>
+</section>
+<section class="task" data-id="60">
+<h2>60. Liczba mnoga</h2>
+<p class="hint">en kommentar</p>
+<div class="inline sent">Mange <input type="text" id="t60" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> på nett er hatefulle.</div>
+<div class="row"><button class="btn" onclick="checkText(60,[&quot;kommentarer&quot;],&quot;Dobrze. En kommentar → kommentarer.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(60)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f60"></div>
+<div class="sol" id="s60">Wzorcowa odpowiedź: <b>kommentarer</b></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 60 / 60</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
 </main>
 <script>
-const TOTAL=10;const solved=new Set();
+const TOTAL=60;const solved=new Set();
 function mark(n,ok,msg){
   const f=document.getElementById('f'+n);
   f.className='fb '+(ok?'ok':'bad');f.textContent=msg;

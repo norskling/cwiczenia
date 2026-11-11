@@ -82,104 +82,507 @@ input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1
 .text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
 .text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
 .text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
 </style>
 </head>
 <body>
 <main class="wrap">
   <span class="pill">Norskling · B1 · Lekcja 26</span>
-  <h1>Budżet państwa: <span>słownictwo i przekształcenia</span></h1>
+  <h1>Budżet państwa: <span>pełna powtórka</span></h1>
   <div class="bar"></div>
-  <p class="intro">Powtórka po lekcji „Statens inntekter og utgifter”: słownictwo z tekstu, strona bierna, inwersja, mowa zależna i stopniowanie. Odpowiedź sprawdza się od razu.</p>
-  <div class="meta"><span>Słownictwo + gramatyka mieszana</span><span>ok. 20 min</span><span>10 zadań</span></div>
-  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 10</b></div>
+  <p class="intro">Duży zestaw po lekcji „Statens inntekter og utgifter”: słownictwo, przekształcenia jak na egzaminie, szyk, formy, poprawianie błędów i tekst. Możesz robić go w kilku podejściach.</p>
+  <div class="meta"><span>Słownictwo + gramatyka mieszana</span><span>ok. 40 min</span><span>60 zadań</span><span>6 części</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 60</b></div>
   
+<h2 class="part">Część A: Słownictwo</h2><p class="partintro">Synonimy, przeciwieństwa i definicje ze słownictwa lekcji.</p>
 <section class="task" data-id="1">
 <h2>1. Wybierz synonim</h2>
 <p class="hint">„De <b>samlede</b> inntektene til staten”</p>
-<div class="opts" data-q="1" data-correct="totale" data-ok="Dobrze. „Samlede inntekter” = całkowite (totale) dochody.">
+<div class="opts" data-q="1" data-correct="totale" data-ok="Dobrze. Samlede = totale, całkowite.">
 <button class="opt">totale</button><button class="opt">sparte</button><button class="opt">skjulte</button>
 </div>
 <div class="fb" id="f1"></div>
 </section>
 <section class="task" data-id="2">
-<h2>2. Dopasuj definicje</h2>
-<p class="hint">Wybierz norweską definicję każdego słowa.</p>
-<div class="match">
-<span class="w">et underskudd</span><select id="m2_0"><option value="">wybierz…</option><option>en avgift på varer som kommer fra utlandet</option><option>en plan for statens inntekter og utgifter for ett år</option><option>staten bruker mer enn den tjener</option><option>staten tjener mer enn den bruker</option></select>
-<span class="w">et overskudd</span><select id="m2_1"><option value="">wybierz…</option><option>en avgift på varer som kommer fra utlandet</option><option>en plan for statens inntekter og utgifter for ett år</option><option>staten bruker mer enn den tjener</option><option>staten tjener mer enn den bruker</option></select>
-<span class="w">toll</span><select id="m2_2"><option value="">wybierz…</option><option>en avgift på varer som kommer fra utlandet</option><option>en plan for statens inntekter og utgifter for ett år</option><option>staten bruker mer enn den tjener</option><option>staten tjener mer enn den bruker</option></select>
-<span class="w">statsbudsjettet</span><select id="m2_3"><option value="">wybierz…</option><option>en avgift på varer som kommer fra utlandet</option><option>en plan for statens inntekter og utgifter for ett år</option><option>staten bruker mer enn den tjener</option><option>staten tjener mer enn den bruker</option></select>
+<h2>2. Wybierz synonim</h2>
+<p class="hint">„Staten <b>beregner</b> utgiftene for året.”</p>
+<div class="opts" data-q="2" data-correct="regner ut" data-ok="Dobrze. Beregne = regne ut, obliczyć.">
+<button class="opt">regner ut</button><button class="opt">betaler</button><button class="opt">låner</button>
 </div>
-<button class="btn" onclick='checkMatch(2,{&quot;m2_0&quot;: &quot;staten bruker mer enn den tjener&quot;, &quot;m2_1&quot;: &quot;staten tjener mer enn den bruker&quot;, &quot;m2_2&quot;: &quot;en avgift på varer som kommer fra utlandet&quot;, &quot;m2_3&quot;: &quot;en plan for statens inntekter og utgifter for ett år&quot;})'>Sprawdź</button>
 <div class="fb" id="f2"></div>
 </section>
 <section class="task" data-id="3">
-<h2>3. Wybierz synonim</h2>
-<p class="hint">„Staten <b>beregner</b> utgiftene for året.”</p>
-<div class="opts" data-q="3" data-correct="regner ut" data-ok="Dobrze. „Beregne” = obliczyć, regne ut.">
-<button class="opt">regner ut</button><button class="opt">betaler</button><button class="opt">låner</button>
+<h2>3. Co to znaczy?</h2>
+<p class="hint">„Staten håper å <b>unngå</b> underskudd.”</p>
+<div class="opts" data-q="3" data-correct="hindre at det skjer" data-ok="Dobrze. Unngå = uniknąć.">
+<button class="opt">hindre at det skjer</button><button class="opt">sørge for at det skjer</button><button class="opt">glemme det</button>
 </div>
 <div class="fb" id="f3"></div>
 </section>
 <section class="task" data-id="4">
-<h2>4. Utwórz rzeczownik</h2>
-<p class="hint">investere → ? (liczba mnoga)</p>
-<div class="inline sent">Staten gjør store <input type="text" id="t4" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i veier og jernbane.</div>
-<div class="row"><button class="btn" onclick="checkText(4,[&quot;investeringer&quot;],&quot;Dobrze. Investere → en investering → investeringer.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(4)">Pokaż odpowiedź</button></div>
+<h2>4. Wybierz synonim</h2>
+<p class="hint">„…for å <b>opprettholde</b> en stabil økonomi”</p>
+<div class="opts" data-q="4" data-correct="bevare" data-ok="Dobrze. Opprettholde = bevare, utrzymać.">
+<button class="opt">bevare</button><button class="opt">ødelegge</button><button class="opt">starte</button>
+</div>
 <div class="fb" id="f4"></div>
-<div class="sol" id="s4">Wzorcowa odpowiedź: <b>investeringer</b></div>
 </section>
 <section class="task" data-id="5">
-<h2>5. Strona bierna</h2>
-<p class="given">Staten bruker overskuddet til å betale ned gjeld.</p>
-<div class="rw"><span>Overskuddet blir</span><input type="text" id="t5" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
-<div class="row"><button class="btn" onclick="checkText(5,[&quot;brukt til å betale ned gjeld&quot;, &quot;brukt av staten til å betale ned gjeld&quot;, &quot;brukt til å betale ned gjeld av staten&quot;],&quot;Dobrze. Bli + imiesłów: blir brukt.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(5)">Pokaż odpowiedź</button></div>
+<h2>5. Wybierz synonim</h2>
+<p class="hint">„skoler, sykehus og politi, <b>samt</b> investeringer”</p>
+<div class="opts" data-q="5" data-correct="og" data-ok="Dobrze. Samt = oraz, og (bardziej formalnie).">
+<button class="opt">og</button><button class="opt">men</button><button class="opt">eller</button>
+</div>
 <div class="fb" id="f5"></div>
-<div class="sol" id="s5">Wzorcowa odpowiedź: <b>Overskuddet blir brukt til å betale ned gjeld.</b></div>
 </section>
 <section class="task" data-id="6">
-<h2>6. Inwersja</h2>
-<p class="given">Staten må låne penger hvis det blir underskudd.</p>
-<div class="rw"><span>Hvis det blir underskudd,</span><input type="text" id="t6" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
-<div class="row"><button class="btn" onclick="checkText(6,[&quot;må staten låne penger&quot;],&quot;Dobrze. Zdanie z „hvis” na początku, więc czasownik przed podmiotem: må staten.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(6)">Pokaż odpowiedź</button></div>
+<h2>6. Wybierz synonim</h2>
+<p class="hint">„…hvordan staten skal bruke pengene <b>i løpet av</b> året”</p>
+<div class="opts" data-q="6" data-correct="gjennom" data-ok="Dobrze. I løpet av året = w ciągu roku.">
+<button class="opt">gjennom</button><button class="opt">etter</button><button class="opt">før</button>
+</div>
 <div class="fb" id="f6"></div>
-<div class="sol" id="s6">Wzorcowa odpowiedź: <b>Hvis det blir underskudd, må staten låne penger.</b></div>
 </section>
 <section class="task" data-id="7">
-<h2>7. Wybierz wyrażenie</h2>
-<p class="sent">Skattene er høye i Norge. ___ får innbyggerne mange gratis tjenester.</p>
-<div class="opts" data-q="7" data-correct="Til gjengjeld" data-ok="Dobrze. „Til gjengjeld” = w zamian. Po nim inwersja: får innbyggerne.">
-<button class="opt">Til gjengjeld</button><button class="opt">Fordi</button><button class="opt">Selv om</button>
+<h2>7. Dopasuj definicje</h2>
+<p class="hint">Wybierz norweską definicję każdego słowa.</p>
+<div class="match">
+<span class="w">et underskudd</span><select id="m7_0"><option value="">wybierz…</option><option>en avgift på varer som kommer fra utlandet</option><option>en plan for statens inntekter og utgifter for ett år</option><option>staten bruker mer enn den tjener</option><option>staten tjener mer enn den bruker</option></select>
+<span class="w">et overskudd</span><select id="m7_1"><option value="">wybierz…</option><option>en avgift på varer som kommer fra utlandet</option><option>en plan for statens inntekter og utgifter for ett år</option><option>staten bruker mer enn den tjener</option><option>staten tjener mer enn den bruker</option></select>
+<span class="w">toll</span><select id="m7_2"><option value="">wybierz…</option><option>en avgift på varer som kommer fra utlandet</option><option>en plan for statens inntekter og utgifter for ett år</option><option>staten bruker mer enn den tjener</option><option>staten tjener mer enn den bruker</option></select>
+<span class="w">statsbudsjettet</span><select id="m7_3"><option value="">wybierz…</option><option>en avgift på varer som kommer fra utlandet</option><option>en plan for statens inntekter og utgifter for ett år</option><option>staten bruker mer enn den tjener</option><option>staten tjener mer enn den bruker</option></select>
 </div>
+<button class="btn" onclick='checkMatch(7,{&quot;m7_0&quot;: &quot;staten bruker mer enn den tjener&quot;, &quot;m7_1&quot;: &quot;staten tjener mer enn den bruker&quot;, &quot;m7_2&quot;: &quot;en avgift på varer som kommer fra utlandet&quot;, &quot;m7_3&quot;: &quot;en plan for statens inntekter og utgifter for ett år&quot;})'>Sprawdź</button>
 <div class="fb" id="f7"></div>
 </section>
 <section class="task" data-id="8">
-<h2>8. Stopień wyższy</h2>
-<p class="hint">stor → ?</p>
-<div class="inline sent">I fjor var utgiftene <input type="text" id="t8" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> enn inntektene.</div>
-<div class="row"><button class="btn" onclick="checkText(8,[&quot;større&quot;],&quot;Dobrze. Stor, større, størst: stopniowanie nieregularne.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(8)">Pokaż odpowiedź</button></div>
+<h2>8. Dopasuj tłumaczenie</h2>
+<p class="hint">Wybierz polskie tłumaczenie.</p>
+<div class="match">
+<span class="w">en skatt</span><select id="m8_0"><option value="">wybierz…</option><option>odsetki</option><option>opłata</option><option>podatek</option><option>zasiłek dla bezrobotnych</option></select>
+<span class="w">en avgift</span><select id="m8_1"><option value="">wybierz…</option><option>odsetki</option><option>opłata</option><option>podatek</option><option>zasiłek dla bezrobotnych</option></select>
+<span class="w">renter</span><select id="m8_2"><option value="">wybierz…</option><option>odsetki</option><option>opłata</option><option>podatek</option><option>zasiłek dla bezrobotnych</option></select>
+<span class="w">ledighetstrygd</span><select id="m8_3"><option value="">wybierz…</option><option>odsetki</option><option>opłata</option><option>podatek</option><option>zasiłek dla bezrobotnych</option></select>
+</div>
+<button class="btn" onclick='checkMatch(8,{&quot;m8_0&quot;: &quot;podatek&quot;, &quot;m8_1&quot;: &quot;opłata&quot;, &quot;m8_2&quot;: &quot;odsetki&quot;, &quot;m8_3&quot;: &quot;zasiłek dla bezrobotnych&quot;})'>Sprawdź</button>
 <div class="fb" id="f8"></div>
-<div class="sol" id="s8">Wzorcowa odpowiedź: <b>større</b></div>
 </section>
 <section class="task" data-id="9">
-<h2>9. Mowa zależna</h2>
-<p class="given">Finansministeren sa: «Vi må spare for fremtiden.»</p>
-<div class="rw"><span>Finansministeren sa at</span><input type="text" id="t9" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
-<div class="row"><button class="btn" onclick="checkText(9,[&quot;de måtte spare for fremtiden&quot;, &quot;vi måtte spare for fremtiden&quot;, &quot;de må spare for fremtiden&quot;, &quot;vi må spare for fremtiden&quot;],&quot;Dobrze. W mowie zależnej czas zwykle się cofa: må → måtte.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(9)">Pokaż odpowiedź</button></div>
+<h2>9. Które słowo nie pasuje?</h2>
+<p class="hint">Trzy słowa to dochody państwa. Które jest wydatkiem?</p>
+<div class="opts" data-q="9" data-correct="jernbane" data-ok="Dobrze. Jernbane (kolej) to inwestycja, czyli wydatek.">
+<button class="opt">skatter</button><button class="opt">avgifter</button><button class="opt">toll</button><button class="opt">jernbane</button>
+</div>
 <div class="fb" id="f9"></div>
-<div class="sol" id="s9">Wzorcowa odpowiedź: <b>Finansministeren sa at de måtte spare for fremtiden.</b></div>
 </section>
 <section class="task" data-id="10">
-<h2>10. Popraw błąd</h2>
-<div class="inline sent">Staten har mange <b>utgift</b>. → <input type="text" id="t10" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
-<div class="row"><button class="btn" onclick="checkText(10,[&quot;utgifter&quot;],&quot;Dobrze. Po „mange” liczba mnoga: utgifter.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(10)">Pokaż odpowiedź</button></div>
+<h2>10. Uzupełnij wyrażenie</h2>
+<div class="inline sent">Hvis det blir underskudd, må staten låne penger for å <input type="text" id="t10" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> forskjellen.</div>
+<div class="row"><button class="btn" onclick="checkText(10,[&quot;dekke&quot;],&quot;Dobrze. Dekke forskjellen = pokryć różnicę.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(10)">Pokaż odpowiedź</button></div>
 <div class="fb" id="f10"></div>
-<div class="sol" id="s10">Wzorcowa odpowiedź: <b>utgifter</b></div>
+<div class="sol" id="s10">Wzorcowa odpowiedź: <b>dekke</b></div>
 </section>
-  <div class="done" id="done"><h2>Wszystko zrobione: 10 / 10</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+<h2 class="part">Część B: Przekształcanie zdań</h2><p class="partintro">Przepisz zdanie tak, żeby znaczyło to samo. Początek jest podany, dopisz resztę.</p>
+<section class="task" data-id="11">
+<h2>11. Strona bierna</h2>
+<p class="given">Staten bruker overskuddet til å betale ned gjeld.</p>
+<div class="rw"><span>Overskuddet blir</span><input type="text" id="t11" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(11,[&quot;brukt til å betale ned gjeld&quot;, &quot;brukt av staten til å betale ned gjeld&quot;, &quot;brukt til å betale ned gjeld av staten&quot;],&quot;Dobrze. Bli + imiesłów: blir brukt.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(11)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f11"></div>
+<div class="sol" id="s11">Wzorcowa odpowiedź: <b>Overskuddet blir brukt til å betale ned gjeld</b></div>
+</section>
+<section class="task" data-id="12">
+<h2>12. Inwersja</h2>
+<p class="given">Staten må låne penger hvis det blir underskudd.</p>
+<div class="rw"><span>Hvis det blir underskudd,</span><input type="text" id="t12" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(12,[&quot;må staten låne penger&quot;],&quot;Dobrze. Zdanie z „hvis” na początku, więc må staten.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(12)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f12"></div>
+<div class="sol" id="s12">Wzorcowa odpowiedź: <b>Hvis det blir underskudd, må staten låne penger</b></div>
+</section>
+<section class="task" data-id="13">
+<h2>13. Mowa zależna</h2>
+<p class="given">Finansministeren sa: «Vi må spare for fremtiden.»</p>
+<div class="rw"><span>Finansministeren sa at</span><input type="text" id="t13" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(13,[&quot;de måtte spare for fremtiden&quot;, &quot;vi måtte spare for fremtiden&quot;, &quot;de må spare for fremtiden&quot;, &quot;vi må spare for fremtiden&quot;],&quot;Dobrze. W mowie zależnej må zwykle przechodzi w måtte.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(13)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f13"></div>
+<div class="sol" id="s13">Wzorcowa odpowiedź: <b>Finansministeren sa at de måtte spare for fremtiden</b></div>
+</section>
+<section class="task" data-id="14">
+<h2>14. Strona bierna (-s)</h2>
+<p class="given">Man må beregne utgiftene nøye.</p>
+<div class="rw"><span>Utgiftene må</span><input type="text" id="t14" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(14,[&quot;beregnes nøye&quot;, &quot;bli beregnet nøye&quot;],&quot;Dobrze. Po czasowniku modalnym: beregnes.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(14)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f14"></div>
+<div class="sol" id="s14">Wzorcowa odpowiedź: <b>Utgiftene må beregnes nøye</b></div>
+</section>
+<section class="task" data-id="15">
+<h2>15. Fordi → derfor</h2>
+<p class="given">Staten låner penger fordi utgiftene er større enn inntektene.</p>
+<div class="rw"><span>Utgiftene er større enn inntektene. Derfor</span><input type="text" id="t15" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(15,[&quot;låner staten penger&quot;],&quot;Dobrze. Po „derfor” inwersja: låner staten.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(15)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f15"></div>
+<div class="sol" id="s15">Wzorcowa odpowiedź: <b>Utgiftene er større enn inntektene. Derfor låner staten penger</b></div>
+</section>
+<section class="task" data-id="16">
+<h2>16. Połącz zdania (som)</h2>
+<p class="given">Staten har oljeinntekter. Oljeinntektene er viktige for økonomien.</p>
+<div class="rw"><span>Oljeinntektene som staten har,</span><input type="text" id="t16" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(16,[&quot;er viktige for økonomien&quot;],&quot;Dobrze. Orzeczenie główne stoi po zdaniu z „som”.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(16)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f16"></div>
+<div class="sol" id="s16">Wzorcowa odpowiedź: <b>Oljeinntektene som staten har, er viktige for økonomien</b></div>
+</section>
+<section class="task" data-id="17">
+<h2>17. Pytanie zależne</h2>
+<p class="given">Eleven spurte: «Hvor kommer statens inntekter fra?»</p>
+<div class="rw"><span>Eleven spurte hvor</span><input type="text" id="t17" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(17,[&quot;statens inntekter kom fra&quot;, &quot;statens inntekter kommer fra&quot;],&quot;Dobrze. W pytaniu zależnym szyk prosty: statens inntekter kom fra.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(17)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f17"></div>
+<div class="sol" id="s17">Wzorcowa odpowiedź: <b>Eleven spurte hvor statens inntekter kom fra</b></div>
+</section>
+<section class="task" data-id="18">
+<h2>18. Pytanie zależne z „om”</h2>
+<p class="given">Hun spurte meg: «Betaler du skatt i Norge?»</p>
+<div class="rw"><span>Hun spurte meg om</span><input type="text" id="t18" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(18,[&quot;jeg betalte skatt i norge&quot;, &quot;jeg betaler skatt i norge&quot;],&quot;Dobrze. Om + szyk prosty, du → jeg.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(18)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f18"></div>
+<div class="sol" id="s18">Wzorcowa odpowiedź: <b>Hun spurte meg om jeg betalte skatt i norge</b></div>
+</section>
+<section class="task" data-id="19">
+<h2>19. Men … likevel → selv om</h2>
+<p class="given">Skattene er høye, men folk er fornøyde likevel.</p>
+<div class="rw"><span>Selv om skattene er høye,</span><input type="text" id="t19" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(19,[&quot;er folk fornøyde&quot;, &quot;er folk fornøyde likevel&quot;],&quot;Dobrze. Po zdaniu podrzędnym inwersja: er folk.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(19)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f19"></div>
+<div class="sol" id="s19">Wzorcowa odpowiedź: <b>Selv om skattene er høye, er folk fornøyde</b></div>
+</section>
+<section class="task" data-id="20">
+<h2>20. Inwersja</h2>
+<p class="given">Staten bruker mye penger på sykehus hvert år.</p>
+<div class="rw"><span>Hvert år</span><input type="text" id="t20" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(20,[&quot;bruker staten mye penger på sykehus&quot;],&quot;Dobrze. Czasownik na drugim miejscu.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(20)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f20"></div>
+<div class="sol" id="s20">Wzorcowa odpowiedź: <b>Hvert år bruker staten mye penger på sykehus</b></div>
+</section>
+<h2 class="part">Część C: Spójniki i szyk zdania</h2><p class="partintro">Wybierz spójnik albo poprawny szyk, potem połącz zdania samodzielnie.</p>
+<section class="task" data-id="21">
+<h2>21. Wybierz spójnik</h2>
+<p class="sent">___ inntektene er større enn utgiftene, har staten et overskudd.</p>
+<div class="opts" data-q="21" data-correct="Hvis" data-ok="Dobrze. Hvis = jeśli.">
+<button class="opt">Hvis</button><button class="opt">Derfor</button><button class="opt">Likevel</button>
+</div>
+<div class="fb" id="f21"></div>
+</section>
+<section class="task" data-id="22">
+<h2>22. Wybierz słowo</h2>
+<p class="sent">Staten har store oljeinntekter. ___ må den spare, fordi oljeprisene kan variere.</p>
+<div class="opts" data-q="22" data-correct="Likevel" data-ok="Dobrze. Likevel = mimo to.">
+<button class="opt">Likevel</button><button class="opt">Fordi</button><button class="opt">Hvis</button>
+</div>
+<div class="fb" id="f22"></div>
+</section>
+<section class="task" data-id="23">
+<h2>23. Wybierz spójnik</h2>
+<p class="sent">Vi betaler skatt, ___ staten kan drive skoler og sykehus.</p>
+<div class="opts" data-q="23" data-correct="slik at" data-ok="Dobrze. Slik at = tak, żeby.">
+<button class="opt">slik at</button><button class="opt">fordi</button><button class="opt">selv om</button>
+</div>
+<div class="fb" id="f23"></div>
+</section>
+<section class="task" data-id="24">
+<h2>24. Wybierz spójnik</h2>
+<p class="sent">Mange synes skattene er for høye, ___ de får mye tilbake.</p>
+<div class="opts" data-q="24" data-correct="selv om" data-ok="Dobrze. Selv om = chociaż.">
+<button class="opt">selv om</button><button class="opt">derfor</button><button class="opt">slik at</button>
+</div>
+<div class="fb" id="f24"></div>
+</section>
+<section class="task" data-id="25">
+<h2>25. Wybierz wyrażenie</h2>
+<p class="sent">Skattene er høye i Norge. ___ får innbyggerne mange gratis tjenester.</p>
+<div class="opts" data-q="25" data-correct="Til gjengjeld" data-ok="Dobrze. Til gjengjeld = w zamian.">
+<button class="opt">Til gjengjeld</button><button class="opt">Fordi</button><button class="opt">Selv om</button>
+</div>
+<div class="fb" id="f25"></div>
+</section>
+<section class="task" data-id="26">
+<h2>26. Które zdanie jest poprawne?</h2>
+<div class="opts" data-q="26" data-correct="Jeg vet at staten ikke har underskudd i år." data-ok="Dobrze. W zdaniu podrzędnym „ikke” przed czasownikiem.">
+<button class="opt">Jeg vet at staten ikke har underskudd i år.</button><button class="opt">Jeg vet at staten har ikke underskudd i år.</button><button class="opt">Jeg vet at ikke staten har underskudd i år.</button>
+</div>
+<div class="fb" id="f26"></div>
+</section>
+<section class="task" data-id="27">
+<h2>27. Wybierz poprawny szyk</h2>
+<p class="sent">I fjor ___ et stort overskudd.</p>
+<div class="opts" data-q="27" data-correct="hadde staten" data-ok="Dobrze. „I fjor” = preteritum + inwersja.">
+<button class="opt">hadde staten</button><button class="opt">staten hadde</button><button class="opt">har staten hatt</button>
+</div>
+<div class="fb" id="f27"></div>
+</section>
+<section class="task" data-id="28">
+<h2>28. Dokończ zdanie</h2>
+<p class="sent">Når staten har underskudd, ___</p>
+<div class="opts" data-q="28" data-correct="må den låne penger." data-ok="Dobrze. Po zdaniu z „når” inwersja.">
+<button class="opt">må den låne penger.</button><button class="opt">den må låne penger.</button><button class="opt">låne den må penger.</button>
+</div>
+<div class="fb" id="f28"></div>
+</section>
+<section class="task" data-id="29">
+<h2>29. Połącz zdania (fordi)</h2>
+<p class="given">Vi betaler skatt. Vi vil ha gode offentlige tjenester.</p>
+<div class="rw"><span>Vi betaler skatt fordi</span><input type="text" id="t29" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(29,[&quot;vi vil ha gode offentlige tjenester&quot;],&quot;Dobrze. Po „fordi” szyk prosty.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(29)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f29"></div>
+<div class="sol" id="s29">Wzorcowa odpowiedź: <b>Vi betaler skatt fordi vi vil ha gode offentlige tjenester</b></div>
+</section>
+<section class="task" data-id="30">
+<h2>30. Połącz zdania (at)</h2>
+<p class="given">Staten bruker ikke mer penger enn den tjener. Det er viktig.</p>
+<div class="rw"><span>Det er viktig at staten</span><input type="text" id="t30" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(30,[&quot;ikke bruker mer penger enn den tjener&quot;],&quot;Dobrze. W zdaniu z „at” „ikke” przed czasownikiem.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(30)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f30"></div>
+<div class="sol" id="s30">Wzorcowa odpowiedź: <b>Det er viktig at staten ikke bruker mer penger enn den tjener</b></div>
+</section>
+<h2 class="part">Część D: Formy i słowotwórstwo</h2><p class="partintro">Wpisz brakujące słowo w odpowiedniej formie.</p>
+<section class="task" data-id="31">
+<h2>31. Utwórz rzeczownik</h2>
+<p class="hint">investere → ? (liczba mnoga)</p>
+<div class="inline sent">Staten gjør store <input type="text" id="t31" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i veier og jernbane.</div>
+<div class="row"><button class="btn" onclick="checkText(31,[&quot;investeringer&quot;],&quot;Dobrze. Investere → en investering → investeringer.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(31)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f31"></div>
+<div class="sol" id="s31">Wzorcowa odpowiedź: <b>investeringer</b></div>
+</section>
+<section class="task" data-id="32">
+<h2>32. Forma określona, liczba mnoga</h2>
+<p class="hint">en inntekt</p>
+<div class="inline sent">De samlede <input type="text" id="t32" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> kommer fra ulike kilder.</div>
+<div class="row"><button class="btn" onclick="checkText(32,[&quot;inntektene&quot;],&quot;Dobrze. En inntekt → inntektene.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(32)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f32"></div>
+<div class="sol" id="s32">Wzorcowa odpowiedź: <b>inntektene</b></div>
+</section>
+<section class="task" data-id="33">
+<h2>33. Liczba mnoga</h2>
+<p class="hint">en utgift</p>
+<div class="inline sent">Staten har mange <input type="text" id="t33" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">.</div>
+<div class="row"><button class="btn" onclick="checkText(33,[&quot;utgifter&quot;],&quot;Dobrze. En utgift → utgifter.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(33)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f33"></div>
+<div class="sol" id="s33">Wzorcowa odpowiedź: <b>utgifter</b></div>
+</section>
+<section class="task" data-id="34">
+<h2>34. Utwórz rzeczownik</h2>
+<p class="hint">låne → et ?</p>
+<div class="inline sent">Staten måtte ta opp et stort <input type="text" id="t34" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">.</div>
+<div class="row"><button class="btn" onclick="checkText(34,[&quot;lån&quot;],&quot;Dobrze. Låne → et lån.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(34)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f34"></div>
+<div class="sol" id="s34">Wzorcowa odpowiedź: <b>lån</b></div>
+</section>
+<section class="task" data-id="35">
+<h2>35. Utwórz rzeczownik w formie określonej</h2>
+<p class="hint">drive → en ?</p>
+<div class="inline sent"><input type="text" id="t35" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> av sykehus koster mye penger.</div>
+<div class="row"><button class="btn" onclick="checkText(35,[&quot;driften&quot;],&quot;Dobrze. Drive → en drift → driften.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(35)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f35"></div>
+<div class="sol" id="s35">Wzorcowa odpowiedź: <b>driften</b></div>
+</section>
+<section class="task" data-id="36">
+<h2>36. Złożenie</h2>
+<p class="hint">skatt + betaler (liczba mnoga)</p>
+<div class="inline sent">Alle som betaler skatt, er <input type="text" id="t36" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">.</div>
+<div class="row"><button class="btn" onclick="checkText(36,[&quot;skattebetalere&quot;, &quot;skatteytere&quot;],&quot;Dobrze. Skatt + betaler → skattebetaler, l. mn. skattebetalere.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(36)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f36"></div>
+<div class="sol" id="s36">Wzorcowa odpowiedź: <b>skattebetalere</b></div>
+</section>
+<section class="task" data-id="37">
+<h2>37. Stopień wyższy</h2>
+<p class="hint">stor</p>
+<div class="inline sent">I fjor var utgiftene <input type="text" id="t37" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> enn inntektene.</div>
+<div class="row"><button class="btn" onclick="checkText(37,[&quot;større&quot;],&quot;Dobrze. Stor, større, størst.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(37)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f37"></div>
+<div class="sol" id="s37">Wzorcowa odpowiedź: <b>større</b></div>
+</section>
+<section class="task" data-id="38">
+<h2>38. Stopień najwyższy</h2>
+<p class="hint">viktig</p>
+<div class="inline sent">Skatter er den <input type="text" id="t38" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> inntektskilden.</div>
+<div class="row"><button class="btn" onclick="checkText(38,[&quot;viktigste&quot;],&quot;Dobrze. Den + stopień najwyższy w formie określonej: viktigste.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(38)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f38"></div>
+<div class="sol" id="s38">Wzorcowa odpowiedź: <b>viktigste</b></div>
+</section>
+<section class="task" data-id="39">
+<h2>39. Forma przymiotnika</h2>
+<p class="hint">stor</p>
+<div class="inline sent">Staten har et <input type="text" id="t39" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> underskudd.</div>
+<div class="row"><button class="btn" onclick="checkText(39,[&quot;stort&quot;],&quot;Dobrze. Et underskudd (nijaki) → stort.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(39)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f39"></div>
+<div class="sol" id="s39">Wzorcowa odpowiedź: <b>stort</b></div>
+</section>
+<section class="task" data-id="40">
+<h2>40. Forma przymiotnika</h2>
+<p class="hint">viktig</p>
+<div class="inline sent">Offentlige tjenester er <input type="text" id="t40" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> for innbyggerne.</div>
+<div class="row"><button class="btn" onclick="checkText(40,[&quot;viktige&quot;],&quot;Dobrze. Podmiot w liczbie mnogiej → viktige.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(40)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f40"></div>
+<div class="sol" id="s40">Wzorcowa odpowiedź: <b>viktige</b></div>
+</section>
+<h2 class="part">Część E: Znajdź i popraw błąd</h2><p class="partintro">W każdym zdaniu jest jeden błąd w pogrubionym fragmencie. Wpisz poprawną wersję fragmentu.</p>
+<section class="task" data-id="41">
+<h2>41. Popraw błąd</h2>
+<div class="inline sent">Staten har mange <b>utgift</b>. → <input type="text" id="t41" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(41,[&quot;utgifter&quot;],&quot;Dobrze. Po „mange” liczba mnoga.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(41)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f41"></div>
+<div class="sol" id="s41">Wzorcowa odpowiedź: <b>utgifter</b></div>
+</section>
+<section class="task" data-id="42">
+<h2>42. Popraw błąd</h2>
+<div class="inline sent">I fjor <b>har staten hatt</b> et overskudd. → <input type="text" id="t42" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(42,[&quot;hadde staten&quot;],&quot;Dobrze. „I fjor” wymaga preteritum, do tego inwersja.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(42)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f42"></div>
+<div class="sol" id="s42">Wzorcowa odpowiedź: <b>hadde staten</b></div>
+</section>
+<section class="task" data-id="43">
+<h2>43. Popraw błąd</h2>
+<div class="inline sent">Staten må <b>låner</b> penger. → <input type="text" id="t43" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(43,[&quot;låne&quot;],&quot;Dobrze. Po czasowniku modalnym bezokolicznik.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(43)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f43"></div>
+<div class="sol" id="s43">Wzorcowa odpowiedź: <b>låne</b></div>
+</section>
+<section class="task" data-id="44">
+<h2>44. Popraw błąd</h2>
+<div class="inline sent">Hvis det blir underskudd, <b>staten må</b> låne penger. → <input type="text" id="t44" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(44,[&quot;må staten&quot;],&quot;Dobrze. Inwersja po zdaniu z „hvis”.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(44)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f44"></div>
+<div class="sol" id="s44">Wzorcowa odpowiedź: <b>må staten</b></div>
+</section>
+<section class="task" data-id="45">
+<h2>45. Popraw błąd</h2>
+<div class="inline sent">Utgiftene var <b>stor</b> enn inntektene. → <input type="text" id="t45" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(45,[&quot;større&quot;],&quot;Dobrze. Po „enn” stopień wyższy.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(45)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f45"></div>
+<div class="sol" id="s45">Wzorcowa odpowiedź: <b>større</b></div>
+</section>
+<section class="task" data-id="46">
+<h2>46. Popraw błąd</h2>
+<div class="inline sent">Det er viktig å <b>har</b> balanse i budsjettet. → <input type="text" id="t46" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(46,[&quot;ha&quot;],&quot;Dobrze. Po „å” bezokolicznik.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(46)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f46"></div>
+<div class="sol" id="s46">Wzorcowa odpowiedź: <b>ha</b></div>
+</section>
+<section class="task" data-id="47">
+<h2>47. Popraw błąd</h2>
+<div class="inline sent">Han sa at staten <b>har ikke</b> nok penger. → <input type="text" id="t47" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(47,[&quot;ikke har&quot;],&quot;Dobrze. W zdaniu z „at” „ikke” przed czasownikiem.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(47)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f47"></div>
+<div class="sol" id="s47">Wzorcowa odpowiedź: <b>ikke har</b></div>
+</section>
+<section class="task" data-id="48">
+<h2>48. Popraw błąd</h2>
+<div class="inline sent">Det finnes mange <b>ulik</b> kilder til inntekter. → <input type="text" id="t48" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(48,[&quot;ulike&quot;],&quot;Dobrze. Przymiotnik przed rzeczownikiem w l. mn.: ulike.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(48)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f48"></div>
+<div class="sol" id="s48">Wzorcowa odpowiedź: <b>ulike</b></div>
+</section>
+<section class="task" data-id="49">
+<h2>49. Popraw błąd</h2>
+<div class="inline sent">Staten har betalt ned gjeld <b>siden</b> fem år. → <input type="text" id="t49" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(49,[&quot;i&quot;],&quot;Dobrze. Perfektum + „i” + okres czasu.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(49)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f49"></div>
+<div class="sol" id="s49">Wzorcowa odpowiedź: <b>i</b></div>
+</section>
+<section class="task" data-id="50">
+<h2>50. Popraw błąd</h2>
+<div class="inline sent"><b>Den statsbudsjettet</b> viser planen for året. → <input type="text" id="t50" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(50,[&quot;statsbudsjettet&quot;],&quot;Dobrze. Bez przymiotnika nie ma podwójnej określoności: statsbudsjettet.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(50)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f50"></div>
+<div class="sol" id="s50">Wzorcowa odpowiedź: <b>statsbudsjettet</b></div>
+</section>
+<h2 class="part">Część F: Tekst i mini-test</h2><p class="partintro">Przeczytaj tekst i zrób zadania do niego.</p>
+<article class="text"><h2>Kommunens budsjett</h2><p>Hver høst lager kommunen et budsjett for neste år. Pengene kommer fra flere kilder: skatt fra innbyggerne, penger fra staten og gebyrer for tjenester som vann og avfall. Kommunen bruker mest penger på skoler, barnehager og eldreomsorg.</p><p>I år har kommunen et problem. Det bor flere eldre i kommunen enn før, og de trenger mer hjelp. Samtidig har inntektene ikke økt like mye som utgiftene. Derfor må politikerne velge: Skal de kutte i andre tjenester, eller skal de øke eiendomsskatten?</p><p>Mange innbyggere har sendt inn meninger til kommunen. Noen mener at det er viktigere å ha et godt tilbud til de eldre enn å bygge en ny idrettshall. Andre synes at unge familier også må prioriteres, slik at de ikke flytter fra kommunen.</p></article>
+<section class="task" data-id="51">
+<h2>51. Riktig eller galt?</h2>
+<p class="sent">Kommunen får bare penger fra skatt.</p>
+<div class="opts" data-q="51" data-correct="Galt" data-ok="Dobrze. Pieniądze pochodzą też od państwa i z opłat (gebyrer).">
+<button class="opt">Riktig</button><button class="opt">Galt</button>
+</div>
+<div class="fb" id="f51"></div>
+</section>
+<section class="task" data-id="52">
+<h2>52. Riktig eller galt?</h2>
+<p class="sent">Kommunen bruker mye penger på eldreomsorg.</p>
+<div class="opts" data-q="52" data-correct="Riktig" data-ok="Dobrze. Skoler, barnehager og eldreomsorg.">
+<button class="opt">Riktig</button><button class="opt">Galt</button>
+</div>
+<div class="fb" id="f52"></div>
+</section>
+<section class="task" data-id="53">
+<h2>53. Riktig eller galt?</h2>
+<p class="sent">Utgiftene har økt mer enn inntektene.</p>
+<div class="opts" data-q="53" data-correct="Riktig" data-ok="Dobrze. „Inntektene har ikke økt like mye som utgiftene.”">
+<button class="opt">Riktig</button><button class="opt">Galt</button>
+</div>
+<div class="fb" id="f53"></div>
+</section>
+<section class="task" data-id="54">
+<h2>54. Riktig eller galt?</h2>
+<p class="sent">Alle innbyggere er enige om hva kommunen bør gjøre.</p>
+<div class="opts" data-q="54" data-correct="Galt" data-ok="Dobrze. „Noen mener… Andre synes…”">
+<button class="opt">Riktig</button><button class="opt">Galt</button>
+</div>
+<div class="fb" id="f54"></div>
+</section>
+<section class="task" data-id="55">
+<h2>55. Wybierz synonim</h2>
+<p class="hint">„Skal de <b>kutte i</b> andre tjenester?”</p>
+<div class="opts" data-q="55" data-correct="redusere" data-ok="Dobrze. Kutte i = ograniczyć.">
+<button class="opt">redusere</button><button class="opt">øke</button><button class="opt">dele</button>
+</div>
+<div class="fb" id="f55"></div>
+</section>
+<section class="task" data-id="56">
+<h2>56. Co to znaczy?</h2>
+<p class="hint">„Unge familier må <b>prioriteres</b>.”</p>
+<div class="opts" data-q="56" data-correct="być traktowane priorytetowo" data-ok="Dobrze. Prioritere = stawiać na pierwszym miejscu.">
+<button class="opt">być traktowane priorytetowo</button><button class="opt">zostać zapomniane</button><button class="opt">płacić wyższe podatki</button>
+</div>
+<div class="fb" id="f56"></div>
+</section>
+<section class="task" data-id="57">
+<h2>57. Co to znaczy?</h2>
+<p class="hint">„<b>gebyrer</b> for tjenester som vann og avfall”</p>
+<div class="opts" data-q="57" data-correct="opłaty za usługi" data-ok="Dobrze. Et gebyr = opłata.">
+<button class="opt">opłaty za usługi</button><button class="opt">dotacje</button><button class="opt">długi</button>
+</div>
+<div class="fb" id="f57"></div>
+</section>
+<section class="task" data-id="58">
+<h2>58. Strona bierna</h2>
+<p class="given">Kommunen lager et budsjett hver høst.</p>
+<div class="rw"><span>Et budsjett blir</span><input type="text" id="t58" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(58,[&quot;laget av kommunen hver høst&quot;, &quot;laget hver høst&quot;, &quot;laget hver høst av kommunen&quot;],&quot;Dobrze. Lage → laget.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(58)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f58"></div>
+<div class="sol" id="s58">Wzorcowa odpowiedź: <b>Et budsjett blir laget av kommunen hver høst</b></div>
+</section>
+<section class="task" data-id="59">
+<h2>59. Inwersja</h2>
+<p class="given">Det bor flere eldre i kommunen enn før.</p>
+<div class="rw"><span>I kommunen</span><input type="text" id="t59" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(59,[&quot;bor det flere eldre enn før&quot;],&quot;Dobrze. Czasownik na drugim miejscu: bor det.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(59)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f59"></div>
+<div class="sol" id="s59">Wzorcowa odpowiedź: <b>I kommunen bor det flere eldre enn før</b></div>
+</section>
+<section class="task" data-id="60">
+<h2>60. Stopień wyższy</h2>
+<p class="hint">viktig</p>
+<div class="inline sent">Noen mener at det er <input type="text" id="t60" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> å ha et godt tilbud til de eldre enn å bygge en idrettshall.</div>
+<div class="row"><button class="btn" onclick="checkText(60,[&quot;viktigere&quot;],&quot;Dobrze. Viktig → viktigere.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(60)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f60"></div>
+<div class="sol" id="s60">Wzorcowa odpowiedź: <b>viktigere</b></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 60 / 60</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
 </main>
 <script>
-const TOTAL=10;const solved=new Set();
+const TOTAL=60;const solved=new Set();
 function mark(n,ok,msg){
   const f=document.getElementById('f'+n);
   f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
