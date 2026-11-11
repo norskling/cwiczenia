@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenia B1 Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · B1 · Lekcja 30</span>
+  <h1>Równość i nękanie: <span>słownictwo i gramatyka</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Powtórka po lekcji „Likestilling, diskriminering og trakassering”: słownictwo, przyimki, słowotwórstwo, strona bierna, selv om i pytania zależne.</p>
+  <div class="meta"><span>Słownictwo + gramatyka mieszana</span><span>ok. 20 min</span><span>10 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 10</b></div>
+  
+<section class="task" data-id="1">
+<h2>1. Wybierz synonim</h2>
+<p class="hint">„Han brukte <b>krenkende</b> språk.”</p>
+<div class="opts" data-q="1" data-correct="sårende" data-ok="Dobrze. Krenkende = obraźliwy, sårende.">
+<button class="opt">sårende</button><button class="opt">hyggelig</button><button class="opt">nøytralt</button>
+</div>
+<div class="fb" id="f1"></div>
+</section>
+<section class="task" data-id="2">
+<h2>2. Dopasuj definicje</h2>
+<p class="hint">Wybierz norweską definicję każdego słowa.</p>
+<div class="match">
+<span class="w">trakassering</span><select id="m2_0"><option value="">wybierz…</option><option>at alle har like rettigheter og muligheter</option><option>gjentatt plaging eller ubehagelig oppførsel mot noen</option><option>plaging via sosiale medier eller meldinger</option><option>å si fra om noe kritikkverdig til ledelsen</option></select>
+<span class="w">digital trakassering</span><select id="m2_1"><option value="">wybierz…</option><option>at alle har like rettigheter og muligheter</option><option>gjentatt plaging eller ubehagelig oppførsel mot noen</option><option>plaging via sosiale medier eller meldinger</option><option>å si fra om noe kritikkverdig til ledelsen</option></select>
+<span class="w">å varsle</span><select id="m2_2"><option value="">wybierz…</option><option>at alle har like rettigheter og muligheter</option><option>gjentatt plaging eller ubehagelig oppførsel mot noen</option><option>plaging via sosiale medier eller meldinger</option><option>å si fra om noe kritikkverdig til ledelsen</option></select>
+<span class="w">likestilling</span><select id="m2_3"><option value="">wybierz…</option><option>at alle har like rettigheter og muligheter</option><option>gjentatt plaging eller ubehagelig oppførsel mot noen</option><option>plaging via sosiale medier eller meldinger</option><option>å si fra om noe kritikkverdig til ledelsen</option></select>
+</div>
+<button class="btn" onclick='checkMatch(2,{&quot;m2_0&quot;: &quot;gjentatt plaging eller ubehagelig oppførsel mot noen&quot;, &quot;m2_1&quot;: &quot;plaging via sosiale medier eller meldinger&quot;, &quot;m2_2&quot;: &quot;å si fra om noe kritikkverdig til ledelsen&quot;, &quot;m2_3&quot;: &quot;at alle har like rettigheter og muligheter&quot;})'>Sprawdź</button>
+<div class="fb" id="f2"></div>
+</section>
+<section class="task" data-id="3">
+<h2>3. Wpisz przyimek</h2>
+<div class="inline sent">Hun ble utsatt <input type="text" id="t3" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> trakassering på jobben.</div>
+<div class="row"><button class="btn" onclick="checkText(3,[&quot;for&quot;],&quot;Dobrze. Bli utsatt for noe = być narażonym na coś.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(3)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f3"></div>
+<div class="sol" id="s3">Wzorcowa odpowiedź: <b>for</b></div>
+</section>
+<section class="task" data-id="4">
+<h2>4. Wpisz przyimek</h2>
+<div class="inline sent">Anklager om trakassering må tas <input type="text" id="t4" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> alvor.</div>
+<div class="row"><button class="btn" onclick="checkText(4,[&quot;på&quot;],&quot;Dobrze. Ta noe på alvor = traktować coś poważnie.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(4)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f4"></div>
+<div class="sol" id="s4">Wzorcowa odpowiedź: <b>på</b></div>
+</section>
+<section class="task" data-id="5">
+<h2>5. Utwórz rzeczownik</h2>
+<p class="hint">fornærme → ? (liczba mnoga)</p>
+<div class="inline sent">Verbale <input type="text" id="t5" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> kan såre andre.</div>
+<div class="row"><button class="btn" onclick="checkText(5,[&quot;fornærmelser&quot;],&quot;Dobrze. Fornærme → en fornærmelse → fornærmelser.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(5)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f5"></div>
+<div class="sol" id="s5">Wzorcowa odpowiedź: <b>fornærmelser</b></div>
+</section>
+<section class="task" data-id="6">
+<h2>6. Strona bierna (-s)</h2>
+<p class="given">Ledelsen må håndtere konflikter profesjonelt.</p>
+<div class="rw"><span>Konflikter må</span><input type="text" id="t6" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(6,[&quot;håndteres profesjonelt&quot;, &quot;håndteres profesjonelt av ledelsen&quot;, &quot;bli håndtert profesjonelt&quot;, &quot;bli håndtert profesjonelt av ledelsen&quot;],&quot;Dobrze. Po „må” strona bierna z -s: håndteres.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(6)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f6"></div>
+<div class="sol" id="s6">Wzorcowa odpowiedź: <b>Konflikter må håndteres profesjonelt.</b></div>
+</section>
+<section class="task" data-id="7">
+<h2>7. Men → selv om</h2>
+<p class="given">Hun ble mobbet, men hun sa ikke fra.</p>
+<div class="rw"><span>Selv om hun ble mobbet,</span><input type="text" id="t7" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(7,[&quot;sa hun ikke fra&quot;],&quot;Dobrze. Po zdaniu podrzędnym inwersja: sa hun ikke fra.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(7)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f7"></div>
+<div class="sol" id="s7">Wzorcowa odpowiedź: <b>Selv om hun ble mobbet, sa hun ikke fra.</b></div>
+</section>
+<section class="task" data-id="8">
+<h2>8. Pytanie zależne z „om”</h2>
+<p class="given">Sjefen spurte meg: «Har du opplevd trakassering?»</p>
+<div class="rw"><span>Sjefen spurte meg om</span><input type="text" id="t8" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(8,[&quot;jeg hadde opplevd trakassering&quot;, &quot;jeg har opplevd trakassering&quot;],&quot;Dobrze. „Om” + szyk prosty, „du” zmienia się na „jeg”.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(8)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f8"></div>
+<div class="sol" id="s8">Wzorcowa odpowiedź: <b>Sjefen spurte meg om jeg hadde opplevd trakassering.</b></div>
+</section>
+<section class="task" data-id="9">
+<h2>9. Wybierz poprawną formę</h2>
+<p class="sent">Hvis du blir utsatt for trakassering, ___ varsle HR-avdelingen.</p>
+<div class="opts" data-q="9" data-correct="bør du" data-ok="Dobrze. Zdanie z „hvis” na początku, więc inwersja: bør du.">
+<button class="opt">bør du</button><button class="opt">du bør</button><button class="opt">bør å</button>
+</div>
+<div class="fb" id="f9"></div>
+</section>
+<section class="task" data-id="10">
+<h2>10. Popraw błąd</h2>
+<div class="inline sent">Mobbing kan påvirke selvfølelsen <b>negative</b>. → <input type="text" id="t10" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(10,[&quot;negativt&quot;],&quot;Dobrze. Przysłówek od przymiotnika dostaje końcówkę -t: negativt.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(10)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f10"></div>
+<div class="sol" id="s10">Wzorcowa odpowiedź: <b>negativt</b></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 10 / 10</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=10;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+</script>
+</body>
+</html>
