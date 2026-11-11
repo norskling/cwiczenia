@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenia B1 Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · B1 · Lekcja 25</span>
+  <h1>Klimat: <span>pełna powtórka</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Duży zestaw po lekcji „Klimaendringer og global oppvarming”: słownictwo, przekształcenia jak na egzaminie, szyk, słowotwórstwo, poprawianie błędów i tekst. Możesz robić go w kilku podejściach.</p>
+  <div class="meta"><span>Słownictwo + gramatyka mieszana</span><span>ok. 40 min</span><span>60 zadań</span><span>6 części</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 60</b></div>
+  
+<h2 class="part">Część A: Słownictwo</h2><p class="partintro">Słownictwo z lekcji o globalnym ociepleniu w nowych kontekstach: synonimy, przeciwieństwa i definicje po norwesku. Odpowiedź sprawdza się od razu.</p>
+<section class="task" data-id="1">
+<h2>1. Wybierz synonim</h2>
+<p class="hint">Które słowo znaczy to samo co <b>øke</b>?</p>
+<div class="opts" data-q="1" data-correct="stige" data-ok="Dobrze. „Temperaturen øker” = „temperaturen stiger”.">
+<button class="opt">synke</button><button class="opt">stige</button><button class="opt">stoppe</button>
+</div>
+<div class="fb" id="f1"></div>
+</section>
+<section class="task" data-id="2">
+<h2>2. Wybierz synonim</h2>
+<p class="hint">Które wyrażenie znaczy to samo co <b>redusere</b>?</p>
+<div class="opts" data-q="2" data-correct="kutte ned på" data-ok="Dobrze. „Redusere bruken av bil” = „kutte ned på bilkjøring”.">
+<button class="opt">bidra til</button><button class="opt">kutte ned på</button><button class="opt">satse på</button>
+</div>
+<div class="fb" id="f2"></div>
+</section>
+<section class="task" data-id="3">
+<h2>3. Wybierz synonim</h2>
+<p class="hint">Które wyrażenie znaczy to samo co <b>føre til</b>?</p>
+<div class="opts" data-q="3" data-correct="forårsake" data-ok="Dobrze. „Tørke fører til vannmangel” = „tørke forårsaker vannmangel”.">
+<button class="opt">forårsake</button><button class="opt">forhindre</button><button class="opt">beskytte</button>
+</div>
+<div class="fb" id="f3"></div>
+</section>
+<section class="task" data-id="4">
+<h2>4. Wybierz synonim</h2>
+<p class="hint">Które wyrażenie znaczy to samo co <b>påvirke</b>?</p>
+<div class="opts" data-q="4" data-correct="ha innvirkning på" data-ok="Dobrze. Oba znaczą „wpływać na”.">
+<button class="opt">ha innvirkning på</button><button class="opt">ha lyst på</button><button class="opt">ha råd til</button>
+</div>
+<div class="fb" id="f4"></div>
+</section>
+<section class="task" data-id="5">
+<h2>5. Wybierz synonim</h2>
+<p class="hint">„Temperaturen har økt <b>betydelig</b>.” Które słowo pasuje najlepiej zamiast „betydelig”?</p>
+<div class="opts" data-q="5" data-correct="merkbart" data-ok="Dobrze. „Betydelig” = znacząco, wyraźnie (merkbart).">
+<button class="opt">litt</button><button class="opt">merkbart</button><button class="opt">sjelden</button>
+</div>
+<div class="fb" id="f5"></div>
+</section>
+<section class="task" data-id="6">
+<h2>6. Co to znaczy?</h2>
+<p class="hint">„Mange kystområder kan bli <b>oversvømmet</b>.”</p>
+<div class="opts" data-q="6" data-correct="dekket av vann" data-ok="Dobrze. „Oversvømmet” = zalany wodą.">
+<button class="opt">dekket av vann</button><button class="opt">helt uttørket</button><button class="opt">ødelagt av brann</button>
+</div>
+<div class="fb" id="f6"></div>
+</section>
+<section class="task" data-id="7">
+<h2>7. Dopasuj przeciwieństwa</h2>
+<p class="hint">Wybierz słowo o przeciwnym znaczeniu.</p>
+<div class="match">
+<span class="w">tørke</span><select id="m7_0"><option value="">wybierz…</option><option>bekymret</option><option>flom</option><option>fossil energi</option><option>synke</option></select>
+<span class="w">øke</span><select id="m7_1"><option value="">wybierz…</option><option>bekymret</option><option>flom</option><option>fossil energi</option><option>synke</option></select>
+<span class="w">fornybar energi</span><select id="m7_2"><option value="">wybierz…</option><option>bekymret</option><option>flom</option><option>fossil energi</option><option>synke</option></select>
+<span class="w">optimistisk</span><select id="m7_3"><option value="">wybierz…</option><option>bekymret</option><option>flom</option><option>fossil energi</option><option>synke</option></select>
+</div>
+<button class="btn" onclick='checkMatch(7,{&quot;m7_0&quot;: &quot;flom&quot;, &quot;m7_1&quot;: &quot;synke&quot;, &quot;m7_2&quot;: &quot;fossil energi&quot;, &quot;m7_3&quot;: &quot;bekymret&quot;})'>Sprawdź</button>
+<div class="fb" id="f7"></div>
+</section>
+<section class="task" data-id="8">
+<h2>8. Dopasuj definicje</h2>
+<p class="hint">Wybierz norweską definicję każdego słowa.</p>
+<div class="match">
+<span class="w">en hetebølge</span><select id="m8_0"><option value="">wybierz…</option><option>at havet blir høyere enn før</option><option>det som slippes ut i lufta fra fabrikker og biler</option><option>en gass som holder på varmen i atmosfæren</option><option>en lang periode med svært høye temperaturer</option></select>
+<span class="w">en drivhusgass</span><select id="m8_1"><option value="">wybierz…</option><option>at havet blir høyere enn før</option><option>det som slippes ut i lufta fra fabrikker og biler</option><option>en gass som holder på varmen i atmosfæren</option><option>en lang periode med svært høye temperaturer</option></select>
+<span class="w">et utslipp</span><select id="m8_2"><option value="">wybierz…</option><option>at havet blir høyere enn før</option><option>det som slippes ut i lufta fra fabrikker og biler</option><option>en gass som holder på varmen i atmosfæren</option><option>en lang periode med svært høye temperaturer</option></select>
+<span class="w">havnivåstigning</span><select id="m8_3"><option value="">wybierz…</option><option>at havet blir høyere enn før</option><option>det som slippes ut i lufta fra fabrikker og biler</option><option>en gass som holder på varmen i atmosfæren</option><option>en lang periode med svært høye temperaturer</option></select>
+</div>
+<button class="btn" onclick='checkMatch(8,{&quot;m8_0&quot;: &quot;en lang periode med svært høye temperaturer&quot;, &quot;m8_1&quot;: &quot;en gass som holder på varmen i atmosfæren&quot;, &quot;m8_2&quot;: &quot;det som slippes ut i lufta fra fabrikker og biler&quot;, &quot;m8_3&quot;: &quot;at havet blir høyere enn før&quot;})'>Sprawdź</button>
+<div class="fb" id="f8"></div>
+</section>
+<section class="task" data-id="9">
+<h2>9. Które słowo nie pasuje?</h2>
+<p class="hint">Trzy słowa to rodzaje ekstremalnej pogody. Które jest inne?</p>
+<div class="opts" data-q="9" data-correct="solenergi" data-ok="Dobrze. Solenergi to energia odnawialna, pozostałe słowa to ekstremvær.">
+<button class="opt">orkan</button><button class="opt">storm</button><button class="opt">solenergi</button><button class="opt">hetebølge</button>
+</div>
+<div class="fb" id="f9"></div>
+</section>
+<section class="task" data-id="10">
+<h2>10. Uzupełnij wyrażenie</h2>
+<p class="hint">Jedno słowo. Wyrażenie znaczy „ograniczyć”.</p>
+<div class="inline sent">Vi må <input type="text" id="t10" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> ned på bruken av fly og bil.</div>
+<div class="row"><button class="btn" onclick="checkText(10,[&quot;kutte&quot;],&quot;Dobrze. „Kutte ned på noe” = ograniczyć coś.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(10)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f10"></div>
+<div class="sol" id="s10">Wzorcowa odpowiedź: <b>kutte</b></div>
+</section>
+<h2 class="part">Część B: Przekształcanie zdań</h2><p class="partintro">Przepisz zdanie tak, żeby znaczyło to samo. Początek nowego zdania jest już podany, dopisz resztę. Jeśli odpowiedź nie przechodzi, kliknij „Pokaż odpowiedź” i porównaj ze swoją.</p>
+<section class="task" data-id="11">
+<h2>11. Strona bierna (bli)</h2>
+<p class="given">Fabrikker slipper ut mye CO2.</p>
+<div class="rw"><span>Mye CO2 blir</span><input type="text" id="t11" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(11,[&quot;sluppet ut av fabrikker&quot;],&quot;Dobrze. Bli + imiesłów (sluppet ut), a wykonawca po „av”.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(11)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f11"></div>
+<div class="sol" id="s11">Wzorcowa odpowiedź: <b>Mye CO2 blir sluppet ut av fabrikker.</b></div>
+</section>
+<section class="task" data-id="12">
+<h2>12. Strona bierna (-s)</h2>
+<p class="given">Vi må redusere utslippene.</p>
+<div class="rw"><span>Utslippene må</span><input type="text" id="t12" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(12,[&quot;reduseres&quot;, &quot;bli redusert&quot;],&quot;Dobrze. Po czasowniku modalnym strona bierna to bezokolicznik + -s (reduseres).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(12)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f12"></div>
+<div class="sol" id="s12">Wzorcowa odpowiedź: <b>Utslippene må reduseres.</b></div>
+</section>
+<section class="task" data-id="13">
+<h2>13. Fordi → derfor</h2>
+<p class="given">Vi bruker mye fossil energi fordi den er billig.</p>
+<div class="rw"><span>Fossil energi er billig. Derfor</span><input type="text" id="t13" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(13,[&quot;bruker vi mye av den&quot;, &quot;bruker vi mye fossil energi&quot;, &quot;bruker vi mye av det&quot;],&quot;Dobrze. Po „derfor” na początku zdania jest inwersja: bruker vi.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(13)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f13"></div>
+<div class="sol" id="s13">Wzorcowa odpowiedź: <b>Fossil energi er billig. Derfor bruker vi mye av den.</b></div>
+</section>
+<section class="task" data-id="14">
+<h2>14. Zamień kolejność zdań</h2>
+<p class="given">Hvis vi ikke handler nå, blir det verre.</p>
+<div class="rw"><span>Det blir verre hvis</span><input type="text" id="t14" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(14,[&quot;vi ikke handler nå&quot;],&quot;Dobrze. W zdaniu podrzędnym „ikke” stoi przed czasownikiem.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(14)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f14"></div>
+<div class="sol" id="s14">Wzorcowa odpowiedź: <b>Det blir verre hvis vi ikke handler nå.</b></div>
+</section>
+<section class="task" data-id="15">
+<h2>15. Mowa zależna</h2>
+<p class="given">Forskeren sa: «Isen smelter raskere enn før.»</p>
+<div class="rw"><span>Forskeren sa at</span><input type="text" id="t15" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(15,[&quot;isen smeltet raskere enn før&quot;, &quot;isen smelter raskere enn før&quot;],&quot;Dobrze. Po „sa at” czas zwykle cofa się do preteritum (smeltet). Czas teraźniejszy też jest akceptowany, jeśli fakt wciąż jest prawdziwy.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(15)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f15"></div>
+<div class="sol" id="s15">Wzorcowa odpowiedź: <b>Forskeren sa at isen smeltet raskere enn før.</b></div>
+</section>
+<section class="task" data-id="16">
+<h2>16. Pytanie zależne</h2>
+<p class="given">Læreren spurte: «Hvorfor øker temperaturen?»</p>
+<div class="rw"><span>Læreren spurte hvorfor</span><input type="text" id="t16" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(16,[&quot;temperaturen økte&quot;, &quot;temperaturen øker&quot;],&quot;Dobrze. W pytaniu zależnym nie ma inwersji: temperaturen økte.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(16)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f16"></div>
+<div class="sol" id="s16">Wzorcowa odpowiedź: <b>Læreren spurte hvorfor temperaturen økte.</b></div>
+</section>
+<section class="task" data-id="17">
+<h2>17. Pytanie zależne z „om”</h2>
+<p class="given">Hun spurte meg: «Kjører du mye bil?»</p>
+<div class="rw"><span>Hun spurte meg om</span><input type="text" id="t17" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(17,[&quot;jeg kjørte mye bil&quot;, &quot;jeg kjører mye bil&quot;],&quot;Dobrze. Pytanie tak/nie w mowie zależnej zaczyna się od „om”, a „du” zmienia się na „jeg”.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(17)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f17"></div>
+<div class="sol" id="s17">Wzorcowa odpowiedź: <b>Hun spurte meg om jeg kjørte mye bil.</b></div>
+</section>
+<section class="task" data-id="18">
+<h2>18. Połącz zdania (som)</h2>
+<p class="given">Isbreene smelter. Isbreene ligger på Svalbard.</p>
+<div class="rw"><span>Isbreene som</span><input type="text" id="t18" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(18,[&quot;ligger på svalbard smelter&quot;],&quot;Dobrze. Zdanie z „som” stoi zaraz po rzeczowniku, a orzeczenie główne (smelter) na końcu.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(18)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f18"></div>
+<div class="sol" id="s18">Wzorcowa odpowiedź: <b>Isbreene som ligger på Svalbard, smelter.</b></div>
+</section>
+<section class="task" data-id="19">
+<h2>19. Men … likevel → selv om</h2>
+<p class="given">Det er dyrt å kjøpe elbil, men mange gjør det likevel.</p>
+<div class="rw"><span>Selv om det er dyrt å kjøpe elbil,</span><input type="text" id="t19" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(19,[&quot;gjør mange det likevel&quot;, &quot;gjør mange det&quot;, &quot;kjøper mange elbil likevel&quot;, &quot;kjøper mange elbil&quot;],&quot;Dobrze. Zdanie podrzędne na początku, więc w zdaniu głównym czasownik stoi przed podmiotem.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(19)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f19"></div>
+<div class="sol" id="s19">Wzorcowa odpowiedź: <b>Selv om det er dyrt å kjøpe elbil, gjør mange det likevel.</b></div>
+</section>
+<section class="task" data-id="20">
+<h2>20. Inwersja</h2>
+<p class="given">Vi må handle nå for å beskytte planeten.</p>
+<div class="rw"><span>For å beskytte planeten</span><input type="text" id="t20" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(20,[&quot;må vi handle nå&quot;],&quot;Dobrze. Czasownik zawsze na drugim miejscu: må vi.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(20)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f20"></div>
+<div class="sol" id="s20">Wzorcowa odpowiedź: <b>For å beskytte planeten må vi handle nå.</b></div>
+</section>
+<h2 class="part">Część C: Spójniki i szyk zdania</h2><p class="partintro">Spójniki (fordi, derfor, selv om, likevel, når) i zdaniach o klimacie i to, jak zmieniają szyk zdania. Na koniec połącz zdania samodzielnie.</p>
+<section class="task" data-id="21">
+<h2>21. Wybierz spójnik</h2>
+<p class="sent">Det har vært tørke lenge, ___ er det stor fare for skogbrann.</p>
+<div class="opts" data-q="21" data-correct="derfor" data-ok="Dobrze. „Derfor” = dlatego. Zauważ inwersję: er det.">
+<button class="opt">derfor</button><button class="opt">fordi</button><button class="opt">selv om</button>
+</div>
+<div class="fb" id="f21"></div>
+</section>
+<section class="task" data-id="22">
+<h2>22. Wybierz spójnik</h2>
+<p class="sent">Mange kjører bil hver dag, ___ de vet at det forurenser.</p>
+<div class="opts" data-q="22" data-correct="selv om" data-ok="Dobrze. „Selv om” = chociaż, mimo że.">
+<button class="opt">derfor</button><button class="opt">selv om</button><button class="opt">slik at</button>
+</div>
+<div class="fb" id="f22"></div>
+</section>
+<section class="task" data-id="23">
+<h2>23. Wybierz spójnik</h2>
+<p class="sent">Vi bør bruke mer fornybar energi, ___ den ikke slipper ut CO2.</p>
+<div class="opts" data-q="23" data-correct="fordi" data-ok="Dobrze. „Fordi” wprowadza przyczynę, a po nim „ikke” stoi przed czasownikiem.">
+<button class="opt">likevel</button><button class="opt">derfor</button><button class="opt">fordi</button>
+</div>
+<div class="fb" id="f23"></div>
+</section>
+<section class="task" data-id="24">
+<h2>24. Wybierz spójnik</h2>
+<p class="sent">___ temperaturen øker, smelter isbreene.</p>
+<div class="opts" data-q="24" data-correct="Når" data-ok="Dobrze. „Når” = kiedy. Po zdaniu podrzędnym na początku jest inwersja: smelter isbreene.">
+<button class="opt">Når</button><button class="opt">Derfor</button><button class="opt">Likevel</button>
+</div>
+<div class="fb" id="f24"></div>
+</section>
+<section class="task" data-id="25">
+<h2>25. Wybierz słowo</h2>
+<p class="sent">Regjeringen har lovet å kutte utslippene. ___ har utslippene økt de siste årene.</p>
+<div class="opts" data-q="25" data-correct="Likevel" data-ok="Dobrze. „Likevel” = mimo to, a jednak.">
+<button class="opt">Likevel</button><button class="opt">Derfor</button><button class="opt">Fordi</button>
+</div>
+<div class="fb" id="f25"></div>
+</section>
+<section class="task" data-id="26">
+<h2>26. Które zdanie jest poprawne?</h2>
+<div class="opts" data-q="26" data-correct="Jeg vet at mange mennesker ikke bryr seg om klimaet." data-ok="Dobrze. W zdaniu podrzędnym (at …) „ikke” stoi przed czasownikiem.">
+<button class="opt">Jeg vet at mange mennesker ikke bryr seg om klimaet.</button><button class="opt">Jeg vet at mange mennesker bryr seg ikke om klimaet.</button><button class="opt">Jeg vet at bryr mange mennesker seg ikke om klimaet.</button>
+</div>
+<div class="fb" id="f26"></div>
+</section>
+<section class="task" data-id="27">
+<h2>27. Wybierz poprawny szyk</h2>
+<p class="sent">I fjor ___ mange skogbranner i Europa.</p>
+<div class="opts" data-q="27" data-correct="var det" data-ok="Dobrze. „I fjor” na początku, więc inwersja: var det. „I fjor” wymaga preteritum, nie perfektum.">
+<button class="opt">det var</button><button class="opt">var det</button><button class="opt">det har vært</button>
+</div>
+<div class="fb" id="f27"></div>
+</section>
+<section class="task" data-id="28">
+<h2>28. Dokończ zdanie</h2>
+<p class="sent">Hvis det blir varmere, ___</p>
+<div class="opts" data-q="28" data-correct="smelter mer is." data-ok="Dobrze. Zdanie z „hvis” jest na pierwszym miejscu, więc czasownik idzie przed podmiotem.">
+<button class="opt">mer is smelter.</button><button class="opt">smelter mer is.</button><button class="opt">is smelter mer.</button>
+</div>
+<div class="fb" id="f28"></div>
+</section>
+<section class="task" data-id="29">
+<h2>29. Połącz zdania (fordi)</h2>
+<p class="given">Vi sykler til jobben. Vi vil ikke forurense.</p>
+<div class="rw"><span>Vi sykler til jobben fordi</span><input type="text" id="t29" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(29,[&quot;vi ikke vil forurense&quot;],&quot;Dobrze. Po „fordi” jest zdanie podrzędne: vi ikke vil.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(29)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f29"></div>
+<div class="sol" id="s29">Wzorcowa odpowiedź: <b>Vi sykler til jobben fordi vi ikke vil forurense.</b></div>
+</section>
+<section class="task" data-id="30">
+<h2>30. Połącz zdania (som)</h2>
+<p class="given">Noen land slipper ut mest CO2. De må ta mest ansvar.</p>
+<div class="rw"><span>Landene som</span><input type="text" id="t30" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(30,[&quot;slipper ut mest co2 må ta mest ansvar&quot;],&quot;Dobrze. Zdanie z „som” opisuje rzeczownik, a orzeczenie główne (må ta) jest po nim.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(30)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f30"></div>
+<div class="sol" id="s30">Wzorcowa odpowiedź: <b>Landene som slipper ut mest CO2, må ta mest ansvar.</b></div>
+</section>
+<h2 class="part">Część D: Słowotwórstwo</h2><p class="partintro">Tworzenie rzeczowników i przymiotników od słów z lekcji. Wpisz brakujące słowo w odpowiedniej formie.</p>
+<section class="task" data-id="31">
+<h2>31. Utwórz rzeczownik</h2>
+<p class="hint">øke → ?</p>
+<div class="inline sent">Vi ser en stor <input type="text" id="t31" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i den globale temperaturen.</div>
+<div class="row"><button class="btn" onclick="checkText(31,[&quot;økning&quot;],&quot;Dobrze. Øke → en økning (końcówka -ning).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(31)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f31"></div>
+<div class="sol" id="s31">Wzorcowa odpowiedź: <b>økning</b></div>
+</section>
+<section class="task" data-id="32">
+<h2>32. Utwórz rzeczownik</h2>
+<p class="hint">smelte → ?</p>
+<div class="inline sent"><input type="text" id="t32" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> av isbreene fører til havnivåstigning.</div>
+<div class="row"><button class="btn" onclick="checkText(32,[&quot;smeltingen&quot;, &quot;smeltinga&quot;],&quot;Dobrze. Smelte → en smelting, tutaj w formie określonej: smeltingen.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(32)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f32"></div>
+<div class="sol" id="s32">Wzorcowa odpowiedź: <b>Smeltingen</b></div>
+</section>
+<section class="task" data-id="33">
+<h2>33. Utwórz rzeczownik</h2>
+<p class="hint">forurense → ?</p>
+<div class="inline sent">Luften i byen er full av <input type="text" id="t33" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">.</div>
+<div class="row"><button class="btn" onclick="checkText(33,[&quot;forurensning&quot;, &quot;forurensing&quot;],&quot;Dobrze. Forurense → en forurensning.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(33)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f33"></div>
+<div class="sol" id="s33">Wzorcowa odpowiedź: <b>forurensning</b></div>
+</section>
+<section class="task" data-id="34">
+<h2>34. Utwórz rzeczownik</h2>
+<p class="hint">endre (klima) → ?</p>
+<div class="inline sent">Klima<input type="text" id="t34" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> er et stort problem i verden i dag.</div>
+<div class="row"><button class="btn" onclick="checkText(34,[&quot;endringer&quot;, &quot;endringene&quot;],&quot;Dobrze. Endre → en endring, w liczbie mnogiej: endringer.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(34)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f34"></div>
+<div class="sol" id="s34">Wzorcowa odpowiedź: <b>Klimaendringer</b></div>
+</section>
+<section class="task" data-id="35">
+<h2>35. Forma określona, liczba mnoga</h2>
+<p class="hint">et utslipp → (de) ?</p>
+<div class="inline sent">Vi må redusere <input type="text" id="t35" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> av CO2.</div>
+<div class="row"><button class="btn" onclick="checkText(35,[&quot;utslippene&quot;],&quot;Dobrze. Et utslipp, utslipp, utslippene: rzeczowniki nijakie jednosylabowe nie mają końcówki w l. mn. nieokreślonej.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(35)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f35"></div>
+<div class="sol" id="s35">Wzorcowa odpowiedź: <b>utslippene</b></div>
+</section>
+<section class="task" data-id="36">
+<h2>36. Utwórz przymiotnik</h2>
+<p class="hint">miljø + venn → ?</p>
+<div class="inline sent">En bil som ikke skader miljøet, er <input type="text" id="t36" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">.</div>
+<div class="row"><button class="btn" onclick="checkText(36,[&quot;miljøvennlig&quot;],&quot;Dobrze. Miljøvennlig = przyjazny dla środowiska.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(36)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f36"></div>
+<div class="sol" id="s36">Wzorcowa odpowiedź: <b>miljøvennlig</b></div>
+</section>
+<section class="task" data-id="37">
+<h2>37. Utwórz przymiotnik</h2>
+<p class="hint">fornye → ?</p>
+<div class="inline sent">Energi som ikke tar slutt, kaller vi <input type="text" id="t37" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> energi.</div>
+<div class="row"><button class="btn" onclick="checkText(37,[&quot;fornybar&quot;],&quot;Dobrze. Fornye → fornybar (końcówka -bar, jak w „lesbar”, czytelny).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(37)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f37"></div>
+<div class="sol" id="s37">Wzorcowa odpowiedź: <b>fornybar</b></div>
+</section>
+<section class="task" data-id="38">
+<h2>38. Utwórz rzeczownik</h2>
+<p class="hint">tørr → ?</p>
+<div class="inline sent">Når det ikke regner på lenge, blir det <input type="text" id="t38" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">.</div>
+<div class="row"><button class="btn" onclick="checkText(38,[&quot;tørke&quot;],&quot;Dobrze. Tørr (suchy) → en tørke (susza).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(38)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f38"></div>
+<div class="sol" id="s38">Wzorcowa odpowiedź: <b>tørke</b></div>
+</section>
+<section class="task" data-id="39">
+<h2>39. Utwórz rzeczownik w formie określonej</h2>
+<p class="hint">varm → ?</p>
+<div class="inline sent">Drivhusgassene holder på <input type="text" id="t39" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> fra sola.</div>
+<div class="row"><button class="btn" onclick="checkText(39,[&quot;varmen&quot;],&quot;Dobrze. Varm → en varme, tu w formie określonej: varmen.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(39)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f39"></div>
+<div class="sol" id="s39">Wzorcowa odpowiedź: <b>varmen</b></div>
+</section>
+<section class="task" data-id="40">
+<h2>40. Wybierz poprawne złożenie</h2>
+<p class="hint">Jak nazywamy to, że poziom morza rośnie?</p>
+<div class="opts" data-q="40" data-correct="havnivåstigning" data-ok="Dobrze. Hav + nivå + stigning: najważniejsze słowo (stigning) stoi na końcu.">
+<button class="opt">havstigningsnivå</button><button class="opt">havnivåstigning</button><button class="opt">nivåhavstigning</button>
+</div>
+<div class="fb" id="f40"></div>
+</section>
+<h2 class="part">Część E: Znajdź i popraw błąd</h2><p class="partintro">W każdym zdaniu jest jeden błąd w podkreślonym fragmencie. Wpisz poprawną wersję tego fragmentu. To typowe błędy, które pojawiają się w wypracowaniach na Norskprøve.</p>
+<section class="task" data-id="41">
+<h2>41. Popraw błąd</h2>
+<div class="inline sent">Temperaturen har økt <b>betydelige</b> de siste tiårene. → <input type="text" id="t41" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(41,[&quot;betydelig&quot;],&quot;Dobrze. Tu „betydelig” opisuje czasownik (har økt), więc jest przysłówkiem bez końcówki -e.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(41)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f41"></div>
+<div class="sol" id="s41">Wzorcowa odpowiedź: <b>betydelig</b></div>
+</section>
+<section class="task" data-id="42">
+<h2>42. Popraw błąd</h2>
+<div class="inline sent">I fjor <b>har det vært</b> en lang hetebølge i Spania. → <input type="text" id="t42" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(42,[&quot;var det&quot;],&quot;Dobrze. „I fjor” to zamknięty czas w przeszłości, więc preteritum. Do tego inwersja: var det.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(42)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f42"></div>
+<div class="sol" id="s42">Wzorcowa odpowiedź: <b>var det</b></div>
+</section>
+<section class="task" data-id="43">
+<h2>43. Popraw błąd</h2>
+<div class="inline sent">Vi har kjørt mindre bil <b>siden</b> tre år. → <input type="text" id="t43" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(43,[&quot;i&quot;],&quot;Dobrze. Har + perfektum + „i” + okres czasu: i tre år. „Siden” łączy się z punktem w czasie (siden 2020).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(43)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f43"></div>
+<div class="sol" id="s43">Wzorcowa odpowiedź: <b>i</b></div>
+</section>
+<section class="task" data-id="44">
+<h2>44. Popraw błąd</h2>
+<div class="inline sent">Det er viktig å <b>bruker</b> mer fornybar energi. → <input type="text" id="t44" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(44,[&quot;bruke&quot;],&quot;Dobrze. Po „å” zawsze bezokolicznik.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(44)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f44"></div>
+<div class="sol" id="s44">Wzorcowa odpowiedź: <b>bruke</b></div>
+</section>
+<section class="task" data-id="45">
+<h2>45. Popraw błąd</h2>
+<div class="inline sent">Jeg tror at klimaendringene <b>er ikke</b> et lite problem. → <input type="text" id="t45" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(45,[&quot;ikke er&quot;],&quot;Dobrze. W zdaniu podrzędnym „ikke” stoi przed czasownikiem.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(45)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f45"></div>
+<div class="sol" id="s45">Wzorcowa odpowiedź: <b>ikke er</b></div>
+</section>
+<section class="task" data-id="46">
+<h2>46. Popraw błąd</h2>
+<div class="inline sent">Flere <b>stor</b> orkaner har rammet Karibia. → <input type="text" id="t46" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(46,[&quot;store&quot;],&quot;Dobrze. Przymiotnik przed rzeczownikiem w liczbie mnogiej dostaje -e.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(46)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f46"></div>
+<div class="sol" id="s46">Wzorcowa odpowiedź: <b>store</b></div>
+</section>
+<section class="task" data-id="47">
+<h2>47. Popraw błąd</h2>
+<div class="inline sent">Isbreene smelter <b>fort</b> enn før. → <input type="text" id="t47" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(47,[&quot;fortere&quot;],&quot;Dobrze. Po stopniu wyższym jest „enn”, więc: fortere enn.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(47)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f47"></div>
+<div class="sol" id="s47">Wzorcowa odpowiedź: <b>fortere</b></div>
+</section>
+<section class="task" data-id="48">
+<h2>48. Popraw błąd</h2>
+<div class="inline sent">Hun er veldig interessert <b>for</b> miljøvern. → <input type="text" id="t48" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(48,[&quot;i&quot;],&quot;Dobrze. Interessert i noe.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(48)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f48"></div>
+<div class="sol" id="s48">Wzorcowa odpowiedź: <b>i</b></div>
+</section>
+<section class="task" data-id="49">
+<h2>49. Popraw błąd</h2>
+<div class="inline sent">Utslippene av CO2 må <b>reduserer</b>. → <input type="text" id="t49" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(49,[&quot;reduseres&quot;, &quot;bli redusert&quot;],&quot;Dobrze. Strona bierna po czasowniku modalnym: må reduseres.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(49)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f49"></div>
+<div class="sol" id="s49">Wzorcowa odpowiedź: <b>reduseres</b></div>
+</section>
+<section class="task" data-id="50">
+<h2>50. Popraw błąd</h2>
+<div class="inline sent">Klimaet er den <b>mest viktig</b> utfordringen i vår tid. → <input type="text" id="t50" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(50,[&quot;viktigste&quot;, &quot;mest viktige&quot;],&quot;Dobrze. Po „den” przymiotnik w stopniu najwyższym ma formę określoną: den viktigste.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(50)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f50"></div>
+<div class="sol" id="s50">Wzorcowa odpowiedź: <b>viktigste</b></div>
+</section>
+<h2 class="part">Część F: Tekst i mini-test</h2><p class="partintro">Przeczytaj krótki tekst, a potem zrób zadania: rozumienie tekstu, słownictwo i gramatyka w jednym. Format przypomina część pisemną Norskprøve.</p>
+<article class="text"><h2>Norge og klimaet</h2><p>Norge er kjent for ren natur, men landet er også en stor produsent av olje og gass. Det skaper en vanskelig situasjon. På den ene siden tjener staten mye penger på olje. På den andre siden fører forbrenningen av olje og gass til store utslipp av CO2, også i andre land.</p><p>De siste årene har Norge satset mye på elbiler. I dag er nesten alle nye personbiler som selges i Norge, elektriske. Mange kommuner har også bygd flere sykkelveier, slik at folk kan la bilen stå.</p><p>Likevel er det mange som mener at dette ikke er nok. Klimaforskere advarer om at vi kommer til å se flere flommer og ras i Norge hvis temperaturen fortsetter å øke. Derfor må både politikere og vanlige folk ta ansvar.</p></article>
+<section class="task" data-id="51">
+<h2>51. Riktig eller galt?</h2>
+<p class="sent">Norge produserer olje og gass.</p>
+<div class="opts" data-q="51" data-correct="Riktig" data-ok="Dobrze. „Landet er også en stor produsent av olje og gass.”">
+<button class="opt">Riktig</button><button class="opt">Galt</button>
+</div>
+<div class="fb" id="f51"></div>
+</section>
+<section class="task" data-id="52">
+<h2>52. Riktig eller galt?</h2>
+<p class="sent">De fleste nye bilene i Norge går på bensin.</p>
+<div class="opts" data-q="52" data-correct="Galt" data-ok="Dobrze. Prawie wszystkie nowe samochody osobowe są elektryczne.">
+<button class="opt">Riktig</button><button class="opt">Galt</button>
+</div>
+<div class="fb" id="f52"></div>
+</section>
+<section class="task" data-id="53">
+<h2>53. Riktig eller galt?</h2>
+<p class="sent">Alle er enige om at Norge gjør nok for klimaet.</p>
+<div class="opts" data-q="53" data-correct="Galt" data-ok="Dobrze. „Mange mener at dette ikke er nok.”">
+<button class="opt">Riktig</button><button class="opt">Galt</button>
+</div>
+<div class="fb" id="f53"></div>
+</section>
+<section class="task" data-id="54">
+<h2>54. Co znaczy w tekście?</h2>
+<p class="hint">„Norge har <b>satset</b> mye <b>på</b> elbiler.”</p>
+<div class="opts" data-q="54" data-correct="postawiło na, inwestowało w" data-ok="Dobrze. „Satse på noe” = postawić na coś, inwestować w coś.">
+<button class="opt">postawiło na, inwestowało w</button><button class="opt">zrezygnowało z</button><button class="opt">krytykowało</button>
+</div>
+<div class="fb" id="f54"></div>
+</section>
+<section class="task" data-id="55">
+<h2>55. Co znaczy w tekście?</h2>
+<p class="hint">„Folk kan <b>la bilen stå</b>.”</p>
+<div class="opts" data-q="55" data-correct="nie używać samochodu" data-ok="Dobrze. „La bilen stå” = zostawić samochód w domu.">
+<button class="opt">nie używać samochodu</button><button class="opt">kupić nowy samochód</button><button class="opt">stać w korku</button>
+</div>
+<div class="fb" id="f55"></div>
+</section>
+<section class="task" data-id="56">
+<h2>56. Wybierz synonim</h2>
+<p class="hint">„Klimaforskere <b>advarer om</b> flere flommer.”</p>
+<div class="opts" data-q="56" data-correct="varsler om fare for" data-ok="Dobrze. „Advare om” = ostrzegać przed.">
+<button class="opt">varsler om fare for</button><button class="opt">gleder seg til</button><button class="opt">glemmer</button>
+</div>
+<div class="fb" id="f56"></div>
+</section>
+<section class="task" data-id="57">
+<h2>57. Wybierz formę czasownika</h2>
+<p class="sent">De siste årene ___ Norge satset mye på elbiler.</p>
+<div class="opts" data-q="57" data-correct="har" data-ok="Dobrze. „De siste årene” = okres trwający do dziś, więc perfektum: har satset.">
+<button class="opt">har</button><button class="opt">hadde</button><button class="opt">er</button>
+</div>
+<div class="fb" id="f57"></div>
+</section>
+<section class="task" data-id="58">
+<h2>58. Strona bierna</h2>
+<p class="given">Mange kommuner har bygd flere sykkelveier.</p>
+<div class="rw"><span>Flere sykkelveier har blitt</span><input type="text" id="t58" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(58,[&quot;bygd av mange kommuner&quot;, &quot;bygget av mange kommuner&quot;, &quot;bygd&quot;, &quot;bygget&quot;],&quot;Dobrze. Perfektum w stronie biernej: har blitt + imiesłów.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(58)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f58"></div>
+<div class="sol" id="s58">Wzorcowa odpowiedź: <b>Flere sykkelveier har blitt bygd av mange kommuner.</b></div>
+</section>
+<section class="task" data-id="59">
+<h2>59. Inwersja</h2>
+<p class="given">Vi kommer til å se flere flommer hvis temperaturen øker.</p>
+<div class="rw"><span>Hvis temperaturen øker,</span><input type="text" id="t59" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(59,[&quot;kommer vi til å se flere flommer&quot;],&quot;Dobrze. Zdanie z „hvis” na początku, więc inwersja: kommer vi.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(59)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f59"></div>
+<div class="sol" id="s59">Wzorcowa odpowiedź: <b>Hvis temperaturen øker, kommer vi til å se flere flommer.</b></div>
+</section>
+<section class="task" data-id="60">
+<h2>60. Stopień wyższy</h2>
+<p class="hint">høy → ?</p>
+<div class="inline sent">Temperaturen i dag er <input type="text" id="t60" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> enn for hundre år siden.</div>
+<div class="row"><button class="btn" onclick="checkText(60,[&quot;høyere&quot;],&quot;Dobrze. Høy, høyere, høyest.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(60)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f60"></div>
+<div class="sol" id="s60">Wzorcowa odpowiedź: <b>høyere</b></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 60 / 60</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=60;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+</script>
+</body>
+</html>
