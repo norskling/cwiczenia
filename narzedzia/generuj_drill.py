@@ -1,40 +1,65 @@
 #!/usr/bin/env python3
 """Generuje stronę muntlig drill Norskling z pliku JSON.
 
+Muntlig drill = rozmowa na czas. Każda karta: pytanie do rozmowy, stoper 2 lub 4 min,
+słowa pomocnicze i oppfølgingsspørsmål dla lektorki.
+
 Użycie: python3 generuj_drill.py spec.json wynik.html
-Spec: {"pill","title","title_hl","intro","meta":[...],"how":"...",
-       "sections":[{"title","intro","items":[{"cue","prompt","answer","note"?}]}]}
-cue = podpowiedź po polsku (opcjonalna), prompt = to, co mówi lektorka, answer = wzorcowa odpowiedź.
+Spec: {"pill","title","title_hl","intro","meta":[...],"how":"...","default_min":2,
+       "cards":[{"q":"pytanie po norwesku","pl":"tłumaczenie (opcjonalnie)","role":"opis sytuacji (opcjonalnie)",
+                 "words":["słowo","..."],"followups":["pytanie","..."]}]}
 """
 import json, sys, html, os
 D = os.path.dirname(os.path.abspath(__file__)); E = html.escape
 EXTRA = """
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 22px;margin-bottom:12px}
-.card .num{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--fjord);font-size:.85rem;margin-bottom:4px}
-.card .cue{font-size:.9rem;margin:0 0 4px}
-.card .prompt{color:var(--natt);font-size:1.15rem;font-weight:600;margin:0}
-.card .ans{display:none;margin-top:12px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt)}
-.card .ans small{display:block;color:var(--skygge);margin-top:4px}
-.card.open .ans{display:block}
-.card .ghost{margin-top:12px}
-.tools{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.card.active{border-color:var(--is);box-shadow:0 10px 30px rgba(13,31,45,.07)}
+.card .num{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--fjord);font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px}
+.card .q{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.45rem;font-weight:700;letter-spacing:-.02em;line-height:1.25;margin:0}
+.card .pl{font-size:.92rem;margin:4px 0 0}
+.card .role{font-size:.95rem;color:var(--natt);background:var(--tint);border-radius:8px;padding:8px 12px;margin:10px 0 0}
+.lbl{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--fjord);margin:16px 0 8px}
+.words{display:flex;flex-wrap:wrap;gap:8px}
+.words span{background:var(--tint);color:var(--natt);border:1px solid var(--border);border-radius:100px;padding:5px 12px;font-size:.95rem}
+.fu{display:none;margin:0;padding-left:20px;color:var(--natt)}
+.fu li{margin:4px 0}
+.card.showfu .fu{display:block}
+.timer{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid var(--border)}
+.clock{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.9rem;color:var(--natt);min-width:92px;font-variant-numeric:tabular-nums}
+.clock.end{color:var(--bad)}
+.track{flex:1 1 100%;height:6px;background:var(--tint);border-radius:3px;overflow:hidden;order:9}
+.track i{display:block;height:100%;width:0;background:var(--is);transition:width .25s linear}
+.seg{display:inline-flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden}
+.seg button{font:inherit;font-size:.95rem;background:none;border:0;color:var(--fjord);padding:9px 14px;cursor:pointer;min-height:44px}
+.seg button.on{background:var(--fjord);color:#fff}
+.timer .btn,.timer .ghost{margin-top:0}
 .how{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:18px 22px;margin-bottom:20px;color:var(--natt)}
+.tools{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px}
+.tools .ghost{margin-top:0}
+@media (max-width:600px){.card .q{font-size:1.25rem}.timer .btn{width:auto}}
 """
 def main(sp, out):
     s = json.load(open(sp, encoding="utf-8"))
+    dm = int(s.get("default_min", 2))
     style = open(os.path.join(D, "styl.css"), encoding="utf-8").read().replace("</style>", EXTRA + "</style>")
-    body, n = [], 0
-    for sec in s["sections"]:
-        body.append(f'<h2 class="part">{E(sec["title"])}</h2>')
-        if sec.get("intro"): body.append(f'<p class="partintro">{E(sec["intro"])}</p>')
-        for it in sec["items"]:
-            n += 1
-            cue = f'<p class="cue">{E(it["cue"])}</p>' if it.get("cue") else ""
-            note = f'<small>{E(it["note"])}</small>' if it.get("note") else ""
-            body.append(f'<div class="card" id="c{n}"><div class="num">{n}</div>{cue}<p class="prompt">{E(it["prompt"])}</p>'
-                        f'<button class="ghost" onclick="tog({n})">Pokaż odpowiedź</button>'
-                        f'<div class="ans">{E(it["answer"])}{note}</div></div>')
-    meta = "".join(f"<span>{E(m)}</span>" for m in s.get("meta", []) + [f"{n} kart"])
+    body = []
+    for n, c in enumerate(s["cards"], 1):
+        pl = f'<p class="pl">{E(c["pl"])}</p>' if c.get("pl") else ""
+        role = f'<p class="role">{E(c["role"])}</p>' if c.get("role") else ""
+        words = "".join(f"<span>{E(w)}</span>" for w in c.get("words", []))
+        fu = "".join(f"<li>{E(x)}</li>" for x in c.get("followups", []))
+        body.append(f'''<section class="card" id="c{n}" data-min="{dm}">
+<div class="num">Pytanie {n} z {len(s["cards"])}</div>
+<p class="q">{E(c["q"])}</p>{pl}{role}
+<div class="lbl">Słowa pomocnicze</div><div class="words">{words}</div>
+<div class="lbl">Oppfølgingsspørsmål <button class="ghost" style="margin:0 0 0 8px;padding:4px 10px;min-height:0;font-size:.8rem" onclick="fu({n})">pokaż</button></div>
+<ol class="fu">{fu}</ol>
+<div class="timer"><span class="clock" id="k{n}">{dm:02d}:00</span>
+<span class="seg"><button class="{"on" if dm==2 else ""}" onclick="setMin({n},2,this)">2 min</button><button class="{"on" if dm==4 else ""}" onclick="setMin({n},4,this)">4 min</button></span>
+<button class="btn" id="b{n}" onclick="go({n})">Start</button><button class="ghost" onclick="reset({n})">Od nowa</button>
+<div class="track"><i id="p{n}"></i></div></div>
+</section>''')
+    meta = "".join(f"<span>{E(m)}</span>" for m in s.get("meta", []) + [f'{len(s["cards"])} pytań'])
     page = f'''<!doctype html>
 <html lang="pl">
 <head>
@@ -54,15 +79,30 @@ def main(sp, out):
   <p class="intro">{E(s["intro"])}</p>
   <div class="meta">{meta}</div>
   <div class="how">{E(s["how"])}</div>
-  <div class="tools"><button class="ghost" onclick="all_(true)">Pokaż wszystkie odpowiedzi</button><button class="ghost" onclick="all_(false)">Ukryj wszystkie</button></div>
+  <div class="tools"><button class="ghost" onclick="allFu(true)">Pokaż wszystkie oppfølgingsspørsmål</button><button class="ghost" onclick="allFu(false)">Ukryj</button></div>
 {chr(10).join(body)}
 </main>
 <script>
-function tog(n){{const c=document.getElementById('c'+n);c.classList.toggle('open');c.querySelector('.ghost').textContent=c.classList.contains('open')?'Ukryj odpowiedź':'Pokaż odpowiedź'}}
-function all_(o){{document.querySelectorAll('.card').forEach(c=>{{c.classList.toggle('open',o);c.querySelector('.ghost').textContent=o?'Ukryj odpowiedź':'Pokaż odpowiedź'}})}}
+const T={{}};
+function fmt(s){{s=Math.max(0,Math.ceil(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}}
+function st(n){{const c=document.getElementById('c'+n);return T[n]||(T[n]={{total:+c.dataset.min*60,left:+c.dataset.min*60,run:false,id:null,last:0}})}}
+function draw(n){{const t=st(n),k=document.getElementById('k'+n);k.textContent=fmt(t.left);k.classList.toggle('end',t.left<=0);
+  document.getElementById('p'+n).style.width=(100*(1-t.left/t.total))+'%';
+  document.getElementById('b'+n).textContent=t.run?'Pauza':(t.left<t.total&&t.left>0?'Wznów':'Start')}}
+function beep(){{try{{const a=new (window.AudioContext||window.webkitAudioContext)();[0,.35,.7].forEach(d=>{{const o=a.createOscillator(),g=a.createGain();o.frequency.value=880;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.2,a.currentTime+d);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+d+.3);o.start(a.currentTime+d);o.stop(a.currentTime+d+.3)}})}}catch(e){{}}}}
+function stopAll(ex){{for(const k in T)if(+k!==ex&&T[k].run){{clearInterval(T[k].id);T[k].run=false;draw(+k);document.getElementById('c'+k).classList.remove('active')}}}}
+function go(n){{const t=st(n);if(t.run){{clearInterval(t.id);t.run=false;draw(n);return}}
+  if(t.left<=0)t.left=t.total;stopAll(n);t.run=true;t.last=Date.now();document.getElementById('c'+n).classList.add('active');
+  t.id=setInterval(()=>{{const now=Date.now();t.left-=(now-t.last)/1000;t.last=now;
+    if(t.left<=0){{t.left=0;clearInterval(t.id);t.run=false;beep();document.getElementById('c'+n).classList.remove('active')}}draw(n)}},250);draw(n)}}
+function reset(n){{const t=st(n);clearInterval(t.id);t.run=false;t.left=t.total;document.getElementById('c'+n).classList.remove('active');draw(n)}}
+function setMin(n,m,b){{const c=document.getElementById('c'+n);c.dataset.min=m;b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  const t=st(n);clearInterval(t.id);t.run=false;t.total=t.left=m*60;c.classList.remove('active');draw(n)}}
+function fu(n){{const c=document.getElementById('c'+n);c.classList.toggle('showfu');c.querySelector('.lbl .ghost').textContent=c.classList.contains('showfu')?'ukryj':'pokaż'}}
+function allFu(o){{document.querySelectorAll('.card').forEach(c=>{{c.classList.toggle('showfu',o);c.querySelector('.lbl .ghost').textContent=o?'ukryj':'pokaż'}})}}
 </script>
 </body>
 </html>
 '''
-    open(out, "w", encoding="utf-8").write(page); print(out, n, "kart")
+    open(out, "w", encoding="utf-8").write(page); print(out, len(s["cards"]), "kart")
 if __name__ == "__main__": main(sys.argv[1], sys.argv[2])

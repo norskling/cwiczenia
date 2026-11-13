@@ -1,29 +1,25 @@
-{"doc_title":"Muntlig drill A2 Norskling","pill":"Norskling · A2 · Lekcja 1","title":"Muntlig drill:","title_hl":"arbeidsdagen min",
- "intro":"Szybkie ćwiczenie mówienia na 15 minut. Lektorka czyta kartę, Marta odpowiada od razu, pełnym zdaniem. Potem odsłaniacie wzorcową odpowiedź.",
+{"doc_title":"Muntlig drill A2 Norskling","pill":"Norskling · A2 · Lekcja 1","title":"Muntlig drill:","title_hl":"la oss snakke",
+ "intro":"Rozmowa na czas. Lektorka wybiera pytanie, włącza stoper na 2 albo 4 minuty, a Marta mówi bez przerywania. Słowa pomocnicze są pod ręką, pytania dodatkowe podtrzymują rozmowę.",
  "meta":["Mówienie","ok. 15 min"],
- "how":"Tempo jest ważniejsze niż perfekcja. Jeśli odpowiedź jest poprawna, przejdź od razu do kolejnej karty. Jeśli nie, powtórz wzorcowe zdanie dwa razy na głos i wróć do karty na końcu.",
- "sections":[
-  {"title":"1. Pytania o Twój dzień","intro":"Odpowiadaj pełnym zdaniem o sobie. Wzór pokazuje jedną możliwą odpowiedź.","items":[
-   {"prompt":"Hvor jobber du?","answer":"Jeg jobber på et sykehjem i Stavanger."},
-   {"prompt":"Når begynner du på jobb?","answer":"Jeg begynner klokka sju. / Denne uka begynner jeg klokka ti om kvelden."},
-   {"prompt":"Hva gjør du først på vakta?","answer":"Først får jeg rapport."},
-   {"prompt":"Hvem bor du sammen med?","answer":"Jeg bor sammen med mannen min, Tomek, og datteren vår, Zosia."},
-   {"prompt":"Hva liker du å gjøre i fritida?","answer":"Jeg liker å løpe, gå på fjelltur og bake brød."},
-   {"prompt":"Hvor lenge har du bodd i Norge?","answer":"Jeg har bodd i Norge i to år."}]},
-  {"title":"2. Zacznij od czasu","intro":"Lektorka mówi zdanie i określenie czasu. Powiedz zdanie od nowa, zaczynając od określenia czasu.","items":[
-   {"cue":"+ etter jobb","prompt":"Jeg går tur med Bruno.","answer":"Etter jobb går jeg tur med Bruno."},
-   {"cue":"+ om morgenen","prompt":"Tomek kjører Zosia til skolen.","answer":"Om morgenen kjører Tomek Zosia til skolen."},
-   {"cue":"+ på søndag","prompt":"Vi går på fjelltur.","answer":"På søndag går vi på fjelltur."},
-   {"cue":"+ etter frokost","prompt":"Jeg måler blodtrykket til beboerne.","answer":"Etter frokost måler jeg blodtrykket til beboerne."},
-   {"cue":"+ etter nattevakta","prompt":"Jeg sover til klokka to.","answer":"Etter nattevakta sover jeg til klokka to."}]},
-  {"title":"3. Odpowiedz „nei”","intro":"Odpowiedz przecząco pełnym zdaniem.","items":[
-   {"prompt":"Har du nattevakt i dag?","answer":"Nei, jeg har ikke nattevakt i dag."},
-   {"prompt":"Kan du jobbe på lørdag?","answer":"Nei, jeg kan ikke jobbe på lørdag."},
-   {"prompt":"Snakker du stavangersk?","answer":"Nei, jeg snakker ikke stavangersk."},
-   {"prompt":"Må du jobbe i helgen?","answer":"Nei, jeg trenger ikke å jobbe i helgen.","note":"„Jeg må ikke” znaczy „nie wolno mi”. „Nie muszę” to „jeg trenger ikke”."}]},
-  {"title":"4. Na zmianie","intro":"Krótkie sytuacje z pracy. Lektorka gra kolegę, mieszkańca albo rodzinę.","items":[
-   {"cue":"Kolega z porannej zmiany pyta o noc.","prompt":"Hvordan var natta?","answer":"Det var en rolig natt. Fru Hansen sov dårlig."},
-   {"cue":"Córka mieszkanki dzwoni na oddział.","prompt":"Hvordan har mamma det i dag?","answer":"Hun har det bra. Hun har spist frokost og gått en liten tur."},
-   {"cue":"Mieszkaniec pyta o lekarza.","prompt":"Når kommer legen?","answer":"Legen kommer klokka elleve."},
-   {"cue":"Poproś kolegę o pomoc przy przeniesieniu mieszkańca.","prompt":"(Marta zaczyna)","answer":"Kan du hjelpe meg med å flytte beboeren?"}]}
+ "how":"Lektorka: zadaj pytanie i włącz stoper. Nie poprawiaj w trakcie, zapisz 2 lub 3 błędy i omów je po sygnale. Gdy rozmowa zwalnia, użyj oppfølgingsspørsmål. Marta: mów pełnymi zdaniami i zaczynaj część zdań od określenia czasu (først, så, etterpå, klokka …).",
+ "default_min":2,
+ "cards":[
+  {"q":"Fortell om en vanlig arbeidsdag.","pl":"Opowiedz o zwykłym dniu w pracy.",
+   "words":["først","så","etterpå","klokka …","en vakt","å gi rapport","beboerne","å gi medisiner","morgenstell"],
+   "followups":["Når begynner og slutter vakta di?","Hva liker du best på jobben?","Hva er vanskelig på jobben?","Hvor mange beboere har du ansvar for?"]},
+  {"q":"Hvordan er en nattevakt?","pl":"Jak wygląda nocna zmiana?",
+   "words":["rolig","travel","å se til","å sove","sliten","om natta","om morgenen"],
+   "followups":["Liker du å jobbe om natta? Hvorfor / hvorfor ikke?","Hva gjør du når det er rolig?","Hvordan sover du etter nattevakta?"]},
+  {"q":"Fortell om familien din.","pl":"Opowiedz o swojej rodzinie.",
+   "words":["mannen min","datteren min","å bo","elektriker","første klasse","en hund","sammen"],
+   "followups":["Hva liker Zosia å gjøre?","Hvem kjører Zosia til skolen?","Hva gjør dere sammen i helgen?"]},
+  {"q":"Hva gjør du i fritida?","pl":"Co robisz w wolnym czasie?",
+   "words":["å løpe","en fjelltur","å bake","brød","naturen","været","i helgen"],
+   "followups":["Hvor langt løper du?","Hvor liker du å gå på tur?","Hva slags brød baker du?"]},
+  {"q":"Hvorfor lærer du norsk?","pl":"Dlaczego uczysz się norweskiego?",
+   "words":["å forstå","dialekt","pasienter","kolleger","sykepleier","autorisasjon","vanskelig"],
+   "followups":["Hva er vanskeligst med norsk?","Forstår du dialekten i Stavanger?","Hva vil du jobbe med om fem år?"]},
+  {"q":"Hvordan har mamma det i dag?","role":"Rollespill: lektorka jest córką mieszkanki i dzwoni na oddział. Marta odbiera telefon.",
+   "words":["å ha det bra","å spise","å sove godt / dårlig","legen","å besøke","i dag","i morgen"],
+   "followups":["Har hun spist frokost?","Når kommer legen?","Kan jeg besøke henne i morgen?","Trenger hun noe?"]}
  ]}
