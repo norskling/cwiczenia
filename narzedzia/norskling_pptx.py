@@ -57,3 +57,18 @@ def table(s,x,y,colw,rows,head=True,size=18,rowh=0.55):
             f=r_.font;f.name='Inter';f.size=Pt(13 if (head and i==0) else size);f.bold=(head and i==0) or j==0
             f.color.rgb=NATT if j==0 or (head and i==0) else SKY
     return tb
+
+def talk(L, t, hl, qs, phrases=None, tip=None):
+    """Slajd rozmowy: otwarte pytania w kartach + opcjonalne zwroty pomocnicze lub wskazówka dla lektorki."""
+    s = slide(L, t, hl)
+    w = 7.4 if (phrases or tip) else 11.7
+    for i, q in enumerate(qs):
+        y = 2.4 + i * (4.3 / max(len(qs), 1))
+        h = min(0.8, 4.3 / max(len(qs), 1) - 0.12)
+        box(s, 0.8, y, w, h); text(s, 1.05, y + (h - 0.45) / 2, w - 0.4, 0.5, q, size=18 if len(qs) > 4 else 20, color=NATT, bold=True)
+    if phrases or tip:
+        box(s, 8.5, 2.4, 4.0, 4.2)
+        lines = [[('Zwroty pomocnicze' if phrases else 'Dla lektorki', {'bold': True, 'color': FJORD, 'size': 14})]]
+        lines += (phrases if phrases else [tip])
+        text(s, 8.8, 2.6, 3.5, 3.9, lines, size=16, color=NATT, spacing=1.25)
+    return s

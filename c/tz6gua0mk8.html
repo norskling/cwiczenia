@@ -86,18 +86,22 @@ input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1
 .partintro{margin:0 0 16px}
 .progress{position:sticky;top:8px;z-index:5}
 
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
-.card.active{border-color:var(--is);box-shadow:0 10px 30px rgba(13,31,45,.07)}
-.card .num{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--fjord);font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px}
-.card .q{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.45rem;font-weight:700;letter-spacing:-.02em;line-height:1.25;margin:0}
-.card .pl{font-size:.92rem;margin:4px 0 0}
-.card .role{font-size:.95rem;color:var(--natt);background:var(--tint);border-radius:8px;padding:8px 12px;margin:10px 0 0}
-.lbl{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--fjord);margin:16px 0 8px}
+.quiz{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;box-shadow:0 10px 30px rgba(13,31,45,.06)}
+.qtop{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.num{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--fjord);font-size:.8rem;text-transform:uppercase;letter-spacing:.12em}
+.dots{display:flex;gap:6px}.dots i{width:10px;height:10px;border-radius:50%;background:var(--border)}.dots i.on{background:var(--is)}.dots i.done{background:var(--fjord)}
+.card{display:none}.card.cur{display:block}
+.card .q{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.7rem;font-weight:700;letter-spacing:-.02em;line-height:1.25;margin:0}
+.card .pl{font-size:.92rem;margin:6px 0 0}
+.card .role{font-size:.95rem;color:var(--natt);background:var(--tint);border-radius:8px;padding:8px 12px;margin:12px 0 0}
+.panel{display:none;margin-top:16px;padding:14px 16px;border-radius:12px;background:var(--tint)}
+.panel.open{display:block}
+.lbl{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--fjord);margin:0 0 8px}
 .words{display:flex;flex-wrap:wrap;gap:8px}
-.words span{background:var(--tint);color:var(--natt);border:1px solid var(--border);border-radius:100px;padding:5px 12px;font-size:.95rem}
-.fu{display:none;margin:0;padding-left:20px;color:var(--natt)}
-.fu li{margin:4px 0}
-.card.showfu .fu{display:block}
+.words span{background:#fff;color:var(--natt);border:1px solid var(--border);border-radius:100px;padding:5px 12px;font-size:.95rem}
+.fu{margin:0;padding-left:20px;color:var(--natt)}.fu li{margin:5px 0}
+.helpers{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.helpers .ghost{margin-top:0}.helpers .ghost.on{background:var(--fjord);color:#fff;border-color:var(--fjord)}
 .timer{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid var(--border)}
 .clock{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.9rem;color:var(--natt);min-width:92px;font-variant-numeric:tabular-nums}
 .clock.end{color:var(--bad)}
@@ -107,10 +111,12 @@ input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1
 .seg button{font:inherit;font-size:.95rem;background:none;border:0;color:var(--fjord);padding:9px 14px;cursor:pointer;min-height:44px}
 .seg button.on{background:var(--fjord);color:#fff}
 .timer .btn,.timer .ghost{margin-top:0}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+.nav .btn,.nav .ghost{margin-top:0}
 .how{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:18px 22px;margin-bottom:20px;color:var(--natt)}
-.tools{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px}
-.tools .ghost{margin-top:0}
-@media (max-width:600px){.card .q{font-size:1.25rem}.timer .btn{width:auto}}
+.fin{display:none;text-align:center;padding:20px 0}.fin.cur{display:block}
+.fin p{font-family:"Space Grotesk",sans-serif;font-size:1.5rem;font-weight:700;color:var(--natt);margin:0 0 6px}
+@media (max-width:600px){.card .q{font-size:1.35rem}.timer .btn{width:auto}.nav .btn{width:auto}}
 </style>
 
 </head>
@@ -119,95 +125,75 @@ input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1
   <span class="pill">Norskling · B1 · Lekcja 1</span>
   <h1>Muntlig drill: <span>jobben min</span></h1>
   <div class="bar"></div>
-  <p class="intro">Rozmowa na czas o Twojej pracy. Lektorka zadaje pytanie i włącza stoper, Katarzyna mówi swobodnie. Pod pytaniem są słowa pomocnicze, a pytania dodatkowe podtrzymują rozmowę.</p>
+  <p class="intro">Rozmowa na czas o Twojej pracy, w formie quizu: jedno pytanie na ekranie. Lektorka włącza stoper, Katarzyna mówi swobodnie. Słowa kluczowe i pytania pomocnicze odkrywacie przyciskami, kiedy są potrzebne.</p>
   <div class="meta"><span>Mówienie</span><span>ok. 15 min</span><span>6 pytań</span></div>
   <div class="how">Lektorka: zadaj pytanie i włącz stoper. Nie poprawiaj w trakcie. Zanotuj, które czasy są mylone i jakich słów brakuje, to plan na lekcję 2. Katarzyna: opowiadając o przeszłości, świadomie wybieraj preteritum albo perfektum.</div>
-  <div class="tools"><button class="ghost" onclick="allFu(true)">Pokaż wszystkie oppfølgingsspørsmål</button><button class="ghost" onclick="allFu(false)">Ukryj</button></div>
-<section class="card" id="c1" data-min="2">
-<div class="num">Pytanie 1 z 6</div>
+  <div class="quiz">
+    <div class="qtop"><span class="num" id="lab">Pytanie 1 z 6</span><span class="dots"><i id="d1" class="on"></i><i id="d2"></i><i id="d3"></i><i id="d4"></i><i id="d5"></i><i id="d6"></i></span></div>
+<section class="card cur" id="c1">
 <p class="q">Fortell om deg selv og jobben din.</p><p class="pl">Opowiedz o sobie i swojej pracy.</p>
-<div class="lbl">Słowa pomocnicze</div><div class="words"><span>å jobbe med</span><span>prosjekter</span><span>utvikling</span><span>innovasjon</span><span>små og mellomstore bedrifter</span><span>EØS-midler</span><span>kunder</span></div>
-<div class="lbl">Oppfølgingsspørsmål <button class="ghost" style="margin:0 0 0 8px;padding:4px 10px;min-height:0;font-size:.8rem" onclick="fu(1)">pokaż</button></div>
-<ol class="fu"><li>Hvor lenge har du jobbet der?</li><li>Hva gjorde du før?</li><li>Hva liker du best med jobben?</li></ol>
-<div class="timer"><span class="clock" id="k1">02:00</span>
-<span class="seg"><button class="on" onclick="setMin(1,2,this)">2 min</button><button class="" onclick="setMin(1,4,this)">4 min</button></span>
-<button class="btn" id="b1" onclick="go(1)">Start</button><button class="ghost" onclick="reset(1)">Od nowa</button>
-<div class="track"><i id="p1"></i></div></div>
+<div class="panel" id="w1"><div class="lbl">Słowa kluczowe</div><div class="words"><span>å jobbe med</span><span>prosjekter</span><span>utvikling</span><span>innovasjon</span><span>små og mellomstore bedrifter</span><span>EØS-midler</span><span>kunder</span></div></div>
+<div class="panel" id="f1"><div class="lbl">Pytania pomocnicze (oppfølgingsspørsmål)</div><ol class="fu"><li>Hvor lenge har du jobbet der?</li><li>Hva gjorde du før?</li><li>Hva liker du best med jobben?</li></ol></div>
 </section>
-<section class="card" id="c2" data-min="2">
-<div class="num">Pytanie 2 z 6</div>
+<section class="card" id="c2">
 <p class="q">Fortell om et prosjekt du har jobbet med.</p><p class="pl">Opowiedz o projekcie, przy którym pracowałaś.</p>
-<div class="lbl">Słowa pomocnicze</div><div class="words"><span>å søke om midler</span><span>en søknad</span><span>et anbud</span><span>en frist</span><span>et budsjett</span><span>partnere</span><span>resultater</span></div>
-<div class="lbl">Oppfølgingsspørsmål <button class="ghost" style="margin:0 0 0 8px;padding:4px 10px;min-height:0;font-size:.8rem" onclick="fu(2)">pokaż</button></div>
-<ol class="fu"><li>Hvem var partnerne?</li><li>Hva var vanskeligst?</li><li>Hvordan gikk det til slutt?</li></ol>
-<div class="timer"><span class="clock" id="k2">02:00</span>
-<span class="seg"><button class="on" onclick="setMin(2,2,this)">2 min</button><button class="" onclick="setMin(2,4,this)">4 min</button></span>
-<button class="btn" id="b2" onclick="go(2)">Start</button><button class="ghost" onclick="reset(2)">Od nowa</button>
-<div class="track"><i id="p2"></i></div></div>
+<div class="panel" id="w2"><div class="lbl">Słowa kluczowe</div><div class="words"><span>å søke om midler</span><span>en søknad</span><span>et anbud</span><span>en frist</span><span>et budsjett</span><span>partnere</span><span>resultater</span></div></div>
+<div class="panel" id="f2"><div class="lbl">Pytania pomocnicze (oppfølgingsspørsmål)</div><ol class="fu"><li>Hvem var partnerne?</li><li>Hva var vanskeligst?</li><li>Hvordan gikk det til slutt?</li></ol></div>
 </section>
-<section class="card" id="c3" data-min="2">
-<div class="num">Pytanie 3 z 6</div>
+<section class="card" id="c3">
 <p class="q">Hvordan ser en vanlig arbeidsuke ut?</p><p class="pl">Jak wygląda zwykły tydzień pracy?</p>
-<div class="lbl">Słowa pomocnicze</div><div class="words"><span>møter</span><span>e-post</span><span>å skrive</span><span>å ringe</span><span>hjemmekontor</span><span>kolleger</span><span>på norsk / på engelsk</span></div>
-<div class="lbl">Oppfølgingsspørsmål <button class="ghost" style="margin:0 0 0 8px;padding:4px 10px;min-height:0;font-size:.8rem" onclick="fu(3)">pokaż</button></div>
-<ol class="fu"><li>Hvilket språk bruker dere på jobben?</li><li>Hvor mange møter har du i uka?</li><li>Hva gjør du på fredager?</li></ol>
-<div class="timer"><span class="clock" id="k3">02:00</span>
-<span class="seg"><button class="on" onclick="setMin(3,2,this)">2 min</button><button class="" onclick="setMin(3,4,this)">4 min</button></span>
-<button class="btn" id="b3" onclick="go(3)">Start</button><button class="ghost" onclick="reset(3)">Od nowa</button>
-<div class="track"><i id="p3"></i></div></div>
+<div class="panel" id="w3"><div class="lbl">Słowa kluczowe</div><div class="words"><span>møter</span><span>e-post</span><span>å skrive</span><span>å ringe</span><span>hjemmekontor</span><span>kolleger</span><span>på norsk / på engelsk</span></div></div>
+<div class="panel" id="f3"><div class="lbl">Pytania pomocnicze (oppfølgingsspørsmål)</div><ol class="fu"><li>Hvilket språk bruker dere på jobben?</li><li>Hvor mange møter har du i uka?</li><li>Hva gjør du på fredager?</li></ol></div>
 </section>
-<section class="card" id="c4" data-min="2">
-<div class="num">Pytanie 4 z 6</div>
+<section class="card" id="c4">
 <p class="q">Hva skal du jobbe med de neste månedene?</p><p class="pl">Nad czym będziesz pracować w najbliższych miesiącach?</p>
-<div class="lbl">Słowa pomocnicze</div><div class="words"><span>skal</span><span>kommer til å</span><span>neste måned</span><span>til våren</span><span>en ny utlysning</span><span>å planlegge</span><span>et mål</span></div>
-<div class="lbl">Oppfølgingsspørsmål <button class="ghost" style="margin:0 0 0 8px;padding:4px 10px;min-height:0;font-size:.8rem" onclick="fu(4)">pokaż</button></div>
-<ol class="fu"><li>Hvilke frister har du?</li><li>Hva gleder du deg til?</li><li>Hva kommer til å bli utfordrende?</li></ol>
-<div class="timer"><span class="clock" id="k4">02:00</span>
-<span class="seg"><button class="on" onclick="setMin(4,2,this)">2 min</button><button class="" onclick="setMin(4,4,this)">4 min</button></span>
-<button class="btn" id="b4" onclick="go(4)">Start</button><button class="ghost" onclick="reset(4)">Od nowa</button>
-<div class="track"><i id="p4"></i></div></div>
+<div class="panel" id="w4"><div class="lbl">Słowa kluczowe</div><div class="words"><span>skal</span><span>kommer til å</span><span>neste måned</span><span>til våren</span><span>en ny utlysning</span><span>å planlegge</span><span>et mål</span></div></div>
+<div class="panel" id="f4"><div class="lbl">Pytania pomocnicze (oppfølgingsspørsmål)</div><ol class="fu"><li>Hvilke frister har du?</li><li>Hva gleder du deg til?</li><li>Hva kommer til å bli utfordrende?</li></ol></div>
 </section>
-<section class="card" id="c5" data-min="2">
-<div class="num">Pytanie 5 z 6</div>
+<section class="card" id="c5">
 <p class="q">Hvorfor vil du bli bedre i norsk?</p><p class="pl">Dlaczego chcesz lepiej mówić po norwesku?</p>
-<div class="lbl">Słowa pomocnicze</div><div class="words"><span>møter</span><span>kunder</span><span>å forstå</span><span>å uttrykke seg</span><span>en presentasjon</span><span>selvsikker</span><span>høyt B1-nivå</span></div>
-<div class="lbl">Oppfølgingsspørsmål <button class="ghost" style="margin:0 0 0 8px;padding:4px 10px;min-height:0;font-size:.8rem" onclick="fu(5)">pokaż</button></div>
-<ol class="fu"><li>I hvilke situasjoner er norsk vanskeligst?</li><li>Hva har du gjort for å lære norsk?</li><li>Hvordan vil du bruke norsk om ett år?</li></ol>
-<div class="timer"><span class="clock" id="k5">02:00</span>
-<span class="seg"><button class="on" onclick="setMin(5,2,this)">2 min</button><button class="" onclick="setMin(5,4,this)">4 min</button></span>
-<button class="btn" id="b5" onclick="go(5)">Start</button><button class="ghost" onclick="reset(5)">Od nowa</button>
-<div class="track"><i id="p5"></i></div></div>
+<div class="panel" id="w5"><div class="lbl">Słowa kluczowe</div><div class="words"><span>møter</span><span>kunder</span><span>å forstå</span><span>å uttrykke seg</span><span>en presentasjon</span><span>selvsikker</span><span>høyt B1-nivå</span></div></div>
+<div class="panel" id="f5"><div class="lbl">Pytania pomocnicze (oppfølgingsspørsmål)</div><ol class="fu"><li>I hvilke situasjoner er norsk vanskeligst?</li><li>Hva har du gjort for å lære norsk?</li><li>Hvordan vil du bruke norsk om ett år?</li></ol></div>
 </section>
-<section class="card" id="c6" data-min="2">
-<div class="num">Pytanie 6 z 6</div>
+<section class="card" id="c6">
 <p class="q">Kan du presentere prosjektet kort?</p><p class="role">Rollespill: lektorka reprezentuje norweską gminę (kommune), która rozważa udział w projekcie.</p>
-<div class="lbl">Słowa pomocnicze</div><div class="words"><span>formålet</span><span>målgruppen</span><span>tidsplanen</span><span>budsjettet</span><span>å samarbeide</span><span>finansiering</span></div>
-<div class="lbl">Oppfølgingsspørsmål <button class="ghost" style="margin:0 0 0 8px;padding:4px 10px;min-height:0;font-size:.8rem" onclick="fu(6)">pokaż</button></div>
-<ol class="fu"><li>Hvor mye koster prosjektet?</li><li>Når kan dere begynne?</li><li>Hva trenger dere fra oss?</li></ol>
-<div class="timer"><span class="clock" id="k6">02:00</span>
-<span class="seg"><button class="on" onclick="setMin(6,2,this)">2 min</button><button class="" onclick="setMin(6,4,this)">4 min</button></span>
-<button class="btn" id="b6" onclick="go(6)">Start</button><button class="ghost" onclick="reset(6)">Od nowa</button>
-<div class="track"><i id="p6"></i></div></div>
+<div class="panel" id="w6"><div class="lbl">Słowa kluczowe</div><div class="words"><span>formålet</span><span>målgruppen</span><span>tidsplanen</span><span>budsjettet</span><span>å samarbeide</span><span>finansiering</span></div></div>
+<div class="panel" id="f6"><div class="lbl">Pytania pomocnicze (oppfølgingsspørsmål)</div><ol class="fu"><li>Hvor mye koster prosjektet?</li><li>Når kan dere begynne?</li><li>Hva trenger dere fra oss?</li></ol></div>
 </section>
+    <div class="fin" id="fin"><p>Koniec pytań</p><span class="muted">Dobra robota! Lektorka zapisuje uwagi do kolejnej lekcji.</span></div>
+    <div id="ctl">
+      <div class="helpers"><button class="ghost" id="bw" onclick="tog('w')">Słowa kluczowe</button><button class="ghost" id="bf" onclick="tog('f')">Pytania pomocnicze</button></div>
+      <div class="timer"><span class="clock" id="k">02:00</span>
+        <span class="seg"><button id="m2" class="on" onclick="setMin(2)">2 min</button><button id="m4" class="" onclick="setMin(4)">4 min</button></span>
+        <button class="btn" id="b" onclick="go()">Start</button><button class="ghost" onclick="reset()">Od nowa</button>
+        <div class="track"><i id="p"></i></div></div>
+    </div>
+    <div class="nav"><button class="ghost" id="prev" onclick="move(-1)">← Poprzednie</button><button class="btn" id="next" onclick="move(1)">Następne pytanie →</button></div>
+  </div>
 </main>
 <script>
-const T={};
+const N=6,MIN=2;
+const $=x=>document.getElementById(x);
+let cur=1,total=MIN*60,left=total,run=false,id=null,last=0;
 function fmt(s){s=Math.max(0,Math.ceil(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
-function st(n){const c=document.getElementById('c'+n);return T[n]||(T[n]={total:+c.dataset.min*60,left:+c.dataset.min*60,run:false,id:null,last:0})}
-function draw(n){const t=st(n),k=document.getElementById('k'+n);k.textContent=fmt(t.left);k.classList.toggle('end',t.left<=0);
-  document.getElementById('p'+n).style.width=(100*(1-t.left/t.total))+'%';
-  document.getElementById('b'+n).textContent=t.run?'Pauza':(t.left<t.total&&t.left>0?'Wznów':'Start')}
+function draw(){$('k').textContent=fmt(left);$('k').classList.toggle('end',left<=0);$('p').style.width=(100*(1-left/total))+'%';
+  $('b').textContent=run?'Pauza':(left<total&&left>0?'Wznów':'Start')}
 function beep(){try{const a=new (window.AudioContext||window.webkitAudioContext)();[0,.35,.7].forEach(d=>{const o=a.createOscillator(),g=a.createGain();o.frequency.value=880;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.2,a.currentTime+d);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+d+.3);o.start(a.currentTime+d);o.stop(a.currentTime+d+.3)})}catch(e){}}
-function stopAll(ex){for(const k in T)if(+k!==ex&&T[k].run){clearInterval(T[k].id);T[k].run=false;draw(+k);document.getElementById('c'+k).classList.remove('active')}}
-function go(n){const t=st(n);if(t.run){clearInterval(t.id);t.run=false;draw(n);return}
-  if(t.left<=0)t.left=t.total;stopAll(n);t.run=true;t.last=Date.now();document.getElementById('c'+n).classList.add('active');
-  t.id=setInterval(()=>{const now=Date.now();t.left-=(now-t.last)/1000;t.last=now;
-    if(t.left<=0){t.left=0;clearInterval(t.id);t.run=false;beep();document.getElementById('c'+n).classList.remove('active')}draw(n)},250);draw(n)}
-function reset(n){const t=st(n);clearInterval(t.id);t.run=false;t.left=t.total;document.getElementById('c'+n).classList.remove('active');draw(n)}
-function setMin(n,m,b){const c=document.getElementById('c'+n);c.dataset.min=m;b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
-  const t=st(n);clearInterval(t.id);t.run=false;t.total=t.left=m*60;c.classList.remove('active');draw(n)}
-function fu(n){const c=document.getElementById('c'+n);c.classList.toggle('showfu');c.querySelector('.lbl .ghost').textContent=c.classList.contains('showfu')?'ukryj':'pokaż'}
-function allFu(o){document.querySelectorAll('.card').forEach(c=>{c.classList.toggle('showfu',o);c.querySelector('.lbl .ghost').textContent=o?'ukryj':'pokaż'})}
+function go(){if(run){clearInterval(id);run=false;draw();return}if(left<=0)left=total;run=true;last=Date.now();
+  id=setInterval(()=>{const now=Date.now();left-=(now-last)/1000;last=now;if(left<=0){left=0;clearInterval(id);run=false;beep()}draw()},250);draw()}
+function reset(){clearInterval(id);run=false;left=total;draw()}
+function setMin(m){$('m2').classList.toggle('on',m==2);$('m4').classList.toggle('on',m==4);total=m*60;reset()}
+function tog(k){if(cur>N)return;const o=$(k+cur).classList.toggle('open');$('b'+k).classList.toggle('on',o)}
+function move(d){const n=cur+d;if(n<1||n>N+1)return;
+  if(cur<=N){$('c'+cur).classList.remove('cur');$('w'+cur).classList.remove('open');$('f'+cur).classList.remove('open')}else $('fin').classList.remove('cur');
+  cur=n;$('bw').classList.remove('on');$('bf').classList.remove('on');
+  for(let i=1;i<=N;i++)$('d'+i).className=i<cur?'done':(i==cur?'on':'');
+  if(cur<=N){$('c'+cur).classList.add('cur');$('lab').textContent='Pytanie '+cur+' z '+N;$('ctl').style.display=''}
+  else{$('fin').classList.add('cur');$('lab').textContent='Koniec';$('ctl').style.display='none'}
+  $('prev').style.visibility=cur==1?'hidden':'visible';$('next').style.visibility=cur>N?'hidden':'visible';
+  $('next').textContent=cur==N?'Zakończ →':'Następne pytanie →';reset()}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')move(1);if(e.key==='ArrowLeft')move(-1)});
+$('prev').style.visibility='hidden';draw();
 </script>
 </body>
 </html>
