@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenia A2 Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · A2 · Lekcja 1</span>
+  <h1>Arbeidsdagen min: <span>powtórka przekrojowa</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Marta, to zestaw po lekcji o Twoim dniu pracy na sykehjem. Słownictwo ze zmiany, szyk zdania po „i dag” i „klokka sju”, przeczenie „ikke” i krótki tekst. Zadania są krótkie, możesz je robić w przerwie, po kilka naraz.</p>
+  <div class="meta"><span>Słownictwo + gramatyka</span><span>ok. 20 min</span><span>29 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 29</b></div>
+<h2 class="part">Część A: Słownictwo z pracy</h2>
+<p class="partintro">Słowa, których używasz na każdej zmianie. Odpowiedź sprawdza się od razu.</p>
+<section class="task" data-id="1">
+<h2>1. Co to znaczy?</h2>
+<p class="hint"><b>nattevakt</b></p>
+<div class="opts" data-q="1" data-correct="nocna zmiana" data-ok="Dobrze. En vakt = zmiana w pracy, nattevakt = nocna zmiana.">
+<button class="opt">nocna zmiana</button>
+<button class="opt">nocny autobus</button>
+<button class="opt">nocny spacer</button>
+</div><div class="fb" id="f1"></div>
+</section>
+<section class="task" data-id="2">
+<h2>2. Co to znaczy?</h2>
+<p class="hint"><b>en beboer</b> på sykehjemmet</p>
+<div class="opts" data-q="2" data-correct="mieszkaniec" data-ok="Dobrze. Beboer = mieszkaniec (od „bo”, mieszkać). Na sykehjem mówi się beboer, w szpitalu pasient.">
+<button class="opt">odwiedzający</button>
+<button class="opt">mieszkaniec</button>
+<button class="opt">lekarz</button>
+</div><div class="fb" id="f2"></div>
+</section>
+<section class="task" data-id="3">
+<h2>3. Połącz w pary</h2>
+<p class="hint">Wybierz polskie znaczenie dla każdego słowa.</p>
+<div class="match">
+<span class="w">en sykepleier</span><select id="m3_0"><option value="">wybierz…</option><option>członek rodziny pacjenta</option><option>lekarz</option><option>pielęgniarka</option><option>posiłek</option></select>
+<span class="w">en lege</span><select id="m3_1"><option value="">wybierz…</option><option>członek rodziny pacjenta</option><option>lekarz</option><option>pielęgniarka</option><option>posiłek</option></select>
+<span class="w">et måltid</span><select id="m3_2"><option value="">wybierz…</option><option>członek rodziny pacjenta</option><option>lekarz</option><option>pielęgniarka</option><option>posiłek</option></select>
+<span class="w">en pårørende</span><select id="m3_3"><option value="">wybierz…</option><option>członek rodziny pacjenta</option><option>lekarz</option><option>pielęgniarka</option><option>posiłek</option></select>
+</div>
+<button class="btn" onclick="checkMatch(3,{&quot;m3_0&quot;: &quot;pielęgniarka&quot;, &quot;m3_1&quot;: &quot;lekarz&quot;, &quot;m3_2&quot;: &quot;posiłek&quot;, &quot;m3_3&quot;: &quot;członek rodziny pacjenta&quot;})">Sprawdź</button><div class="fb" id="f3"></div>
+</section>
+<section class="task" data-id="4">
+<h2>4. Uzupełnij</h2>
+<p class="hint">dawać (leki)</p>
+<div class="inline sent">Klokka åtte <input type="text" id="t4" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> jeg medisiner til beboerne.</div>
+<div class="row"><button class="btn" onclick="checkText(4,[&quot;gir&quot;, &quot;deler ut&quot;],&quot;Dobrze. Å gi → jeg gir. Możesz też powiedzieć „deler ut” (rozdaję).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(4)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f4"></div><div class="sol" id="s4">Wzorcowa odpowiedź: <b>gir</b></div>
+</section>
+<section class="task" data-id="5">
+<h2>5. Wybierz pasujące słowo</h2>
+<p class="hint">Jeg måler ___ til beboeren.</p>
+<div class="opts" data-q="5" data-correct="blodtrykket" data-ok="Dobrze. Å måle blodtrykket = mierzyć ciśnienie.">
+<button class="opt">blodtrykket</button>
+<button class="opt">blodbanken</button>
+<button class="opt">blodappelsinen</button>
+</div><div class="fb" id="f5"></div>
+</section>
+<section class="task" data-id="6">
+<h2>6. Uzupełnij</h2>
+<p class="hint">raport (przekazanie zmiany)</p>
+<div class="inline sent">Etter vakta gir jeg <input type="text" id="t6" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> til kollegaen min.</div>
+<div class="row"><button class="btn" onclick="checkText(6,[&quot;rapport&quot;],&quot;Dobrze. Å gi rapport = przekazać raport kolejnej zmianie.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(6)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f6"></div><div class="sol" id="s6">Wzorcowa odpowiedź: <b>rapport</b></div>
+</section>
+<section class="task" data-id="7">
+<h2>7. Wybierz pasujące słowo</h2>
+<p class="hint">Jeg har ___ i dag, så jeg sover om dagen.</p>
+<div class="opts" data-q="7" data-correct="nattevakt" data-ok="Dobrze. Po nocnej zmianie śpisz w dzień.">
+<button class="opt">nattevakt</button>
+<button class="opt">fri</button>
+<button class="opt">ferie</button>
+</div><div class="fb" id="f7"></div>
+</section>
+<h2 class="part">Część B: Czasownik na 2. miejscu</h2>
+<p class="partintro">Gdy zdanie zaczyna się od określenia czasu (i dag, klokka sju, etterpå), czasownik zostaje na 2. miejscu, a podmiot idzie za nim.</p>
+<section class="task" data-id="8">
+<h2>8. Które zdanie jest poprawne?</h2>
+<div class="opts" data-q="8" data-correct="I dag jobber jeg nattevakt." data-ok="Dobrze. I dag (1) jobber (2) jeg.">
+<button class="opt">I dag jeg jobber nattevakt.</button>
+<button class="opt">I dag jobber jeg nattevakt.</button>
+<button class="opt">I dag jobber nattevakt jeg.</button>
+</div><div class="fb" id="f8"></div>
+</section>
+<section class="task" data-id="9">
+<h2>9. Zacznij od określenia czasu</h2>
+<p class="given">Jeg drikker kaffe klokka sju.</p>
+<div class="rw"><span>Klokka sju</span><input type="text" id="t9" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(9,[&quot;drikker jeg kaffe&quot;],&quot;Dobrze. Czasownik drikker stoi zaraz po „klokka sju”.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(9)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f9"></div><div class="sol" id="s9">Wzorcowa odpowiedź: <b>Klokka sju drikker jeg kaffe.</b></div>
+</section>
+<section class="task" data-id="10">
+<h2>10. Zacznij od określenia czasu</h2>
+<p class="given">Zosia går på skolen etter frokost.</p>
+<div class="rw"><span>Etter frokost</span><input type="text" id="t10" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(10,[&quot;går zosia på skolen&quot;],&quot;Dobrze. Podmiot (Zosia) przechodzi za czasownik.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(10)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f10"></div><div class="sol" id="s10">Wzorcowa odpowiedź: <b>Etter frokost går Zosia på skolen.</b></div>
+</section>
+<section class="task" data-id="11">
+<h2>11. Zacznij od określenia czasu</h2>
+<p class="given">Jeg løper fem kilometer på lørdag.</p>
+<div class="rw"><span>På lørdag</span><input type="text" id="t11" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(11,[&quot;løper jeg fem kilometer&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(11)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f11"></div><div class="sol" id="s11">Wzorcowa odpowiedź: <b>På lørdag løper jeg fem kilometer.</b></div>
+</section>
+<section class="task" data-id="12">
+<h2>12. Zacznij od określenia czasu</h2>
+<p class="given">Tomek kommer hjem fra jobb klokka fire.</p>
+<div class="rw"><span>Klokka fire</span><input type="text" id="t12" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(12,[&quot;kommer tomek hjem fra jobb&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(12)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f12"></div><div class="sol" id="s12">Wzorcowa odpowiedź: <b>Klokka fire kommer Tomek hjem fra jobb.</b></div>
+</section>
+<section class="task" data-id="13">
+<h2>13. Które zdanie jest poprawne?</h2>
+<div class="opts" data-q="13" data-correct="Etterpå spiser vi middag sammen." data-ok="Dobrze. Etterpå (1) spiser (2) vi.">
+<button class="opt">Etterpå vi spiser middag sammen.</button>
+<button class="opt">Etterpå spiser vi middag sammen.</button>
+<button class="opt">Vi etterpå spiser middag sammen.</button>
+</div><div class="fb" id="f13"></div>
+</section>
+<section class="task" data-id="14">
+<h2>14. Uzupełnij</h2>
+<p class="hint">piec (chleb)</p>
+<div class="inline sent">Om kvelden <input type="text" id="t14" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> jeg brød.</div>
+<div class="row"><button class="btn" onclick="checkText(14,[&quot;baker&quot;],&quot;Dobrze. Å bake → jeg baker. Czasownik na 2. miejscu po „om kvelden”.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(14)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f14"></div><div class="sol" id="s14">Wzorcowa odpowiedź: <b>baker</b></div>
+</section>
+<h2 class="part">Część C: Przeczenie „ikke” i czasowniki modalne</h2>
+<p class="partintro">Ikke stoi zaraz po czasowniku. Po kan, må, vil, skal drugi czasownik jest w bezokoliczniku.</p>
+<section class="task" data-id="15">
+<h2>15. Które zdanie jest poprawne?</h2>
+<div class="opts" data-q="15" data-correct="Jeg kan ikke komme på jobb i morgen." data-ok="Dobrze. Kan ikke komme: ikke zaraz po czasowniku modalnym.">
+<button class="opt">Jeg kan komme ikke på jobb i morgen.</button>
+<button class="opt">Jeg ikke kan komme på jobb i morgen.</button>
+<button class="opt">Jeg kan ikke komme på jobb i morgen.</button>
+</div><div class="fb" id="f15"></div>
+</section>
+<section class="task" data-id="16">
+<h2>16. Uzupełnij</h2>
+<p class="hint">móc</p>
+<div class="inline sent">Beboeren <input type="text" id="t16" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> ikke spise alene, så jeg hjelper ham.</div>
+<div class="row"><button class="btn" onclick="checkText(16,[&quot;kan&quot;],&quot;Dobrze. Han kan ikke spise alene = nie może jeść sam.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(16)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f16"></div><div class="sol" id="s16">Wzorcowa odpowiedź: <b>kan</b></div>
+</section>
+<section class="task" data-id="17">
+<h2>17. Uzupełnij</h2>
+<p class="hint">musieć</p>
+<div class="inline sent">Jeg <input type="text" id="t17" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> ringe legen hvis beboeren har feber.</div>
+<div class="row"><button class="btn" onclick="checkText(17,[&quot;må&quot;],&quot;Dobrze. Å måtte → jeg må.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(17)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f17"></div><div class="sol" id="s17">Wzorcowa odpowiedź: <b>må</b></div>
+</section>
+<section class="task" data-id="18">
+<h2>18. Zaprzecz zdaniu</h2>
+<p class="given">Zosia vil gå på skolen i dag.</p>
+<div class="rw"><span>Zosia vil</span><input type="text" id="t18" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(18,[&quot;ikke gå på skolen i dag&quot;],&quot;Dobrze. Vil ikke gå.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(18)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f18"></div><div class="sol" id="s18">Wzorcowa odpowiedź: <b>Zosia vil ikke gå på skolen i dag.</b></div>
+</section>
+<section class="task" data-id="19">
+<h2>19. Zaprzecz zdaniu</h2>
+<p class="given">I dag jobber jeg.</p>
+<div class="rw"><span>I dag jobber jeg</span><input type="text" id="t19" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(19,[&quot;ikke&quot;],&quot;Dobrze. Po inwersji ikke idzie na koniec: jobber jeg ikke.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(19)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f19"></div><div class="sol" id="s19">Wzorcowa odpowiedź: <b>I dag jobber jeg ikke.</b></div>
+</section>
+<section class="task" data-id="20">
+<h2>20. Przetłumacz</h2>
+<p class="hint">Chcę lepiej rozumieć dialekt.</p>
+<div class="opts" data-q="20" data-correct="Jeg vil forstå dialekten bedre." data-ok="Dobrze. Vil = chcę, potem bezokolicznik forstå.">
+<button class="opt">Jeg vil forstå dialekten bedre.</button>
+<button class="opt">Jeg skal forstå dialekten bedre.</button>
+<button class="opt">Jeg vil forstår dialekten bedre.</button>
+</div><div class="fb" id="f20"></div>
+</section>
+<section class="task" data-id="21">
+<h2>21. Co znaczy to zdanie?</h2>
+<p class="hint"><b>Jeg trenger ikke å jobbe i helgen.</b></p>
+<div class="opts" data-q="21" data-correct="Nie muszę pracować w weekend." data-ok="Dobrze. Uwaga: „jeg må ikke” znaczy „nie wolno mi”. „Nie muszę” to „jeg trenger ikke”.">
+<button class="opt">Nie muszę pracować w weekend.</button>
+<button class="opt">Nie wolno mi pracować w weekend.</button>
+<button class="opt">Nie chcę pracować w weekend.</button>
+</div><div class="fb" id="f21"></div>
+</section>
+<h2 class="part">Część D: Pytania</h2>
+<p class="partintro">Wybierz słowo pytające, które pasuje do odpowiedzi.</p>
+<section class="task" data-id="22">
+<h2>22. Wybierz słowo pytające</h2>
+<p class="hint">___ jobber du? <i>På et sykehjem i Stavanger.</i></p>
+<div class="opts" data-q="22" data-correct="Hvor" data-ok="Dobrze. Hvor = gdzie.">
+<button class="opt">Hvor</button>
+<button class="opt">Når</button>
+<button class="opt">Hvem</button>
+</div><div class="fb" id="f22"></div>
+</section>
+<section class="task" data-id="23">
+<h2>23. Wybierz słowo pytające</h2>
+<p class="hint">___ begynner vakta di? <i>Klokka sju.</i></p>
+<div class="opts" data-q="23" data-correct="Når" data-ok="Dobrze. Når = kiedy.">
+<button class="opt">Hva</button>
+<button class="opt">Når</button>
+<button class="opt">Hvordan</button>
+</div><div class="fb" id="f23"></div>
+</section>
+<section class="task" data-id="24">
+<h2>24. Wybierz słowo pytające</h2>
+<p class="hint">___ har du bodd i Norge? <i>I to år.</i></p>
+<div class="opts" data-q="24" data-correct="Hvor lenge" data-ok="Dobrze. Hvor lenge = jak długo.">
+<button class="opt">Hvor lenge</button>
+<button class="opt">Hvor mye</button>
+<button class="opt">Hvor mange</button>
+</div><div class="fb" id="f24"></div>
+</section>
+<section class="task" data-id="25">
+<h2>25. Zamień zdanie na pytanie</h2>
+<p class="hint">Du jobber i helgen. → pytanie tak/nie</p>
+<div class="inline sent"><input type="text" id="t25" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> du i helgen?</div>
+<div class="row"><button class="btn" onclick="checkText(25,[&quot;jobber&quot;],&quot;Dobrze. W pytaniu tak/nie czasownik idzie na początek.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(25)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f25"></div><div class="sol" id="s25">Wzorcowa odpowiedź: <b>jobber</b></div>
+</section>
+<h2 class="part">Część E: Tekst</h2>
+<p class="partintro">Przeczytaj tekst i odpowiedz na pytania.</p>
+<div class="text"><h2>En natt på jobb</h2><p>Marta jobber på et sykehjem i Stavanger. Denne uka har hun nattevakt. Hun begynner klokka ti om kvelden og slutter klokka sju om morgenen.</p><p>Først får hun rapport fra kveldsvakta. Så går hun en runde og ser til beboerne. Klokka to gir hun medisiner til en beboer som har vondt.</p><p>Om morgenen kommer dagvakta, og Marta gir rapport. Etterpå sykler hun hjem. Da har Tomek allerede kjørt Zosia til skolen. Marta sover til klokka to, og så går hun en tur med Bruno.</p></div>
+<section class="task" data-id="26">
+<h2>26. Når begynner vakta til Marta?</h2>
+<div class="opts" data-q="26" data-correct="Klokka ti om kvelden" data-ok="Dobrze.">
+<button class="opt">Klokka sju om morgenen</button>
+<button class="opt">Klokka ti om kvelden</button>
+<button class="opt">Klokka to om natta</button>
+</div><div class="fb" id="f26"></div>
+</section>
+<section class="task" data-id="27">
+<h2>27. Hva gjør Marta først?</h2>
+<div class="opts" data-q="27" data-correct="Hun får rapport." data-ok="Dobrze. Først får hun rapport fra kveldsvakta.">
+<button class="opt">Hun gir medisiner.</button>
+<button class="opt">Hun får rapport.</button>
+<button class="opt">Hun sykler hjem.</button>
+</div><div class="fb" id="f27"></div>
+</section>
+<section class="task" data-id="28">
+<h2>28. Hvem kjører Zosia til skolen?</h2>
+<div class="opts" data-q="28" data-correct="Tomek" data-ok="Dobrze.">
+<button class="opt">Marta</button>
+<button class="opt">Tomek</button>
+<button class="opt">Dagvakta</button>
+</div><div class="fb" id="f28"></div>
+</section>
+<section class="task" data-id="29">
+<h2>29. Hva gjør Marta etter at hun har sovet?</h2>
+<div class="opts" data-q="29" data-correct="Hun går en tur med Bruno." data-ok="Dobrze.">
+<button class="opt">Hun går en tur med Bruno.</button>
+<button class="opt">Hun baker brød.</button>
+<button class="opt">Hun går på jobb.</button>
+</div><div class="fb" id="f29"></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 29 / 29</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=29;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+</script>
+
+</body>
+</html>

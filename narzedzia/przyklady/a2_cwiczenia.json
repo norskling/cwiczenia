@@ -1,0 +1,63 @@
+{
+ "doc_title": "Ćwiczenia A2 Norskling",
+ "pill": "Norskling · A2 · Lekcja 1",
+ "title": "Arbeidsdagen min:",
+ "title_hl": "powtórka przekrojowa",
+ "intro": "Marta, to zestaw po lekcji o Twoim dniu pracy na sykehjem. Słownictwo ze zmiany, szyk zdania po „i dag” i „klokka sju”, przeczenie „ikke” i krótki tekst. Zadania są krótkie, możesz je robić w przerwie, po kilka naraz.",
+ "meta": ["Słownictwo + gramatyka", "ok. 20 min"],
+ "parts": [
+  {"title": "Część A: Słownictwo z pracy",
+   "intro": "Słowa, których używasz na każdej zmianie. Odpowiedź sprawdza się od razu.",
+   "tasks": [
+    {"type":"choice","h":"Co to znaczy?","hint":"<b>nattevakt</b>","options":["nocna zmiana","nocny autobus","nocny spacer"],"correct":"nocna zmiana","ok":"Dobrze. En vakt = zmiana w pracy, nattevakt = nocna zmiana."},
+    {"type":"choice","h":"Co to znaczy?","hint":"<b>en beboer</b> på sykehjemmet","options":["odwiedzający","mieszkaniec","lekarz"],"correct":"mieszkaniec","ok":"Dobrze. Beboer = mieszkaniec (od „bo”, mieszkać). Na sykehjem mówi się beboer, w szpitalu pasient."},
+    {"type":"match","h":"Połącz w pary","hint":"Wybierz polskie znaczenie dla każdego słowa.","pairs":[["en sykepleier","pielęgniarka"],["en lege","lekarz"],["et måltid","posiłek"],["en pårørende","członek rodziny pacjenta"]],"ok":"Dobrze."},
+    {"type":"fill","h":"Uzupełnij","hint":"dawać (leki)","sentence":"Klokka åtte ___ jeg medisiner til beboerne.","answers":["gir","deler ut"],"ok":"Dobrze. Å gi → jeg gir. Możesz też powiedzieć „deler ut” (rozdaję)."},
+    {"type":"choice","h":"Wybierz pasujące słowo","hint":"Jeg måler ___ til beboeren.","options":["blodtrykket","blodbanken","blodappelsinen"],"correct":"blodtrykket","ok":"Dobrze. Å måle blodtrykket = mierzyć ciśnienie."},
+    {"type":"fill","h":"Uzupełnij","hint":"raport (przekazanie zmiany)","sentence":"Etter vakta gir jeg ___ til kollegaen min.","answers":["rapport"],"ok":"Dobrze. Å gi rapport = przekazać raport kolejnej zmianie."},
+    {"type":"choice","h":"Wybierz pasujące słowo","hint":"Jeg har ___ i dag, så jeg sover om dagen.","options":["nattevakt","fri","ferie"],"correct":"nattevakt","ok":"Dobrze. Po nocnej zmianie śpisz w dzień."}
+   ]},
+  {"title": "Część B: Czasownik na 2. miejscu",
+   "intro": "Gdy zdanie zaczyna się od określenia czasu (i dag, klokka sju, etterpå), czasownik zostaje na 2. miejscu, a podmiot idzie za nim.",
+   "tasks": [
+    {"type":"choice","h":"Które zdanie jest poprawne?","options":["I dag jeg jobber nattevakt.","I dag jobber jeg nattevakt.","I dag jobber nattevakt jeg."],"correct":"I dag jobber jeg nattevakt.","ok":"Dobrze. I dag (1) jobber (2) jeg."},
+    {"type":"rewrite","h":"Zacznij od określenia czasu","given":"Jeg drikker kaffe klokka sju.","start":"Klokka sju","answers":["drikker jeg kaffe"],"full":"Klokka sju drikker jeg kaffe.","ok":"Dobrze. Czasownik drikker stoi zaraz po „klokka sju”."},
+    {"type":"rewrite","h":"Zacznij od określenia czasu","given":"Zosia går på skolen etter frokost.","start":"Etter frokost","answers":["går zosia på skolen"],"full":"Etter frokost går Zosia på skolen.","ok":"Dobrze. Podmiot (Zosia) przechodzi za czasownik."},
+    {"type":"rewrite","h":"Zacznij od określenia czasu","given":"Jeg løper fem kilometer på lørdag.","start":"På lørdag","answers":["løper jeg fem kilometer"],"full":"På lørdag løper jeg fem kilometer.","ok":"Dobrze."},
+    {"type":"rewrite","h":"Zacznij od określenia czasu","given":"Tomek kommer hjem fra jobb klokka fire.","start":"Klokka fire","answers":["kommer tomek hjem fra jobb"],"full":"Klokka fire kommer Tomek hjem fra jobb.","ok":"Dobrze."},
+    {"type":"choice","h":"Które zdanie jest poprawne?","options":["Etterpå vi spiser middag sammen.","Etterpå spiser vi middag sammen.","Vi etterpå spiser middag sammen."],"correct":"Etterpå spiser vi middag sammen.","ok":"Dobrze. Etterpå (1) spiser (2) vi."},
+    {"type":"fill","h":"Uzupełnij","hint":"piec (chleb)","sentence":"Om kvelden ___ jeg brød.","answers":["baker"],"ok":"Dobrze. Å bake → jeg baker. Czasownik na 2. miejscu po „om kvelden”."}
+   ]},
+  {"title": "Część C: Przeczenie „ikke” i czasowniki modalne",
+   "intro": "Ikke stoi zaraz po czasowniku. Po kan, må, vil, skal drugi czasownik jest w bezokoliczniku.",
+   "tasks": [
+    {"type":"choice","h":"Które zdanie jest poprawne?","options":["Jeg kan komme ikke på jobb i morgen.","Jeg ikke kan komme på jobb i morgen.","Jeg kan ikke komme på jobb i morgen."],"correct":"Jeg kan ikke komme på jobb i morgen.","ok":"Dobrze. Kan ikke komme: ikke zaraz po czasowniku modalnym."},
+    {"type":"fill","h":"Uzupełnij","hint":"móc","sentence":"Beboeren ___ ikke spise alene, så jeg hjelper ham.","answers":["kan"],"ok":"Dobrze. Han kan ikke spise alene = nie może jeść sam."},
+    {"type":"fill","h":"Uzupełnij","hint":"musieć","sentence":"Jeg ___ ringe legen hvis beboeren har feber.","answers":["må"],"ok":"Dobrze. Å måtte → jeg må."},
+    {"type":"rewrite","h":"Zaprzecz zdaniu","given":"Zosia vil gå på skolen i dag.","start":"Zosia vil","answers":["ikke gå på skolen i dag"],"full":"Zosia vil ikke gå på skolen i dag.","ok":"Dobrze. Vil ikke gå."},
+    {"type":"rewrite","h":"Zaprzecz zdaniu","given":"I dag jobber jeg.","start":"I dag jobber jeg","answers":["ikke"],"full":"I dag jobber jeg ikke.","ok":"Dobrze. Po inwersji ikke idzie na koniec: jobber jeg ikke."},
+    {"type":"choice","h":"Przetłumacz","hint":"Chcę lepiej rozumieć dialekt.","options":["Jeg vil forstå dialekten bedre.","Jeg skal forstå dialekten bedre.","Jeg vil forstår dialekten bedre."],"correct":"Jeg vil forstå dialekten bedre.","ok":"Dobrze. Vil = chcę, potem bezokolicznik forstå."},
+    {"type":"choice","h":"Co znaczy to zdanie?","hint":"<b>Jeg trenger ikke å jobbe i helgen.</b>","options":["Nie muszę pracować w weekend.","Nie wolno mi pracować w weekend.","Nie chcę pracować w weekend."],"correct":"Nie muszę pracować w weekend.","ok":"Dobrze. Uwaga: „jeg må ikke” znaczy „nie wolno mi”. „Nie muszę” to „jeg trenger ikke”."}
+   ]},
+  {"title": "Część D: Pytania",
+   "intro": "Wybierz słowo pytające, które pasuje do odpowiedzi.",
+   "tasks": [
+    {"type":"choice","h":"Wybierz słowo pytające","hint":"___ jobber du? <i>På et sykehjem i Stavanger.</i>","options":["Hvor","Når","Hvem"],"correct":"Hvor","ok":"Dobrze. Hvor = gdzie."},
+    {"type":"choice","h":"Wybierz słowo pytające","hint":"___ begynner vakta di? <i>Klokka sju.</i>","options":["Hva","Når","Hvordan"],"correct":"Når","ok":"Dobrze. Når = kiedy."},
+    {"type":"choice","h":"Wybierz słowo pytające","hint":"___ har du bodd i Norge? <i>I to år.</i>","options":["Hvor lenge","Hvor mye","Hvor mange"],"correct":"Hvor lenge","ok":"Dobrze. Hvor lenge = jak długo."},
+    {"type":"fill","h":"Zamień zdanie na pytanie","hint":"Du jobber i helgen. → pytanie tak/nie","sentence":"___ du i helgen?","answers":["jobber"],"ok":"Dobrze. W pytaniu tak/nie czasownik idzie na początek."}
+   ]},
+  {"title": "Część E: Tekst",
+   "intro": "Przeczytaj tekst i odpowiedz na pytania.",
+   "text": {"title":"En natt på jobb","paragraphs":[
+     "Marta jobber på et sykehjem i Stavanger. Denne uka har hun nattevakt. Hun begynner klokka ti om kvelden og slutter klokka sju om morgenen.",
+     "Først får hun rapport fra kveldsvakta. Så går hun en runde og ser til beboerne. Klokka to gir hun medisiner til en beboer som har vondt.",
+     "Om morgenen kommer dagvakta, og Marta gir rapport. Etterpå sykler hun hjem. Da har Tomek allerede kjørt Zosia til skolen. Marta sover til klokka to, og så går hun en tur med Bruno."]},
+   "tasks": [
+    {"type":"choice","h":"Når begynner vakta til Marta?","options":["Klokka sju om morgenen","Klokka ti om kvelden","Klokka to om natta"],"correct":"Klokka ti om kvelden","ok":"Dobrze."},
+    {"type":"choice","h":"Hva gjør Marta først?","options":["Hun gir medisiner.","Hun får rapport.","Hun sykler hjem."],"correct":"Hun får rapport.","ok":"Dobrze. Først får hun rapport fra kveldsvakta."},
+    {"type":"choice","h":"Hvem kjører Zosia til skolen?","options":["Marta","Tomek","Dagvakta"],"correct":"Tomek","ok":"Dobrze."},
+    {"type":"choice","h":"Hva gjør Marta etter at hun har sovet?","options":["Hun går en tur med Bruno.","Hun baker brød.","Hun går på jobb."],"correct":"Hun går en tur med Bruno.","ok":"Dobrze."}
+   ]}
+ ]
+}
