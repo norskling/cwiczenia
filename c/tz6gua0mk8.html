@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muntlig drill B1 Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.card.active{border-color:var(--is);box-shadow:0 10px 30px rgba(13,31,45,.07)}
+.card .num{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--fjord);font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px}
+.card .q{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.45rem;font-weight:700;letter-spacing:-.02em;line-height:1.25;margin:0}
+.card .pl{font-size:.92rem;margin:4px 0 0}
+.card .role{font-size:.95rem;color:var(--natt);background:var(--tint);border-radius:8px;padding:8px 12px;margin:10px 0 0}
+.lbl{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--fjord);margin:16px 0 8px}
+.words{display:flex;flex-wrap:wrap;gap:8px}
+.words span{background:var(--tint);color:var(--natt);border:1px solid var(--border);border-radius:100px;padding:5px 12px;font-size:.95rem}
+.fu{display:none;margin:0;padding-left:20px;color:var(--natt)}
+.fu li{margin:4px 0}
+.card.showfu .fu{display:block}
+.timer{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid var(--border)}
+.clock{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.9rem;color:var(--natt);min-width:92px;font-variant-numeric:tabular-nums}
+.clock.end{color:var(--bad)}
+.track{flex:1 1 100%;height:6px;background:var(--tint);border-radius:3px;overflow:hidden;order:9}
+.track i{display:block;height:100%;width:0;background:var(--is);transition:width .25s linear}
+.seg{display:inline-flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden}
+.seg button{font:inherit;font-size:.95rem;background:none;border:0;color:var(--fjord);padding:9px 14px;cursor:pointer;min-height:44px}
+.seg button.on{background:var(--fjord);color:#fff}
+.timer .btn,.timer .ghost{margin-top:0}
+.how{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:18px 22px;margin-bottom:20px;color:var(--natt)}
+.tools{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px}
+.tools .ghost{margin-top:0}
+@media (max-width:600px){.card .q{font-size:1.25rem}.timer .btn{width:auto}}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · B1 · Lekcja 1</span>
+  <h1>Muntlig drill: <span>jobben min</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Rozmowa na czas o Twojej pracy. Lektorka zadaje pytanie i włącza stoper, Katarzyna mówi swobodnie. Pod pytaniem są słowa pomocnicze, a pytania dodatkowe podtrzymują rozmowę.</p>
+  <div class="meta"><span>Mówienie</span><span>ok. 15 min</span><span>6 pytań</span></div>
+  <div class="how">Lektorka: zadaj pytanie i włącz stoper. Nie poprawiaj w trakcie. Zanotuj, które czasy są mylone i jakich słów brakuje, to plan na lekcję 2. Katarzyna: opowiadając o przeszłości, świadomie wybieraj preteritum albo perfektum.</div>
+  <div class="tools"><button class="ghost" onclick="allFu(true)">Pokaż wszystkie oppfølgingsspørsmål</button><button class="ghost" onclick="allFu(false)">Ukryj</button></div>
+<section class="card" id="c1" data-min="2">
+<div class="num">Pytanie 1 z 6</div>
+<p class="q">Fortell om deg selv og jobben din.</p><p class="pl">Opowiedz o sobie i swojej pracy.</p>
+<div class="lbl">Słowa pomocnicze</div><div class="words"><span>å jobbe med</span><span>prosjekter</span><span>utvikling</span><span>innovasjon</span><span>små og mellomstore bedrifter</span><span>EØS-midler</span><span>kunder</span></div>
+<div class="lbl">Oppfølgingsspørsmål <button class="ghost" style="margin:0 0 0 8px;padding:4px 10px;min-height:0;font-size:.8rem" onclick="fu(1)">pokaż</button></div>
+<ol class="fu"><li>Hvor lenge har du jobbet der?</li><li>Hva gjorde du før?</li><li>Hva liker du best med jobben?</li></ol>
+<div class="timer"><span class="clock" id="k1">02:00</span>
+<span class="seg"><button class="on" onclick="setMin(1,2,this)">2 min</button><button class="" onclick="setMin(1,4,this)">4 min</button></span>
+<button class="btn" id="b1" onclick="go(1)">Start</button><button class="ghost" onclick="reset(1)">Od nowa</button>
+<div class="track"><i id="p1"></i></div></div>
+</section>
+<section class="card" id="c2" data-min="2">
+<div class="num">Pytanie 2 z 6</div>
+<p class="q">Fortell om et prosjekt du har jobbet med.</p><p class="pl">Opowiedz o projekcie, przy którym pracowałaś.</p>
+<div class="lbl">Słowa pomocnicze</div><div class="words"><span>å søke om midler</span><span>en søknad</span><span>et anbud</span><span>en frist</span><span>et budsjett</span><span>partnere</span><span>resultater</span></div>
+<div class="lbl">Oppfølgingsspørsmål <button class="ghost" style="margin:0 0 0 8px;padding:4px 10px;min-height:0;font-size:.8rem" onclick="fu(2)">pokaż</button></div>
+<ol class="fu"><li>Hvem var partnerne?</li><li>Hva var vanskeligst?</li><li>Hvordan gikk det til slutt?</li></ol>
+<div class="timer"><span class="clock" id="k2">02:00</span>
+<span class="seg"><button class="on" onclick="setMin(2,2,this)">2 min</button><button class="" onclick="setMin(2,4,this)">4 min</button></span>
+<button class="btn" id="b2" onclick="go(2)">Start</button><button class="ghost" onclick="reset(2)">Od nowa</button>
+<div class="track"><i id="p2"></i></div></div>
+</section>
+<section class="card" id="c3" data-min="2">
+<div class="num">Pytanie 3 z 6</div>
+<p class="q">Hvordan ser en vanlig arbeidsuke ut?</p><p class="pl">Jak wygląda zwykły tydzień pracy?</p>
+<div class="lbl">Słowa pomocnicze</div><div class="words"><span>møter</span><span>e-post</span><span>å skrive</span><span>å ringe</span><span>hjemmekontor</span><span>kolleger</span><span>på norsk / på engelsk</span></div>
+<div class="lbl">Oppfølgingsspørsmål <button class="ghost" style="margin:0 0 0 8px;padding:4px 10px;min-height:0;font-size:.8rem" onclick="fu(3)">pokaż</button></div>
+<ol class="fu"><li>Hvilket språk bruker dere på jobben?</li><li>Hvor mange møter har du i uka?</li><li>Hva gjør du på fredager?</li></ol>
+<div class="timer"><span class="clock" id="k3">02:00</span>
+<span class="seg"><button class="on" onclick="setMin(3,2,this)">2 min</button><button class="" onclick="setMin(3,4,this)">4 min</button></span>
+<button class="btn" id="b3" onclick="go(3)">Start</button><button class="ghost" onclick="reset(3)">Od nowa</button>
+<div class="track"><i id="p3"></i></div></div>
+</section>
+<section class="card" id="c4" data-min="2">
+<div class="num">Pytanie 4 z 6</div>
+<p class="q">Hva skal du jobbe med de neste månedene?</p><p class="pl">Nad czym będziesz pracować w najbliższych miesiącach?</p>
+<div class="lbl">Słowa pomocnicze</div><div class="words"><span>skal</span><span>kommer til å</span><span>neste måned</span><span>til våren</span><span>en ny utlysning</span><span>å planlegge</span><span>et mål</span></div>
+<div class="lbl">Oppfølgingsspørsmål <button class="ghost" style="margin:0 0 0 8px;padding:4px 10px;min-height:0;font-size:.8rem" onclick="fu(4)">pokaż</button></div>
+<ol class="fu"><li>Hvilke frister har du?</li><li>Hva gleder du deg til?</li><li>Hva kommer til å bli utfordrende?</li></ol>
+<div class="timer"><span class="clock" id="k4">02:00</span>
+<span class="seg"><button class="on" onclick="setMin(4,2,this)">2 min</button><button class="" onclick="setMin(4,4,this)">4 min</button></span>
+<button class="btn" id="b4" onclick="go(4)">Start</button><button class="ghost" onclick="reset(4)">Od nowa</button>
+<div class="track"><i id="p4"></i></div></div>
+</section>
+<section class="card" id="c5" data-min="2">
+<div class="num">Pytanie 5 z 6</div>
+<p class="q">Hvorfor vil du bli bedre i norsk?</p><p class="pl">Dlaczego chcesz lepiej mówić po norwesku?</p>
+<div class="lbl">Słowa pomocnicze</div><div class="words"><span>møter</span><span>kunder</span><span>å forstå</span><span>å uttrykke seg</span><span>en presentasjon</span><span>selvsikker</span><span>høyt B1-nivå</span></div>
+<div class="lbl">Oppfølgingsspørsmål <button class="ghost" style="margin:0 0 0 8px;padding:4px 10px;min-height:0;font-size:.8rem" onclick="fu(5)">pokaż</button></div>
+<ol class="fu"><li>I hvilke situasjoner er norsk vanskeligst?</li><li>Hva har du gjort for å lære norsk?</li><li>Hvordan vil du bruke norsk om ett år?</li></ol>
+<div class="timer"><span class="clock" id="k5">02:00</span>
+<span class="seg"><button class="on" onclick="setMin(5,2,this)">2 min</button><button class="" onclick="setMin(5,4,this)">4 min</button></span>
+<button class="btn" id="b5" onclick="go(5)">Start</button><button class="ghost" onclick="reset(5)">Od nowa</button>
+<div class="track"><i id="p5"></i></div></div>
+</section>
+<section class="card" id="c6" data-min="2">
+<div class="num">Pytanie 6 z 6</div>
+<p class="q">Kan du presentere prosjektet kort?</p><p class="role">Rollespill: lektorka reprezentuje norweską gminę (kommune), która rozważa udział w projekcie.</p>
+<div class="lbl">Słowa pomocnicze</div><div class="words"><span>formålet</span><span>målgruppen</span><span>tidsplanen</span><span>budsjettet</span><span>å samarbeide</span><span>finansiering</span></div>
+<div class="lbl">Oppfølgingsspørsmål <button class="ghost" style="margin:0 0 0 8px;padding:4px 10px;min-height:0;font-size:.8rem" onclick="fu(6)">pokaż</button></div>
+<ol class="fu"><li>Hvor mye koster prosjektet?</li><li>Når kan dere begynne?</li><li>Hva trenger dere fra oss?</li></ol>
+<div class="timer"><span class="clock" id="k6">02:00</span>
+<span class="seg"><button class="on" onclick="setMin(6,2,this)">2 min</button><button class="" onclick="setMin(6,4,this)">4 min</button></span>
+<button class="btn" id="b6" onclick="go(6)">Start</button><button class="ghost" onclick="reset(6)">Od nowa</button>
+<div class="track"><i id="p6"></i></div></div>
+</section>
+</main>
+<script>
+const T={};
+function fmt(s){s=Math.max(0,Math.ceil(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function st(n){const c=document.getElementById('c'+n);return T[n]||(T[n]={total:+c.dataset.min*60,left:+c.dataset.min*60,run:false,id:null,last:0})}
+function draw(n){const t=st(n),k=document.getElementById('k'+n);k.textContent=fmt(t.left);k.classList.toggle('end',t.left<=0);
+  document.getElementById('p'+n).style.width=(100*(1-t.left/t.total))+'%';
+  document.getElementById('b'+n).textContent=t.run?'Pauza':(t.left<t.total&&t.left>0?'Wznów':'Start')}
+function beep(){try{const a=new (window.AudioContext||window.webkitAudioContext)();[0,.35,.7].forEach(d=>{const o=a.createOscillator(),g=a.createGain();o.frequency.value=880;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.2,a.currentTime+d);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+d+.3);o.start(a.currentTime+d);o.stop(a.currentTime+d+.3)})}catch(e){}}
+function stopAll(ex){for(const k in T)if(+k!==ex&&T[k].run){clearInterval(T[k].id);T[k].run=false;draw(+k);document.getElementById('c'+k).classList.remove('active')}}
+function go(n){const t=st(n);if(t.run){clearInterval(t.id);t.run=false;draw(n);return}
+  if(t.left<=0)t.left=t.total;stopAll(n);t.run=true;t.last=Date.now();document.getElementById('c'+n).classList.add('active');
+  t.id=setInterval(()=>{const now=Date.now();t.left-=(now-t.last)/1000;t.last=now;
+    if(t.left<=0){t.left=0;clearInterval(t.id);t.run=false;beep();document.getElementById('c'+n).classList.remove('active')}draw(n)},250);draw(n)}
+function reset(n){const t=st(n);clearInterval(t.id);t.run=false;t.left=t.total;document.getElementById('c'+n).classList.remove('active');draw(n)}
+function setMin(n,m,b){const c=document.getElementById('c'+n);c.dataset.min=m;b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  const t=st(n);clearInterval(t.id);t.run=false;t.total=t.left=m*60;c.classList.remove('active');draw(n)}
+function fu(n){const c=document.getElementById('c'+n);c.classList.toggle('showfu');c.querySelector('.lbl .ghost').textContent=c.classList.contains('showfu')?'ukryj':'pokaż'}
+function allFu(o){document.querySelectorAll('.card').forEach(c=>{c.classList.toggle('showfu',o);c.querySelector('.lbl .ghost').textContent=o?'ukryj':'pokaż'})}
+</script>
+</body>
+</html>
