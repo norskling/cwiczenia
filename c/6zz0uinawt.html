@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muntlig drill A2 Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+
+.quiz{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;box-shadow:0 10px 30px rgba(13,31,45,.06)}
+.qtop{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.num{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--fjord);font-size:.8rem;text-transform:uppercase;letter-spacing:.12em}
+.dots{display:flex;gap:6px}.dots i{width:10px;height:10px;border-radius:50%;background:var(--border)}.dots i.on{background:var(--is)}.dots i.done{background:var(--fjord)}
+.card{display:none}.card.cur{display:block}
+.card .q{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.7rem;font-weight:700;letter-spacing:-.02em;line-height:1.25;margin:0}
+.card .pl{font-size:.92rem;margin:6px 0 0}
+.card .role{font-size:.95rem;color:var(--natt);background:var(--tint);border-radius:8px;padding:8px 12px;margin:12px 0 0}
+.panel{display:none;margin-top:16px;padding:14px 16px;border-radius:12px;background:var(--tint)}
+.panel.open{display:block}
+.lbl{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--fjord);margin:0 0 8px}
+.words{display:flex;flex-wrap:wrap;gap:8px}
+.words span{background:#fff;color:var(--natt);border:1px solid var(--border);border-radius:100px;padding:5px 12px;font-size:.95rem}
+.fu{margin:0;padding-left:20px;color:var(--natt)}.fu li{margin:5px 0}
+.helpers{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.helpers .ghost{margin-top:0}.helpers .ghost.on{background:var(--fjord);color:#fff;border-color:var(--fjord)}
+.timer{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid var(--border)}
+.clock{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.9rem;color:var(--natt);min-width:92px;font-variant-numeric:tabular-nums}
+.clock.end{color:var(--bad)}
+.track{flex:1 1 100%;height:6px;background:var(--tint);border-radius:3px;overflow:hidden;order:9}
+.track i{display:block;height:100%;width:0;background:var(--is);transition:width .25s linear}
+.seg{display:inline-flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden}
+.seg button{font:inherit;font-size:.95rem;background:none;border:0;color:var(--fjord);padding:9px 14px;cursor:pointer;min-height:44px}
+.seg button.on{background:var(--fjord);color:#fff}
+.timer .btn,.timer .ghost{margin-top:0}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+.nav .btn,.nav .ghost{margin-top:0}
+.how{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:18px 22px;margin-bottom:20px;color:var(--natt)}
+.fin{display:none;text-align:center;padding:20px 0}.fin.cur{display:block}
+.fin p{font-family:"Space Grotesk",sans-serif;font-size:1.5rem;font-weight:700;color:var(--natt);margin:0 0 6px}
+@media (max-width:600px){.card .q{font-size:1.35rem}.timer .btn{width:auto}.nav .btn{width:auto}}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · A2 · Lekcja 2</span>
+  <h1>Muntlig drill: <span>hva gjorde du?</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Rozmowa na czas, w formie quizu: jedno pytanie na ekranie. Lektorka włącza stoper na 2 albo 4 minuty, a Marta opowiada w czasie przeszłym. Słowa kluczowe i pytania pomocnicze odkrywacie przyciskami, kiedy są potrzebne.</p>
+  <div class="meta"><span>Mówienie</span><span>ok. 10 min</span><span>4 pytań</span></div>
+  <div class="how">Lektorka: zadaj pytanie i włącz stoper. Nie poprawiaj w trakcie, zapisz 2 lub 3 błędy (forma preteritum, szyk po określeniu czasu, kj/sj) i omów je po sygnale. Marta: zaczynaj część zdań od i går, på lørdag, først, etterpå, klokka … i pilnuj czasownika na 2. miejscu.</div>
+  <div class="quiz">
+    <div class="qtop"><span class="num" id="lab">Pytanie 1 z 4</span><span class="dots"><i id="d1" class="on"></i><i id="d2"></i><i id="d3"></i><i id="d4"></i></span></div>
+<section class="card cur" id="c1">
+<p class="q">Hva gjorde du i helgen?</p><p class="pl">Co robiłaś w weekend?</p>
+<div class="panel" id="w1"><div class="lbl">Słowa kluczowe</div><div class="words"><span>på lørdag</span><span>på søndag</span><span>jogget</span><span>bakte</span><span>gikk tur</span><span>Bruno</span><span>slappet av</span><span>besøkte</span></div></div>
+<div class="panel" id="f1"><div class="lbl">Pytania pomocnicze (oppfølgingsspørsmål)</div><ol class="fu"><li>Hva gjorde du på lørdag formiddag?</li><li>Hvem var du sammen med?</li><li>Bakte du brød? Hva slags brød?</li><li>Hva var det beste med helgen?</li></ol></div>
+</section>
+<section class="card" id="c2">
+<p class="q">Fortell om den siste nattevakta di.</p><p class="pl">Opowiedz o swojej ostatniej nocnej zmianie.</p>
+<div class="panel" id="w2"><div class="lbl">Słowa kluczowe</div><div class="words"><span>vakta begynte</span><span>først</span><span>så til beboerne</span><span>ringte på</span><span>målte blodtrykket</span><span>ringte til legen</span><span>var rolig</span><span>ga rapport</span></div></div>
+<div class="panel" id="f2"><div class="lbl">Pytania pomocnicze (oppfølgingsspørsmål)</div><ol class="fu"><li>Når begynte og sluttet vakta?</li><li>Skjedde det noe spesielt?</li><li>Var natta rolig eller travel?</li><li>Hva gjorde du etter vakta?</li></ol></div>
+</section>
+<section class="card" id="c3">
+<p class="q">Hva gjorde du i går?</p><p class="pl">Co robiłaś wczoraj?</p>
+<div class="panel" id="w3"><div class="lbl">Słowa kluczowe</div><div class="words"><span>i går morges</span><span>etter jobb</span><span>om kvelden</span><span>spiste</span><span>hentet Zosia</span><span>ryddet</span><span>trente</span><span>sov</span></div></div>
+<div class="panel" id="f3"><div class="lbl">Pytania pomocnicze (oppfølgingsspørsmål)</div><ol class="fu"><li>Når sto du opp?</li><li>Hva spiste dere til middag?</li><li>Hva gjorde Zosia i går?</li><li>Når la du deg?</li></ol></div>
+</section>
+<section class="card" id="c4">
+<p class="q">Fortell om en tur i fjellet.</p><p class="pl">Opowiedz o wycieczce w góry.</p>
+<div class="panel" id="w4"><div class="lbl">Słowa kluczowe</div><div class="words"><span>i fjor</span><span>i sommer</span><span>kjørte</span><span>gikk</span><span>utsikten</span><span>var sliten</span><span>pakket sekken</span><span>tok bilder</span></div></div>
+<div class="panel" id="f4"><div class="lbl">Pytania pomocnicze (oppfølgingsspørsmål)</div><ol class="fu"><li>Hvor gikk dere?</li><li>Hvem var med?</li><li>Hvor lang tid brukte dere?</li><li>Hvordan var været?</li></ol></div>
+</section>
+    <div class="fin" id="fin"><p>Koniec pytań</p><span class="muted">Dobra robota! Lektorka zapisuje uwagi do kolejnej lekcji.</span></div>
+    <div id="ctl">
+      <div class="helpers"><button class="ghost" id="bw" onclick="tog('w')">Słowa kluczowe</button><button class="ghost" id="bf" onclick="tog('f')">Pytania pomocnicze</button></div>
+      <div class="timer"><span class="clock" id="k">02:00</span>
+        <span class="seg"><button id="m2" class="on" onclick="setMin(2)">2 min</button><button id="m4" class="" onclick="setMin(4)">4 min</button></span>
+        <button class="btn" id="b" onclick="go()">Start</button><button class="ghost" onclick="reset()">Od nowa</button>
+        <div class="track"><i id="p"></i></div></div>
+    </div>
+    <div class="nav"><button class="ghost" id="prev" onclick="move(-1)">← Poprzednie</button><button class="btn" id="next" onclick="move(1)">Następne pytanie →</button></div>
+  </div>
+</main>
+<script>
+const N=4,MIN=2;
+const $=x=>document.getElementById(x);
+let cur=1,total=MIN*60,left=total,run=false,id=null,last=0;
+function fmt(s){s=Math.max(0,Math.ceil(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function draw(){$('k').textContent=fmt(left);$('k').classList.toggle('end',left<=0);$('p').style.width=(100*(1-left/total))+'%';
+  $('b').textContent=run?'Pauza':(left<total&&left>0?'Wznów':'Start')}
+function beep(){try{const a=new (window.AudioContext||window.webkitAudioContext)();[0,.35,.7].forEach(d=>{const o=a.createOscillator(),g=a.createGain();o.frequency.value=880;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.2,a.currentTime+d);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+d+.3);o.start(a.currentTime+d);o.stop(a.currentTime+d+.3)})}catch(e){}}
+function go(){if(run){clearInterval(id);run=false;draw();return}if(left<=0)left=total;run=true;last=Date.now();
+  id=setInterval(()=>{const now=Date.now();left-=(now-last)/1000;last=now;if(left<=0){left=0;clearInterval(id);run=false;beep()}draw()},250);draw()}
+function reset(){clearInterval(id);run=false;left=total;draw()}
+function setMin(m){$('m2').classList.toggle('on',m==2);$('m4').classList.toggle('on',m==4);total=m*60;reset()}
+function tog(k){if(cur>N)return;const o=$(k+cur).classList.toggle('open');$('b'+k).classList.toggle('on',o)}
+function move(d){const n=cur+d;if(n<1||n>N+1)return;
+  if(cur<=N){$('c'+cur).classList.remove('cur');$('w'+cur).classList.remove('open');$('f'+cur).classList.remove('open')}else $('fin').classList.remove('cur');
+  cur=n;$('bw').classList.remove('on');$('bf').classList.remove('on');
+  for(let i=1;i<=N;i++)$('d'+i).className=i<cur?'done':(i==cur?'on':'');
+  if(cur<=N){$('c'+cur).classList.add('cur');$('lab').textContent='Pytanie '+cur+' z '+N;$('ctl').style.display=''}
+  else{$('fin').classList.add('cur');$('lab').textContent='Koniec';$('ctl').style.display='none'}
+  $('prev').style.visibility=cur==1?'hidden':'visible';$('next').style.visibility=cur>N?'hidden':'visible';
+  $('next').textContent=cur==N?'Zakończ →':'Następne pytanie →';reset()}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')move(1);if(e.key==='ArrowLeft')move(-1)});
+$('prev').style.visibility='hidden';draw();
+</script>
+</body>
+</html>

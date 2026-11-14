@@ -65,7 +65,7 @@ def talk(L, t, hl, qs, phrases=None, tip=None):
     for i, q in enumerate(qs):
         y = 2.4 + i * (4.3 / max(len(qs), 1))
         h = min(0.8, 4.3 / max(len(qs), 1) - 0.12)
-        box(s, 0.8, y, w, h); text(s, 1.05, y + (h - 0.45) / 2, w - 0.4, 0.5, q, size=18 if len(qs) > 4 else 20, color=NATT, bold=True)
+        box(s, 0.8, y, w, h); text(s, 1.05, y + (h - 0.45) / 2, w - 0.4, 0.5, q, size=16 if len(q) > 48 else (18 if len(qs) > 4 else 20), color=NATT, bold=True)
     if phrases or tip:
         box(s, 8.5, 2.4, 4.0, 4.2)
         lines = [[('Zwroty pomocnicze' if phrases else 'Dla lektorki', {'bold': True, 'color': FJORD, 'size': 14})]]
