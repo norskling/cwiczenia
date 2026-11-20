@@ -14,7 +14,9 @@ Narzędzia: Google Drive (connector), repo `norskling/cwiczenia` (ten katalog), 
 ## 1. Znajdź kursantów
 
 1. `search_files` z `parentId = '<Kursanci indywidualni>'`, tylko foldery. Pomiń folder **Wzór** (chyba że uruchomienie testowe mówi inaczej).
-2. W folderze kursanta znajdź **Folder lektorki** (dokument „Notatki: …”) i **Folder kursanta** (podfoldery „Lekcja N”).
+2. W folderze kursanta znajdź **Folder lektorki** (dokument „Notatki: …” + podfoldery „Lekcja M” z materiałami PRZED lekcją) i **Folder kursanta** (podfoldery „Lekcja N” ze zrzutami ekranu i dokumentem PO lekcji).
+
+**Gdzie co trafia (Monika, 2026-11-20):** prezentacja i dokument „Lekcja M: materiały na lekcję” → `Folder lektorki / Lekcja M`. Dokument „Lekcja N: słownictwo i zadania” → `Folder kursanta / Lekcja N`. Nic innego nie trafia do folderu kursanta.
 3. Brak dokumentu notatek albo brak któregoś folderu: zapisz w raporcie, przejdź do następnego kursanta.
 
 ## 2. Odczytaj notatki (`read_file_content`)
@@ -36,15 +38,15 @@ Pole puste albo z tekstem szablonu (np. „[Imię Nazwisko]”) traktuj jako bra
 
 ## 3. Ustal kroki do wykonania
 
-Krok jest **zrobiony**, gdy w folderze `Folder kursanta / Lekcja K` istnieje dokument o dokładnej nazwie z kroku. Nie powtarzaj zrobionych kroków.
+Krok jest **zrobiony**, gdy istnieje dokument o dokładnej nazwie z kroku: dla PRZED w `Folder lektorki / Lekcja M` **albo** (materiały sprzed 2026-11-20) w `Folder kursanta / Lekcja M`; dla PO w `Folder kursanta / Lekcja N`. Nie powtarzaj zrobionych kroków i nie przenoś starych plików.
 
-| Krok | Warunek | Źródło planu | Wynik w `Lekcja K` |
+| Krok | Warunek | Źródło planu | Wynik |
 |---|---|---|---|
-| **PRZED lekcją M** | strona źródłowa ma GOTOWE `[X]` | M=1: strona 1; M>1: strona LEKCJA M-1 | „Lekcja M: materiały na lekcję” (+ prezentacja, jeśli zaznaczona) |
-| **PO lekcji N** | strona LEKCJA N ma GOTOWE `[X]` | strona LEKCJA N + zrzuty ekranu w `Lekcja N` | „Lekcja N: słownictwo i zadania” |
+| **PRZED lekcją M** | strona źródłowa ma GOTOWE `[X]` | M=1: strona 1; M>1: strona LEKCJA M-1 | `Folder lektorki / Lekcja M`: „Lekcja M: materiały na lekcję” (+ prezentacja, jeśli zaznaczona) |
+| **PO lekcji N** | strona LEKCJA N ma GOTOWE `[X]` | strona LEKCJA N + zrzuty ekranu | `Folder kursanta / Lekcja N`: „Lekcja N: słownictwo i zadania” |
 
 Kolejność dla jednej strony LEKCJA N: najpierw PO lekcji N, potem PRZED lekcją N+1. Brakujący folder „Lekcja K” utwórz
-(`create_file`, mimeType folder, parent = Folder kursanta).
+(`create_file`, mimeType folder, parent = Folder lektorki dla kroku PRZED, Folder kursanta dla kroku PO).
 
 ## 4. Krok PRZED lekcją M
 
@@ -75,7 +77,7 @@ Spec JSON dla `generuj_prezentacje.py` (typy slajdów w nagłówku skryptu). Str
 python3 generuj_prezentacje.py spec.json ../L<M>.pptx
 ```
 Plik .pptx zapisz w katalogu roboczym sesji (korzeń repo, `*.pptx` jest w `.gitignore`). Referencja `sha256:` działa tylko dla plików w katalogu roboczym, z `/tmp` wgranie się nie uda.
-Wgranie: `create_file` z `parentId` = folder Lekcja M, `title` „Lekcja M: prezentacja (<temat>)”,
+Wgranie: `create_file` z `parentId` = `Folder lektorki / Lekcja M`, `title` „Lekcja M: prezentacja (<temat>)”,
 `contentMimeType` `application/vnd.openxmlformats-officedocument.presentationml.presentation`,
 `base64Content` = referencja `sha256:<sha256 pliku>:<ścieżka absolutna>` (sha256 policz `sha256sum`) (bez `disableConversionToGoogleType`, plik ma się przekonwertować do Slides).
 Sprawdź wynik `read_file_content` (liczba slajdów). Gdy wgranie się nie uda, i tak opublikuj resztę i zapisz błąd w raporcie.
@@ -89,17 +91,17 @@ Monika pozwoliła publikować prosto na `main` (bez PR). Push ponawiaj do 4 razy
 
 ### 4e. Dokument „Lekcja M: materiały na lekcję”
 Spec dla `pomocnicze.py dokument` z jedną sekcją `links` (prezentacja, muntlig drill, ćwiczenia; w opisie liczba slajdów/pytań/zadań i czas).
-Wgranie: `create_file`, `parentId` = Lekcja M, `title` dokładnie „Lekcja M: materiały na lekcję”, `textContent` = HTML, `contentMimeType` `text/html`.
+Wgranie: `create_file`, `parentId` = `Folder lektorki / Lekcja M`, `title` dokładnie „Lekcja M: materiały na lekcję”, `textContent` = HTML, `contentMimeType` `text/html`.
 Ten dokument tworzysz NA KOŃCU kroku, bo jego istnienie oznacza „zrobione”.
 
 ## 5. Krok PO lekcji N
 
-1. Zrzuty ekranu: pliki graficzne w `Lekcja N` (`mimeType contains 'image/'`). Każdy przeczytaj (`read_file_content`), zwróć uwagę na dopiski lektorki.
+1. Zrzuty ekranu: pliki graficzne w `Folder kursanta / Lekcja N` oraz w `Folder lektorki / Lekcja N`, jeśli tam są (`mimeType contains 'image/'`). Każdy przeczytaj (`read_file_content`), zwróć uwagę na dopiski lektorki.
    Gdy ZRZUTY EKRANU WGRANE = TAK, a plików nie ma, zbuduj słownictwo z notatek i zapisz to w raporcie.
 2. Słownictwo: tabela Norsk / Polski / Przykład (przykład z profilu kursanta), 8–20 pozycji, tylko słowa, które były na lekcji.
 3. Zadanie domowe (gdy ZADANIE DOMOWE = TAK): wg INSTRUKCJI. Część do zrobienia online publikujesz jako osobną stronę ćwiczeń
    (lub linkujesz istniejące ćwiczenia z lekcji, gdy instrukcja tak mówi). Część pisemną/ustną opisz jako krok listy. Czas wg CZAS ZADANIA DOMOWEGO.
-4. Dokument „Lekcja N: słownictwo i zadania” w `Lekcja N`: sekcja `table` (słownictwo) + sekcja `steps` (zadanie domowe z linkami). Tworzysz go na końcu.
+4. Dokument „Lekcja N: słownictwo i zadania” w `Folder kursanta / Lekcja N`: sekcja `table` (słownictwo) + sekcja `steps` (zadanie domowe z linkami). Tworzysz go na końcu.
 
 ## 6. Raport
 
