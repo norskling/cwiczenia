@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="pl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A1 Lekcja 14: denne, dette, disse | Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · A1 · Lekcja 14</span>
+  <h1>Zaimki wskazujące: <span>denne kjolen</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Ten/ta: denne (en, ei), dette (et), disse (liczba mnoga). Tamten/tamta: den, det, de. Po zaimku wskazującym rzeczownik zawsze stoi w formie określonej: denne kjolen, dette skjerfet, disse skoene. Przymiotnik też ma wtedy -e: denne røde kjolen.</p>
+  <div class="meta"><span>Gramatyka</span><span>ok. 10-15 min</span><span>20 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 20</b></div>
+<h2 class="part">Część A: Denne, dette czy disse?</h2>
+<p class="partintro">Wybierz zaimek „ten, ta, to, te”.</p>
+<section class="task" data-id="1">
+<h2>1. ___ kjolen er for liten.</h2>
+<div class="opts" data-q="1" data-correct="Denne" data-ok="Dobrze. En kjole → denne kjolen.">
+<button class="opt">Denne</button>
+<button class="opt">Dette</button>
+<button class="opt">Disse</button>
+</div><div class="fb" id="f1"></div>
+</section>
+<section class="task" data-id="2">
+<h2>2. ___ skjerfet er av ull.</h2>
+<div class="opts" data-q="2" data-correct="Dette" data-ok="Dobrze. Et skjerf → dette skjerfet.">
+<button class="opt">Denne</button>
+<button class="opt">Dette</button>
+<button class="opt">Disse</button>
+</div><div class="fb" id="f2"></div>
+</section>
+<section class="task" data-id="3">
+<h2>3. ___ skoene er for store.</h2>
+<div class="opts" data-q="3" data-correct="Disse" data-ok="Dobrze. Liczba mnoga → disse.">
+<button class="opt">Denne</button>
+<button class="opt">Dette</button>
+<button class="opt">Disse</button>
+</div><div class="fb" id="f3"></div>
+</section>
+<section class="task" data-id="4">
+<h2>4. Jeg vil kjøpe ___ lua.</h2>
+<div class="opts" data-q="4" data-correct="denne" data-ok="Dobrze. Ei lue → denne lua.">
+<button class="opt">denne</button>
+<button class="opt">dette</button>
+<button class="opt">disse</button>
+</div><div class="fb" id="f4"></div>
+</section>
+<section class="task" data-id="5">
+<h2>5. Hvem eier ___ huset?</h2>
+<div class="opts" data-q="5" data-correct="dette" data-ok="Dobrze.">
+<button class="opt">denne</button>
+<button class="opt">dette</button>
+<button class="opt">disse</button>
+</div><div class="fb" id="f5"></div>
+</section>
+<section class="task" data-id="6">
+<h2>6. Jeg liker ikke ___ buksene.</h2>
+<div class="opts" data-q="6" data-correct="disse" data-ok="Dobrze.">
+<button class="opt">denne</button>
+<button class="opt">dette</button>
+<button class="opt">disse</button>
+</div><div class="fb" id="f6"></div>
+</section>
+<h2 class="part">Część B: Den, det czy de?</h2>
+<p class="partintro">Teraz „tamten, tamta, tamto, tamte”, czyli coś dalej, np. der borte.</p>
+<section class="task" data-id="7">
+<h2>7. Se på ___ jakka der borte!</h2>
+<div class="opts" data-q="7" data-correct="den" data-ok="Dobrze.">
+<button class="opt">den</button>
+<button class="opt">det</button>
+<button class="opt">de</button>
+</div><div class="fb" id="f7"></div>
+</section>
+<section class="task" data-id="8">
+<h2>8. Vi vil kjøpe ___ støvlene der borte.</h2>
+<div class="opts" data-q="8" data-correct="de" data-ok="Dobrze.">
+<button class="opt">den</button>
+<button class="opt">det</button>
+<button class="opt">de</button>
+</div><div class="fb" id="f8"></div>
+</section>
+<section class="task" data-id="9">
+<h2>9. Kjolen henger i ___ skapet der.</h2>
+<div class="opts" data-q="9" data-correct="det" data-ok="Dobrze. Et skap → det skapet. Tak jak w tekście.">
+<button class="opt">den</button>
+<button class="opt">det</button>
+<button class="opt">de</button>
+</div><div class="fb" id="f9"></div>
+</section>
+<section class="task" data-id="10">
+<h2>10. ___ dagen skal jeg treffe ham.</h2>
+<div class="opts" data-q="10" data-correct="Den" data-ok="Dobrze.">
+<button class="opt">Den</button>
+<button class="opt">Det</button>
+<button class="opt">De</button>
+</div><div class="fb" id="f10"></div>
+</section>
+<h2 class="part">Część C: Forma rzeczownika</h2>
+<p class="partintro">Po denne/dette/disse i den/det/de rzeczownik ma formę określoną. Który wariant jest poprawny?</p>
+<section class="task" data-id="11">
+<h2>11. ten sweter</h2>
+<div class="opts" data-q="11" data-correct="denne genseren" data-ok="Dobrze.">
+<button class="opt">denne genser</button>
+<button class="opt">denne genseren</button>
+<button class="opt">denne en genser</button>
+</div><div class="fb" id="f11"></div>
+</section>
+<section class="task" data-id="12">
+<h2>12. ten czerwony szalik</h2>
+<div class="opts" data-q="12" data-correct="dette røde skjerfet" data-ok="Dobrze. Po zaimku wskazującym przymiotnik ma -e.">
+<button class="opt">dette rødt skjerf</button>
+<button class="opt">dette røde skjerfet</button>
+<button class="opt">dette rødt skjerfet</button>
+</div><div class="fb" id="f12"></div>
+</section>
+<section class="task" data-id="13">
+<h2>13. te drogie buty</h2>
+<div class="opts" data-q="13" data-correct="disse dyre skoene" data-ok="Dobrze.">
+<button class="opt">disse dyre skoene</button>
+<button class="opt">disse dyr skoene</button>
+<button class="opt">disse dyre sko</button>
+</div><div class="fb" id="f13"></div>
+</section>
+<h2 class="part">Część D: Ułóż zdania</h2>
+<p class="partintro">Kliknij słowa w poprawnej kolejności. Pamiętaj: czasownik na 2. miejscu.</p>
+<section class="task" data-id="14">
+<h2>14. Ułóż zdanie</h2>
+<div class="ord" id="o14"><div class="line" id="l14" aria-label="Twoje zdanie"></div><div class="tiles" id="p14">
+<button class="tile" onclick="pick(14,this)">for</button>
+<button class="tile" onclick="pick(14,this)">Denne</button>
+<button class="tile" onclick="pick(14,this)">liten</button>
+<button class="tile" onclick="pick(14,this)">er</button>
+<button class="tile" onclick="pick(14,this)">kjolen</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(14,[&quot;Denne kjolen er for liten&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(14)">Od nowa</button><button class="ghost" onclick="showSol(14)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f14"></div><div class="sol" id="s14">Wzorcowa odpowiedź: <b>Denne kjolen er for liten</b></div>
+</section>
+<section class="task" data-id="15">
+<h2>15. Ułóż zdanie</h2>
+<div class="ord" id="o15"><div class="line" id="l15" aria-label="Twoje zdanie"></div><div class="tiles" id="p15">
+<button class="tile" onclick="pick(15,this)">prøve</button>
+<button class="tile" onclick="pick(15,this)">jeg</button>
+<button class="tile" onclick="pick(15,this)">denne</button>
+<button class="tile" onclick="pick(15,this)">jakka</button>
+<button class="tile" onclick="pick(15,this)">Kan</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(15,[&quot;Kan jeg prøve denne jakka&quot;],&quot;Dobrze. Pytanie zaczyna się od czasownika.&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(15)">Od nowa</button><button class="ghost" onclick="showSol(15)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f15"></div><div class="sol" id="s15">Wzorcowa odpowiedź: <b>Kan jeg prøve denne jakka</b></div>
+</section>
+<section class="task" data-id="16">
+<h2>16. Ułóż zdanie</h2>
+<div class="ord" id="o16"><div class="line" id="l16" aria-label="Twoje zdanie"></div><div class="tiles" id="p16">
+<button class="tile" onclick="pick(16,this)">vil</button>
+<button class="tile" onclick="pick(16,this)">Jeg</button>
+<button class="tile" onclick="pick(16,this)">skoene</button>
+<button class="tile" onclick="pick(16,this)">kjøpe</button>
+<button class="tile" onclick="pick(16,this)">disse</button>
+<button class="tile" onclick="pick(16,this)">ikke</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(16,[&quot;Jeg vil ikke kjøpe disse skoene&quot;],&quot;Dobrze. Ikke stoi po pierwszym czasowniku (vil).&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(16)">Od nowa</button><button class="ghost" onclick="showSol(16)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f16"></div><div class="sol" id="s16">Wzorcowa odpowiedź: <b>Jeg vil ikke kjøpe disse skoene</b></div>
+</section>
+<section class="task" data-id="17">
+<h2>17. Ułóż zdanie</h2>
+<div class="ord" id="o17"><div class="line" id="l17" aria-label="Twoje zdanie"></div><div class="tiles" id="p17">
+<button class="tile" onclick="pick(17,this)">dette</button>
+<button class="tile" onclick="pick(17,this)">I</button>
+<button class="tile" onclick="pick(17,this)">skjerfet</button>
+<button class="tile" onclick="pick(17,this)">vi</button>
+<button class="tile" onclick="pick(17,this)">dag</button>
+<button class="tile" onclick="pick(17,this)">kjøpe</button>
+<button class="tile" onclick="pick(17,this)">skal</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(17,[&quot;I dag skal vi kjøpe dette skjerfet&quot;],&quot;Dobrze. I dag na początku, potem czasownik, potem podmiot.&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(17)">Od nowa</button><button class="ghost" onclick="showSol(17)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f17"></div><div class="sol" id="s17">Wzorcowa odpowiedź: <b>I dag skal vi kjøpe dette skjerfet</b></div>
+</section>
+<section class="task" data-id="18">
+<h2>18. Ułóż zdanie</h2>
+<div class="ord" id="o18"><div class="line" id="l18" aria-label="Twoje zdanie"></div><div class="tiles" id="p18">
+<button class="tile" onclick="pick(18,this)">størrelse</button>
+<button class="tile" onclick="pick(18,this)">bruker</button>
+<button class="tile" onclick="pick(18,this)">du</button>
+<button class="tile" onclick="pick(18,this)">Hvilken</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(18,[&quot;Hvilken størrelse bruker du&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(18)">Od nowa</button><button class="ghost" onclick="showSol(18)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f18"></div><div class="sol" id="s18">Wzorcowa odpowiedź: <b>Hvilken størrelse bruker du</b></div>
+</section>
+<section class="task" data-id="19">
+<h2>19. Ułóż zdanie</h2>
+<div class="ord" id="o19"><div class="line" id="l19" aria-label="Twoje zdanie"></div><div class="tiles" id="p19">
+<button class="tile" onclick="pick(19,this)">borte</button>
+<button class="tile" onclick="pick(19,this)">jakka</button>
+<button class="tile" onclick="pick(19,this)">veldig</button>
+<button class="tile" onclick="pick(19,this)">der</button>
+<button class="tile" onclick="pick(19,this)">er</button>
+<button class="tile" onclick="pick(19,this)">fin</button>
+<button class="tile" onclick="pick(19,this)">Den</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(19,[&quot;Den jakka der borte er veldig fin&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(19)">Od nowa</button><button class="ghost" onclick="showSol(19)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f19"></div><div class="sol" id="s19">Wzorcowa odpowiedź: <b>Den jakka der borte er veldig fin</b></div>
+</section>
+<section class="task" data-id="20">
+<h2>20. Ułóż zdanie</h2>
+<div class="ord" id="o20"><div class="line" id="l20" aria-label="Twoje zdanie"></div><div class="tiles" id="p20">
+<button class="tile" onclick="pick(20,this)">kjolen</button>
+<button class="tile" onclick="pick(20,this)">Har</button>
+<button class="tile" onclick="pick(20,this)">42</button>
+<button class="tile" onclick="pick(20,this)">dere</button>
+<button class="tile" onclick="pick(20,this)">i</button>
+<button class="tile" onclick="pick(20,this)">denne</button>
+<button class="tile" onclick="pick(20,this)">størrelse</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(20,[&quot;Har dere denne kjolen i størrelse 42&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(20)">Od nowa</button><button class="ghost" onclick="showSol(20)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f20"></div><div class="sol" id="s20">Wzorcowa odpowiedź: <b>Har dere denne kjolen i størrelse 42</b></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 20 / 20</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=20;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
+</script>
+
+</body>
+</html>

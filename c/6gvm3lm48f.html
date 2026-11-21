@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="pl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A1 Lekcja 20: czasowniki nieregularne | Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · A1 · Lekcja 20</span>
+  <h1>Wpisz czasownik: <span>gikk, fikk, tok</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Powtórka czasowników nieregularnych w czasie przeszłym: var, gikk, fikk, gjorde, tok, så, sa, satt, drakk, kom, ble, dro, ga, la, hjalp, skrev, sov, sto, traff, visste, oraz skulle, kunne, ville, måtte, burde.</p>
+  <div class="meta"><span>Gramatyka</span><span>ok. 10-15 min</span><span>20 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 20</b></div>
+<h2 class="part">Część A: Wpisz formę</h2>
+<p class="partintro">W nawiasie jest czas teraźniejszy. Wpisz czas przeszły.</p>
+<section class="task" data-id="1">
+<h2>1. Wpisz czasownik</h2>
+<p class="hint">er</p>
+<div class="inline sent">Det <input type="text" id="t1" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> en fin dag.</div>
+<div class="row"><button class="btn" onclick="checkText(1,[&quot;var&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(1)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f1"></div><div class="sol" id="s1">Wzorcowa odpowiedź: <b>var</b></div>
+</section>
+<section class="task" data-id="2">
+<h2>2. Wpisz czasownik</h2>
+<p class="hint">står</p>
+<div class="inline sent">Jeg <input type="text" id="t2" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> opp tidlig.</div>
+<div class="row"><button class="btn" onclick="checkText(2,[&quot;sto&quot;, &quot;stod&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(2)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f2"></div><div class="sol" id="s2">Wzorcowa odpowiedź: <b>sto</b></div>
+</section>
+<section class="task" data-id="3">
+<h2>3. Wpisz czasownik</h2>
+<p class="hint">spiser</p>
+<div class="inline sent">Jeg <input type="text" id="t3" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> frokost.</div>
+<div class="row"><button class="btn" onclick="checkText(3,[&quot;spiste&quot;],&quot;Dobrze. Ten był regularny!&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(3)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f3"></div><div class="sol" id="s3">Wzorcowa odpowiedź: <b>spiste</b></div>
+</section>
+<section class="task" data-id="4">
+<h2>4. Wpisz czasownik</h2>
+<p class="hint">går</p>
+<div class="inline sent">Deretter <input type="text" id="t4" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> jeg til skolen.</div>
+<div class="row"><button class="btn" onclick="checkText(4,[&quot;gikk&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(4)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f4"></div><div class="sol" id="s4">Wzorcowa odpowiedź: <b>gikk</b></div>
+</section>
+<section class="task" data-id="5">
+<h2>5. Wpisz czasownik</h2>
+<p class="hint">ser</p>
+<div class="inline sent">Jeg <input type="text" id="t5" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> en vakker blomst i parken.</div>
+<div class="row"><button class="btn" onclick="checkText(5,[&quot;så&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(5)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f5"></div><div class="sol" id="s5">Wzorcowa odpowiedź: <b>så</b></div>
+</section>
+<section class="task" data-id="6">
+<h2>6. Wpisz czasownik</h2>
+<p class="hint">får</p>
+<div class="inline sent">Hun <input type="text" id="t6" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> en ny jobb.</div>
+<div class="row"><button class="btn" onclick="checkText(6,[&quot;fikk&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(6)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f6"></div><div class="sol" id="s6">Wzorcowa odpowiedź: <b>fikk</b></div>
+</section>
+<section class="task" data-id="7">
+<h2>7. Wpisz czasownik</h2>
+<p class="hint">gjør</p>
+<div class="inline sent">Hva <input type="text" id="t7" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> du i går?</div>
+<div class="row"><button class="btn" onclick="checkText(7,[&quot;gjorde&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(7)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f7"></div><div class="sol" id="s7">Wzorcowa odpowiedź: <b>gjorde</b></div>
+</section>
+<section class="task" data-id="8">
+<h2>8. Wpisz czasownik</h2>
+<p class="hint">hjelper</p>
+<div class="inline sent">Jeg <input type="text" id="t8" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> dem å flytte.</div>
+<div class="row"><button class="btn" onclick="checkText(8,[&quot;hjalp&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(8)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f8"></div><div class="sol" id="s8">Wzorcowa odpowiedź: <b>hjalp</b></div>
+</section>
+<section class="task" data-id="9">
+<h2>9. Wpisz czasownik</h2>
+<p class="hint">treffer</p>
+<div class="inline sent">Vi <input type="text" id="t9" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> vennene våre i byen.</div>
+<div class="row"><button class="btn" onclick="checkText(9,[&quot;traff&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(9)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f9"></div><div class="sol" id="s9">Wzorcowa odpowiedź: <b>traff</b></div>
+</section>
+<section class="task" data-id="10">
+<h2>10. Wpisz czasownik</h2>
+<p class="hint">legger</p>
+<div class="inline sent">Han <input type="text" id="t10" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> boka på bordet.</div>
+<div class="row"><button class="btn" onclick="checkText(10,[&quot;la&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(10)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f10"></div><div class="sol" id="s10">Wzorcowa odpowiedź: <b>la</b></div>
+</section>
+<section class="task" data-id="11">
+<h2>11. Wpisz czasownik</h2>
+<p class="hint">skriver</p>
+<div class="inline sent">Hun <input type="text" id="t11" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> en e-post til sjefen.</div>
+<div class="row"><button class="btn" onclick="checkText(11,[&quot;skrev&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(11)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f11"></div><div class="sol" id="s11">Wzorcowa odpowiedź: <b>skrev</b></div>
+</section>
+<section class="task" data-id="12">
+<h2>12. Wpisz czasownik</h2>
+<p class="hint">sover</p>
+<div class="inline sent">Barna <input type="text" id="t12" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> godt i natt.</div>
+<div class="row"><button class="btn" onclick="checkText(12,[&quot;sov&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(12)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f12"></div><div class="sol" id="s12">Wzorcowa odpowiedź: <b>sov</b></div>
+</section>
+<section class="task" data-id="13">
+<h2>13. Wpisz czasownik</h2>
+<p class="hint">drar</p>
+<div class="inline sent">Vi <input type="text" id="t13" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> på hytta i helga.</div>
+<div class="row"><button class="btn" onclick="checkText(13,[&quot;dro&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(13)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f13"></div><div class="sol" id="s13">Wzorcowa odpowiedź: <b>dro</b></div>
+</section>
+<section class="task" data-id="14">
+<h2>14. Wpisz czasownik</h2>
+<p class="hint">gir</p>
+<div class="inline sent">Jens <input type="text" id="t14" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> Tonje en kjole.</div>
+<div class="row"><button class="btn" onclick="checkText(14,[&quot;ga&quot;, &quot;gav&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(14)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f14"></div><div class="sol" id="s14">Wzorcowa odpowiedź: <b>ga</b></div>
+</section>
+<section class="task" data-id="15">
+<h2>15. Wpisz czasownik</h2>
+<p class="hint">kommer</p>
+<div class="inline sent">Hun <input type="text" id="t15" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> til Norge i 2008.</div>
+<div class="row"><button class="btn" onclick="checkText(15,[&quot;kom&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(15)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f15"></div><div class="sol" id="s15">Wzorcowa odpowiedź: <b>kom</b></div>
+</section>
+<section class="task" data-id="16">
+<h2>16. Wpisz czasownik</h2>
+<p class="hint">blir</p>
+<div class="inline sent">Jeg <input type="text" id="t16" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> så glad!</div>
+<div class="row"><button class="btn" onclick="checkText(16,[&quot;ble&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(16)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f16"></div><div class="sol" id="s16">Wzorcowa odpowiedź: <b>ble</b></div>
+</section>
+<section class="task" data-id="17">
+<h2>17. Wpisz czasownik</h2>
+<p class="hint">vil</p>
+<div class="inline sent">Han <input type="text" id="t17" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> ikke hjelpe meg.</div>
+<div class="row"><button class="btn" onclick="checkText(17,[&quot;ville&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(17)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f17"></div><div class="sol" id="s17">Wzorcowa odpowiedź: <b>ville</b></div>
+</section>
+<section class="task" data-id="18">
+<h2>18. Wpisz czasownik</h2>
+<p class="hint">skal</p>
+<div class="inline sent">Vi <input type="text" id="t18" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> reise, men bilen var ødelagt.</div>
+<div class="row"><button class="btn" onclick="checkText(18,[&quot;skulle&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(18)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f18"></div><div class="sol" id="s18">Wzorcowa odpowiedź: <b>skulle</b></div>
+</section>
+<section class="task" data-id="19">
+<h2>19. Wpisz czasownik</h2>
+<p class="hint">sitter</p>
+<div class="inline sent">Vi <input type="text" id="t19" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i stua og pratet.</div>
+<div class="row"><button class="btn" onclick="checkText(19,[&quot;satt&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(19)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f19"></div><div class="sol" id="s19">Wzorcowa odpowiedź: <b>satt</b></div>
+</section>
+<section class="task" data-id="20">
+<h2>20. Wpisz czasownik</h2>
+<p class="hint">vet</p>
+<div class="inline sent">Jeg <input type="text" id="t20" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> ikke at du var syk.</div>
+<div class="row"><button class="btn" onclick="checkText(20,[&quot;visste&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(20)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f20"></div><div class="sol" id="s20">Wzorcowa odpowiedź: <b>visste</b></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 20 / 20</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=20;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
+</script>
+
+</body>
+</html>

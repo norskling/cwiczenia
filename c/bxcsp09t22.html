@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="pl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A1 Lekcja 13: klær og farger | Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · A1 · Lekcja 13</span>
+  <h1>Klær og farger: <span>ei rød jakke</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Podsumowanie ubrań, kolorów i odmiany przymiotnika. Kolor zgadza się z rzeczownikiem: en rød genser, ei rød jakke, et rødt skjerf, røde sokker. Kolory zakończone na -e (oransje, rosa, lilla) się nie zmieniają. Blå i grå: et blått/grått, w liczbie mnogiej blå/blåe, grå/gråe.</p>
+  <div class="meta"><span>Słownictwo i gramatyka</span><span>ok. 10-15 min</span><span>22 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 22</b></div>
+<h2 class="part">Część A: Ubrania</h2>
+<p class="partintro">Połącz słowo z polskim znaczeniem.</p>
+<section class="task" data-id="1">
+<h2>1. Połącz w pary</h2>
+<p class="hint">Ubrania</p>
+<div class="match">
+<span class="w">ei jakke</span><select id="m1_0"><option value="">wybierz…</option><option>kurtka</option><option>spodnie</option><option>spódnica</option><option>sukienka</option><option>sweter</option></select>
+<span class="w">en genser</span><select id="m1_1"><option value="">wybierz…</option><option>kurtka</option><option>spodnie</option><option>spódnica</option><option>sukienka</option><option>sweter</option></select>
+<span class="w">et skjørt</span><select id="m1_2"><option value="">wybierz…</option><option>kurtka</option><option>spodnie</option><option>spódnica</option><option>sukienka</option><option>sweter</option></select>
+<span class="w">en kjole</span><select id="m1_3"><option value="">wybierz…</option><option>kurtka</option><option>spodnie</option><option>spódnica</option><option>sukienka</option><option>sweter</option></select>
+<span class="w">bukser</span><select id="m1_4"><option value="">wybierz…</option><option>kurtka</option><option>spodnie</option><option>spódnica</option><option>sukienka</option><option>sweter</option></select>
+</div>
+<button class="btn" onclick="checkMatch(1,{&quot;m1_0&quot;: &quot;kurtka&quot;, &quot;m1_1&quot;: &quot;sweter&quot;, &quot;m1_2&quot;: &quot;spódnica&quot;, &quot;m1_3&quot;: &quot;sukienka&quot;, &quot;m1_4&quot;: &quot;spodnie&quot;})">Sprawdź</button><div class="fb" id="f1"></div>
+</section>
+<section class="task" data-id="2">
+<h2>2. Połącz w pary</h2>
+<p class="hint">Dodatki</p>
+<div class="match">
+<span class="w">ei lue</span><select id="m2_0"><option value="">wybierz…</option><option>czapka</option><option>kozaki</option><option>rękawiczki z jednym palcem</option><option>szalik</option><option>torebka</option></select>
+<span class="w">et skjerf</span><select id="m2_1"><option value="">wybierz…</option><option>czapka</option><option>kozaki</option><option>rękawiczki z jednym palcem</option><option>szalik</option><option>torebka</option></select>
+<span class="w">votter</span><select id="m2_2"><option value="">wybierz…</option><option>czapka</option><option>kozaki</option><option>rękawiczki z jednym palcem</option><option>szalik</option><option>torebka</option></select>
+<span class="w">støvler</span><select id="m2_3"><option value="">wybierz…</option><option>czapka</option><option>kozaki</option><option>rękawiczki z jednym palcem</option><option>szalik</option><option>torebka</option></select>
+<span class="w">ei veske</span><select id="m2_4"><option value="">wybierz…</option><option>czapka</option><option>kozaki</option><option>rękawiczki z jednym palcem</option><option>szalik</option><option>torebka</option></select>
+</div>
+<button class="btn" onclick="checkMatch(2,{&quot;m2_0&quot;: &quot;czapka&quot;, &quot;m2_1&quot;: &quot;szalik&quot;, &quot;m2_2&quot;: &quot;rękawiczki z jednym palcem&quot;, &quot;m2_3&quot;: &quot;kozaki&quot;, &quot;m2_4&quot;: &quot;torebka&quot;})">Sprawdź</button><div class="fb" id="f2"></div>
+</section>
+<section class="task" data-id="3">
+<h2>3. Połącz w pary</h2>
+<p class="hint">Kolory i wzory</p>
+<div class="match">
+<span class="w">gul</span><select id="m3_0"><option value="">wybierz…</option><option>czarny</option><option>w kropki</option><option>w paski</option><option>zielony</option><option>żółty</option></select>
+<span class="w">grønn</span><select id="m3_1"><option value="">wybierz…</option><option>czarny</option><option>w kropki</option><option>w paski</option><option>zielony</option><option>żółty</option></select>
+<span class="w">svart</span><select id="m3_2"><option value="">wybierz…</option><option>czarny</option><option>w kropki</option><option>w paski</option><option>zielony</option><option>żółty</option></select>
+<span class="w">stripete</span><select id="m3_3"><option value="">wybierz…</option><option>czarny</option><option>w kropki</option><option>w paski</option><option>zielony</option><option>żółty</option></select>
+<span class="w">prikkete</span><select id="m3_4"><option value="">wybierz…</option><option>czarny</option><option>w kropki</option><option>w paski</option><option>zielony</option><option>żółty</option></select>
+</div>
+<button class="btn" onclick="checkMatch(3,{&quot;m3_0&quot;: &quot;żółty&quot;, &quot;m3_1&quot;: &quot;zielony&quot;, &quot;m3_2&quot;: &quot;czarny&quot;, &quot;m3_3&quot;: &quot;w paski&quot;, &quot;m3_4&quot;: &quot;w kropki&quot;})">Sprawdź</button><div class="fb" id="f3"></div>
+</section>
+<h2 class="part">Część B: Jaka forma koloru?</h2>
+<p class="partintro">Patrz na rodzaj rzeczownika: en/ei, et czy liczba mnoga.</p>
+<section class="task" data-id="4">
+<h2>4. et ___ skjerf (rød)</h2>
+<div class="opts" data-q="4" data-correct="rødt" data-ok="Dobrze. Et → -t: et rødt skjerf.">
+<button class="opt">rød</button>
+<button class="opt">rødt</button>
+<button class="opt">røde</button>
+</div><div class="fb" id="f4"></div>
+</section>
+<section class="task" data-id="5">
+<h2>5. ei ___ lue (gul)</h2>
+<div class="opts" data-q="5" data-correct="gul" data-ok="Dobrze. Ei → bez końcówki.">
+<button class="opt">gul</button>
+<button class="opt">gult</button>
+<button class="opt">gule</button>
+</div><div class="fb" id="f5"></div>
+</section>
+<section class="task" data-id="6">
+<h2>6. ___ sokker (hvit)</h2>
+<div class="opts" data-q="6" data-correct="hvite" data-ok="Dobrze. Liczba mnoga → -e.">
+<button class="opt">hvit</button>
+<button class="opt">hvitt</button>
+<button class="opt">hvite</button>
+</div><div class="fb" id="f6"></div>
+</section>
+<section class="task" data-id="7">
+<h2>7. et ___ skjørt (grønn)</h2>
+<div class="opts" data-q="7" data-correct="grønt" data-ok="Dobrze. Grønn traci jedno n przed -t: grønt.">
+<button class="opt">grønn</button>
+<button class="opt">grønt</button>
+<button class="opt">grønnt</button>
+</div><div class="fb" id="f7"></div>
+</section>
+<section class="task" data-id="8">
+<h2>8. en ___ genser (blå)</h2>
+<div class="opts" data-q="8" data-correct="blå" data-ok="Dobrze.">
+<button class="opt">blå</button>
+<button class="opt">blått</button>
+<button class="opt">blåe</button>
+</div><div class="fb" id="f8"></div>
+</section>
+<section class="task" data-id="9">
+<h2>9. et ___ belte (blå)</h2>
+<div class="opts" data-q="9" data-correct="blått" data-ok="Dobrze. Jednosylabowe na samogłoskę dostają -tt: blått, grått, nytt.">
+<button class="opt">blå</button>
+<button class="opt">blåt</button>
+<button class="opt">blått</button>
+</div><div class="fb" id="f9"></div>
+</section>
+<section class="task" data-id="10">
+<h2>10. et ___ skjerf (svart)</h2>
+<div class="opts" data-q="10" data-correct="svart" data-ok="Dobrze. Svart kończy się na -t, więc się nie zmienia.">
+<button class="opt">svart</button>
+<button class="opt">svartt</button>
+<button class="opt">svarte</button>
+</div><div class="fb" id="f10"></div>
+</section>
+<section class="task" data-id="11">
+<h2>11. ___ bukser (oransje)</h2>
+<div class="opts" data-q="11" data-correct="oransje" data-ok="Dobrze. Oransje kończy się na -e i się nie odmienia.">
+<button class="opt">oransje</button>
+<button class="opt">oransjer</button>
+<button class="opt">oransjet</button>
+</div><div class="fb" id="f11"></div>
+</section>
+<section class="task" data-id="12">
+<h2>12. en ___ kjole (rosa)</h2>
+<div class="opts" data-q="12" data-correct="rosa" data-ok="Dobrze. Rosa się nie odmienia. Pamiętasz rosa jakke Karoline?">
+<button class="opt">rosa</button>
+<button class="opt">rosat</button>
+<button class="opt">rose</button>
+</div><div class="fb" id="f12"></div>
+</section>
+<h2 class="part">Część C: Opisz ubranie</h2>
+<p class="partintro">Wpisz kolor w odpowiedniej formie.</p>
+<section class="task" data-id="13">
+<h2>13. Wpisz kolor</h2>
+<p class="hint">brun</p>
+<div class="inline sent">Jeg har et <input type="text" id="t13" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> belte.</div>
+<div class="row"><button class="btn" onclick="checkText(13,[&quot;brunt&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(13)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f13"></div><div class="sol" id="s13">Wzorcowa odpowiedź: <b>brunt</b></div>
+</section>
+<section class="task" data-id="14">
+<h2>14. Wpisz kolor</h2>
+<p class="hint">svart</p>
+<div class="inline sent">Hun kjøper <input type="text" id="t14" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> støvler.</div>
+<div class="row"><button class="btn" onclick="checkText(14,[&quot;svarte&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(14)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f14"></div><div class="sol" id="s14">Wzorcowa odpowiedź: <b>svarte</b></div>
+</section>
+<section class="task" data-id="15">
+<h2>15. Wpisz kolor</h2>
+<p class="hint">grønn</p>
+<div class="inline sent">Egil trenger ei <input type="text" id="t15" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> lue.</div>
+<div class="row"><button class="btn" onclick="checkText(15,[&quot;grønn&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(15)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f15"></div><div class="sol" id="s15">Wzorcowa odpowiedź: <b>grønn</b></div>
+</section>
+<section class="task" data-id="16">
+<h2>16. Wpisz kolor</h2>
+<p class="hint">hvit</p>
+<div class="inline sent">Jens har på seg ei <input type="text" id="t16" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> skjorte.</div>
+<div class="row"><button class="btn" onclick="checkText(16,[&quot;hvit&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(16)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f16"></div><div class="sol" id="s16">Wzorcowa odpowiedź: <b>hvit</b></div>
+</section>
+<section class="task" data-id="17">
+<h2>17. Wpisz kolor</h2>
+<p class="hint">grå</p>
+<div class="inline sent">Det er et <input type="text" id="t17" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> skjerf.</div>
+<div class="row"><button class="btn" onclick="checkText(17,[&quot;grått&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(17)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f17"></div><div class="sol" id="s17">Wzorcowa odpowiedź: <b>grått</b></div>
+</section>
+<section class="task" data-id="18">
+<h2>18. Wpisz kolor</h2>
+<p class="hint">gul</p>
+<div class="inline sent">Karoline vil ha <input type="text" id="t18" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> hansker.</div>
+<div class="row"><button class="btn" onclick="checkText(18,[&quot;gule&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(18)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f18"></div><div class="sol" id="s18">Wzorcowa odpowiedź: <b>gule</b></div>
+</section>
+<h2 class="part">Część D: Przetłumacz</h2>
+<p class="partintro">Napisz po norwesku.</p>
+<section class="task" data-id="19">
+<h2>19. Przetłumacz</h2>
+<p class="given">czerwona sukienka</p>
+<div class="rw"><span></span><input type="text" id="t19" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(19,[&quot;en rød kjole&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(19)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f19"></div><div class="sol" id="s19">Wzorcowa odpowiedź: <b>en rød kjole</b></div>
+</section>
+<section class="task" data-id="20">
+<h2>20. Przetłumacz</h2>
+<p class="given">nowy szalik</p>
+<div class="rw"><span></span><input type="text" id="t20" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(20,[&quot;et nytt skjerf&quot;],&quot;Dobrze. Ny → nytt.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(20)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f20"></div><div class="sol" id="s20">Wzorcowa odpowiedź: <b>et nytt skjerf</b></div>
+</section>
+<section class="task" data-id="21">
+<h2>21. Przetłumacz</h2>
+<p class="given">ciepłe skarpetki</p>
+<div class="rw"><span></span><input type="text" id="t21" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(21,[&quot;varme sokker&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(21)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f21"></div><div class="sol" id="s21">Wzorcowa odpowiedź: <b>varme sokker</b></div>
+</section>
+<section class="task" data-id="22">
+<h2>22. Przetłumacz</h2>
+<p class="given">Kurtka jest zielona.</p>
+<div class="rw"><span></span><input type="text" id="t22" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(22,[&quot;jakka er grønn&quot;, &quot;jakken er grønn&quot;],&quot;Dobrze. Jakka er grønn (albo jakken).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(22)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f22"></div><div class="sol" id="s22">Wzorcowa odpowiedź: <b>Jakka er grønn.</b></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 22 / 22</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=22;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
+</script>
+
+</body>
+</html>
