@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="pl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B1 Lekcja 5: ord fra leksjon 4 | Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · B1 · Lekcja 5</span>
+  <h1>Ord fra leksjon 4: <span>samene og minoriteter</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Powtórka słownictwa z lekcji 4: rdzenne ludy, mniejszości narodowe i przyimki po czasownikach.</p>
+  <div class="meta"><span>Słownictwo</span><span>ok. 10-15 min</span><span>24 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 24</b></div>
+<h2 class="part">Część A: Co znaczy?</h2>
+<p class="partintro">Połącz norweskie słowo z polskim znaczeniem.</p>
+<section class="task" data-id="1">
+<h2>1. Połącz w pary</h2>
+<p class="hint">Ludzie i historia</p>
+<div class="match">
+<span class="w">urfolk</span><select id="m1_0"><option value="">wybierz…</option><option>grupa mniejszościowa</option><option>ludność rdzenna</option><option>prześladowanie</option><option>uciskany</option><option>uprzedzenia</option></select>
+<span class="w">en minoritetsgruppe</span><select id="m1_1"><option value="">wybierz…</option><option>grupa mniejszościowa</option><option>ludność rdzenna</option><option>prześladowanie</option><option>uciskany</option><option>uprzedzenia</option></select>
+<span class="w">forfølgelse</span><select id="m1_2"><option value="">wybierz…</option><option>grupa mniejszościowa</option><option>ludność rdzenna</option><option>prześladowanie</option><option>uciskany</option><option>uprzedzenia</option></select>
+<span class="w">undertrykt</span><select id="m1_3"><option value="">wybierz…</option><option>grupa mniejszościowa</option><option>ludność rdzenna</option><option>prześladowanie</option><option>uciskany</option><option>uprzedzenia</option></select>
+<span class="w">fordommer</span><select id="m1_4"><option value="">wybierz…</option><option>grupa mniejszościowa</option><option>ludność rdzenna</option><option>prześladowanie</option><option>uciskany</option><option>uprzedzenia</option></select>
+</div>
+<button class="btn" onclick="checkMatch(1,{&quot;m1_0&quot;: &quot;ludność rdzenna&quot;, &quot;m1_1&quot;: &quot;grupa mniejszościowa&quot;, &quot;m1_2&quot;: &quot;prześladowanie&quot;, &quot;m1_3&quot;: &quot;uciskany&quot;, &quot;m1_4&quot;: &quot;uprzedzenia&quot;})">Sprawdź</button><div class="fb" id="f1"></div>
+</section>
+<section class="task" data-id="2">
+<h2>2. Połącz w pary</h2>
+<p class="hint">Kultura</p>
+<div class="match">
+<span class="w">en klesdrakt</span><select id="m2_0"><option value="">wybierz…</option><option>hodowla reniferów</option><option>różnorodność</option><option>rękodzieło</option><option>strój</option><option>styl życia</option></select>
+<span class="w">håndverk</span><select id="m2_1"><option value="">wybierz…</option><option>hodowla reniferów</option><option>różnorodność</option><option>rękodzieło</option><option>strój</option><option>styl życia</option></select>
+<span class="w">et levesett</span><select id="m2_2"><option value="">wybierz…</option><option>hodowla reniferów</option><option>różnorodność</option><option>rękodzieło</option><option>strój</option><option>styl życia</option></select>
+<span class="w">reindrift</span><select id="m2_3"><option value="">wybierz…</option><option>hodowla reniferów</option><option>różnorodność</option><option>rękodzieło</option><option>strój</option><option>styl życia</option></select>
+<span class="w">mangfoldet</span><select id="m2_4"><option value="">wybierz…</option><option>hodowla reniferów</option><option>różnorodność</option><option>rękodzieło</option><option>strój</option><option>styl życia</option></select>
+</div>
+<button class="btn" onclick="checkMatch(2,{&quot;m2_0&quot;: &quot;strój&quot;, &quot;m2_1&quot;: &quot;rękodzieło&quot;, &quot;m2_2&quot;: &quot;styl życia&quot;, &quot;m2_3&quot;: &quot;hodowla reniferów&quot;, &quot;m2_4&quot;: &quot;różnorodność&quot;})">Sprawdź</button><div class="fb" id="f2"></div>
+</section>
+<section class="task" data-id="3">
+<h2>3. Połącz w pary</h2>
+<p class="hint">Czasowniki i inne</p>
+<div class="match">
+<span class="w">å bevare</span><select id="m3_0"><option value="">wybierz…</option><option>paść się</option><option>przyczyniać się</option><option>tysiące</option><option>uznanie</option><option>zachować</option></select>
+<span class="w">å bidra</span><select id="m3_1"><option value="">wybierz…</option><option>paść się</option><option>przyczyniać się</option><option>tysiące</option><option>uznanie</option><option>zachować</option></select>
+<span class="w">å beite</span><select id="m3_2"><option value="">wybierz…</option><option>paść się</option><option>przyczyniać się</option><option>tysiące</option><option>uznanie</option><option>zachować</option></select>
+<span class="w">tusenvis</span><select id="m3_3"><option value="">wybierz…</option><option>paść się</option><option>przyczyniać się</option><option>tysiące</option><option>uznanie</option><option>zachować</option></select>
+<span class="w">anerkjennelse</span><select id="m3_4"><option value="">wybierz…</option><option>paść się</option><option>przyczyniać się</option><option>tysiące</option><option>uznanie</option><option>zachować</option></select>
+</div>
+<button class="btn" onclick="checkMatch(3,{&quot;m3_0&quot;: &quot;zachować&quot;, &quot;m3_1&quot;: &quot;przyczyniać się&quot;, &quot;m3_2&quot;: &quot;paść się&quot;, &quot;m3_3&quot;: &quot;tysiące&quot;, &quot;m3_4&quot;: &quot;uznanie&quot;})">Sprawdź</button><div class="fb" id="f3"></div>
+</section>
+<h2 class="part">Część B: Uzupełnij zdania</h2>
+<p class="partintro">Wpisz brakujące słowo.</p>
+<section class="task" data-id="4">
+<h2>4. Wpisz słowo</h2>
+<p class="hint">ludność rdzenna</p>
+<div class="inline sent">Samene er Norges <input type="text" id="t4" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> .</div>
+<div class="row"><button class="btn" onclick="checkText(4,[&quot;urfolk&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(4)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f4"></div><div class="sol" id="s4">Wzorcowa odpowiedź: <b>urfolk</b></div>
+</section>
+<section class="task" data-id="5">
+<h2>5. Wpisz słowo</h2>
+<p class="hint">hodowla reniferów</p>
+<div class="inline sent">Mange samer lever av <input type="text" id="t5" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> .</div>
+<div class="row"><button class="btn" onclick="checkText(5,[&quot;reindrift&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(5)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f5"></div><div class="sol" id="s5">Wzorcowa odpowiedź: <b>reindrift</b></div>
+</section>
+<section class="task" data-id="6">
+<h2>6. Wpisz słowo</h2>
+<p class="hint">prześladowanie</p>
+<div class="inline sent">Romanifolket har opplevd <input type="text" id="t6" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> og fattigdom.</div>
+<div class="row"><button class="btn" onclick="checkText(6,[&quot;forfølgelse&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(6)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f6"></div><div class="sol" id="s6">Wzorcowa odpowiedź: <b>forfølgelse</b></div>
+</section>
+<section class="task" data-id="7">
+<h2>7. Wpisz słowo</h2>
+<p class="hint">zachować</p>
+<div class="inline sent">Det er viktig å <input type="text" id="t7" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> språket og kulturen.</div>
+<div class="row"><button class="btn" onclick="checkText(7,[&quot;bevare&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(7)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f7"></div><div class="sol" id="s7">Wzorcowa odpowiedź: <b>bevare</b></div>
+</section>
+<section class="task" data-id="8">
+<h2>8. Wpisz słowo</h2>
+<p class="hint">strój</p>
+<div class="inline sent">Samene har en egen <input type="text" id="t8" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> , kofte.</div>
+<div class="row"><button class="btn" onclick="checkText(8,[&quot;klesdrakt&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(8)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f8"></div><div class="sol" id="s8">Wzorcowa odpowiedź: <b>klesdrakt</b></div>
+</section>
+<section class="task" data-id="9">
+<h2>9. Wpisz słowo</h2>
+<p class="hint">uprzedzenia</p>
+<div class="inline sent">Vi må kjempe mot <input type="text" id="t9" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> .</div>
+<div class="row"><button class="btn" onclick="checkText(9,[&quot;fordommer&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(9)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f9"></div><div class="sol" id="s9">Wzorcowa odpowiedź: <b>fordommer</b></div>
+</section>
+<section class="task" data-id="10">
+<h2>10. Wpisz słowo</h2>
+<p class="hint">uznanie</p>
+<div class="inline sent">Samene har fått mer <input type="text" id="t10" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i dag.</div>
+<div class="row"><button class="btn" onclick="checkText(10,[&quot;anerkjennelse&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(10)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f10"></div><div class="sol" id="s10">Wzorcowa odpowiedź: <b>anerkjennelse</b></div>
+</section>
+<h2 class="part">Część C: Alle czy alt?</h2>
+<p class="partintro">Alle = wszyscy, wszystkie (liczba mnoga). Alt = wszystko.</p>
+<section class="task" data-id="11">
+<h2>11. Ikke ___ samene driver med reindrift.</h2>
+<div class="opts" data-q="11" data-correct="alle" data-ok="Dobrze.">
+<button class="opt">alle</button>
+<button class="opt">alt</button>
+</div><div class="fb" id="f11"></div>
+</section>
+<section class="task" data-id="12">
+<h2>12. Hun forteller ___ om kulturen sin.</h2>
+<div class="opts" data-q="12" data-correct="alt" data-ok="Dobrze.">
+<button class="opt">alle</button>
+<button class="opt">alt</button>
+</div><div class="fb" id="f12"></div>
+</section>
+<section class="task" data-id="13">
+<h2>13. ___ er velkomne på festen.</h2>
+<div class="opts" data-q="13" data-correct="Alle" data-ok="Dobrze.">
+<button class="opt">Alle</button>
+<button class="opt">Alt</button>
+</div><div class="fb" id="f13"></div>
+</section>
+<section class="task" data-id="14">
+<h2>14. Er ___ i orden?</h2>
+<div class="opts" data-q="14" data-correct="alt" data-ok="Dobrze.">
+<button class="opt">alle</button>
+<button class="opt">alt</button>
+</div><div class="fb" id="f14"></div>
+</section>
+<section class="task" data-id="15">
+<h2>15. Jeg har lest ___ bøkene om samene.</h2>
+<div class="opts" data-q="15" data-correct="alle" data-ok="Dobrze.">
+<button class="opt">alle</button>
+<button class="opt">alt</button>
+</div><div class="fb" id="f15"></div>
+</section>
+<h2 class="part">Część D: Jaki przyimek?</h2>
+<p class="partintro">Te czasowniki i rzeczowniki zawsze idą z tym samym przyimkiem.</p>
+<section class="task" data-id="16">
+<h2>16. Jeg abonnerer ___ en avis.</h2>
+<div class="opts" data-q="16" data-correct="på" data-ok="Dobrze.">
+<button class="opt">på</button>
+<button class="opt">for</button>
+<button class="opt">med</button>
+</div><div class="fb" id="f16"></div>
+</section>
+<section class="task" data-id="17">
+<h2>17. Han er avhengig ___ kaffe.</h2>
+<div class="opts" data-q="17" data-correct="av" data-ok="Dobrze.">
+<button class="opt">av</button>
+<button class="opt">på</button>
+<button class="opt">til</button>
+</div><div class="fb" id="f17"></div>
+</section>
+<section class="task" data-id="18">
+<h2>18. Vi har behov ___ hjelp.</h2>
+<div class="opts" data-q="18" data-correct="for" data-ok="Dobrze.">
+<button class="opt">for</button>
+<button class="opt">av</button>
+<button class="opt">med</button>
+</div><div class="fb" id="f18"></div>
+</section>
+<section class="task" data-id="19">
+<h2>19. Hun bestemte seg ___ å flytte til Tromsø.</h2>
+<div class="opts" data-q="19" data-correct="for" data-ok="Dobrze.">
+<button class="opt">for</button>
+<button class="opt">på</button>
+<button class="opt">til</button>
+</div><div class="fb" id="f19"></div>
+</section>
+<section class="task" data-id="20">
+<h2>20. Vil du bli med ___ turen?</h2>
+<div class="opts" data-q="20" data-correct="på" data-ok="Dobrze.">
+<button class="opt">på</button>
+<button class="opt">for</button>
+<button class="opt">av</button>
+</div><div class="fb" id="f20"></div>
+</section>
+<section class="task" data-id="21">
+<h2>21. Hva bruker du kniven ___ ?</h2>
+<div class="opts" data-q="21" data-correct="til" data-ok="Dobrze.">
+<button class="opt">til</button>
+<button class="opt">for</button>
+<button class="opt">med</button>
+</div><div class="fb" id="f21"></div>
+</section>
+<section class="task" data-id="22">
+<h2>22. Hva driver du ___ i fritiden?</h2>
+<div class="opts" data-q="22" data-correct="med" data-ok="Dobrze.">
+<button class="opt">med</button>
+<button class="opt">på</button>
+<button class="opt">av</button>
+</div><div class="fb" id="f22"></div>
+</section>
+<section class="task" data-id="23">
+<h2>23. Jeg er enig ___ deg.</h2>
+<div class="opts" data-q="23" data-correct="med" data-ok="Dobrze. Enig med kogoś, enig i czymś.">
+<button class="opt">med</button>
+<button class="opt">i</button>
+<button class="opt">på</button>
+</div><div class="fb" id="f23"></div>
+</section>
+<section class="task" data-id="24">
+<h2>24. Jeg er enig ___ det.</h2>
+<div class="opts" data-q="24" data-correct="i" data-ok="Dobrze. Enig i czymś.">
+<button class="opt">i</button>
+<button class="opt">med</button>
+<button class="opt">av</button>
+</div><div class="fb" id="f24"></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 24 / 24</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=24;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
+</script>
+
+</body>
+</html>

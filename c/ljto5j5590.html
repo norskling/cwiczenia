@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="pl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B1 Lekcja 6: ord fra leksjon 5 | Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · B1 · Lekcja 6</span>
+  <h1>Ord fra leksjon 5: <span>arbeidsmarkedet</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Powtórka z lekcji 5: rynek pracy, mange/mye, preteritum czy presens perfektum i krótkie odpowiedzi.</p>
+  <div class="meta"><span>Słownictwo i gramatyka</span><span>ok. 10-15 min</span><span>24 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 24</b></div>
+<h2 class="part">Część A: Co znaczy?</h2>
+<p class="partintro">Połącz norweskie słowo z polskim znaczeniem.</p>
+<section class="task" data-id="1">
+<h2>1. Połącz w pary</h2>
+<p class="hint">Rynek pracy 1</p>
+<div class="match">
+<span class="w">arbeidsmarkedet</span><select id="m1_0"><option value="">wybierz…</option><option>bezrobocie</option><option>rynek pracy</option><option>warunki pracy</option><option>wzrost płac</option><option>zatrudnienie</option></select>
+<span class="w">sysselsetting</span><select id="m1_1"><option value="">wybierz…</option><option>bezrobocie</option><option>rynek pracy</option><option>warunki pracy</option><option>wzrost płac</option><option>zatrudnienie</option></select>
+<span class="w">arbeidsledighet</span><select id="m1_2"><option value="">wybierz…</option><option>bezrobocie</option><option>rynek pracy</option><option>warunki pracy</option><option>wzrost płac</option><option>zatrudnienie</option></select>
+<span class="w">lønnsutvikling</span><select id="m1_3"><option value="">wybierz…</option><option>bezrobocie</option><option>rynek pracy</option><option>warunki pracy</option><option>wzrost płac</option><option>zatrudnienie</option></select>
+<span class="w">arbeidsvilkår</span><select id="m1_4"><option value="">wybierz…</option><option>bezrobocie</option><option>rynek pracy</option><option>warunki pracy</option><option>wzrost płac</option><option>zatrudnienie</option></select>
+</div>
+<button class="btn" onclick="checkMatch(1,{&quot;m1_0&quot;: &quot;rynek pracy&quot;, &quot;m1_1&quot;: &quot;zatrudnienie&quot;, &quot;m1_2&quot;: &quot;bezrobocie&quot;, &quot;m1_3&quot;: &quot;wzrost płac&quot;, &quot;m1_4&quot;: &quot;warunki pracy&quot;})">Sprawdź</button><div class="fb" id="f1"></div>
+</section>
+<section class="task" data-id="2">
+<h2>2. Połącz w pary</h2>
+<p class="hint">Rynek pracy 2</p>
+<div class="match">
+<span class="w">en fagforening</span><select id="m2_0"><option value="">wybierz…</option><option>organizacja pracodawców</option><option>strajk</option><option>układ zbiorowy</option><option>wydajność</option><option>związek zawodowy</option></select>
+<span class="w">en arbeidsgiverorganisasjon</span><select id="m2_1"><option value="">wybierz…</option><option>organizacja pracodawców</option><option>strajk</option><option>układ zbiorowy</option><option>wydajność</option><option>związek zawodowy</option></select>
+<span class="w">en tariffavtale</span><select id="m2_2"><option value="">wybierz…</option><option>organizacja pracodawców</option><option>strajk</option><option>układ zbiorowy</option><option>wydajność</option><option>związek zawodowy</option></select>
+<span class="w">en streik</span><select id="m2_3"><option value="">wybierz…</option><option>organizacja pracodawców</option><option>strajk</option><option>układ zbiorowy</option><option>wydajność</option><option>związek zawodowy</option></select>
+<span class="w">produktivitet</span><select id="m2_4"><option value="">wybierz…</option><option>organizacja pracodawców</option><option>strajk</option><option>układ zbiorowy</option><option>wydajność</option><option>związek zawodowy</option></select>
+</div>
+<button class="btn" onclick="checkMatch(2,{&quot;m2_0&quot;: &quot;związek zawodowy&quot;, &quot;m2_1&quot;: &quot;organizacja pracodawców&quot;, &quot;m2_2&quot;: &quot;układ zbiorowy&quot;, &quot;m2_3&quot;: &quot;strajk&quot;, &quot;m2_4&quot;: &quot;wydajność&quot;})">Sprawdź</button><div class="fb" id="f2"></div>
+</section>
+<h2 class="part">Część B: Tekst o rynku pracy</h2>
+<p class="partintro">Wpisz brakujące słowo z tekstu.</p>
+<section class="task" data-id="3">
+<h2>3. Wpisz słowo</h2>
+<p class="hint">związek, relacja</p>
+<div class="inline sent">Arbeidsmarkedet beskriver <input type="text" id="t3" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> mellom arbeidsgivere og arbeidstakere.</div>
+<div class="row"><button class="btn" onclick="checkText(3,[&quot;forholdet&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(3)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f3"></div><div class="sol" id="s3">Wzorcowa odpowiedź: <b>forholdet</b></div>
+</section>
+<section class="task" data-id="4">
+<h2>4. Wpisz słowo</h2>
+<p class="hint">zatrudnienie</p>
+<div class="inline sent">I Norge er det høy <input type="text" id="t4" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> .</div>
+<div class="row"><button class="btn" onclick="checkText(4,[&quot;sysselsetting&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(4)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f4"></div><div class="sol" id="s4">Wzorcowa odpowiedź: <b>sysselsetting</b></div>
+</section>
+<section class="task" data-id="5">
+<h2>5. Wpisz słowo</h2>
+<p class="hint">bezrobocie</p>
+<div class="inline sent">Norge har lav <input type="text" id="t5" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> .</div>
+<div class="row"><button class="btn" onclick="checkText(5,[&quot;arbeidsledighet&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(5)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f5"></div><div class="sol" id="s5">Wzorcowa odpowiedź: <b>arbeidsledighet</b></div>
+</section>
+<section class="task" data-id="6">
+<h2>6. Wpisz słowo</h2>
+<p class="hint">związki zawodowe</p>
+<div class="inline sent">Arbeidslivets parter er <input type="text" id="t6" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> , arbeidsgiverorganisasjoner og myndighetene.</div>
+<div class="row"><button class="btn" onclick="checkText(6,[&quot;fagforeninger&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(6)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f6"></div><div class="sol" id="s6">Wzorcowa odpowiedź: <b>fagforeninger</b></div>
+</section>
+<section class="task" data-id="7">
+<h2>7. Wpisz słowo</h2>
+<p class="hint">nazywa się</p>
+<div class="inline sent">Dette <input type="text" id="t7" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> den norske modellen.</div>
+<div class="row"><button class="btn" onclick="checkText(7,[&quot;kalles&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(7)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f7"></div><div class="sol" id="s7">Wzorcowa odpowiedź: <b>kalles</b></div>
+</section>
+<section class="task" data-id="8">
+<h2>8. Wpisz słowo</h2>
+<p class="hint">warunki pracy</p>
+<div class="inline sent">Modellen sikrer gode <input type="text" id="t8" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> for alle.</div>
+<div class="row"><button class="btn" onclick="checkText(8,[&quot;arbeidsvilkår&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(8)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f8"></div><div class="sol" id="s8">Wzorcowa odpowiedź: <b>arbeidsvilkår</b></div>
+</section>
+<h2 class="part">Część C: Mange czy mye?</h2>
+<p class="partintro">Mange: rzeczy policzalne (mange bøker). Mye: niepoliczalne (mye vann).</p>
+<section class="task" data-id="9">
+<h2>9. Det er ___ folk i parken i dag.</h2>
+<div class="opts" data-q="9" data-correct="mange" data-ok="Dobrze.">
+<button class="opt">mange</button>
+<button class="opt">mye</button>
+</div><div class="fb" id="f9"></div>
+</section>
+<section class="task" data-id="10">
+<h2>10. Det er ___ snø i fjellet.</h2>
+<div class="opts" data-q="10" data-correct="mye" data-ok="Dobrze.">
+<button class="opt">mange</button>
+<button class="opt">mye</button>
+</div><div class="fb" id="f10"></div>
+</section>
+<section class="task" data-id="11">
+<h2>11. Han har ___ venner i klassen.</h2>
+<div class="opts" data-q="11" data-correct="mange" data-ok="Dobrze.">
+<button class="opt">mange</button>
+<button class="opt">mye</button>
+</div><div class="fb" id="f11"></div>
+</section>
+<section class="task" data-id="12">
+<h2>12. Vi har ___ tid før toget går.</h2>
+<div class="opts" data-q="12" data-correct="mye" data-ok="Dobrze.">
+<button class="opt">mange</button>
+<button class="opt">mye</button>
+</div><div class="fb" id="f12"></div>
+</section>
+<section class="task" data-id="13">
+<h2>13. Jeg har ___ penger i lommeboken.</h2>
+<div class="opts" data-q="13" data-correct="mye" data-ok="Dobrze.">
+<button class="opt">mange</button>
+<button class="opt">mye</button>
+</div><div class="fb" id="f13"></div>
+</section>
+<h2 class="part">Część D: Preteritum czy presens perfektum?</h2>
+<p class="partintro">Określony, zakończony czas (i går, i fjor) → preteritum. Bez czasu, nadal trwa, allerede/nettopp → presens perfektum.</p>
+<section class="task" data-id="14">
+<h2>14. Jeg ___ til Oslo i går.</h2>
+<div class="opts" data-q="14" data-correct="dro" data-ok="Dobrze. I går → preteritum.">
+<button class="opt">dro</button>
+<button class="opt">har dratt</button>
+</div><div class="fb" id="f14"></div>
+</section>
+<section class="task" data-id="15">
+<h2>15. De ___ i dette huset i fem år, og de bor der fortsatt.</h2>
+<div class="opts" data-q="15" data-correct="har bodd" data-ok="Dobrze. Nadal trwa → presens perfektum.">
+<button class="opt">bodde</button>
+<button class="opt">har bodd</button>
+</div><div class="fb" id="f15"></div>
+</section>
+<section class="task" data-id="16">
+<h2>16. Hun ___ nettopp boka ferdig.</h2>
+<div class="opts" data-q="16" data-correct="har lest" data-ok="Dobrze. Nettopp → presens perfektum.">
+<button class="opt">leste</button>
+<button class="opt">har lest</button>
+</div><div class="fb" id="f16"></div>
+</section>
+<section class="task" data-id="17">
+<h2>17. Han ___ en mil i dag.</h2>
+<div class="opts" data-q="17" data-correct="har løpt" data-ok="Dobrze. I dag jeszcze trwa → presens perfektum.">
+<button class="opt">løp</button>
+<button class="opt">har løpt</button>
+</div><div class="fb" id="f17"></div>
+</section>
+<section class="task" data-id="18">
+<h2>18. Vi ___ i koret i tre år, men nå synger vi ikke lenger.</h2>
+<div class="opts" data-q="18" data-correct="sang" data-ok="Dobrze. Zakończone → preteritum.">
+<button class="opt">sang</button>
+<button class="opt">har sunget</button>
+</div><div class="fb" id="f18"></div>
+</section>
+<h2 class="part">Część E: Krótkie odpowiedzi</h2>
+<p class="partintro">Ja / nei / jo + det + ten sam czasownik (modalny, har, er) albo gjør.</p>
+<section class="task" data-id="19">
+<h2>19. Spiser du fisk? Ja, det ___ jeg.</h2>
+<div class="opts" data-q="19" data-correct="gjør" data-ok="Dobrze.">
+<button class="opt">gjør</button>
+<button class="opt">spiser</button>
+<button class="opt">er</button>
+</div><div class="fb" id="f19"></div>
+</section>
+<section class="task" data-id="20">
+<h2>20. Kan du snakke flere språk? Ja, det ___ jeg.</h2>
+<div class="opts" data-q="20" data-correct="kan" data-ok="Dobrze.">
+<button class="opt">kan</button>
+<button class="opt">gjør</button>
+<button class="opt">har</button>
+</div><div class="fb" id="f20"></div>
+</section>
+<section class="task" data-id="21">
+<h2>21. Har du ikke en sykkel? ___ , det har jeg.</h2>
+<div class="opts" data-q="21" data-correct="Jo" data-ok="Dobrze. Pytanie z ikke, odpowiedź twierdząca → jo.">
+<button class="opt">Ja</button>
+<button class="opt">Jo</button>
+<button class="opt">Nei</button>
+</div><div class="fb" id="f21"></div>
+</section>
+<section class="task" data-id="22">
+<h2>22. Er du alltid glad? Nei, det ___ jeg ikke.</h2>
+<div class="opts" data-q="22" data-correct="er" data-ok="Dobrze.">
+<button class="opt">er</button>
+<button class="opt">gjør</button>
+<button class="opt">har</button>
+</div><div class="fb" id="f22"></div>
+</section>
+<section class="task" data-id="23">
+<h2>23. Liker du ikke å lese? ___ , det gjør jeg.</h2>
+<div class="opts" data-q="23" data-correct="Jo" data-ok="Dobrze.">
+<button class="opt">Ja</button>
+<button class="opt">Jo</button>
+<button class="opt">Nei</button>
+</div><div class="fb" id="f23"></div>
+</section>
+<section class="task" data-id="24">
+<h2>24. Må du jobbe i helgene? Nei, det ___ jeg ikke.</h2>
+<div class="opts" data-q="24" data-correct="må" data-ok="Dobrze.">
+<button class="opt">må</button>
+<button class="opt">gjør</button>
+<button class="opt">vil</button>
+</div><div class="fb" id="f24"></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 24 / 24</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=24;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
+</script>
+
+</body>
+</html>
