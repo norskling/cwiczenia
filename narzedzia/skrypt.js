@@ -30,4 +30,12 @@ function checkMatch(n,key){
     s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
   mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
 }
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
 </script>

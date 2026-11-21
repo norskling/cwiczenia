@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A1 Lekcja 1: ważne zwroty | Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · A1 · Lekcja 1</span>
+  <h1>Viktige ord og uttrykk: <span>powtórka</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Zwroty, których używasz od pierwszej lekcji: powitania, pożegnania, podziękowania i zdania, które ratują rozmowę, gdy czegoś nie rozumiesz. Każda odpowiedź sprawdza się od razu.</p>
+  <div class="meta"><span>Słownictwo</span><span>ok. 10-15 min</span><span>23 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 23</b></div>
+<h2 class="part">Część A: Co to znaczy?</h2>
+<p class="partintro">Wybierz polskie znaczenie.</p>
+<section class="task" data-id="1">
+<h2>1. Co to znaczy?</h2>
+<p class="hint"><b>Ha det bra!</b></p>
+<div class="opts" data-q="1" data-correct="Do widzenia!" data-ok="Dobrze. Ha det bra! = Do widzenia! (dosłownie: miej się dobrze).">
+<button class="opt">Dzień dobry!</button>
+<button class="opt">Do widzenia!</button>
+<button class="opt">Dziękuję!</button>
+</div><div class="fb" id="f1"></div>
+</section>
+<section class="task" data-id="2">
+<h2>2. Co to znaczy?</h2>
+<p class="hint"><b>Vi ses!</b></p>
+<div class="opts" data-q="2" data-correct="Do zobaczenia!" data-ok="Dobrze. Å ses = zobaczyć się.">
+<button class="opt">Do zobaczenia!</button>
+<button class="opt">Przepraszam!</button>
+<button class="opt">Witamy!</button>
+</div><div class="fb" id="f2"></div>
+</section>
+<section class="task" data-id="3">
+<h2>3. Co to znaczy?</h2>
+<p class="hint"><b>Unnskyld!</b></p>
+<div class="opts" data-q="3" data-correct="Przepraszam!" data-ok="Dobrze. Unnskyld! mówisz, gdy chcesz kogoś zaczepić albo kogoś potrąciłeś.">
+<button class="opt">Smacznego!</button>
+<button class="opt">Przepraszam!</button>
+<button class="opt">Proszę!</button>
+</div><div class="fb" id="f3"></div>
+</section>
+<section class="task" data-id="4">
+<h2>4. Co to znaczy?</h2>
+<p class="hint"><b>Jeg forstår ikke.</b></p>
+<div class="opts" data-q="4" data-correct="Nie rozumiem." data-ok="Dobrze. Å forstå = rozumieć, ikke = nie.">
+<button class="opt">Nie wiem.</button>
+<button class="opt">Nie pamiętam.</button>
+<button class="opt">Nie rozumiem.</button>
+</div><div class="fb" id="f4"></div>
+</section>
+<section class="task" data-id="5">
+<h2>5. Co to znaczy?</h2>
+<p class="hint"><b>Jeg husker ikke.</b></p>
+<div class="opts" data-q="5" data-correct="Nie pamiętam." data-ok="Dobrze. Å huske = pamiętać.">
+<button class="opt">Nie pamiętam.</button>
+<button class="opt">Nie słyszę.</button>
+<button class="opt">Nie mówię.</button>
+</div><div class="fb" id="f5"></div>
+</section>
+<section class="task" data-id="6">
+<h2>6. Co to znaczy?</h2>
+<p class="hint"><b>God helg!</b></p>
+<div class="opts" data-q="6" data-correct="Miłego weekendu!" data-ok="Dobrze. Helg = weekend. Mówisz to w piątek.">
+<button class="opt">Dobranoc!</button>
+<button class="opt">Miłego weekendu!</button>
+<button class="opt">Dzień dobry!</button>
+</div><div class="fb" id="f6"></div>
+</section>
+<section class="task" data-id="7">
+<h2>7. Co to znaczy?</h2>
+<p class="hint"><b>Ikke sant?</b></p>
+<div class="opts" data-q="7" data-correct="Prawda?" data-ok="Dobrze. Ikke sant? dodajesz na końcu zdania, gdy szukasz potwierdzenia.">
+<button class="opt">Prawda?</button>
+<button class="opt">Nie teraz?</button>
+<button class="opt">Dlaczego nie?</button>
+</div><div class="fb" id="f7"></div>
+</section>
+<section class="task" data-id="8">
+<h2>8. Połącz w pary</h2>
+<p class="hint">Wybierz polskie znaczenie dla każdego zwrotu.</p>
+<div class="match">
+<span class="w">Takk for i dag!</span><select id="m8_0"><option value="">wybierz…</option><option>Co powiedziałeś?</option><option>Co to znaczy?</option><option>Czy możesz powtórzyć?</option><option>Dziękuję za dziś!</option><option>Nie wiem.</option></select>
+<span class="w">Hva betyr det?</span><select id="m8_1"><option value="">wybierz…</option><option>Co powiedziałeś?</option><option>Co to znaczy?</option><option>Czy możesz powtórzyć?</option><option>Dziękuję za dziś!</option><option>Nie wiem.</option></select>
+<span class="w">Kan du gjenta?</span><select id="m8_2"><option value="">wybierz…</option><option>Co powiedziałeś?</option><option>Co to znaczy?</option><option>Czy możesz powtórzyć?</option><option>Dziękuję za dziś!</option><option>Nie wiem.</option></select>
+<span class="w">Hva sa du?</span><select id="m8_3"><option value="">wybierz…</option><option>Co powiedziałeś?</option><option>Co to znaczy?</option><option>Czy możesz powtórzyć?</option><option>Dziękuję za dziś!</option><option>Nie wiem.</option></select>
+<span class="w">Jeg vet ikke.</span><select id="m8_4"><option value="">wybierz…</option><option>Co powiedziałeś?</option><option>Co to znaczy?</option><option>Czy możesz powtórzyć?</option><option>Dziękuję za dziś!</option><option>Nie wiem.</option></select>
+</div>
+<button class="btn" onclick="checkMatch(8,{&quot;m8_0&quot;: &quot;Dziękuję za dziś!&quot;, &quot;m8_1&quot;: &quot;Co to znaczy?&quot;, &quot;m8_2&quot;: &quot;Czy możesz powtórzyć?&quot;, &quot;m8_3&quot;: &quot;Co powiedziałeś?&quot;, &quot;m8_4&quot;: &quot;Nie wiem.&quot;})">Sprawdź</button><div class="fb" id="f8"></div>
+</section>
+<h2 class="part">Część B: Co powiesz w tej sytuacji?</h2>
+<p class="partintro">Wybierz zwrot, który pasuje do sytuacji.</p>
+<section class="task" data-id="9">
+<h2>9. Jest 8 rano, wchodzisz do pracy.</h2>
+<div class="opts" data-q="9" data-correct="God morgen!" data-ok="Dobrze. God morgen! wymawiamy [gu morn].">
+<button class="opt">God morgen!</button>
+<button class="opt">God helg!</button>
+<button class="opt">Ha det!</button>
+</div><div class="fb" id="f9"></div>
+</section>
+<section class="task" data-id="10">
+<h2>10. Lektorka mówi za szybko. Prosisz, żeby powtórzyła.</h2>
+<div class="opts" data-q="10" data-correct="Kan du gjenta?" data-ok="Dobrze. Å gjenta = powtórzyć.">
+<button class="opt">Kan du gjenta?</button>
+<button class="opt">Ikke sant?</button>
+<button class="opt">Vi ses!</button>
+</div><div class="fb" id="f10"></div>
+</section>
+<section class="task" data-id="11">
+<h2>11. Nie znasz norweskiego słowa na „kubek”. Pytasz:</h2>
+<div class="opts" data-q="11" data-correct="Hva heter det på norsk?" data-ok="Dobrze. Hva heter det på norsk? = Jak to się nazywa po norwesku? Hva betyr det? pytasz o znaczenie słowa, które już słyszysz.">
+<button class="opt">Hva heter det på norsk?</button>
+<button class="opt">Hva betyr det?</button>
+<button class="opt">Hvordan går det?</button>
+</div><div class="fb" id="f11"></div>
+</section>
+<section class="task" data-id="12">
+<h2>12. Ktoś pyta: Hvordan går det? Odpowiadasz:</h2>
+<div class="opts" data-q="12" data-correct="Det går bra, takk!" data-ok="Dobrze. Hvordan går det? = Jak leci? Det går bra = Dobrze.">
+<button class="opt">Det går bra, takk!</button>
+<button class="opt">Vær så god!</button>
+<button class="opt">Jeg heter Anna.</button>
+</div><div class="fb" id="f12"></div>
+</section>
+<section class="task" data-id="13">
+<h2>13. Spóźniłeś się na lekcję. Mówisz:</h2>
+<div class="opts" data-q="13" data-correct="Beklager!" data-ok="Dobrze. Beklager = przykro mi, przepraszam (gdy coś było Twoją winą).">
+<button class="opt">Beklager!</button>
+<button class="opt">God helg!</button>
+<button class="opt">Takk!</button>
+</div><div class="fb" id="f13"></div>
+</section>
+<section class="task" data-id="14">
+<h2>14. Podajesz komuś kawę. Mówisz:</h2>
+<div class="opts" data-q="14" data-correct="Vær så god!" data-ok="Dobrze. Vær så god! = Proszę (podając coś). Wymowa: [waszogu].">
+<button class="opt">Vær så god!</button>
+<button class="opt">Unnskyld!</button>
+<button class="opt">Ha det!</button>
+</div><div class="fb" id="f14"></div>
+</section>
+<section class="task" data-id="15">
+<h2>15. Ktoś mówi: Hyggelig å hilse på deg! Odpowiadasz:</h2>
+<div class="opts" data-q="15" data-correct="I like måte!" data-ok="Dobrze. I like måte = wzajemnie.">
+<button class="opt">I like måte!</button>
+<button class="opt">Jeg vet ikke.</button>
+<button class="opt">Kan du gjenta?</button>
+</div><div class="fb" id="f15"></div>
+</section>
+<section class="task" data-id="16">
+<h2>16. Koniec lekcji w czwartek. Żegnasz się z grupą do następnego tygodnia.</h2>
+<div class="opts" data-q="16" data-correct="Takk for i dag! Vi ses!" data-ok="Dobrze.">
+<button class="opt">Takk for i dag! Vi ses!</button>
+<button class="opt">God morgen! Vi ses!</button>
+<button class="opt">Unnskyld! Ha det!</button>
+</div><div class="fb" id="f16"></div>
+</section>
+<h2 class="part">Część C: Napisz po norwesku</h2>
+<p class="partintro">Wpisz zwrot. Wielkość liter i znaki interpunkcyjne nie mają znaczenia, ale litery å, æ, ø tak.</p>
+<section class="task" data-id="17">
+<h2>17. Uzupełnij</h2>
+<p class="hint">Dziękuję bardzo!</p>
+<div class="inline sent"><input type="text" id="t17" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> skal du ha!</div>
+<div class="row"><button class="btn" onclick="checkText(17,[&quot;takk&quot;],&quot;Dobrze. Takk skal du ha! = Bardzo dziękuję.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(17)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f17"></div><div class="sol" id="s17">Wzorcowa odpowiedź: <b>takk</b></div>
+</section>
+<section class="task" data-id="18">
+<h2>18. Uzupełnij</h2>
+<p class="hint">Nie wiem.</p>
+<div class="inline sent">Jeg <input type="text" id="t18" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> ikke.</div>
+<div class="row"><button class="btn" onclick="checkText(18,[&quot;vet&quot;],&quot;Dobrze. Å vite → jeg vet.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(18)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f18"></div><div class="sol" id="s18">Wzorcowa odpowiedź: <b>vet</b></div>
+</section>
+<section class="task" data-id="19">
+<h2>19. Uzupełnij</h2>
+<p class="hint">Nie rozumiem.</p>
+<div class="inline sent">Jeg <input type="text" id="t19" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> ikke.</div>
+<div class="row"><button class="btn" onclick="checkText(19,[&quot;forstår&quot;],&quot;Dobrze. Pamiętaj o å: forstår.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(19)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f19"></div><div class="sol" id="s19">Wzorcowa odpowiedź: <b>forstår</b></div>
+</section>
+<section class="task" data-id="20">
+<h2>20. Uzupełnij</h2>
+<p class="hint">Jak leci?</p>
+<div class="inline sent">Hvordan <input type="text" id="t20" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> det?</div>
+<div class="row"><button class="btn" onclick="checkText(20,[&quot;går&quot;],&quot;Dobrze. Hvordan går det?&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(20)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f20"></div><div class="sol" id="s20">Wzorcowa odpowiedź: <b>går</b></div>
+</section>
+<section class="task" data-id="21">
+<h2>21. Uzupełnij</h2>
+<p class="hint">Co to znaczy?</p>
+<div class="inline sent">Hva <input type="text" id="t21" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> det?</div>
+<div class="row"><button class="btn" onclick="checkText(21,[&quot;betyr&quot;],&quot;Dobrze. Å bety = znaczyć.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(21)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f21"></div><div class="sol" id="s21">Wzorcowa odpowiedź: <b>betyr</b></div>
+</section>
+<section class="task" data-id="22">
+<h2>22. Przetłumacz</h2>
+<p class="given">Do zobaczenia!</p>
+<div class="rw"><span></span><input type="text" id="t22" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(22,[&quot;vi ses&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(22)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f22"></div><div class="sol" id="s22">Wzorcowa odpowiedź: <b>Vi ses!</b></div>
+</section>
+<section class="task" data-id="23">
+<h2>23. Przetłumacz</h2>
+<p class="given">Czy możesz powtórzyć?</p>
+<div class="rw"><span></span><input type="text" id="t23" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(23,[&quot;kan du gjenta&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(23)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f23"></div><div class="sol" id="s23">Wzorcowa odpowiedź: <b>Kan du gjenta?</b></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 23 / 23</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=23;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
+</script>
+
+</body>
+</html>

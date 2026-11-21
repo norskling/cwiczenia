@@ -9,6 +9,8 @@ Typy zadań:
   fill   : {"type":"fill","h","hint"?,"sentence":"... ___ ...","answers":[...],"ok"}
   rewrite: {"type":"rewrite","h","given","start","answers":[...],"full","ok"}
   match  : {"type":"match","h","hint","pairs":[[lewy,prawy],...],"ok"?}
+  order  : {"type":"order","h","hint"?,"words":[słowa w poprawnej kolejności],"answers":[...]?,"ok"}
+           kafelki tasowane przy generowaniu; answers = dodatkowe poprawne warianty zdania
 Strona: noindex, tylko imię kursanta, styl z narzedzia/styl.css.
 """
 import json, sys, html, os, random
@@ -37,6 +39,21 @@ def task(n, t):
         o.append(f'<div class="row"><button class="btn" onclick="checkText({n},{js(t["answers"])},{js(t["ok"])})">Sprawdź</button>'
                  f'<button class="ghost" onclick="showSol({n})">Pokaż odpowiedź</button></div>')
         o.append(f'<div class="fb" id="f{n}"></div><div class="sol" id="s{n}">Wzorcowa odpowiedź: <b>{E(sol)}</b></div>')
+    elif k == "order":
+        ws = list(t["words"]); rnd = random.Random(f'{n}|{"|".join(ws)}')
+        sh = ws[:]
+        for _ in range(10):
+            rnd.shuffle(sh)
+            if sh != ws or len(ws) < 2: break
+        full = " ".join(ws)
+        ans = [full] + t.get("answers", [])
+        o.append(f'<div class="ord" id="o{n}"><div class="line" id="l{n}" aria-label="Twoje zdanie"></div><div class="tiles" id="p{n}">')
+        o += [f'<button class="tile" onclick="pick({n},this)">{E(w)}</button>' for w in sh]
+        o.append('</div></div>')
+        o.append(f'<div class="row"><button class="btn" onclick="checkOrder({n},{js(ans)},{js(t["ok"])})">Sprawdź</button>'
+                 f'<button class="ghost" onclick="clearOrder({n})">Od nowa</button>'
+                 f'<button class="ghost" onclick="showSol({n})">Pokaż odpowiedź</button></div>')
+        o.append(f'<div class="fb" id="f{n}"></div><div class="sol" id="s{n}">Wzorcowa odpowiedź: <b>{E(full)}</b></div>')
     elif k == "match":
         rights = sorted(p[1] for p in t["pairs"])
         opts = '<option value="">wybierz…</option>' + "".join(f"<option>{E(r)}</option>" for r in rights)
