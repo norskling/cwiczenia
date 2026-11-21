@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ordforråd B1–B2: miljø og klima</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · B1–B2 · Lekcja 1</span>
+  <h1>Ordforråd: <span>miljø, avfall og klima</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Słownictwo dla grupy (Marta, Joanna, Wiktoria) przed Norskprøve: środowisko, segregacja odpadów, marnowanie jedzenia, zmiany klimatu. Najpierw krótkie zadania, potem dłuższe przekształcenia.</p>
+  <div class="meta"><span>Słownictwo</span><span>ok. 40 min</span><span>44 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 44</b></div>
+<h2 class="part">Del 1. Ordforråd: fire temaer</h2>
+<p class="partintro">Krótkie dopasowania: najważniejsze słowa z czterech tematów lekcji.</p>
+<section class="task" data-id="1">
+<h2>1. Miljø og forurensning</h2>
+<p class="hint">Dopasuj tłumaczenie.</p>
+<div class="match">
+<span class="w">forurensning</span><select id="m1_0"><option value="">wybierz…</option><option>działanie na rzecz klimatu</option><option>emisja</option><option>jakość powietrza</option><option>mikroplastik</option><option>spaliny</option><option>zanieczyszczenie</option></select>
+<span class="w">et utslipp</span><select id="m1_1"><option value="">wybierz…</option><option>działanie na rzecz klimatu</option><option>emisja</option><option>jakość powietrza</option><option>mikroplastik</option><option>spaliny</option><option>zanieczyszczenie</option></select>
+<span class="w">luftkvalitet</span><select id="m1_2"><option value="">wybierz…</option><option>działanie na rzecz klimatu</option><option>emisja</option><option>jakość powietrza</option><option>mikroplastik</option><option>spaliny</option><option>zanieczyszczenie</option></select>
+<span class="w">avgasser</span><select id="m1_3"><option value="">wybierz…</option><option>działanie na rzecz klimatu</option><option>emisja</option><option>jakość powietrza</option><option>mikroplastik</option><option>spaliny</option><option>zanieczyszczenie</option></select>
+<span class="w">mikroplast</span><select id="m1_4"><option value="">wybierz…</option><option>działanie na rzecz klimatu</option><option>emisja</option><option>jakość powietrza</option><option>mikroplastik</option><option>spaliny</option><option>zanieczyszczenie</option></select>
+<span class="w">et klimatiltak</span><select id="m1_5"><option value="">wybierz…</option><option>działanie na rzecz klimatu</option><option>emisja</option><option>jakość powietrza</option><option>mikroplastik</option><option>spaliny</option><option>zanieczyszczenie</option></select>
+</div>
+<button class="btn" onclick="checkMatch(1,{&quot;m1_0&quot;: &quot;zanieczyszczenie&quot;, &quot;m1_1&quot;: &quot;emisja&quot;, &quot;m1_2&quot;: &quot;jakość powietrza&quot;, &quot;m1_3&quot;: &quot;spaliny&quot;, &quot;m1_4&quot;: &quot;mikroplastik&quot;, &quot;m1_5&quot;: &quot;działanie na rzecz klimatu&quot;})">Sprawdź</button><div class="fb" id="f1"></div>
+</section>
+<section class="task" data-id="2">
+<h2>2. Avfallssortering</h2>
+<p class="hint">Dopasuj tłumaczenie.</p>
+<div class="match">
+<span class="w">restavfall</span><select id="m2_0"><option value="">wybierz…</option><option>kaucja (za butelki i puszki)</option><option>odpady niebezpieczne</option><option>odpady spożywcze</option><option>odpady zmieszane</option><option>opakowania plastikowe</option><option>punkt zbiórki odpadów</option></select>
+<span class="w">matavfall</span><select id="m2_1"><option value="">wybierz…</option><option>kaucja (za butelki i puszki)</option><option>odpady niebezpieczne</option><option>odpady spożywcze</option><option>odpady zmieszane</option><option>opakowania plastikowe</option><option>punkt zbiórki odpadów</option></select>
+<span class="w">plastemballasje</span><select id="m2_2"><option value="">wybierz…</option><option>kaucja (za butelki i puszki)</option><option>odpady niebezpieczne</option><option>odpady spożywcze</option><option>odpady zmieszane</option><option>opakowania plastikowe</option><option>punkt zbiórki odpadów</option></select>
+<span class="w">farlig avfall</span><select id="m2_3"><option value="">wybierz…</option><option>kaucja (za butelki i puszki)</option><option>odpady niebezpieczne</option><option>odpady spożywcze</option><option>odpady zmieszane</option><option>opakowania plastikowe</option><option>punkt zbiórki odpadów</option></select>
+<span class="w">pant</span><select id="m2_4"><option value="">wybierz…</option><option>kaucja (za butelki i puszki)</option><option>odpady niebezpieczne</option><option>odpady spożywcze</option><option>odpady zmieszane</option><option>opakowania plastikowe</option><option>punkt zbiórki odpadów</option></select>
+<span class="w">en gjenvinningsstasjon</span><select id="m2_5"><option value="">wybierz…</option><option>kaucja (za butelki i puszki)</option><option>odpady niebezpieczne</option><option>odpady spożywcze</option><option>odpady zmieszane</option><option>opakowania plastikowe</option><option>punkt zbiórki odpadów</option></select>
+</div>
+<button class="btn" onclick="checkMatch(2,{&quot;m2_0&quot;: &quot;odpady zmieszane&quot;, &quot;m2_1&quot;: &quot;odpady spożywcze&quot;, &quot;m2_2&quot;: &quot;opakowania plastikowe&quot;, &quot;m2_3&quot;: &quot;odpady niebezpieczne&quot;, &quot;m2_4&quot;: &quot;kaucja (za butelki i puszki)&quot;, &quot;m2_5&quot;: &quot;punkt zbiórki odpadów&quot;})">Sprawdź</button><div class="fb" id="f2"></div>
+</section>
+<section class="task" data-id="3">
+<h2>3. Matsvinn</h2>
+<p class="hint">Dopasuj tłumaczenie.</p>
+<div class="match">
+<span class="w">matsvinn</span><select id="m3_0"><option value="">wybierz…</option><option>marnowanie jedzenia</option><option>przechowywać</option><option>przejrzały</option><option>resztki</option><option>trwałość, termin przydatności</option><option>zmarnować się</option></select>
+<span class="w">rester</span><select id="m3_1"><option value="">wybierz…</option><option>marnowanie jedzenia</option><option>przechowywać</option><option>przejrzały</option><option>resztki</option><option>trwałość, termin przydatności</option><option>zmarnować się</option></select>
+<span class="w">holdbarhet</span><select id="m3_2"><option value="">wybierz…</option><option>marnowanie jedzenia</option><option>przechowywać</option><option>przejrzały</option><option>resztki</option><option>trwałość, termin przydatności</option><option>zmarnować się</option></select>
+<span class="w">å oppbevare</span><select id="m3_3"><option value="">wybierz…</option><option>marnowanie jedzenia</option><option>przechowywać</option><option>przejrzały</option><option>resztki</option><option>trwałość, termin przydatności</option><option>zmarnować się</option></select>
+<span class="w">overmoden</span><select id="m3_4"><option value="">wybierz…</option><option>marnowanie jedzenia</option><option>przechowywać</option><option>przejrzały</option><option>resztki</option><option>trwałość, termin przydatności</option><option>zmarnować się</option></select>
+<span class="w">å gå til spille</span><select id="m3_5"><option value="">wybierz…</option><option>marnowanie jedzenia</option><option>przechowywać</option><option>przejrzały</option><option>resztki</option><option>trwałość, termin przydatności</option><option>zmarnować się</option></select>
+</div>
+<button class="btn" onclick="checkMatch(3,{&quot;m3_0&quot;: &quot;marnowanie jedzenia&quot;, &quot;m3_1&quot;: &quot;resztki&quot;, &quot;m3_2&quot;: &quot;trwałość, termin przydatności&quot;, &quot;m3_3&quot;: &quot;przechowywać&quot;, &quot;m3_4&quot;: &quot;przejrzały&quot;, &quot;m3_5&quot;: &quot;zmarnować się&quot;})">Sprawdź</button><div class="fb" id="f3"></div>
+</section>
+<section class="task" data-id="4">
+<h2>4. Klimaendringer</h2>
+<p class="hint">Dopasuj tłumaczenie.</p>
+<div class="match">
+<span class="w">global oppvarming</span><select id="m4_0"><option value="">wybierz…</option><option>ekstremalne zjawiska pogodowe</option><option>energia odnawialna</option><option>globalne ocieplenie</option><option>paliwa kopalne</option><option>poziom morza się podnosi</option><option>ślad węglowy</option></select>
+<span class="w">ekstremvær</span><select id="m4_1"><option value="">wybierz…</option><option>ekstremalne zjawiska pogodowe</option><option>energia odnawialna</option><option>globalne ocieplenie</option><option>paliwa kopalne</option><option>poziom morza się podnosi</option><option>ślad węglowy</option></select>
+<span class="w">havnivået stiger</span><select id="m4_2"><option value="">wybierz…</option><option>ekstremalne zjawiska pogodowe</option><option>energia odnawialna</option><option>globalne ocieplenie</option><option>paliwa kopalne</option><option>poziom morza się podnosi</option><option>ślad węglowy</option></select>
+<span class="w">fornybar energi</span><select id="m4_3"><option value="">wybierz…</option><option>ekstremalne zjawiska pogodowe</option><option>energia odnawialna</option><option>globalne ocieplenie</option><option>paliwa kopalne</option><option>poziom morza się podnosi</option><option>ślad węglowy</option></select>
+<span class="w">fossilt brensel</span><select id="m4_4"><option value="">wybierz…</option><option>ekstremalne zjawiska pogodowe</option><option>energia odnawialna</option><option>globalne ocieplenie</option><option>paliwa kopalne</option><option>poziom morza się podnosi</option><option>ślad węglowy</option></select>
+<span class="w">et klimafotavtrykk</span><select id="m4_5"><option value="">wybierz…</option><option>ekstremalne zjawiska pogodowe</option><option>energia odnawialna</option><option>globalne ocieplenie</option><option>paliwa kopalne</option><option>poziom morza się podnosi</option><option>ślad węglowy</option></select>
+</div>
+<button class="btn" onclick="checkMatch(4,{&quot;m4_0&quot;: &quot;globalne ocieplenie&quot;, &quot;m4_1&quot;: &quot;ekstremalne zjawiska pogodowe&quot;, &quot;m4_2&quot;: &quot;poziom morza się podnosi&quot;, &quot;m4_3&quot;: &quot;energia odnawialna&quot;, &quot;m4_4&quot;: &quot;paliwa kopalne&quot;, &quot;m4_5&quot;: &quot;ślad węglowy&quot;})">Sprawdź</button><div class="fb" id="f4"></div>
+</section>
+<h2 class="part">Del 2. Hvor skal avfallet?</h2>
+<p class="partintro">Gdzie wyrzucić odpad? Zasady różnią się trochę między gminami. Tu najczęstszy system.</p>
+<section class="task" data-id="5">
+<h2>5. Hvor skal et tomt syltetøyglass?</h2>
+<div class="opts" data-q="5" data-correct="Glass og metall" data-ok="Riktig: glass og metall.">
+<button class="opt">Restavfall</button>
+<button class="opt">Matavfall</button>
+<button class="opt">Plastemballasje</button>
+<button class="opt">Papp og papir</button>
+<button class="opt">Glass og metall</button>
+<button class="opt">Farlig avfall</button>
+</div><div class="fb" id="f5"></div>
+</section>
+<section class="task" data-id="6">
+<h2>6. Hvor skal potetskrell?</h2>
+<div class="opts" data-q="6" data-correct="Matavfall" data-ok="Riktig: matavfall.">
+<button class="opt">Restavfall</button>
+<button class="opt">Matavfall</button>
+<button class="opt">Plastemballasje</button>
+<button class="opt">Papp og papir</button>
+<button class="opt">Glass og metall</button>
+<button class="opt">Farlig avfall</button>
+</div><div class="fb" id="f6"></div>
+</section>
+<section class="task" data-id="7">
+<h2>7. Hvor skal en tom melkekartong?</h2>
+<div class="opts" data-q="7" data-correct="Papp og papir" data-ok="Riktig: papp og papir.">
+<button class="opt">Restavfall</button>
+<button class="opt">Matavfall</button>
+<button class="opt">Plastemballasje</button>
+<button class="opt">Papp og papir</button>
+<button class="opt">Glass og metall</button>
+<button class="opt">Farlig avfall</button>
+</div><div class="fb" id="f7"></div>
+</section>
+<section class="task" data-id="8">
+<h2>8. Hvor skal brukte batterier?</h2>
+<div class="opts" data-q="8" data-correct="Farlig avfall" data-ok="Riktig: farlig avfall.">
+<button class="opt">Restavfall</button>
+<button class="opt">Matavfall</button>
+<button class="opt">Plastemballasje</button>
+<button class="opt">Papp og papir</button>
+<button class="opt">Glass og metall</button>
+<button class="opt">Farlig avfall</button>
+</div><div class="fb" id="f8"></div>
+</section>
+<section class="task" data-id="9">
+<h2>9. Hvor skal en tom sjampoflaske av plast?</h2>
+<div class="opts" data-q="9" data-correct="Plastemballasje" data-ok="Riktig: plastemballasje.">
+<button class="opt">Restavfall</button>
+<button class="opt">Matavfall</button>
+<button class="opt">Plastemballasje</button>
+<button class="opt">Papp og papir</button>
+<button class="opt">Glass og metall</button>
+<button class="opt">Farlig avfall</button>
+</div><div class="fb" id="f9"></div>
+</section>
+<section class="task" data-id="10">
+<h2>10. Hvor skal en brukt bleie?</h2>
+<div class="opts" data-q="10" data-correct="Restavfall" data-ok="Riktig: restavfall.">
+<button class="opt">Restavfall</button>
+<button class="opt">Matavfall</button>
+<button class="opt">Plastemballasje</button>
+<button class="opt">Papp og papir</button>
+<button class="opt">Glass og metall</button>
+<button class="opt">Farlig avfall</button>
+</div><div class="fb" id="f10"></div>
+</section>
+<section class="task" data-id="11">
+<h2>11. Hvor skal en tom hermetikkboks?</h2>
+<div class="opts" data-q="11" data-correct="Glass og metall" data-ok="Riktig: glass og metall.">
+<button class="opt">Restavfall</button>
+<button class="opt">Matavfall</button>
+<button class="opt">Plastemballasje</button>
+<button class="opt">Papp og papir</button>
+<button class="opt">Glass og metall</button>
+<button class="opt">Farlig avfall</button>
+</div><div class="fb" id="f11"></div>
+</section>
+<section class="task" data-id="12">
+<h2>12. Hvor skal maling som er til overs?</h2>
+<div class="opts" data-q="12" data-correct="Farlig avfall" data-ok="Riktig: farlig avfall.">
+<button class="opt">Restavfall</button>
+<button class="opt">Matavfall</button>
+<button class="opt">Plastemballasje</button>
+<button class="opt">Papp og papir</button>
+<button class="opt">Glass og metall</button>
+<button class="opt">Farlig avfall</button>
+</div><div class="fb" id="f12"></div>
+</section>
+<h2 class="part">Del 3. Uzupełnij zdania</h2>
+<p class="partintro">Jedno słowo w każdą lukę. Zdania z przedszkola, hotelu i studiów logistycznych.</p>
+<section class="task" data-id="13">
+<h2>13. Uzupełnij lukę.</h2>
+<div class="inline sent">I barnehagen lærer barna å <input type="text" id="t13" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> avfallet.</div>
+<div class="row"><button class="btn" onclick="checkText(13,[&quot;sortere&quot;],&quot;Riktig: å sortere avfallet.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(13)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f13"></div><div class="sol" id="s13">Wzorcowa odpowiedź: <b>sortere</b></div>
+</section>
+<section class="task" data-id="14">
+<h2>14. Uzupełnij lukę.</h2>
+<div class="inline sent">Etter frokostbuffeten blir mye mat <input type="text" id="t14" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> .</div>
+<div class="row"><button class="btn" onclick="checkText(14,[&quot;kastet&quot;],&quot;Riktig: blir kastet (passiv).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(14)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f14"></div><div class="sol" id="s14">Wzorcowa odpowiedź: <b>kastet</b></div>
+</section>
+<section class="task" data-id="15">
+<h2>15. Uzupełnij lukę.</h2>
+<div class="inline sent">På hotellet bruker vi vaskemidler som er <input type="text" id="t15" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> , altså bedre for miljøet.</div>
+<div class="row"><button class="btn" onclick="checkText(15,[&quot;miljøvennlige&quot;],&quot;Riktig: miljøvennlige (liczba mnoga).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(15)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f15"></div><div class="sol" id="s15">Wzorcowa odpowiedź: <b>miljøvennlige</b></div>
+</section>
+<section class="task" data-id="16">
+<h2>16. Uzupełnij lukę.</h2>
+<div class="inline sent">Lastebiler slipper ut mye CO₂, så logistikkbransjen må <input type="text" id="t16" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> utslippene.</div>
+<div class="row"><button class="btn" onclick="checkText(16,[&quot;redusere&quot;, &quot;kutte&quot;, &quot;minske&quot;],&quot;Riktig: redusere / kutte / minske.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(16)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f16"></div><div class="sol" id="s16">Wzorcowa odpowiedź: <b>redusere</b></div>
+</section>
+<section class="task" data-id="17">
+<h2>17. Uzupełnij lukę.</h2>
+<div class="inline sent">Isen på polene smelter på grunn av global <input type="text" id="t17" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> .</div>
+<div class="row"><button class="btn" onclick="checkText(17,[&quot;oppvarming&quot;],&quot;Riktig: global oppvarming.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(17)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f17"></div><div class="sol" id="s17">Wzorcowa odpowiedź: <b>oppvarming</b></div>
+</section>
+<section class="task" data-id="18">
+<h2>18. Uzupełnij lukę.</h2>
+<div class="inline sent">Vi panter flasker og bokser og får <input type="text" id="t18" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> tilbake.</div>
+<div class="row"><button class="btn" onclick="checkText(18,[&quot;pant&quot;, &quot;pantepenger&quot;, &quot;penger&quot;],&quot;Riktig: vi får pant tilbake.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(18)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f18"></div><div class="sol" id="s18">Wzorcowa odpowiedź: <b>pant</b></div>
+</section>
+<section class="task" data-id="19">
+<h2>19. Uzupełnij lukę.</h2>
+<div class="inline sent">Sol- og vindkraft er eksempler på <input type="text" id="t19" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> energi.</div>
+<div class="row"><button class="btn" onclick="checkText(19,[&quot;fornybar&quot;],&quot;Riktig: fornybar energi.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(19)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f19"></div><div class="sol" id="s19">Wzorcowa odpowiedź: <b>fornybar</b></div>
+</section>
+<section class="task" data-id="20">
+<h2>20. Uzupełnij lukę.</h2>
+<div class="inline sent">Yoghurten var fortsatt god. Datoen var bare «best <input type="text" id="t20" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">».</div>
+<div class="row"><button class="btn" onclick="checkText(20,[&quot;før&quot;],&quot;Riktig: best før.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(20)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f20"></div><div class="sol" id="s20">Wzorcowa odpowiedź: <b>før</b></div>
+</section>
+<section class="task" data-id="21">
+<h2>21. Uzupełnij lukę.</h2>
+<div class="inline sent">Det har vært mye <input type="text" id="t21" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i år: flom, tørke og storm.</div>
+<div class="row"><button class="btn" onclick="checkText(21,[&quot;ekstremvær&quot;],&quot;Riktig: ekstremvær.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(21)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f21"></div><div class="sol" id="s21">Wzorcowa odpowiedź: <b>ekstremvær</b></div>
+</section>
+<section class="task" data-id="22">
+<h2>22. Uzupełnij lukę.</h2>
+<div class="inline sent">Matrester kan vi <input type="text" id="t22" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i fryseren og spise senere.</div>
+<div class="row"><button class="btn" onclick="checkText(22,[&quot;oppbevare&quot;, &quot;legge&quot;, &quot;fryse&quot;],&quot;Riktig: oppbevare.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(22)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f22"></div><div class="sol" id="s22">Wzorcowa odpowiedź: <b>oppbevare</b></div>
+</section>
+<h2 class="part">Del 4. Przekształcenia (B1–B2)</h2>
+<p class="partintro">Dłuższe zadania: rzeczowniki zamiast czasowników, strona bierna, zdania z «noe som» i «jo … jo».</p>
+<section class="task" data-id="23">
+<h2>23. Przekształć zdanie.</h2>
+<p class="given">Vi må redusere utslippene.</p>
+<div class="rw"><span>Vi trenger en</span><input type="text" id="t23" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(23,[&quot;reduksjon av utslippene&quot;, &quot;reduksjon i utslippene&quot;],&quot;Riktig!&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(23)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f23"></div><div class="sol" id="s23">Wzorcowa odpowiedź: <b>Vi trenger en reduksjon av utslippene.</b></div>
+</section>
+<section class="task" data-id="24">
+<h2>24. Przekształć zdanie.</h2>
+<p class="given">Lufta i byen er forurenset.</p>
+<div class="rw"><span>Det er mye</span><input type="text" id="t24" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(24,[&quot;forurensning i byen&quot;, &quot;luftforurensning i byen&quot;, &quot;forurensning i lufta i byen&quot;],&quot;Riktig!&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(24)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f24"></div><div class="sol" id="s24">Wzorcowa odpowiedź: <b>Det er mye forurensning i byen.</b></div>
+</section>
+<section class="task" data-id="25">
+<h2>25. Przekształć zdanie.</h2>
+<p class="given">Hotellet sorterer avfallet nøye.</p>
+<div class="rw"><span>Avfallet</span><input type="text" id="t25" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(25,[&quot;blir sortert nøye på hotellet&quot;, &quot;sorteres nøye på hotellet&quot;, &quot;blir nøye sortert på hotellet&quot;],&quot;Riktig!&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(25)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f25"></div><div class="sol" id="s25">Wzorcowa odpowiedź: <b>Avfallet blir sortert nøye på hotellet.</b></div>
+</section>
+<section class="task" data-id="26">
+<h2>26. Przekształć zdanie.</h2>
+<p class="given">Barna kaster mindre mat nå.</p>
+<div class="rw"><span>Det blir</span><input type="text" id="t26" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(26,[&quot;kastet mindre mat nå&quot;, &quot;kastet mindre mat av barna nå&quot;],&quot;Riktig!&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(26)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f26"></div><div class="sol" id="s26">Wzorcowa odpowiedź: <b>Det blir kastet mindre mat nå.</b></div>
+</section>
+<section class="task" data-id="27">
+<h2>27. Przekształć zdanie.</h2>
+<p class="given">Vi bør bruke mindre plast. Plast forurenser havet.</p>
+<div class="rw"><span>Vi bør bruke mindre plast fordi</span><input type="text" id="t27" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(27,[&quot;den forurenser havet&quot;, &quot;plast forurenser havet&quot;, &quot;plasten forurenser havet&quot;],&quot;Riktig!&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(27)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f27"></div><div class="sol" id="s27">Wzorcowa odpowiedź: <b>Vi bør bruke mindre plast fordi den forurenser havet.</b></div>
+</section>
+<section class="task" data-id="28">
+<h2>28. Przekształć zdanie.</h2>
+<p class="given">Jeg sykler til universitetet. Det er bra for miljøet.</p>
+<div class="rw"><span>Jeg sykler til universitetet, noe som</span><input type="text" id="t28" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(28,[&quot;er bra for miljøet&quot;],&quot;Riktig!&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(28)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f28"></div><div class="sol" id="s28">Wzorcowa odpowiedź: <b>Jeg sykler til universitetet, noe som er bra for miljøet.</b></div>
+</section>
+<section class="task" data-id="29">
+<h2>29. Przekształć zdanie.</h2>
+<p class="given">Hvis flere sorterer avfallet, blir mer gjenvunnet.</p>
+<div class="rw"><span>Jo flere som sorterer avfallet,</span><input type="text" id="t29" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(29,[&quot;jo mer blir gjenvunnet&quot;, &quot;desto mer blir gjenvunnet&quot;],&quot;Riktig!&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(29)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f29"></div><div class="sol" id="s29">Wzorcowa odpowiedź: <b>Jo flere som sorterer avfallet, jo mer blir gjenvunnet.</b></div>
+</section>
+<h2 class="part">Del 5. Ułóż zdania</h2>
+<p class="partintro">Uwaga na szyk: inwersja po «derfor» i po zdaniu podrzędnym, «ikke» w zdaniu z «at».</p>
+<section class="task" data-id="30">
+<h2>30. Ułóż zdanie.</h2>
+<div class="ord" id="o30"><div class="line" id="l30" aria-label="Twoje zdanie"></div><div class="tiles" id="p30">
+<button class="tile" onclick="pick(30,this)">barnehagen</button>
+<button class="tile" onclick="pick(30,this)">vi</button>
+<button class="tile" onclick="pick(30,this)">matavfall</button>
+<button class="tile" onclick="pick(30,this)">plast.</button>
+<button class="tile" onclick="pick(30,this)">I</button>
+<button class="tile" onclick="pick(30,this)">sorterer</button>
+<button class="tile" onclick="pick(30,this)">og</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(30,[&quot;I barnehagen sorterer vi matavfall og plast.&quot;],&quot;Riktig!&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(30)">Od nowa</button><button class="ghost" onclick="showSol(30)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f30"></div><div class="sol" id="s30">Wzorcowa odpowiedź: <b>I barnehagen sorterer vi matavfall og plast.</b></div>
+</section>
+<section class="task" data-id="31">
+<h2>31. Ułóż zdanie.</h2>
+<div class="ord" id="o31"><div class="line" id="l31" aria-label="Twoje zdanie"></div><div class="tiles" id="p31">
+<button class="tile" onclick="pick(31,this)">temperaturen</button>
+<button class="tile" onclick="pick(31,this)">å</button>
+<button class="tile" onclick="pick(31,this)">Hvis</button>
+<button class="tile" onclick="pick(31,this)">vil</button>
+<button class="tile" onclick="pick(31,this)">vi</button>
+<button class="tile" onclick="pick(31,this)">utslippene,</button>
+<button class="tile" onclick="pick(31,this)">ikke</button>
+<button class="tile" onclick="pick(31,this)">stige.</button>
+<button class="tile" onclick="pick(31,this)">kutter</button>
+<button class="tile" onclick="pick(31,this)">fortsette</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(31,[&quot;Hvis vi ikke kutter utslippene, vil temperaturen fortsette å stige.&quot;],&quot;Riktig!&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(31)">Od nowa</button><button class="ghost" onclick="showSol(31)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f31"></div><div class="sol" id="s31">Wzorcowa odpowiedź: <b>Hvis vi ikke kutter utslippene, vil temperaturen fortsette å stige.</b></div>
+</section>
+<section class="task" data-id="32">
+<h2>32. Ułóż zdanie.</h2>
+<div class="ord" id="o32"><div class="line" id="l32" aria-label="Twoje zdanie"></div><div class="tiles" id="p32">
+<button class="tile" onclick="pick(32,this)">å</button>
+<button class="tile" onclick="pick(32,this)">flere</button>
+<button class="tile" onclick="pick(32,this)">om</button>
+<button class="tile" onclick="pick(32,this)">ganger.</button>
+<button class="tile" onclick="pick(32,this)">blir</button>
+<button class="tile" onclick="pick(32,this)">Gjestene</button>
+<button class="tile" onclick="pick(32,this)">håndklærne</button>
+<button class="tile" onclick="pick(32,this)">bruke</button>
+<button class="tile" onclick="pick(32,this)">bedt</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(32,[&quot;Gjestene blir bedt om å bruke håndklærne flere ganger.&quot;],&quot;Riktig!&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(32)">Od nowa</button><button class="ghost" onclick="showSol(32)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f32"></div><div class="sol" id="s32">Wzorcowa odpowiedź: <b>Gjestene blir bedt om å bruke håndklærne flere ganger.</b></div>
+</section>
+<section class="task" data-id="33">
+<h2>33. Ułóż zdanie.</h2>
+<div class="ord" id="o33"><div class="line" id="l33" aria-label="Twoje zdanie"></div><div class="tiles" id="p33">
+<button class="tile" onclick="pick(33,this)">Jeg</button>
+<button class="tile" onclick="pick(33,this)">klimaproblemet.</button>
+<button class="tile" onclick="pick(33,this)">alene</button>
+<button class="tile" onclick="pick(33,this)">løse</button>
+<button class="tile" onclick="pick(33,this)">elbiler</button>
+<button class="tile" onclick="pick(33,this)">at</button>
+<button class="tile" onclick="pick(33,this)">kan</button>
+<button class="tile" onclick="pick(33,this)">tror</button>
+<button class="tile" onclick="pick(33,this)">ikke</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(33,[&quot;Jeg tror ikke at elbiler alene kan løse klimaproblemet.&quot;],&quot;Riktig!&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(33)">Od nowa</button><button class="ghost" onclick="showSol(33)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f33"></div><div class="sol" id="s33">Wzorcowa odpowiedź: <b>Jeg tror ikke at elbiler alene kan løse klimaproblemet.</b></div>
+</section>
+<section class="task" data-id="34">
+<h2>34. Ułóż zdanie.</h2>
+<div class="ord" id="o34"><div class="line" id="l34" aria-label="Twoje zdanie"></div><div class="tiles" id="p34">
+<button class="tile" onclick="pick(34,this)">planlegge</button>
+<button class="tile" onclick="pick(34,this)">rutene</button>
+<button class="tile" onclick="pick(34,this)">bedre.</button>
+<button class="tile" onclick="pick(34,this)">bør</button>
+<button class="tile" onclick="pick(34,this)">transportfirmaer</button>
+<button class="tile" onclick="pick(34,this)">Derfor</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(34,[&quot;Derfor bør transportfirmaer planlegge rutene bedre.&quot;],&quot;Riktig!&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(34)">Od nowa</button><button class="ghost" onclick="showSol(34)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f34"></div><div class="sol" id="s34">Wzorcowa odpowiedź: <b>Derfor bør transportfirmaer planlegge rutene bedre.</b></div>
+</section>
+<section class="task" data-id="35">
+<h2>35. Ułóż zdanie.</h2>
+<div class="ord" id="o35"><div class="line" id="l35" aria-label="Twoje zdanie"></div><div class="tiles" id="p35">
+<button class="tile" onclick="pick(35,this)">maten</button>
+<button class="tile" onclick="pick(35,this)">den</button>
+<button class="tile" onclick="pick(35,this)">har</button>
+<button class="tile" onclick="pick(35,this)">på</button>
+<button class="tile" onclick="pick(35,this)">dato,</button>
+<button class="tile" onclick="pick(35,this)">kan</button>
+<button class="tile" onclick="pick(35,this)">ut</button>
+<button class="tile" onclick="pick(35,this)">god.</button>
+<button class="tile" onclick="pick(35,this)">være</button>
+<button class="tile" onclick="pick(35,this)">Selv om</button>
+<button class="tile" onclick="pick(35,this)">gått</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(35,[&quot;Selv om maten har gått ut på dato, kan den være god.&quot;],&quot;Riktig!&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(35)">Od nowa</button><button class="ghost" onclick="showSol(35)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f35"></div><div class="sol" id="s35">Wzorcowa odpowiedź: <b>Selv om maten har gått ut på dato, kan den være god.</b></div>
+</section>
+<h2 class="part">Del 6. Wyrażenia i przyimki</h2>
+<p class="partintro">Krótkie pytania wyboru: znaczenie wyrażeń i stałe połączenia.</p>
+<section class="task" data-id="36">
+<h2>36. Hva betyr «å gå til spille»?</h2>
+<div class="opts" data-q="36" data-correct="å bli kastet uten å bli brukt" data-ok="Riktig.">
+<button class="opt">å bli kastet uten å bli brukt</button>
+<button class="opt">å spille et spill</button>
+<button class="opt">å gå en tur</button>
+<button class="opt">å bli solgt billig</button>
+</div><div class="fb" id="f36"></div>
+</section>
+<section class="task" data-id="37">
+<h2>37. Velg riktig: Vi må ___ tiltak mot forurensning.</h2>
+<div class="opts" data-q="37" data-correct="sette i verk" data-ok="Riktig: sette i verk tiltak = wprowadzić działania.">
+<button class="opt">sette i verk</button>
+<button class="opt">sette på</button>
+<button class="opt">gjøre om</button>
+<button class="opt">ta opp</button>
+</div><div class="fb" id="f37"></div>
+</section>
+<section class="task" data-id="38">
+<h2>38. Hvilken energikilde er ikke fornybar?</h2>
+<div class="opts" data-q="38" data-correct="kull" data-ok="Riktig: kull er fossilt brensel.">
+<button class="opt">kull</button>
+<button class="opt">sol</button>
+<button class="opt">vind</button>
+<button class="opt">vannkraft</button>
+</div><div class="fb" id="f38"></div>
+</section>
+<section class="task" data-id="39">
+<h2>39. Velg riktig: Klimaendringene ___ store konsekvenser for naturen.</h2>
+<div class="opts" data-q="39" data-correct="får" data-ok="Riktig: få konsekvenser.">
+<button class="opt">får</button>
+<button class="opt">gjør</button>
+<button class="opt">lager</button>
+<button class="opt">tar</button>
+</div><div class="fb" id="f39"></div>
+</section>
+<section class="task" data-id="40">
+<h2>40. Hva betyr «bærekraftig»?</h2>
+<div class="opts" data-q="40" data-correct="som kan fortsette uten å skade miljøet" data-ok="Riktig: bærekraftig = zrównoważony.">
+<button class="opt">som kan fortsette uten å skade miljøet</button>
+<button class="opt">som er sterk og tung</button>
+<button class="opt">som er billig å kjøpe</button>
+<button class="opt">som er laget av plast</button>
+</div><div class="fb" id="f40"></div>
+</section>
+<section class="task" data-id="41">
+<h2>41. Velg riktig preposisjon: Vi må ta vare ___ naturen.</h2>
+<div class="opts" data-q="41" data-correct="på" data-ok="Riktig: ta vare på.">
+<button class="opt">på</button>
+<button class="opt">om</button>
+<button class="opt">for</button>
+<button class="opt">med</button>
+</div><div class="fb" id="f41"></div>
+</section>
+<section class="task" data-id="42">
+<h2>42. Velg riktig preposisjon: Jeg er opptatt ___ miljøspørsmål.</h2>
+<div class="opts" data-q="42" data-correct="av" data-ok="Riktig: opptatt av.">
+<button class="opt">av</button>
+<button class="opt">med</button>
+<button class="opt">på</button>
+<button class="opt">om</button>
+</div><div class="fb" id="f42"></div>
+</section>
+<section class="task" data-id="43">
+<h2>43. Velg riktig preposisjon: Kommunen har innført et forbud ___ engangsgriller i parken.</h2>
+<div class="opts" data-q="43" data-correct="mot" data-ok="Riktig: forbud mot.">
+<button class="opt">mot</button>
+<button class="opt">for</button>
+<button class="opt">av</button>
+<button class="opt">til</button>
+</div><div class="fb" id="f43"></div>
+</section>
+<section class="task" data-id="44">
+<h2>44. Hva betyr «klimafotavtrykk»?</h2>
+<div class="opts" data-q="44" data-correct="hvor mye en person eller bedrift påvirker klimaet" data-ok="Riktig: ślad węglowy.">
+<button class="opt">hvor mye en person eller bedrift påvirker klimaet</button>
+<button class="opt">spor etter sko i snøen</button>
+<button class="opt">et kart over klimaet</button>
+<button class="opt">en skatt på bensin</button>
+</div><div class="fb" id="f44"></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 44 / 44</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=44;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
+</script>
+
+</body>
+</html>

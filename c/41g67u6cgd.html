@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Norskprøve B1–B2: miljø og klima</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · B1–B2 · Lekcja 1</span>
+  <h1>Norskprøve B1–B2: <span>miljø og klima</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Ćwiczenia dla grupy (Marta, Joanna, Wiktoria) w formacie zadań z Norskprøve: Lytteforståelse i Leseforståelse. Temat: środowisko i zanieczyszczenia, segregacja odpadów, marnowanie jedzenia, zmiany klimatu.</p>
+  <div class="meta"><span>Lytteforståelse</span><span>Leseforståelse</span><span>ok. 60 min</span><span>39 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 39</b></div>
+<h2 class="part">Del 1. Lytteforståelse: korte meldinger</h2>
+<p class="partintro">Generatory nie tworzą nagrań, więc słuchanie jest tu w formie transkrypcji. Lektorka czyta tekst na głos (B1: dwa razy, B2: raz), a Wy odpowiadacie bez patrzenia. Ćwicząc samodzielnie, przeczytaj tekst raz, zakryj go i odpowiedz.</p>
+<section class="task" data-id="1">
+<h2>1. Hva skal beboerne gjøre med glass og metall?</h2>
+<p class="hint">Melding fra borettslaget: <i>«Fra 1. desember kommer det nye containere ved inngangen. Glass og metall skal i den grønne containeren. Plastemballasje legger dere fortsatt i egne poser.»</i></p>
+<div class="opts" data-q="1" data-correct="I den grønne containeren ved inngangen" data-ok="Riktig: glass og metall skal i den grønne containeren.">
+<button class="opt">I den grønne containeren ved inngangen</button>
+<button class="opt">Sammen med restavfallet</button>
+<button class="opt">I egne poser</button>
+<button class="opt">På gjenvinningsstasjonen</button>
+</div><div class="fb" id="f1"></div>
+</section>
+<section class="task" data-id="2">
+<h2>2. Hva må barna ha med seg i morgen?</h2>
+<p class="hint">Telefonbeskjed: <i>«Hei, det er Tone fra barnehagen. I morgen har vi ryddedag i nærmiljøet. Barna må ha med seg hansker og regntøy. Vi går klokka ni og er tilbake før lunsj.»</i></p>
+<div class="opts" data-q="2" data-correct="Hansker og regntøy" data-ok="Riktig: hansker og regntøy.">
+<button class="opt">Hansker og regntøy</button>
+<button class="opt">Matpakke og drikkeflaske</button>
+<button class="opt">Søppelsekker</button>
+<button class="opt">Lue og votter</button>
+</div><div class="fb" id="f2"></div>
+</section>
+<section class="task" data-id="3">
+<h2>3. Når stenger gjenvinningsstasjonen på hverdager?</h2>
+<p class="hint">Radio: <i>«Gjenvinningsstasjonen på Haugerud har nye åpningstider. Fra mandag er den åpen fra klokka sju til halv sju på hverdager, og fra ni til tre på lørdager.»</i></p>
+<div class="opts" data-q="3" data-correct="18.30" data-ok="Riktig: «halv sju» = 18.30.">
+<button class="opt">18.30</button>
+<button class="opt">19.00</button>
+<button class="opt">17.30</button>
+<button class="opt">15.00</button>
+</div><div class="fb" id="f3"></div>
+</section>
+<section class="task" data-id="4">
+<h2>4. Når er neste henting av hageavfall?</h2>
+<p class="hint">Melding fra kommunen: <i>«Vi henter hageavfall annenhver fredag. Neste henting er fredag 4. desember. Etter det henter vi ikke før i april.»</i></p>
+<div class="opts" data-q="4" data-correct="Fredag 4. desember" data-ok="Riktig: fredag 4. desember.">
+<button class="opt">Fredag 4. desember</button>
+<button class="opt">Fredag 11. desember</button>
+<button class="opt">Torsdag 3. desember</button>
+<button class="opt">I april</button>
+</div><div class="fb" id="f4"></div>
+</section>
+<section class="task" data-id="5">
+<h2>5. Hvorfor skal ikke håndklærne byttes?</h2>
+<p class="hint">Samtale på hotellet: <i>«– Hei, Lars. Skal jeg bytte håndklærne på rom 214? – Nei, gjesten har hengt dem på kroken. Det betyr at hun vil bruke dem igjen. Vi bytter bare håndklær som ligger på gulvet.»</i></p>
+<div class="opts" data-q="5" data-correct="Gjesten vil bruke dem igjen" data-ok="Riktig: håndklær på kroken = gjesten vil bruke dem igjen.">
+<button class="opt">Gjesten vil bruke dem igjen</button>
+<button class="opt">Det er ikke flere rene håndklær</button>
+<button class="opt">Gjesten har reist</button>
+<button class="opt">Lars har allerede byttet dem</button>
+</div><div class="fb" id="f5"></div>
+</section>
+<h2 class="part">Del 2. Lytteforståelse: tema-serie og meninger</h2>
+<p class="partintro">Tema-serie: cztery osoby mówią na jeden temat. Za każdym razem to samo pytanie i te same odpowiedzi. Potem (poziom B2) cztery osoby mówią o tym, czy zakazać samochodów benzynowych w centrum miasta.</p>
+<section class="task" data-id="6">
+<h2>6. Tema-serie: Hva er viktigst for personen når det gjelder matsvinn?</h2>
+<p class="hint">Person 1: <i>«Jeg skriver alltid en handleliste før jeg går på butikken. Da kjøper jeg bare det vi trenger den uka, og ingenting blir liggende i kjøleskapet.»</i></p>
+<div class="opts" data-q="6" data-correct="Å planlegge innkjøpene" data-ok="Riktig: handleliste = planlegging.">
+<button class="opt">Å planlegge innkjøpene</button>
+<button class="opt">Å bruke rester</button>
+<button class="opt">Å forstå datomerkingen</button>
+<button class="opt">Å dele mat med andre</button>
+</div><div class="fb" id="f6"></div>
+</section>
+<section class="task" data-id="7">
+<h2>7. Tema-serie: Hva er viktigst for personen når det gjelder matsvinn?</h2>
+<p class="hint">Person 2: <i>«Når det står «best før» på pakken, lukter og smaker jeg på maten. Den er ofte helt fin flere dager etter datoen.»</i></p>
+<div class="opts" data-q="7" data-correct="Å forstå datomerkingen" data-ok="Riktig: hun ser, lukter og smaker etter «best før».">
+<button class="opt">Å planlegge innkjøpene</button>
+<button class="opt">Å bruke rester</button>
+<button class="opt">Å forstå datomerkingen</button>
+<button class="opt">Å dele mat med andre</button>
+</div><div class="fb" id="f7"></div>
+</section>
+<section class="task" data-id="8">
+<h2>8. Tema-serie: Hva er viktigst for personen når det gjelder matsvinn?</h2>
+<p class="hint">Person 3: <i>«Har vi kokt for mange poteter, lager jeg potetsalat eller suppe dagen etter. Ingenting blir kastet hos oss.»</i></p>
+<div class="opts" data-q="8" data-correct="Å bruke rester" data-ok="Riktig: potetsalat og suppe av restene.">
+<button class="opt">Å planlegge innkjøpene</button>
+<button class="opt">Å bruke rester</button>
+<button class="opt">Å forstå datomerkingen</button>
+<button class="opt">Å dele mat med andre</button>
+</div><div class="fb" id="f8"></div>
+</section>
+<section class="task" data-id="9">
+<h2>9. Tema-serie: Hva er viktigst for personen når det gjelder matsvinn?</h2>
+<p class="hint">Person 4: <i>«I nabolaget vårt har vi et felles kjøleskap. Når jeg reiser bort, setter jeg maten min der, så andre kan ta den.»</i></p>
+<div class="opts" data-q="9" data-correct="Å dele mat med andre" data-ok="Riktig: felles kjøleskap i nabolaget.">
+<button class="opt">Å planlegge innkjøpene</button>
+<button class="opt">Å bruke rester</button>
+<button class="opt">Å forstå datomerkingen</button>
+<button class="opt">Å dele mat med andre</button>
+</div><div class="fb" id="f9"></div>
+</section>
+<section class="task" data-id="10">
+<h2>10. Hva mener personen om å forby bensinbiler i sentrum?</h2>
+<p class="hint"><i>«Jeg bor i sentrum, og lufta er mye renere nå enn for ti år siden. Men vi kan gjøre mer. Bensinbilene har ingenting i sentrum å gjøre.»</i></p>
+<div class="opts" data-q="10" data-correct="For et forbud" data-ok="Riktig: «Bensinbilene har ingenting i sentrum å gjøre.»">
+<button class="opt">For et forbud</button>
+<button class="opt">Imot et forbud</button>
+<button class="opt">Usikker</button>
+</div><div class="fb" id="f10"></div>
+</section>
+<section class="task" data-id="11">
+<h2>11. Hva mener personen om å forby bensinbiler i sentrum?</h2>
+<p class="hint"><i>«Mange eldre og familier med små barn er avhengige av bil. Et forbud rammer dem som ikke har råd til elbil. Det synes jeg er urettferdig.»</i></p>
+<div class="opts" data-q="11" data-correct="Imot et forbud" data-ok="Riktig: hun synes forbudet er urettferdig.">
+<button class="opt">For et forbud</button>
+<button class="opt">Imot et forbud</button>
+<button class="opt">Usikker</button>
+</div><div class="fb" id="f11"></div>
+</section>
+<section class="task" data-id="12">
+<h2>12. Hva mener personen om å forby bensinbiler i sentrum?</h2>
+<p class="hint"><i>«På den ene siden trenger vi renere luft. På den andre siden er kollektivtilbudet ikke godt nok ennå. Jeg vet faktisk ikke hva jeg mener.»</i></p>
+<div class="opts" data-q="12" data-correct="Usikker" data-ok="Riktig: «Jeg vet faktisk ikke hva jeg mener.»">
+<button class="opt">For et forbud</button>
+<button class="opt">Imot et forbud</button>
+<button class="opt">Usikker</button>
+</div><div class="fb" id="f12"></div>
+</section>
+<section class="task" data-id="13">
+<h2>13. Hvem snakker, og hva mener hun?</h2>
+<p class="hint"><i>«Jeg kjører buss og ser køene hver dag. Hvis færre biler kjører inn, kommer bussene fram i tide. Da vil flere ta bussen, og det er bra for alle.»</i></p>
+<div class="opts" data-q="13" data-correct="En bussjåfør som er for et forbud" data-ok="Riktig: hun kjører buss og vil ha færre biler.">
+<button class="opt">En bussjåfør som er for et forbud</button>
+<button class="opt">En bussjåfør som er imot et forbud</button>
+<button class="opt">En drosjesjåfør som er for et forbud</button>
+<button class="opt">En lærer som er usikker</button>
+</div><div class="fb" id="f13"></div>
+</section>
+<h2 class="part">Del 3. Leseforståelse: korte tekster</h2>
+<p class="partintro">Velg riktig tekst: wybierz ogłoszenie pasujące do sytuacji. Klikk på riktig ord: wybierz słowo o podobnym znaczeniu.</p>
+<section class="task" data-id="14">
+<h2>14. Velg riktig tekst: Du har en gammel mobiltelefon som ikke virker. Hvilken tekst passer?</h2>
+<div class="opts" data-q="14" data-correct="Elektrobutikken tar imot gamle mobiler, ladere og batterier gratis. Lever ved kassen." data-ok="Riktig: elektrobutikken tar imot gamle mobiler.">
+<button class="opt">Elektrobutikken tar imot gamle mobiler, ladere og batterier gratis. Lever ved kassen.</button>
+<button class="opt">Vi kjøper brukte møbler og henter dem hjemme hos deg.</button>
+<button class="opt">Bytt klær på biblioteket lørdag kl. 12–15. Ta med det du ikke bruker.</button>
+<button class="opt">Pantemaskinen i kjelleren er ute av drift til fredag.</button>
+</div><div class="fb" id="f14"></div>
+</section>
+<section class="task" data-id="15">
+<h2>15. Velg riktig tekst: Barnehagen trenger materialer til et formingsprosjekt. Hvilken tekst passer?</h2>
+<div class="opts" data-q="15" data-correct="Vi samler tomme melkekartonger, dorullruller og korker. Lever dem i garderoben innen fredag." data-ok="Riktig: materialer til forming.">
+<button class="opt">Vi samler tomme melkekartonger, dorullruller og korker. Lever dem i garderoben innen fredag.</button>
+<button class="opt">Husk å sortere matavfallet i de grønne posene.</button>
+<button class="opt">Foreldremøte om bærekraft tirsdag kl. 18.</button>
+<button class="opt">Vi trenger frivillige til å plukke søppel i parken.</button>
+</div><div class="fb" id="f15"></div>
+</section>
+<section class="task" data-id="16">
+<h2>16. Velg riktig tekst: Du vil lære å kaste mindre mat. Hvilket kurs passer?</h2>
+<div class="opts" data-q="16" data-correct="Lag middag av restene! Tips om planlegging og oppbevaring. Torsdag kl. 18." data-ok="Riktig: kurset handler om rester og planlegging.">
+<button class="opt">Lag middag av restene! Tips om planlegging og oppbevaring. Torsdag kl. 18.</button>
+<button class="opt">Sy om gamle klær. Ta med symaskin.</button>
+<button class="opt">Kildesortering for styret i borettslaget.</button>
+<button class="opt">Dyrk egne grønnsaker på balkongen.</button>
+</div><div class="fb" id="f16"></div>
+</section>
+<section class="task" data-id="17">
+<h2>17. Klikk på riktig ord: Hvilket ord betyr omtrent det samme som «redusert»?</h2>
+<p class="hint"><i>«Hotellet har redusert bruken av engangsplast.»</i></p>
+<div class="opts" data-q="17" data-correct="minsket" data-ok="Riktig: redusere = minske.">
+<button class="opt">minsket</button>
+<button class="opt">økt</button>
+<button class="opt">forbudt</button>
+<button class="opt">erstattet</button>
+</div><div class="fb" id="f17"></div>
+</section>
+<section class="task" data-id="18">
+<h2>18. Klikk på riktig ord: Hvilket ord betyr omtrent det samme som «avgjørende»?</h2>
+<p class="hint"><i>«Det er avgjørende at alle bidrar.»</i></p>
+<div class="opts" data-q="18" data-correct="svært viktig" data-ok="Riktig: avgjørende = svært viktig.">
+<button class="opt">svært viktig</button>
+<button class="opt">frivillig</button>
+<button class="opt">umulig</button>
+<button class="opt">vanlig</button>
+</div><div class="fb" id="f18"></div>
+</section>
+<section class="task" data-id="19">
+<h2>19. Klikk på riktig ord: Hvilket ord betyr omtrent det samme som «oppfordrer»?</h2>
+<p class="hint"><i>«Kommunen oppfordrer innbyggerne til å sykle mer.»</i></p>
+<div class="opts" data-q="19" data-correct="ber" data-ok="Riktig: oppfordre noen til = be noen om.">
+<button class="opt">ber</button>
+<button class="opt">tvinger</button>
+<button class="opt">forbyr</button>
+<button class="opt">betaler</button>
+</div><div class="fb" id="f19"></div>
+</section>
+<section class="task" data-id="20">
+<h2>20. Klikk på riktig ord: Hvilket ord betyr omtrent det samme som «bekymret»?</h2>
+<p class="hint"><i>«Mange er bekymret for klimaendringene.»</i></p>
+<div class="opts" data-q="20" data-correct="urolig" data-ok="Riktig: bekymret = urolig.">
+<button class="opt">urolig</button>
+<button class="opt">glad</button>
+<button class="opt">likegyldig</button>
+<button class="opt">overrasket</button>
+</div><div class="fb" id="f20"></div>
+</section>
+<section class="task" data-id="21">
+<h2>21. Klikk på riktig ord: Hvilket ord betyr omtrent det samme som «bortkastet»?</h2>
+<p class="hint"><i>«Matsvinn er bortkastede penger.»</i></p>
+<div class="opts" data-q="21" data-correct="unødvendig brukt" data-ok="Riktig: bortkastet = brukt til ingen nytte.">
+<button class="opt">unødvendig brukt</button>
+<button class="opt">gjenvunnet</button>
+<button class="opt">solgt</button>
+<button class="opt">spart</button>
+</div><div class="fb" id="f21"></div>
+</section>
+<h2 class="part">Del 4. Leseforståelse: klikk på riktig navn</h2>
+<p class="partintro">Przeczytaj, co mówią cztery osoby, i wskaż właściwą osobę.</p>
+<div class="text"><h2>Hva gjør du for miljøet?</h2><p>Ingrid (34): Jeg har sluttet å fly på ferie. I sommer tok vi toget til Bergen i stedet, og det ble en fin tur.</p><p>Ahmed (41): Jeg jobber på et lager, og vi har nettopp byttet til elektriske trucker. Jeg merker at lufta inne er mye bedre nå.</p><p>Silje (27): Jeg kjøper nesten aldri nye klær. Jeg handler på bruktbutikker eller bytter klær med venninnene mine.</p><p>Bjørn (58): Jeg har kuttet ned på kjøtt. Vi spiser fisk eller vegetarmat fire dager i uka, og barnebarna liker det godt.</p></div>
+<section class="task" data-id="22">
+<h2>22. Hvem har opplevd en endring på arbeidsplassen?</h2>
+<div class="opts" data-q="22" data-correct="Ahmed" data-ok="Riktig: Ahmed (elektriske trucker på lageret).">
+<button class="opt">Ingrid</button>
+<button class="opt">Ahmed</button>
+<button class="opt">Silje</button>
+<button class="opt">Bjørn</button>
+</div><div class="fb" id="f22"></div>
+</section>
+<section class="task" data-id="23">
+<h2>23. Hvem reiser på en mer miljøvennlig måte?</h2>
+<div class="opts" data-q="23" data-correct="Ingrid" data-ok="Riktig: Ingrid tar toget i stedet for fly.">
+<button class="opt">Ingrid</button>
+<button class="opt">Ahmed</button>
+<button class="opt">Silje</button>
+<button class="opt">Bjørn</button>
+</div><div class="fb" id="f23"></div>
+</section>
+<section class="task" data-id="24">
+<h2>24. Hvem har endret middagsvanene?</h2>
+<div class="opts" data-q="24" data-correct="Bjørn" data-ok="Riktig: Bjørn spiser mindre kjøtt.">
+<button class="opt">Ingrid</button>
+<button class="opt">Ahmed</button>
+<button class="opt">Silje</button>
+<button class="opt">Bjørn</button>
+</div><div class="fb" id="f24"></div>
+</section>
+<section class="task" data-id="25">
+<h2>25. Hvem bruker klær som andre har brukt før?</h2>
+<div class="opts" data-q="25" data-correct="Silje" data-ok="Riktig: Silje handler brukt.">
+<button class="opt">Ingrid</button>
+<button class="opt">Ahmed</button>
+<button class="opt">Silje</button>
+<button class="opt">Bjørn</button>
+</div><div class="fb" id="f25"></div>
+</section>
+<h2 class="part">Del 5. Leseforståelse: lang tekst</h2>
+<p class="partintro">Przeczytaj tekst i odpowiedz na pytania. Potem Flytt avsnitt (gdzie pasuje akapit) i Lukeoppgaver (wybierz słowo do luki).</p>
+<div class="text"><h2>Matsvinn – et problem vi kan løse</h2><p>Hvert år havner store mengder spiselig mat i søpla i Norge. Mange tror at det er butikkene og restaurantene som kaster mest, men husholdningene står faktisk for en stor del av matsvinnet. Det betyr at hver og en av oss kan gjøre en forskjell.</p><p>Hvorfor kaster vi så mye mat? En vanlig årsak er at vi kjøper for mye. Tilbud som «ta tre, betal for to» frister, men ofte rekker vi ikke å spise alt før det blir dårlig. En annen årsak er at mange misforstår datomerkingen på pakkene.</p><p>Det er nemlig stor forskjell på «siste forbruksdag» og «best før». Mat som er merket med «siste forbruksdag», for eksempel kjøttdeig og fersk fisk, bør man ikke spise etter datoen. «Best før» betyr derimot bare at produsenten garanterer kvaliteten fram til denne datoen. Se, lukt og smak før du kaster.</p><p>Matsvinn er ikke bare bortkastede penger. Når mat blir produsert, transportert og kastet, fører det til utslipp av klimagasser. Å redusere matsvinnet er derfor et av de enkleste klimatiltakene vi kan gjøre i hverdagen.</p><p>Noen enkle råd kan hjelpe: Planlegg middagene for uka, skriv handleliste og sjekk kjøleskapet før du handler. Oppbevar maten riktig, og lag nye retter av restene. Brødskiver kan fryses, og overmodne bananer egner seg godt i bakst.</p><p>Også skoler og barnehager kan bidra. I flere barnehager lærer barna om mat og miljø, for eksempel ved å veie maten som blir kastet etter lunsj. Da ser de selv hvor mye som går til spille, og mange blir motivert til å forsyne seg med mindre.</p></div>
+<section class="task" data-id="26">
+<h2>26. Hvem står for en stor del av matsvinnet ifølge teksten?</h2>
+<div class="opts" data-q="26" data-correct="Husholdningene" data-ok="Riktig: husholdningene.">
+<button class="opt">Husholdningene</button>
+<button class="opt">Butikkene</button>
+<button class="opt">Restaurantene</button>
+<button class="opt">Barnehagene</button>
+</div><div class="fb" id="f26"></div>
+</section>
+<section class="task" data-id="27">
+<h2>27. Hvorfor kan tilbud føre til matsvinn?</h2>
+<div class="opts" data-q="27" data-correct="Vi kjøper mer enn vi rekker å spise" data-ok="Riktig.">
+<button class="opt">Vi kjøper mer enn vi rekker å spise</button>
+<button class="opt">Maten på tilbud er dårligere</button>
+<button class="opt">Tilbudsvarer har kortere holdbarhet</button>
+<button class="opt">Vi glemmer handlelista</button>
+</div><div class="fb" id="f27"></div>
+</section>
+<section class="task" data-id="28">
+<h2>28. Hva betyr «best før» ifølge teksten?</h2>
+<div class="opts" data-q="28" data-correct="At kvaliteten er garantert fram til datoen" data-ok="Riktig.">
+<button class="opt">At kvaliteten er garantert fram til datoen</button>
+<button class="opt">At maten er farlig etter datoen</button>
+<button class="opt">At maten må fryses før datoen</button>
+<button class="opt">At butikken må kaste maten etter datoen</button>
+</div><div class="fb" id="f28"></div>
+</section>
+<section class="task" data-id="29">
+<h2>29. Hvilken matvare bør du ikke spise etter datoen?</h2>
+<div class="opts" data-q="29" data-correct="Kjøttdeig" data-ok="Riktig: kjøttdeig er merket med «siste forbruksdag».">
+<button class="opt">Kjøttdeig</button>
+<button class="opt">Pasta</button>
+<button class="opt">Brød</button>
+<button class="opt">Bananer</button>
+</div><div class="fb" id="f29"></div>
+</section>
+<section class="task" data-id="30">
+<h2>30. Hvorfor er matsvinn et klimaproblem?</h2>
+<div class="opts" data-q="30" data-correct="Produksjon, transport og avfall gir utslipp" data-ok="Riktig.">
+<button class="opt">Produksjon, transport og avfall gir utslipp</button>
+<button class="opt">Maten råtner i naturen</button>
+<button class="opt">Det krever mer plastemballasje</button>
+<button class="opt">Søppelbilene bruker mye diesel</button>
+</div><div class="fb" id="f30"></div>
+</section>
+<section class="task" data-id="31">
+<h2>31. Hva gjør noen barnehager?</h2>
+<div class="opts" data-q="31" data-correct="De veier maten som blir kastet" data-ok="Riktig.">
+<button class="opt">De veier maten som blir kastet</button>
+<button class="opt">De lager middag av rester</button>
+<button class="opt">De dyrker egne grønnsaker</button>
+<button class="opt">De forbyr matpakker</button>
+</div><div class="fb" id="f31"></div>
+</section>
+<section class="task" data-id="32">
+<h2>32. Påstand: Teksten mener at det er vanskelig å gjøre noe med matsvinn.</h2>
+<div class="opts" data-q="32" data-correct="Feil" data-ok="Riktig svar: feil. Teksten gir mange enkle råd.">
+<button class="opt">Riktig</button>
+<button class="opt">Feil</button>
+</div><div class="fb" id="f32"></div>
+</section>
+<section class="task" data-id="33">
+<h2>33. Flytt avsnitt: Hvor i teksten passer dette avsnittet best?</h2>
+<p class="hint"><i>«Et godt eksempel er yoghurt. Den kan ofte spises en til to uker etter best før-datoen, hvis den har stått i kjøleskapet hele tiden.»</i></p>
+<div class="opts" data-q="33" data-correct="Etter avsnittet om «siste forbruksdag» og «best før»" data-ok="Riktig: avsnittet gir et eksempel på «best før».">
+<button class="opt">Etter avsnittet om årsakene til matsvinn</button>
+<button class="opt">Etter avsnittet om «siste forbruksdag» og «best før»</button>
+<button class="opt">Etter avsnittet om klimagasser</button>
+<button class="opt">Etter avsnittet om barnehager</button>
+</div><div class="fb" id="f33"></div>
+</section>
+<section class="task" data-id="34">
+<h2>34. Flytt avsnitt: Hvor i teksten passer dette avsnittet best?</h2>
+<p class="hint"><i>«Et tips til de ansatte er å la barna smake litt først. Etterpå kan de heller forsyne seg en gang til.»</i></p>
+<div class="opts" data-q="34" data-correct="Etter avsnittet om barnehager" data-ok="Riktig: avsnittet handler om barn og lunsj.">
+<button class="opt">Etter avsnittet om årsakene til matsvinn</button>
+<button class="opt">Etter avsnittet om «siste forbruksdag» og «best før»</button>
+<button class="opt">Etter avsnittet om klimagasser</button>
+<button class="opt">Etter avsnittet om barnehager</button>
+</div><div class="fb" id="f34"></div>
+</section>
+<section class="task" data-id="35">
+<h2>35. Lukeoppgave: velg riktig ord.</h2>
+<p class="hint"><i>«___ mange vet at matsvinn er et problem, kaster de fortsatt mye mat.»</i></p>
+<div class="opts" data-q="35" data-correct="Selv om" data-ok="Riktig: selv om = chociaż.">
+<button class="opt">Selv om</button>
+<button class="opt">Fordi</button>
+<button class="opt">Derfor</button>
+<button class="opt">Dessuten</button>
+</div><div class="fb" id="f35"></div>
+</section>
+<section class="task" data-id="36">
+<h2>36. Lukeoppgave: velg riktig ord.</h2>
+<p class="hint"><i>«Vi må redusere utslippene. ___ må vi bruke mer kollektivtransport.»</i></p>
+<div class="opts" data-q="36" data-correct="Derfor" data-ok="Riktig: derfor = dlatego (inwersja: derfor må vi).">
+<button class="opt">Derfor</button>
+<button class="opt">Likevel</button>
+<button class="opt">Selv om</button>
+<button class="opt">Mens</button>
+</div><div class="fb" id="f36"></div>
+</section>
+<section class="task" data-id="37">
+<h2>37. Lukeoppgave: velg riktig ord.</h2>
+<p class="hint"><i>«Plastposer bør ___ med papirposer eller handlenett.»</i></p>
+<div class="opts" data-q="37" data-correct="erstattes" data-ok="Riktig: erstatte noe med noe (byttes wymaga «ut»: byttes ut med).">
+<button class="opt">erstattes</button>
+<button class="opt">byttes</button>
+<button class="opt">endres</button>
+<button class="opt">skiftes</button>
+</div><div class="fb" id="f37"></div>
+</section>
+<section class="task" data-id="38">
+<h2>38. Lukeoppgave: velg riktig ord.</h2>
+<p class="hint"><i>«Det har blitt ___ vanlig å reparere ting i stedet for å kjøpe nytt.»</i></p>
+<div class="opts" data-q="38" data-correct="stadig mer" data-ok="Riktig: stadig mer = coraz bardziej.">
+<button class="opt">stadig mer</button>
+<button class="opt">aldri mer</button>
+<button class="opt">mest</button>
+<button class="opt">mye mer enn</button>
+</div><div class="fb" id="f38"></div>
+</section>
+<section class="task" data-id="39">
+<h2>39. Lukeoppgave: velg riktig ord.</h2>
+<p class="hint"><i>«Hotellet ___ gjestene om å bruke håndklærne mer enn én gang.»</i></p>
+<div class="opts" data-q="39" data-correct="oppfordrer" data-ok="Riktig: oppfordre noen om / til å gjøre noe.">
+<button class="opt">oppfordrer</button>
+<button class="opt">forteller</button>
+<button class="opt">snakker</button>
+<button class="opt">viser</button>
+</div><div class="fb" id="f39"></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 39 / 39</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=39;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
+</script>
+
+</body>
+</html>

@@ -5,9 +5,10 @@ Muntlig drill = quiz rozmowy na czas. Jedno pytanie na ekranie, przycisk do nast
 osobne przyciski do słów kluczowych i pytań pomocniczych (oppfølgingsspørsmål), stoper 2 lub 4 min.
 
 Użycie: python3 generuj_drill.py spec.json wynik.html
-Spec: {"pill","title","title_hl","intro","meta":[...],"how":"...","default_min":2,
+Spec: {"pill","title","title_hl","intro","meta":[...],"how":"...","default_min":2,"timers":[2,4]?,
        "cards":[{"q":"pytanie po norwesku","pl":"tłumaczenie (opcjonalnie)","role":"opis sytuacji (opcjonalnie)",
-                 "words":["słowo","..."],"followups":["pytanie","..."]}]}
+                 "words":["słowo","..."],"followups":["pytanie","..."],"min":3?}]}
+      "timers" = przyciski stopera (domyślnie 2 i 4 min); "min" na karcie ustawia stoper przy tej karcie.
 """
 import json, sys, html, os
 D = os.path.dirname(os.path.abspath(__file__)); E = html.escape
@@ -54,7 +55,7 @@ function beep(){try{const a=new (window.AudioContext||window.webkitAudioContext)
 function go(){if(run){clearInterval(id);run=false;draw();return}if(left<=0)left=total;run=true;last=Date.now();
   id=setInterval(()=>{const now=Date.now();left-=(now-last)/1000;last=now;if(left<=0){left=0;clearInterval(id);run=false;beep()}draw()},250);draw()}
 function reset(){clearInterval(id);run=false;left=total;draw()}
-function setMin(m){$('m2').classList.toggle('on',m==2);$('m4').classList.toggle('on',m==4);total=m*60;reset()}
+function setMin(m){document.querySelectorAll('.seg button').forEach(b=>b.classList.toggle('on',+b.dataset.m==m));total=m*60;reset()}
 function tog(k){if(cur>N)return;const o=$(k+cur).classList.toggle('open');$('b'+k).classList.toggle('on',o)}
 function move(d){const n=cur+d;if(n<1||n>N+1)return;
   if(cur<=N){$('c'+cur).classList.remove('cur');$('w'+cur).classList.remove('open');$('f'+cur).classList.remove('open')}else $('fin').classList.remove('cur');
@@ -63,7 +64,8 @@ function move(d){const n=cur+d;if(n<1||n>N+1)return;
   if(cur<=N){$('c'+cur).classList.add('cur');$('lab').textContent='Pytanie '+cur+' z '+N;$('ctl').style.display=''}
   else{$('fin').classList.add('cur');$('lab').textContent='Koniec';$('ctl').style.display='none'}
   $('prev').style.visibility=cur==1?'hidden':'visible';$('next').style.visibility=cur>N?'hidden':'visible';
-  $('next').textContent=cur==N?'Zakończ →':'Następne pytanie →';reset()}
+  $('next').textContent=cur==N?'Zakończ →':'Następne pytanie →';
+  if(cur<=N&&CM[cur-1])setMin(CM[cur-1]);else reset()}
 document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')move(1);if(e.key==='ArrowLeft')move(-1)});
 $('prev').style.visibility='hidden';draw();
 """
@@ -83,7 +85,9 @@ def main(sp, out):
                     f'<div class="panel" id="f{n}"><div class="lbl">Pytania pomocnicze (oppfølgingsspørsmål)</div><ol class="fu">{fu}</ol></div>\n</section>')
     dots = "".join(f'<i id="d{n}"' + (' class="on"' if n == 1 else '') + '></i>' for n in range(1, N + 1))
     meta = "".join(f"<span>{E(m)}</span>" for m in s.get("meta", []) + [f'{N} pytań'])
-    on2 = "on" if dm == 2 else ""; on4 = "on" if dm == 4 else ""
+    tms = [int(x) for x in s.get("timers", [2, 4])]
+    seg = "".join(f'<button data-m="{m}" class="{"on" if m == dm else ""}" onclick="setMin({m})">{m} min</button>' for m in tms)
+    cm = json.dumps([int(c.get("min", 0)) for c in s["cards"]])
     title = E(s.get("doc_title", "Muntlig drill Norskling"))
     page = f"""<!doctype html>
 <html lang="pl">
@@ -111,7 +115,7 @@ def main(sp, out):
     <div id="ctl">
       <div class="helpers"><button class="ghost" id="bw" onclick="tog('w')">Słowa kluczowe</button><button class="ghost" id="bf" onclick="tog('f')">Pytania pomocnicze</button></div>
       <div class="timer"><span class="clock" id="k">{dm:02d}:00</span>
-        <span class="seg"><button id="m2" class="{on2}" onclick="setMin(2)">2 min</button><button id="m4" class="{on4}" onclick="setMin(4)">4 min</button></span>
+        <span class="seg">{seg}</span>
         <button class="btn" id="b" onclick="go()">Start</button><button class="ghost" onclick="reset()">Od nowa</button>
         <div class="track"><i id="p"></i></div></div>
     </div>
@@ -119,7 +123,7 @@ def main(sp, out):
   </div>
 </main>
 <script>
-const N={N},MIN={dm};{JS}</script>
+const N={N},MIN={dm},CM={cm};{JS}</script>
 </body>
 </html>
 """
