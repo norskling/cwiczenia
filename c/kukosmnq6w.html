@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A1 Lekcja 7: å glede seg til ferie | Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+
+.quiz{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;box-shadow:0 10px 30px rgba(13,31,45,.06)}
+.qtop{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.num{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--fjord);font-size:.8rem;text-transform:uppercase;letter-spacing:.12em}
+.stage{min-height:150px;display:flex;flex-direction:column;justify-content:center}
+.q{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.8rem;font-weight:700;letter-spacing:-.02em;line-height:1.25;margin:0}
+.q.idle{color:var(--skygge);font-size:1.2rem;font-weight:600}
+.pl{font-size:.95rem;margin:8px 0 0}
+.panel{display:none;margin-top:16px;padding:14px 16px;border-radius:12px;background:var(--tint)}
+.panel.open{display:block}
+.lbl{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--fjord);margin:0 0 8px}
+.words{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.words span{background:#fff;color:var(--natt);border:1px solid var(--border);border-radius:100px;padding:5px 12px;font-size:.95rem}
+.ex{color:var(--natt);margin:0}
+.ctl{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.ctl .btn,.ctl .ghost{margin-top:0}
+.timer{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid var(--border)}
+.clock{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.7rem;color:var(--natt);min-width:86px;font-variant-numeric:tabular-nums}
+.clock.end{color:var(--bad)}
+.seg{display:inline-flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden}
+.seg button{font:inherit;font-size:.95rem;background:none;border:0;color:var(--fjord);padding:9px 14px;cursor:pointer;min-height:44px}
+.seg button.on{background:var(--fjord);color:#fff}
+.timer .ghost{margin-top:0}
+.how{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:18px 22px;margin-bottom:20px;color:var(--natt)}
+@media (max-width:600px){.q{font-size:1.4rem}.ctl .btn{width:100%}}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · A1 · Lekcja 7</span>
+  <h1>Wylosuj osobę: <span>jeg gleder meg!</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Losujesz osobę i czasownik zwrotny. Powiedz pełne zdanie w poprawnej formie, z właściwym zaimkiem zwrotnym (meg, deg, seg, oss, dere).</p>
+  <div class="meta"><span>Mówienie</span><span>Czasowniki zwrotne</span><span>ok. 10 min</span><span>20 kart</span></div>
+  <div class="how">Kliknij „Losuj”, przeczytaj kartę i powiedz zdanie na głos. Jeśli nie wiesz, kliknij „Podpowiedź”. Przykład: JEG + å glede seg til ferie → Jeg gleder meg til ferie.</div>
+  <div class="quiz">
+    <div class="qtop"><span class="num" id="lab">Kliknij „Losuj”</span></div>
+    <div class="stage"><p class="q idle" id="q">Kliknij „Losuj”, żeby wylosować pierwszą kartę.</p><p class="pl" id="pl"></p></div>
+    <div class="panel" id="hp"><div class="lbl">Podpowiedź</div><div class="words" id="w"></div><p class="ex" id="ex"></p></div>
+    <div class="ctl"><button class="btn" id="bd" onclick="draw()">Losuj</button><button class="ghost" id="bh" onclick="hint()" style="display:none">Podpowiedź</button></div>
+    
+  </div>
+</main>
+<script>
+const C=[{"q": "JEG + å glede seg til ferie", "words": ["jeg → meg"], "example": "Jeg gleder meg til ferie."}, {"q": "DU + å glede seg til ferie", "words": ["du → deg"], "example": "Du gleder deg til ferie."}, {"q": "HAN + å glede seg til ferie", "words": ["han → seg"], "example": "Han gleder seg til ferie."}, {"q": "HUN + å glede seg til ferie", "words": ["hun → seg"], "example": "Hun gleder seg til ferie."}, {"q": "VI + å glede seg til ferie", "words": ["vi → oss"], "example": "Vi gleder oss til ferie."}, {"q": "DERE + å glede seg til ferie", "words": ["dere → dere"], "example": "Dere gleder dere til ferie."}, {"q": "DE + å glede seg til ferie", "words": ["de → seg"], "example": "De gleder seg til ferie."}, {"q": "JEG + å grue seg til eksamen", "pl": "bać się egzaminu", "words": ["jeg → meg"], "example": "Jeg gruer meg til eksamen."}, {"q": "VI + å grue seg til eksamen", "words": ["vi → oss"], "example": "Vi gruer oss til eksamen."}, {"q": "DU + å legge seg klokka elleve", "words": ["du → deg"], "example": "Du legger deg klokka elleve."}, {"q": "BARNA + å legge seg klokka åtte", "words": ["barna = de → seg"], "example": "Barna legger seg klokka åtte."}, {"q": "HUN + å skynde seg på jobb", "pl": "spieszyć się do pracy", "words": ["hun → seg"], "example": "Hun skynder seg på jobb."}, {"q": "DERE + å kose seg hjemme", "words": ["dere → dere"], "example": "Dere koser dere hjemme."}, {"q": "JEG + å føle seg bra", "words": ["jeg → meg"], "example": "Jeg føler meg bra."}, {"q": "HAN + å gifte seg i juni", "words": ["han → seg"], "example": "Han gifter seg i juni."}, {"q": "VI + å kle på seg", "pl": "ubierać się", "words": ["vi → oss"], "example": "Vi kler på oss."}, {"q": "I DAG + JEG + å glede seg til ferie", "pl": "Zacznij od „I dag”. Uwaga na inwersję!", "words": ["I dag gleder …"], "example": "I dag gleder jeg meg til ferie."}, {"q": "NÅ + VI + å glede seg til ferie", "pl": "Zacznij od „Nå”.", "words": ["Nå gleder …"], "example": "Nå gleder vi oss til ferie."}, {"q": "JEG + IKKE + å kjede seg på jobben", "pl": "Zdanie przeczące. Seg przed ikke!", "words": ["meg ikke"], "example": "Jeg kjeder meg ikke på jobben."}, {"q": "Zadaj pytanie: DU + å glede seg til ferie?", "words": ["Gleder du …?"], "example": "Gleder du deg til ferie?"}],T=[];
+const $=x=>document.getElementById(x);let pool=[],seen=0,cur=-1;
+function refill(){pool=[...Array(C.length).keys()];for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}}
+function draw(){if(!pool.length){refill();seen=0}cur=pool.pop();seen++;const c=C[cur];
+  $('q').className='q';$('q').textContent=c.q;$('pl').textContent=c.pl||'';
+  $('w').innerHTML=(c.words||[]).map(w=>'<span>'+w.replace(/</g,'&lt;')+'</span>').join('');$('ex').textContent=c.example?('Przykład: '+c.example):'';
+  $('hp').classList.remove('open');$('bh').style.display=(c.words&&c.words.length)||c.example?'':'none';
+  $('lab').textContent='Wylosowano '+seen+' z '+C.length;$('bd').textContent='Losuj kolejne';if(T.length)reset()}
+function hint(){$('hp').classList.toggle('open')}
+let total=(T[0]||1)*60,left=total,run=false,id=null,last=0;
+function fmt(s){s=Math.max(0,Math.ceil(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function tdraw(){if(!T.length)return;$('k').textContent=fmt(left);$('k').classList.toggle('end',left<=0);$('b').textContent=run?'Pauza':(left<total&&left>0?'Wznów':'Start')}
+function beep(){try{const a=new (window.AudioContext||window.webkitAudioContext)();[0,.35,.7].forEach(d=>{const o=a.createOscillator(),g=a.createGain();o.frequency.value=880;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.2,a.currentTime+d);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+d+.3);o.start(a.currentTime+d);o.stop(a.currentTime+d+.3)})}catch(e){}}
+function go(){if(run){clearInterval(id);run=false;tdraw();return}if(left<=0)left=total;run=true;last=Date.now();
+  id=setInterval(()=>{const now=Date.now();left-=(now-last)/1000;last=now;if(left<=0){left=0;clearInterval(id);run=false;beep()}tdraw()},250);tdraw()}
+function reset(){clearInterval(id);run=false;left=total;tdraw()}
+function setMin(m){T.forEach(x=>$('m'+x).classList.toggle('on',x==m));total=m*60;reset()}
+document.addEventListener('keydown',e=>{if(e.key===' '&&e.target===document.body){e.preventDefault();draw()}});
+refill();tdraw();
+</script>
+</body>
+</html>
