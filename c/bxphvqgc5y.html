@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zadanie domowe B2 Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · B2 · Lekcja 1 · zadanie domowe</span>
+  <h1>Profesjonell norsk: <span>ord til presentasjoner</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Katarzyna, to zadanie domowe po lekcji 1. Najpierw fiszki ze słowami, których brakowało Ci w rozmowie o projektach (å oppnå, å oppfylle krav, styringsverktøy i inne), potem te słowa w zdaniach z Twojej pracy. Na końcu szyk zdania (inwersja) i strona bierna, bo te dwie rzeczy wróciły kilka razy na lekcji. Część tych słów pojawi się na lekcji 2 w tekście o beredskapsuka.</p>
+  <div class="meta"><span>Słownictwo + gramatyka</span><span>ok. 30 min</span><span>27 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 27</b></div>
+<h2 class="part">Część A: Fiszki</h2>
+<p class="partintro">Połącz norweskie słowo z polskim znaczeniem. Powtórz zestaw, aż zrobisz go bez błędu.</p>
+<section class="task" data-id="1">
+<h2>1. Fiszki 1: język projektów</h2>
+<p class="hint">Wybierz polskie znaczenie.</p>
+<div class="match">
+<span class="w">å oppnå</span><select id="m1_0"><option value="">wybierz…</option><option>narzędzie zarządzania (governance tool)</option><option>osiągnąć</option><option>ramy (np. programu)</option><option>spełnić wymagania</option><option>wdrożyć</option></select>
+<span class="w">å oppfylle krav</span><select id="m1_1"><option value="">wybierz…</option><option>narzędzie zarządzania (governance tool)</option><option>osiągnąć</option><option>ramy (np. programu)</option><option>spełnić wymagania</option><option>wdrożyć</option></select>
+<span class="w">et styringsverktøy</span><select id="m1_2"><option value="">wybierz…</option><option>narzędzie zarządzania (governance tool)</option><option>osiągnąć</option><option>ramy (np. programu)</option><option>spełnić wymagania</option><option>wdrożyć</option></select>
+<span class="w">et rammeverk</span><select id="m1_3"><option value="">wybierz…</option><option>narzędzie zarządzania (governance tool)</option><option>osiągnąć</option><option>ramy (np. programu)</option><option>spełnić wymagania</option><option>wdrożyć</option></select>
+<span class="w">å iverksette</span><select id="m1_4"><option value="">wybierz…</option><option>narzędzie zarządzania (governance tool)</option><option>osiągnąć</option><option>ramy (np. programu)</option><option>spełnić wymagania</option><option>wdrożyć</option></select>
+</div>
+<button class="btn" onclick="checkMatch(1,{&quot;m1_0&quot;: &quot;osiągnąć&quot;, &quot;m1_1&quot;: &quot;spełnić wymagania&quot;, &quot;m1_2&quot;: &quot;narzędzie zarządzania (governance tool)&quot;, &quot;m1_3&quot;: &quot;ramy (np. programu)&quot;, &quot;m1_4&quot;: &quot;wdrożyć&quot;})">Sprawdź</button><div class="fb" id="f1"></div>
+</section>
+<section class="task" data-id="2">
+<h2>2. Fiszki 2: projekt i partnerzy</h2>
+<p class="hint">Wybierz polskie znaczenie.</p>
+<div class="match">
+<span class="w">et tiltak</span><select id="m2_0"><option value="">wybierz…</option><option>działanie, środek</option><option>interesariusz</option><option>korzyść</option><option>ograniczenie</option><option>zakotwiczyć (uzyskać poparcie)</option></select>
+<span class="w">en begrensning</span><select id="m2_1"><option value="">wybierz…</option><option>działanie, środek</option><option>interesariusz</option><option>korzyść</option><option>ograniczenie</option><option>zakotwiczyć (uzyskać poparcie)</option></select>
+<span class="w">en interessent</span><select id="m2_2"><option value="">wybierz…</option><option>działanie, środek</option><option>interesariusz</option><option>korzyść</option><option>ograniczenie</option><option>zakotwiczyć (uzyskać poparcie)</option></select>
+<span class="w">å forankre</span><select id="m2_3"><option value="">wybierz…</option><option>działanie, środek</option><option>interesariusz</option><option>korzyść</option><option>ograniczenie</option><option>zakotwiczyć (uzyskać poparcie)</option></select>
+<span class="w">en gevinst</span><select id="m2_4"><option value="">wybierz…</option><option>działanie, środek</option><option>interesariusz</option><option>korzyść</option><option>ograniczenie</option><option>zakotwiczyć (uzyskać poparcie)</option></select>
+</div>
+<button class="btn" onclick="checkMatch(2,{&quot;m2_0&quot;: &quot;działanie, środek&quot;, &quot;m2_1&quot;: &quot;ograniczenie&quot;, &quot;m2_2&quot;: &quot;interesariusz&quot;, &quot;m2_3&quot;: &quot;zakotwiczyć (uzyskać poparcie)&quot;, &quot;m2_4&quot;: &quot;korzyść&quot;})">Sprawdź</button><div class="fb" id="f2"></div>
+</section>
+<section class="task" data-id="3">
+<h2>3. Fiszki 3: prowadzenie prezentacji</h2>
+<p class="hint">Wybierz polskie znaczenie.</p>
+<div class="match">
+<span class="w">å trekke fram</span><select id="m3_0"><option value="">wybierz…</option><option>kłaść nacisk na</option><option>podsumować</option><option>przegląd</option><option>rozwinąć (myśl)</option><option>wskazać, podkreślić</option></select>
+<span class="w">å legge vekt på</span><select id="m3_1"><option value="">wybierz…</option><option>kłaść nacisk na</option><option>podsumować</option><option>przegląd</option><option>rozwinąć (myśl)</option><option>wskazać, podkreślić</option></select>
+<span class="w">en oversikt</span><select id="m3_2"><option value="">wybierz…</option><option>kłaść nacisk na</option><option>podsumować</option><option>przegląd</option><option>rozwinąć (myśl)</option><option>wskazać, podkreślić</option></select>
+<span class="w">å oppsummere</span><select id="m3_3"><option value="">wybierz…</option><option>kłaść nacisk na</option><option>podsumować</option><option>przegląd</option><option>rozwinąć (myśl)</option><option>wskazać, podkreślić</option></select>
+<span class="w">å utdype</span><select id="m3_4"><option value="">wybierz…</option><option>kłaść nacisk na</option><option>podsumować</option><option>przegląd</option><option>rozwinąć (myśl)</option><option>wskazać, podkreślić</option></select>
+</div>
+<button class="btn" onclick="checkMatch(3,{&quot;m3_0&quot;: &quot;wskazać, podkreślić&quot;, &quot;m3_1&quot;: &quot;kłaść nacisk na&quot;, &quot;m3_2&quot;: &quot;przegląd&quot;, &quot;m3_3&quot;: &quot;podsumować&quot;, &quot;m3_4&quot;: &quot;rozwinąć (myśl)&quot;})">Sprawdź</button><div class="fb" id="f3"></div>
+</section>
+<section class="task" data-id="4">
+<h2>4. Które słowo pasuje?</h2>
+<p class="hint">Vi håper å ___ gode resultater i år.</p>
+<div class="opts" data-q="4" data-correct="oppnå" data-ok="Dobrze. Å oppnå resultater/mål = osiągnąć. Å oppfylle łączy się z krav, forventninger, vilkår.">
+<button class="opt">oppnå</button>
+<button class="opt">oppfylle</button>
+<button class="opt">bidra</button>
+</div><div class="fb" id="f4"></div>
+</section>
+<section class="task" data-id="5">
+<h2>5. Które słowo pasuje?</h2>
+<p class="hint">Søknaden må ___ alle formelle krav.</p>
+<div class="opts" data-q="5" data-correct="oppfylle" data-ok="Dobrze. Å oppfylle krav = spełnić wymagania.">
+<button class="opt">oppfylle</button>
+<button class="opt">oppnå</button>
+<button class="opt">utdype</button>
+</div><div class="fb" id="f5"></div>
+</section>
+<section class="task" data-id="6">
+<h2>6. Które słowo pasuje?</h2>
+<p class="hint">Norske kommuner kan ___ med erfaring fra egne prosjekter.</p>
+<div class="opts" data-q="6" data-correct="bidra" data-ok="Dobrze. Å bidra med noe = wnieść coś, å bidra til noe = przyczynić się do czegoś.">
+<button class="opt">bidra</button>
+<button class="opt">oppnå</button>
+<button class="opt">forankre</button>
+</div><div class="fb" id="f6"></div>
+</section>
+<section class="task" data-id="7">
+<h2>7. Które słowo pasuje?</h2>
+<p class="hint">Jeg er ___ i bøker og lydbøker.</p>
+<div class="opts" data-q="7" data-correct="interessert" data-ok="Dobrze. Jeg er interessert i = interesuję się. Interessant = ciekawy (o rzeczy): boka er interessant.">
+<button class="opt">interessert</button>
+<button class="opt">interessant</button>
+<button class="opt">interessere</button>
+</div><div class="fb" id="f7"></div>
+</section>
+<section class="task" data-id="8">
+<h2>8. Co znaczy fordelaktig?</h2>
+<p class="hint">Samarbeidet er <b>fordelaktig</b> for begge parter.</p>
+<div class="opts" data-q="8" data-correct="korzystny" data-ok="Dobrze. Fordelaktig = korzystny, en fordel = zaleta.">
+<button class="opt">korzystny</button>
+<button class="opt">kosztowny</button>
+<button class="opt">konieczny</button>
+</div><div class="fb" id="f8"></div>
+</section>
+<section class="task" data-id="9">
+<h2>9. Co znaczy å samordne?</h2>
+<p class="hint">Fylket skal <b>samordne</b> arbeidet i kommunene.</p>
+<div class="opts" data-q="9" data-correct="koordynować" data-ok="Dobrze. Å samordne = koordynować, en samordning = koordynacja.">
+<button class="opt">koordynować</button>
+<button class="opt">finansować</button>
+<button class="opt">kontrolować</button>
+</div><div class="fb" id="f9"></div>
+</section>
+<h2 class="part">Część B: Słowa w zdaniach</h2>
+<p class="partintro">Uzupełnij zdania z codziennej pracy w projektach. Wskazówka po polsku podaje znaczenie.</p>
+<section class="task" data-id="10">
+<h2>10. Uzupełnij</h2>
+<p class="hint">osiągnąć</p>
+<div class="inline sent">Prosjektet skal <input type="text" id="t10" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> tre hovedmål.</div>
+<div class="row"><button class="btn" onclick="checkText(10,[&quot;oppnå&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(10)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f10"></div><div class="sol" id="s10">Wzorcowa odpowiedź: <b>oppnå</b></div>
+</section>
+<section class="task" data-id="11">
+<h2>11. Uzupełnij</h2>
+<p class="hint">spełnić</p>
+<div class="inline sent">Alle partnere må <input type="text" id="t11" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> kravene i programmet.</div>
+<div class="row"><button class="btn" onclick="checkText(11,[&quot;oppfylle&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(11)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f11"></div><div class="sol" id="s11">Wzorcowa odpowiedź: <b>oppfylle</b></div>
+</section>
+<section class="task" data-id="12">
+<h2>12. Uzupełnij</h2>
+<p class="hint">narzędzie zarządzania</p>
+<div class="inline sent">Planen er et viktig <input type="text" id="t12" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> for kommunene.</div>
+<div class="row"><button class="btn" onclick="checkText(12,[&quot;styringsverktøy&quot;],&quot;Dobrze. Et styringsverktøy, flere styringsverktøy.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(12)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f12"></div><div class="sol" id="s12">Wzorcowa odpowiedź: <b>styringsverktøy</b></div>
+</section>
+<section class="task" data-id="13">
+<h2>13. Uzupełnij</h2>
+<p class="hint">ograniczenia</p>
+<div class="inline sent">Det finnes flere <input type="text" id="t13" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">, for eksempel tid og penger.</div>
+<div class="row"><button class="btn" onclick="checkText(13,[&quot;begrensninger&quot;],&quot;Dobrze. En begrensning → begrensninger.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(13)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f13"></div><div class="sol" id="s13">Wzorcowa odpowiedź: <b>begrensninger</b></div>
+</section>
+<section class="task" data-id="14">
+<h2>14. Uzupełnij</h2>
+<p class="hint">korzystne</p>
+<div class="inline sent">Samarbeidet er <input type="text" id="t14" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> for begge parter.</div>
+<div class="row"><button class="btn" onclick="checkText(14,[&quot;fordelaktig&quot;],&quot;Dobrze. Samarbeidet (et) → fordelaktig bez -t, bo przymiotniki na -ig nie dostają -t.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(14)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f14"></div><div class="sol" id="s14">Wzorcowa odpowiedź: <b>fordelaktig</b></div>
+</section>
+<section class="task" data-id="15">
+<h2>15. Uzupełnij</h2>
+<p class="hint">wdrożyć</p>
+<div class="inline sent">Vi må <input type="text" id="t15" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> tiltakene innen neste år.</div>
+<div class="row"><button class="btn" onclick="checkText(15,[&quot;iverksette&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(15)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f15"></div><div class="sol" id="s15">Wzorcowa odpowiedź: <b>iverksette</b></div>
+</section>
+<section class="task" data-id="16">
+<h2>16. Uzupełnij</h2>
+<p class="hint">wskazać, podkreślić</p>
+<div class="inline sent">Jeg vil gjerne trekke <input type="text" id="t16" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> tre punkter.</div>
+<div class="row"><button class="btn" onclick="checkText(16,[&quot;fram&quot;, &quot;frem&quot;],&quot;Dobrze. Å trekke fram (albo frem) = wskazać, podkreślić.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(16)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f16"></div><div class="sol" id="s16">Wzorcowa odpowiedź: <b>fram</b></div>
+</section>
+<section class="task" data-id="17">
+<h2>17. Uzupełnij</h2>
+<p class="hint">zakotwiczyć, strona bierna</p>
+<div class="inline sent">Prosjektet må <input type="text" id="t17" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i ledelsen i kommunen.</div>
+<div class="row"><button class="btn" onclick="checkText(17,[&quot;forankres&quot;],&quot;Dobrze. Må + bezokolicznik bierny: forankres = musi zostać zakotwiczony.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(17)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f17"></div><div class="sol" id="s17">Wzorcowa odpowiedź: <b>forankres</b></div>
+</section>
+<h2 class="part">Część C: Inwersja i strona bierna</h2>
+<p class="partintro">Najpierw zacznij zdanie od podanego słowa (czasownik zostaje na 2. miejscu). Potem zmień zdanie na stronę bierną.</p>
+<section class="task" data-id="18">
+<h2>18. Zacznij od określenia czasu</h2>
+<p class="given">Vi skal snakke om beredskap i dag.</p>
+<div class="rw"><span>I dag</span><input type="text" id="t18" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(18,[&quot;skal vi snakke om beredskap&quot;],&quot;Dobrze. Czasownik skal stoi zaraz po „i dag”, podmiot vi za nim.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(18)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f18"></div><div class="sol" id="s18">Wzorcowa odpowiedź: <b>I dag skal vi snakke om beredskap.</b></div>
+</section>
+<section class="task" data-id="19">
+<h2>19. Zacznij od określenia czasu</h2>
+<p class="given">Vi presenterte prosjektet for kommunen i fjor.</p>
+<div class="rw"><span>I fjor</span><input type="text" id="t19" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(19,[&quot;presenterte vi prosjektet for kommunen&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(19)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f19"></div><div class="sol" id="s19">Wzorcowa odpowiedź: <b>I fjor presenterte vi prosjektet for kommunen.</b></div>
+</section>
+<section class="task" data-id="20">
+<h2>20. Zacznij od słowa dessverre</h2>
+<p class="given">Kommunene har dessverre lite tid.</p>
+<div class="rw"><span>Dessverre</span><input type="text" id="t20" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(20,[&quot;har kommunene lite tid&quot;],&quot;Dobrze. Po dessverre, derfor, likevel też jest inwersja.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(20)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f20"></div><div class="sol" id="s20">Wzorcowa odpowiedź: <b>Dessverre har kommunene lite tid.</b></div>
+</section>
+<section class="task" data-id="21">
+<h2>21. Strona bierna z -s</h2>
+<p class="given">Kommunen iverksetter tiltakene.</p>
+<div class="rw"><span>Tiltakene</span><input type="text" id="t21" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(21,[&quot;iverksettes av kommunen&quot;],&quot;Dobrze. Czas teraźniejszy: bezokolicznik + s (iverksettes).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(21)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f21"></div><div class="sol" id="s21">Wzorcowa odpowiedź: <b>Tiltakene iverksettes av kommunen.</b></div>
+</section>
+<section class="task" data-id="22">
+<h2>22. Strona bierna z bli</h2>
+<p class="given">Ekspertgruppen utarbeidet rapporten.</p>
+<div class="rw"><span>Rapporten</span><input type="text" id="t22" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(22,[&quot;ble utarbeidet av ekspertgruppen&quot;],&quot;Dobrze. Przeszły: ble + imiesłów (utarbeidet).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(22)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f22"></div><div class="sol" id="s22">Wzorcowa odpowiedź: <b>Rapporten ble utarbeidet av ekspertgruppen.</b></div>
+</section>
+<section class="task" data-id="23">
+<h2>23. Strona bierna po må</h2>
+<p class="given">Vi må oppfylle kravene.</p>
+<div class="rw"><span>Kravene</span><input type="text" id="t23" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(23,[&quot;må oppfylles&quot;],&quot;Dobrze. Må + oppfylles.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(23)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f23"></div><div class="sol" id="s23">Wzorcowa odpowiedź: <b>Kravene må oppfylles.</b></div>
+</section>
+<h2 class="part">Część D: Ułóż zdanie</h2>
+<p class="partintro">Kliknij słowa w dobrej kolejności. To zdania, które przydadzą się w prezentacji.</p>
+<section class="task" data-id="24">
+<h2>24. Ułóż zdanie</h2>
+<div class="ord" id="o24"><div class="line" id="l24" aria-label="Twoje zdanie"></div><div class="tiles" id="p24">
+<button class="tile" onclick="pick(24,this)">er</button>
+<button class="tile" onclick="pick(24,this)">samarbeidet</button>
+<button class="tile" onclick="pick(24,this)">parter.</button>
+<button class="tile" onclick="pick(24,this)">begge</button>
+<button class="tile" onclick="pick(24,this)">fordelaktig</button>
+<button class="tile" onclick="pick(24,this)">Derfor</button>
+<button class="tile" onclick="pick(24,this)">for</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(24,[&quot;Derfor er samarbeidet fordelaktig for begge parter.&quot;],&quot;Dobrze. Derfor + czasownik + podmiot.&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(24)">Od nowa</button><button class="ghost" onclick="showSol(24)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f24"></div><div class="sol" id="s24">Wzorcowa odpowiedź: <b>Derfor er samarbeidet fordelaktig for begge parter.</b></div>
+</section>
+<section class="task" data-id="25">
+<h2>25. Ułóż zdanie</h2>
+<div class="ord" id="o25"><div class="line" id="l25" aria-label="Twoje zdanie"></div><div class="tiles" id="p25">
+<button class="tile" onclick="pick(25,this)">Etter</button>
+<button class="tile" onclick="pick(25,this)">til</button>
+<button class="tile" onclick="pick(25,this)">spørsmål.</button>
+<button class="tile" onclick="pick(25,this)">blir</button>
+<button class="tile" onclick="pick(25,this)">det</button>
+<button class="tile" onclick="pick(25,this)">presentasjonen</button>
+<button class="tile" onclick="pick(25,this)">tid</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(25,[&quot;Etter presentasjonen blir det tid til spørsmål.&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(25)">Od nowa</button><button class="ghost" onclick="showSol(25)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f25"></div><div class="sol" id="s25">Wzorcowa odpowiedź: <b>Etter presentasjonen blir det tid til spørsmål.</b></div>
+</section>
+<section class="task" data-id="26">
+<h2>26. Ułóż zdanie</h2>
+<div class="ord" id="o26"><div class="line" id="l26" aria-label="Twoje zdanie"></div><div class="tiles" id="p26">
+<button class="tile" onclick="pick(26,this)">Prosjektet</button>
+<button class="tile" onclick="pick(26,this)">av</button>
+<button class="tile" onclick="pick(26,this)">ble</button>
+<button class="tile" onclick="pick(26,this)">finansiert</button>
+<button class="tile" onclick="pick(26,this)">EØS-midlene.</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(26,[&quot;Prosjektet ble finansiert av EØS-midlene.&quot;],&quot;Dobrze. Strona bierna w czasie przeszłym: ble finansiert.&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(26)">Od nowa</button><button class="ghost" onclick="showSol(26)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f26"></div><div class="sol" id="s26">Wzorcowa odpowiedź: <b>Prosjektet ble finansiert av EØS-midlene.</b></div>
+</section>
+<section class="task" data-id="27">
+<h2>27. Ułóż zdanie</h2>
+<div class="ord" id="o27"><div class="line" id="l27" aria-label="Twoje zdanie"></div><div class="tiles" id="p27">
+<button class="tile" onclick="pick(27,this)">vi</button>
+<button class="tile" onclick="pick(27,this)">vi</button>
+<button class="tile" onclick="pick(27,this)">vil</button>
+<button class="tile" onclick="pick(27,this)">samarbeide.</button>
+<button class="tile" onclick="pick(27,this)">må</button>
+<button class="tile" onclick="pick(27,this)">målene,</button>
+<button class="tile" onclick="pick(27,this)">oppnå</button>
+<button class="tile" onclick="pick(27,this)">Hvis</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(27,[&quot;Hvis vi vil oppnå målene, må vi samarbeide.&quot;],&quot;Dobrze. Po zdaniu z hvis zdanie główne zaczyna się od czasownika: må vi.&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(27)">Od nowa</button><button class="ghost" onclick="showSol(27)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f27"></div><div class="sol" id="s27">Wzorcowa odpowiedź: <b>Hvis vi vil oppnå målene, må vi samarbeide.</b></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 27 / 27</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=27;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
+</script>
+
+</body>
+</html>

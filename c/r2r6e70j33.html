@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Słownictwo B2 Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · B2 · Lekcja 2</span>
+  <h1>Ordforråd: <span>beredskap i kommunene</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Katarzyna, to krótki tekst o Egenberedskapsuka i roli kommun. Brakuje w nim trudniejszych słów, które przydadzą Ci się w prezentacji. Część z nich znasz już z zadania domowego. Przeczytaj tekst, potem uzupełnij luki w zdaniach poniżej. Wskazówka po polsku podaje znaczenie.</p>
+  <div class="meta"><span>Słownictwo</span><span>ok. 10 min</span><span>13 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 13</b></div>
+<h2 class="part">Tekst z lukami</h2>
+<p class="partintro">Każda luka ma numer. Uzupełnij ją w zadaniu o tym samym numerze.</p>
+<div class="text"><h2>Egenberedskapsuka: hva betyr den for kommunene?</h2><p>Egenberedskapsuka er en kampanje fra Direktoratet for samfunnssikkerhet og beredskap (DSB). Målet er å (1) ___ innbyggerne på hva de selv kan gjøre før og under en krise. I 2026 er uka en del av Totalforsvarsåret, og et viktig tema er hvordan vi får informasjon når internett og mobilnettet er nede.</p><p>Kommunene har et stort (2) ___ for beredskapen lokalt. Hver kommune skal ha en oppdatert (3) ___, og planen bygger på en risiko- og (4) ___, en såkalt ROS-analyse. Under uka arrangerer mange kommuner (5) ___ og stands der innbyggerne får råd om hvordan de kan (6) ___ seg selv i flere dager uten strøm og vann.</p><p>Sårbare grupper, for eksempel eldre som bor alene, trenger ekstra (7) ___. Derfor må kommunen (8) ___ arbeidet med politiet, helsetjenesten og frivillige organisasjoner, som også (9) ___ mye til beredskapen.</p><p>Et godt (10) ___ gjør det lettere å prioritere. Kommunene har ofte (11) ___, for eksempel lite tid og få ansatte, og tiltakene må (12) ___ i ledelsen. Slik kan kommunen (13) ___ målet om et tryggere lokalsamfunn.</p></div>
+<section class="task" data-id="1">
+<h2>1. Luka 1</h2>
+<p class="hint">uświadomić</p>
+<div class="inline sent">Målet er å <input type="text" id="t1" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> innbyggerne på hva de selv kan gjøre.</div>
+<div class="row"><button class="btn" onclick="checkText(1,[&quot;bevisstgjøre&quot;],&quot;Dobrze. Å bevisstgjøre noen på noe = uświadomić komuś coś.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(1)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f1"></div><div class="sol" id="s1">Wzorcowa odpowiedź: <b>bevisstgjøre</b></div>
+</section>
+<section class="task" data-id="2">
+<h2>2. Luka 2</h2>
+<p class="hint">odpowiedzialność</p>
+<div class="inline sent">Kommunene har et stort <input type="text" id="t2" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> for beredskapen lokalt.</div>
+<div class="row"><button class="btn" onclick="checkText(2,[&quot;ansvar&quot;],&quot;Dobrze. Et ansvar for noe = odpowiedzialność za coś.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(2)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f2"></div><div class="sol" id="s2">Wzorcowa odpowiedź: <b>ansvar</b></div>
+</section>
+<section class="task" data-id="3">
+<h2>3. Luka 3</h2>
+<p class="hint">plan kryzysowy</p>
+<div class="inline sent">Hver kommune skal ha en oppdatert <input type="text" id="t3" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">.</div>
+<div class="row"><button class="btn" onclick="checkText(3,[&quot;kriseplan&quot;, &quot;beredskapsplan&quot;],&quot;Dobrze. W kommunach mówi się często beredskapsplan albo plan for kriseledelse.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(3)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f3"></div><div class="sol" id="s3">Wzorcowa odpowiedź: <b>kriseplan</b></div>
+</section>
+<section class="task" data-id="4">
+<h2>4. Luka 4</h2>
+<p class="hint">analiza podatności (na zagrożenia)</p>
+<div class="inline sent">Planen bygger på en risiko- og <input type="text" id="t4" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">.</div>
+<div class="row"><button class="btn" onclick="checkText(4,[&quot;sårbarhetsanalyse&quot;],&quot;Dobrze. Risiko- og sårbarhetsanalyse = ROS-analyse.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(4)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f4"></div><div class="sol" id="s4">Wzorcowa odpowiedź: <b>sårbarhetsanalyse</b></div>
+</section>
+<section class="task" data-id="5">
+<h2>5. Luka 5</h2>
+<p class="hint">ćwiczenia (manewry)</p>
+<div class="inline sent">Mange kommuner arrangerer <input type="text" id="t5" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> og stands.</div>
+<div class="row"><button class="btn" onclick="checkText(5,[&quot;øvelser&quot;],&quot;Dobrze. En øvelse → øvelser. Å øve = ćwiczyć.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(5)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f5"></div><div class="sol" id="s5">Wzorcowa odpowiedź: <b>øvelser</b></div>
+</section>
+<section class="task" data-id="6">
+<h2>6. Luka 6</h2>
+<p class="hint">poradzić sobie (sami)</p>
+<div class="inline sent">Innbyggerne får råd om hvordan de kan <input type="text" id="t6" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> seg selv i flere dager.</div>
+<div class="row"><button class="btn" onclick="checkText(6,[&quot;klare&quot;],&quot;Dobrze. Å klare seg selv = poradzić sobie samemu.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(6)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f6"></div><div class="sol" id="s6">Wzorcowa odpowiedź: <b>klare</b></div>
+</section>
+<section class="task" data-id="7">
+<h2>7. Luka 7</h2>
+<p class="hint">wsparcie</p>
+<div class="inline sent">Sårbare grupper trenger ekstra <input type="text" id="t7" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">.</div>
+<div class="row"><button class="btn" onclick="checkText(7,[&quot;støtte&quot;, &quot;oppfølging&quot;, &quot;hjelp&quot;],&quot;Dobrze. Støtte = wsparcie, oppfølging = opieka, monitorowanie.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(7)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f7"></div><div class="sol" id="s7">Wzorcowa odpowiedź: <b>støtte</b></div>
+</section>
+<section class="task" data-id="8">
+<h2>8. Luka 8</h2>
+<p class="hint">koordynować</p>
+<div class="inline sent">Derfor må kommunen <input type="text" id="t8" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> arbeidet med politiet og helsetjenesten.</div>
+<div class="row"><button class="btn" onclick="checkText(8,[&quot;samordne&quot;, &quot;koordinere&quot;],&quot;Dobrze. Å samordne = koordynować (koordinere też jest poprawne).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(8)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f8"></div><div class="sol" id="s8">Wzorcowa odpowiedź: <b>samordne</b></div>
+</section>
+<section class="task" data-id="9">
+<h2>9. Luka 9</h2>
+<p class="hint">przyczyniają się</p>
+<div class="inline sent">Frivillige organisasjoner <input type="text" id="t9" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> mye til beredskapen.</div>
+<div class="row"><button class="btn" onclick="checkText(9,[&quot;bidrar&quot;],&quot;Dobrze. Å bidra → bidrar.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(9)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f9"></div><div class="sol" id="s9">Wzorcowa odpowiedź: <b>bidrar</b></div>
+</section>
+<section class="task" data-id="10">
+<h2>10. Luka 10</h2>
+<p class="hint">narzędzie zarządzania</p>
+<div class="inline sent">Et godt <input type="text" id="t10" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> gjør det lettere å prioritere.</div>
+<div class="row"><button class="btn" onclick="checkText(10,[&quot;styringsverktøy&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(10)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f10"></div><div class="sol" id="s10">Wzorcowa odpowiedź: <b>styringsverktøy</b></div>
+</section>
+<section class="task" data-id="11">
+<h2>11. Luka 11</h2>
+<p class="hint">ograniczenia</p>
+<div class="inline sent">Kommunene har ofte <input type="text" id="t11" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">, for eksempel lite tid og få ansatte.</div>
+<div class="row"><button class="btn" onclick="checkText(11,[&quot;begrensninger&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(11)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f11"></div><div class="sol" id="s11">Wzorcowa odpowiedź: <b>begrensninger</b></div>
+</section>
+<section class="task" data-id="12">
+<h2>12. Luka 12</h2>
+<p class="hint">zostać zakotwiczone (strona bierna)</p>
+<div class="inline sent">Tiltakene må <input type="text" id="t12" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i ledelsen.</div>
+<div class="row"><button class="btn" onclick="checkText(12,[&quot;forankres&quot;],&quot;Dobrze. Må + forankres.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(12)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f12"></div><div class="sol" id="s12">Wzorcowa odpowiedź: <b>forankres</b></div>
+</section>
+<section class="task" data-id="13">
+<h2>13. Luka 13</h2>
+<p class="hint">osiągnąć</p>
+<div class="inline sent">Slik kan kommunen <input type="text" id="t13" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> målet om et tryggere lokalsamfunn.</div>
+<div class="row"><button class="btn" onclick="checkText(13,[&quot;oppnå&quot;, &quot;nå&quot;],&quot;Dobrze. Å oppnå et mål albo krócej å nå et mål.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(13)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f13"></div><div class="sol" id="s13">Wzorcowa odpowiedź: <b>oppnå</b></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 13 / 13</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=13;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
+</script>
+
+</body>
+</html>
