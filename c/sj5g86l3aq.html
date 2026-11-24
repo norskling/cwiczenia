@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zadanie domowe Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · A2 · Zadanie domowe po lekcji 2</span>
+  <h1>Preteritum: <span>formy, pytania, szyk</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Czas przeszły czasowników regularnych i nieregularnych z poziomu A1–A2. Najpierw końcówki -et, -te, -de, -dde, potem czasowniki podane tylko po polsku, pytania w czasie przeszłym, szyk z określeniem czasu i „ikke”, „å” po czasowniku i krótki tekst do przepisania.</p>
+  <div class="meta"><span>Gramatyka</span><span>ok. 45 min</span><span>53 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 53</b></div>
+<h2 class="part">Część A: Która końcówka?</h2>
+<p class="partintro">Przypomnij sobie zasadę z lekcji: -et (dwie spółgłoski), -te (jedna spółgłoska), -de (-v, -g, dyftong), -dde (krótkie czasowniki na samogłoskę).</p>
+<section class="task" data-id="1">
+<h2>1. Czas przeszły od „å vaske”</h2>
+<div class="opts" data-q="1" data-correct="vasket" data-ok="Dobrze. Vaske ma dwie spółgłoski (-sk-), więc -et: vasket.">
+<button class="opt">vaskte</button>
+<button class="opt">vasket</button>
+<button class="opt">vaskde</button>
+</div><div class="fb" id="f1"></div>
+</section>
+<section class="task" data-id="2">
+<h2>2. Czas przeszły od „å kjøpe”</h2>
+<div class="opts" data-q="2" data-correct="kjøpte" data-ok="Dobrze. Jedna spółgłoska (-p-), więc -te: kjøpte.">
+<button class="opt">kjøpet</button>
+<button class="opt">kjøpde</button>
+<button class="opt">kjøpte</button>
+</div><div class="fb" id="f2"></div>
+</section>
+<section class="task" data-id="3">
+<h2>3. Czas przeszły od „å prøve”</h2>
+<div class="opts" data-q="3" data-correct="prøvde" data-ok="Dobrze. Temat na -v, więc -de: prøvde.">
+<button class="opt">prøvde</button>
+<button class="opt">prøvte</button>
+<button class="opt">prøvet</button>
+</div><div class="fb" id="f3"></div>
+</section>
+<section class="task" data-id="4">
+<h2>4. Czas przeszły od „å bo”</h2>
+<div class="opts" data-q="4" data-correct="bodde" data-ok="Dobrze. Krótki czasownik na samogłoskę, więc -dde: bodde.">
+<button class="opt">bodet</button>
+<button class="opt">bodde</button>
+<button class="opt">bote</button>
+</div><div class="fb" id="f4"></div>
+</section>
+<section class="task" data-id="5">
+<h2>5. Czas przeszły od „å pakke”</h2>
+<div class="opts" data-q="5" data-correct="pakket" data-ok="Dobrze. Dwie identyczne spółgłoski (-kk-), tu -et: pakket.">
+<button class="opt">pakket</button>
+<button class="opt">pakkte</button>
+<button class="opt">pakde</button>
+</div><div class="fb" id="f5"></div>
+</section>
+<section class="task" data-id="6">
+<h2>6. Czas przeszły od „å leve”</h2>
+<div class="opts" data-q="6" data-correct="levde" data-ok="Dobrze. Temat na -v, więc -de: levde.">
+<button class="opt">levte</button>
+<button class="opt">levet</button>
+<button class="opt">levde</button>
+</div><div class="fb" id="f6"></div>
+</section>
+<section class="task" data-id="7">
+<h2>7. Czas przeszły od „å glemme”</h2>
+<div class="opts" data-q="7" data-correct="glemte" data-ok="Dobrze. Dwie takie same spółgłoski (-mm-), ale tu -te: glemte (tak jak svømme → svømte). Lektorka mówiła: „nie zawsze -et”.">
+<button class="opt">glemmet</button>
+<button class="opt">glemte</button>
+<button class="opt">glemde</button>
+</div><div class="fb" id="f7"></div>
+</section>
+<section class="task" data-id="8">
+<h2>8. Czas przeszły od „å leie”</h2>
+<div class="opts" data-q="8" data-correct="leide" data-ok="Dobrze. Dyftong -ei-, więc -de: leide.">
+<button class="opt">leiet</button>
+<button class="opt">leite</button>
+<button class="opt">leide</button>
+</div><div class="fb" id="f8"></div>
+</section>
+<section class="task" data-id="9">
+<h2>9. Czas przeszły od „å snø”</h2>
+<div class="opts" data-q="9" data-correct="snødde" data-ok="Dobrze. Det snødde = padał śnieg.">
+<button class="opt">snødde</button>
+<button class="opt">snøte</button>
+<button class="opt">snøet</button>
+</div><div class="fb" id="f9"></div>
+</section>
+<h2 class="part">Część B: Czasownik tylko po polsku</h2>
+<p class="partintro">Nie ma tu bezokolicznika. Przypomnij sobie norweski czasownik i od razu wpisz formę przeszłą. Przy czasownikach nieregularnych jest dopisek.</p>
+<section class="task" data-id="10">
+<h2>10. Uzupełnij</h2>
+<p class="hint">pracować</p>
+<div class="inline sent">I går <input type="text" id="t10" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> jeg på fabrikken fra seks til to.</div>
+<div class="row"><button class="btn" onclick="checkText(10,[&quot;jobbet&quot;, &quot;arbeidet&quot;],&quot;Dobrze. Jobbe → jobbet (arbeide → arbeidet też jest poprawne).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(10)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f10"></div><div class="sol" id="s10">Wzorcowa odpowiedź: <b>jobbet</b></div>
+</section>
+<section class="task" data-id="11">
+<h2>11. Uzupełnij</h2>
+<p class="hint">piec</p>
+<div class="inline sent">Forrige uke <input type="text" id="t11" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> jeg tre kaker til bursdagen.</div>
+<div class="row"><button class="btn" onclick="checkText(11,[&quot;bakte&quot;],&quot;Dobrze. Bake → bakte.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(11)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f11"></div><div class="sol" id="s11">Wzorcowa odpowiedź: <b>bakte</b></div>
+</section>
+<section class="task" data-id="12">
+<h2>12. Uzupełnij</h2>
+<p class="hint">pytać (nieregularny)</p>
+<div class="inline sent">I forgårs <input type="text" id="t12" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> sønnen min meg om hjelp med matte.</div>
+<div class="row"><button class="btn" onclick="checkText(12,[&quot;spurte&quot;],&quot;Dobrze. Spørre → spør → spurte.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(12)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f12"></div><div class="sol" id="s12">Wzorcowa odpowiedź: <b>spurte</b></div>
+</section>
+<section class="task" data-id="13">
+<h2>13. Uzupełnij</h2>
+<p class="hint">kupić</p>
+<div class="inline sent">For to uker siden <input type="text" id="t13" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> vi en ny vaskemaskin.</div>
+<div class="row"><button class="btn" onclick="checkText(13,[&quot;kjøpte&quot;],&quot;Dobrze. Kjøpe → kjøpte.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(13)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f13"></div><div class="sol" id="s13">Wzorcowa odpowiedź: <b>kjøpte</b></div>
+</section>
+<section class="task" data-id="14">
+<h2>14. Uzupełnij</h2>
+<p class="hint">budzić się</p>
+<div class="inline sent">I morges <input type="text" id="t14" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> jeg klokka fem.</div>
+<div class="row"><button class="btn" onclick="checkText(14,[&quot;våknet&quot;],&quot;Dobrze. Våkne → våknet.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(14)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f14"></div><div class="sol" id="s14">Wzorcowa odpowiedź: <b>våknet</b></div>
+</section>
+<section class="task" data-id="15">
+<h2>15. Uzupełnij</h2>
+<p class="hint">dać (nieregularny)</p>
+<div class="inline sent">Kunden <input type="text" id="t15" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> meg en kopp kaffe.</div>
+<div class="row"><button class="btn" onclick="checkText(15,[&quot;ga&quot;],&quot;Dobrze. Gi → gir → ga.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(15)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f15"></div><div class="sol" id="s15">Wzorcowa odpowiedź: <b>ga</b></div>
+</section>
+<section class="task" data-id="16">
+<h2>16. Uzupełnij</h2>
+<p class="hint">pływać</p>
+<div class="inline sent">I helgen <input type="text" id="t16" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> jeg i svømmehallen.</div>
+<div class="row"><button class="btn" onclick="checkText(16,[&quot;svømte&quot;],&quot;Dobrze. Svømme → svømte.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(16)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f16"></div><div class="sol" id="s16">Wzorcowa odpowiedź: <b>svømte</b></div>
+</section>
+<section class="task" data-id="17">
+<h2>17. Uzupełnij</h2>
+<p class="hint">przeprowadzić się</p>
+<div class="inline sent">Ingrid <input type="text" id="t17" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> til Norge for ti år siden.</div>
+<div class="row"><button class="btn" onclick="checkText(17,[&quot;flyttet&quot;],&quot;Dobrze. Flytte → flyttet.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(17)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f17"></div><div class="sol" id="s17">Wzorcowa odpowiedź: <b>flyttet</b></div>
+</section>
+<section class="task" data-id="18">
+<h2>18. Uzupełnij</h2>
+<p class="hint">zapomnieć</p>
+<div class="inline sent">Jeg <input type="text" id="t18" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> nøklene hjemme i går.</div>
+<div class="row"><button class="btn" onclick="checkText(18,[&quot;glemte&quot;],&quot;Dobrze. Glemme → glemte.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(18)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f18"></div><div class="sol" id="s18">Wzorcowa odpowiedź: <b>glemte</b></div>
+</section>
+<section class="task" data-id="19">
+<h2>19. Uzupełnij</h2>
+<p class="hint">iść (nieregularny)</p>
+<div class="inline sent">Vi <input type="text" id="t19" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> på kino forrige fredag.</div>
+<div class="row"><button class="btn" onclick="checkText(19,[&quot;gikk&quot;, &quot;dro&quot;],&quot;Dobrze. Gå → gikk.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(19)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f19"></div><div class="sol" id="s19">Wzorcowa odpowiedź: <b>gikk</b></div>
+</section>
+<section class="task" data-id="20">
+<h2>20. Uzupełnij</h2>
+<p class="hint">powiedzieć (nieregularny)</p>
+<div class="inline sent">Hva <input type="text" id="t20" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> læreren på foreldremøtet?</div>
+<div class="row"><button class="btn" onclick="checkText(20,[&quot;sa&quot;],&quot;Dobrze. Si → sier → sa.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(20)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f20"></div><div class="sol" id="s20">Wzorcowa odpowiedź: <b>sa</b></div>
+</section>
+<section class="task" data-id="21">
+<h2>21. Uzupełnij</h2>
+<p class="hint">spać (nieregularny)</p>
+<div class="inline sent">Even <input type="text" id="t21" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> bare fire timer i natt.</div>
+<div class="row"><button class="btn" onclick="checkText(21,[&quot;sov&quot;],&quot;Dobrze. Sove → sover → sov.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(21)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f21"></div><div class="sol" id="s21">Wzorcowa odpowiedź: <b>sov</b></div>
+</section>
+<section class="task" data-id="22">
+<h2>22. Uzupełnij</h2>
+<p class="hint">napisać (nieregularny)</p>
+<div class="inline sent">Jeg <input type="text" id="t22" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> en lang e-post til sjefen.</div>
+<div class="row"><button class="btn" onclick="checkText(22,[&quot;skrev&quot;],&quot;Dobrze. Skrive → skrev.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(22)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f22"></div><div class="sol" id="s22">Wzorcowa odpowiedź: <b>skrev</b></div>
+</section>
+<section class="task" data-id="23">
+<h2>23. Uzupełnij</h2>
+<p class="hint">poskarżyć się</p>
+<div class="inline sent">Kunden <input type="text" id="t23" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> til sjefen fordi kaka var tørr.</div>
+<div class="row"><button class="btn" onclick="checkText(23,[&quot;klaget&quot;, &quot;klagde&quot;],&quot;Dobrze. Klage → klaget (albo klagde).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(23)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f23"></div><div class="sol" id="s23">Wzorcowa odpowiedź: <b>klaget</b></div>
+</section>
+<h2 class="part">Część C: Zadaj pytanie w czasie przeszłym</h2>
+<p class="partintro">Masz odpowiedź, napisz pytanie. Pytanie z „hva, når, hvor”: czasownik zaraz po słowie pytającym. Pytanie bez słowa pytającego (czy): czasownik na 1. miejscu.</p>
+<section class="task" data-id="24">
+<h2>24. Zapytaj: co?</h2>
+<p class="given">Jeg bakte en eplekake i går.</p>
+<div class="rw"><span>Hva</span><input type="text" id="t24" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(24,[&quot;bakte du i går&quot;],&quot;Dobrze. Hva (1) bakte (2) du.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(24)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f24"></div><div class="sol" id="s24">Wzorcowa odpowiedź: <b>Hva bakte du i går?</b></div>
+</section>
+<section class="task" data-id="25">
+<h2>25. Zapytaj: kiedy?</h2>
+<p class="given">Vi flyttet til Norge for åtte år siden.</p>
+<div class="rw"><span>Når</span><input type="text" id="t25" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(25,[&quot;flyttet dere til norge&quot;],&quot;Dobrze. Vi → w pytaniu dere.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(25)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f25"></div><div class="sol" id="s25">Wzorcowa odpowiedź: <b>Når flyttet dere til Norge?</b></div>
+</section>
+<section class="task" data-id="26">
+<h2>26. Zapytaj: czy? (bez słowa pytającego)</h2>
+<p class="given">Ja, jeg jobbet i helgen.</p>
+<div class="rw"><span>Jobbet</span><input type="text" id="t26" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(26,[&quot;du i helgen&quot;],&quot;Dobrze. Pytanie „czy”: czasownik na początku.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(26)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f26"></div><div class="sol" id="s26">Wzorcowa odpowiedź: <b>Jobbet du i helgen?</b></div>
+</section>
+<section class="task" data-id="27">
+<h2>27. Zapytaj: gdzie?</h2>
+<p class="given">Sønnen min spiste lunsj på skolen.</p>
+<div class="rw"><span>Hvor</span><input type="text" id="t27" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(27,[&quot;spiste sønnen din lunsj&quot;],&quot;Dobrze. Sønnen min → w pytaniu do kogoś: sønnen din.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(27)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f27"></div><div class="sol" id="s27">Wzorcowa odpowiedź: <b>Hvor spiste sønnen din lunsj?</b></div>
+</section>
+<section class="task" data-id="28">
+<h2>28. Zapytaj: czy?</h2>
+<p class="given">Ja, det snødde i går.</p>
+<div class="rw"><span>Snødde</span><input type="text" id="t28" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(28,[&quot;det i går&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(28)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f28"></div><div class="sol" id="s28">Wzorcowa odpowiedź: <b>Snødde det i går?</b></div>
+</section>
+<section class="task" data-id="29">
+<h2>29. Zapytaj: z kim?</h2>
+<p class="given">Jeg snakket med læreren i forgårs.</p>
+<div class="rw"><span>Hvem</span><input type="text" id="t29" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(29,[&quot;snakket du med i forgårs&quot;],&quot;Dobrze. Przyimek „med” idzie na koniec pytania.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(29)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f29"></div><div class="sol" id="s29">Wzorcowa odpowiedź: <b>Hvem snakket du med i forgårs?</b></div>
+</section>
+<section class="task" data-id="30">
+<h2>30. Zapytaj: czy?</h2>
+<p class="given">Nei, vi hadde ikke bil i fjor.</p>
+<div class="rw"><span>Hadde</span><input type="text" id="t30" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(30,[&quot;dere bil i fjor&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(30)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f30"></div><div class="sol" id="s30">Wzorcowa odpowiedź: <b>Hadde dere bil i fjor?</b></div>
+</section>
+<section class="task" data-id="31">
+<h2>31. Zapytaj: co?</h2>
+<p class="given">Hun kjøpte melk og brød.</p>
+<div class="rw"><span>Hva</span><input type="text" id="t31" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(31,[&quot;kjøpte hun&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(31)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f31"></div><div class="sol" id="s31">Wzorcowa odpowiedź: <b>Hva kjøpte hun?</b></div>
+</section>
+<h2 class="part">Część D: Określenie czasu na początku, „ikke” na swoim miejscu</h2>
+<p class="partintro">Zacznij zdanie od określenia czasu. Czasownik zostaje na 2. miejscu, potem osoba, potem „ikke”.</p>
+<section class="task" data-id="32">
+<h2>32. Przekształć</h2>
+<p class="given">Jeg ryddet kjøkkenet i går.</p>
+<div class="rw"><span>I går</span><input type="text" id="t32" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(32,[&quot;ryddet jeg kjøkkenet&quot;],&quot;Dobrze. I går (1) ryddet (2) jeg.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(32)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f32"></div><div class="sol" id="s32">Wzorcowa odpowiedź: <b>I går ryddet jeg kjøkkenet.</b></div>
+</section>
+<section class="task" data-id="33">
+<h2>33. Przekształć</h2>
+<p class="given">Vi reiste til Spania forrige måned.</p>
+<div class="rw"><span>Forrige måned</span><input type="text" id="t33" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(33,[&quot;reiste vi til spania&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(33)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f33"></div><div class="sol" id="s33">Wzorcowa odpowiedź: <b>Forrige måned reiste vi til Spania.</b></div>
+</section>
+<section class="task" data-id="34">
+<h2>34. Przekształć</h2>
+<p class="given">Jeg svømte ikke i går.</p>
+<div class="rw"><span>I går</span><input type="text" id="t34" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(34,[&quot;svømte jeg ikke&quot;],&quot;Dobrze. Czasownik, osoba, potem ikke.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(34)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f34"></div><div class="sol" id="s34">Wzorcowa odpowiedź: <b>I går svømte jeg ikke.</b></div>
+</section>
+<section class="task" data-id="35">
+<h2>35. Przekształć</h2>
+<p class="given">Sønnen min gjorde ikke leksene i forgårs.</p>
+<div class="rw"><span>I forgårs</span><input type="text" id="t35" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(35,[&quot;gjorde sønnen min ikke leksene&quot;],&quot;Dobrze. „Sønnen min” to osoba, więc ikke idzie po niej.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(35)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f35"></div><div class="sol" id="s35">Wzorcowa odpowiedź: <b>I forgårs gjorde sønnen min ikke leksene.</b></div>
+</section>
+<section class="task" data-id="36">
+<h2>36. Przekształć</h2>
+<p class="given">Jeg forsto ikke sjefen for en uke siden.</p>
+<div class="rw"><span>For en uke siden</span><input type="text" id="t36" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(36,[&quot;forsto jeg ikke sjefen&quot;, &quot;skjønte jeg ikke sjefen&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(36)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f36"></div><div class="sol" id="s36">Wzorcowa odpowiedź: <b>For en uke siden forsto jeg ikke sjefen.</b></div>
+</section>
+<section class="task" data-id="37">
+<h2>37. Przekształć</h2>
+<p class="given">Kari bodde i Bergen i fjor.</p>
+<div class="rw"><span>I fjor</span><input type="text" id="t37" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(37,[&quot;bodde kari i bergen&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(37)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f37"></div><div class="sol" id="s37">Wzorcowa odpowiedź: <b>I fjor bodde Kari i Bergen.</b></div>
+</section>
+<section class="task" data-id="38">
+<h2>38. Ułóż zdanie</h2>
+<div class="ord" id="o38"><div class="line" id="l38" aria-label="Twoje zdanie"></div><div class="tiles" id="p38">
+<button class="tile" onclick="pick(38,this)">vinter</button>
+<button class="tile" onclick="pick(38,this)">I</button>
+<button class="tile" onclick="pick(38,this)">ikke</button>
+<button class="tile" onclick="pick(38,this)">jeg</button>
+<button class="tile" onclick="pick(38,this)">trente</button>
+<button class="tile" onclick="pick(38,this)">mye</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(38,[&quot;I vinter trente jeg ikke mye&quot;],&quot;Dobrze. I vinter (1) trente (2) jeg ikke.&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(38)">Od nowa</button><button class="ghost" onclick="showSol(38)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f38"></div><div class="sol" id="s38">Wzorcowa odpowiedź: <b>I vinter trente jeg ikke mye</b></div>
+</section>
+<section class="task" data-id="39">
+<h2>39. Ułóż pytanie</h2>
+<div class="ord" id="o39"><div class="line" id="l39" aria-label="Twoje zdanie"></div><div class="tiles" id="p39">
+<button class="tile" onclick="pick(39,this)">Hvorfor</button>
+<button class="tile" onclick="pick(39,this)">ikke</button>
+<button class="tile" onclick="pick(39,this)">du</button>
+<button class="tile" onclick="pick(39,this)">kom</button>
+<button class="tile" onclick="pick(39,this)">går?</button>
+<button class="tile" onclick="pick(39,this)">i</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(39,[&quot;Hvorfor kom du ikke i går?&quot;],&quot;Dobrze. Hvorfor (1) kom (2) du ikke.&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(39)">Od nowa</button><button class="ghost" onclick="showSol(39)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f39"></div><div class="sol" id="s39">Wzorcowa odpowiedź: <b>Hvorfor kom du ikke i går?</b></div>
+</section>
+<h2 class="part">Część E: „å” czy bez „å”?</h2>
+<p class="partintro">Po kan, må, vil, skal, bør (i ich formach przeszłych kunne, måtte, ville, skulle) bez „å”. Po liker, prøver, begynner, pleier i podobnych z „å”.</p>
+<section class="task" data-id="40">
+<h2>40. Wybierz poprawne zdanie</h2>
+<div class="opts" data-q="40" data-correct="Han likte å se på TV." data-ok="Dobrze. Likte + å + bezokolicznik (se, nie så).">
+<button class="opt">Han likte å se på TV.</button>
+<button class="opt">Han likte se på TV.</button>
+<button class="opt">Han likte å så på TV.</button>
+</div><div class="fb" id="f40"></div>
+</section>
+<section class="task" data-id="41">
+<h2>41. Wybierz poprawne zdanie</h2>
+<div class="opts" data-q="41" data-correct="Jeg måtte jobbe i helgen." data-ok="Dobrze. Måtte bez „å”, drugi czasownik w bezokoliczniku.">
+<button class="opt">Jeg måtte å jobbe i helgen.</button>
+<button class="opt">Jeg måtte jobbe i helgen.</button>
+<button class="opt">Jeg måtte jobbet i helgen.</button>
+</div><div class="fb" id="f41"></div>
+</section>
+<section class="task" data-id="42">
+<h2>42. Wybierz poprawne zdanie</h2>
+<div class="opts" data-q="42" data-correct="Vi begynte å pakke kaker klokka seks." data-ok="Dobrze. Czas przeszły tylko w pierwszym czasowniku.">
+<button class="opt">Vi begynte å pakke kaker klokka seks.</button>
+<button class="opt">Vi begynte pakke kaker klokka seks.</button>
+<button class="opt">Vi begynte å pakket kaker klokka seks.</button>
+</div><div class="fb" id="f42"></div>
+</section>
+<section class="task" data-id="43">
+<h2>43. Wpisz „å” albo „-”, gdy nic nie trzeba</h2>
+<div class="inline sent">Jeg prøvde <input type="text" id="t43" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> ringe deg i går.</div>
+<div class="row"><button class="btn" onclick="checkText(43,[&quot;å&quot;],&quot;Dobrze. Prøve å.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(43)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f43"></div><div class="sol" id="s43">Wzorcowa odpowiedź: <b>å</b></div>
+</section>
+<section class="task" data-id="44">
+<h2>44. Wpisz „å” albo „-”, gdy nic nie trzeba</h2>
+<div class="inline sent">Hun kunne ikke <input type="text" id="t44" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> komme på møtet.</div>
+<div class="row"><button class="btn" onclick="checkText(44,[&quot;-&quot;, &quot;nic&quot;],&quot;Dobrze. Po kunne nic: Hun kunne ikke komme på møtet.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(44)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f44"></div><div class="sol" id="s44">Wzorcowa odpowiedź: <b>-</b></div>
+</section>
+<section class="task" data-id="45">
+<h2>45. Wpisz „å” albo „-”, gdy nic nie trzeba</h2>
+<div class="inline sent">Vi pleide <input type="text" id="t45" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> bade i sjøen om sommeren.</div>
+<div class="row"><button class="btn" onclick="checkText(45,[&quot;å&quot;],&quot;Dobrze. Pleie å.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(45)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f45"></div><div class="sol" id="s45">Wzorcowa odpowiedź: <b>å</b></div>
+</section>
+<h2 class="part">Część F: Tekst w czasie przeszłym</h2>
+<p class="partintro">Przeczytaj tekst w czasie teraźniejszym, potem wpisz czasowniki w czasie przeszłym.</p>
+<div class="text"><h2>Lørdagen til Sigrid</h2><p>Sigrid står opp klokka sju og drikker kaffe. Hun vasker hos en familie i Sandnes. Etterpå handler hun på butikken og kjøper mel og egg. Om ettermiddagen baker hun en sjokoladekake. Datteren hennes hjelper henne. Om kvelden ser de en film og spiser kake.</p></div>
+<section class="task" data-id="46">
+<h2>46. Forrige lørdag…</h2>
+<div class="inline sent">Sigrid <input type="text" id="t46" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> opp klokka sju.</div>
+<div class="row"><button class="btn" onclick="checkText(46,[&quot;sto&quot;, &quot;stod&quot;],&quot;Dobrze. Stå → sto.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(46)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f46"></div><div class="sol" id="s46">Wzorcowa odpowiedź: <b>sto</b></div>
+</section>
+<section class="task" data-id="47">
+<h2>47. Uzupełnij</h2>
+<div class="inline sent">Hun <input type="text" id="t47" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> kaffe.</div>
+<div class="row"><button class="btn" onclick="checkText(47,[&quot;drakk&quot;],&quot;Dobrze. Drikke → drakk.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(47)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f47"></div><div class="sol" id="s47">Wzorcowa odpowiedź: <b>drakk</b></div>
+</section>
+<section class="task" data-id="48">
+<h2>48. Uzupełnij</h2>
+<div class="inline sent">Hun <input type="text" id="t48" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> hos en familie i Sandnes.</div>
+<div class="row"><button class="btn" onclick="checkText(48,[&quot;vasket&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(48)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f48"></div><div class="sol" id="s48">Wzorcowa odpowiedź: <b>vasket</b></div>
+</section>
+<section class="task" data-id="49">
+<h2>49. Uzupełnij</h2>
+<div class="inline sent">Etterpå <input type="text" id="t49" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> hun på butikken.</div>
+<div class="row"><button class="btn" onclick="checkText(49,[&quot;handlet&quot;],&quot;Dobrze. Szyk: etterpå (1) handlet (2) hun.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(49)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f49"></div><div class="sol" id="s49">Wzorcowa odpowiedź: <b>handlet</b></div>
+</section>
+<section class="task" data-id="50">
+<h2>50. Uzupełnij</h2>
+<div class="inline sent">Hun <input type="text" id="t50" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> mel og egg.</div>
+<div class="row"><button class="btn" onclick="checkText(50,[&quot;kjøpte&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(50)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f50"></div><div class="sol" id="s50">Wzorcowa odpowiedź: <b>kjøpte</b></div>
+</section>
+<section class="task" data-id="51">
+<h2>51. Uzupełnij</h2>
+<div class="inline sent">Om ettermiddagen <input type="text" id="t51" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> hun en sjokoladekake.</div>
+<div class="row"><button class="btn" onclick="checkText(51,[&quot;bakte&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(51)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f51"></div><div class="sol" id="s51">Wzorcowa odpowiedź: <b>bakte</b></div>
+</section>
+<section class="task" data-id="52">
+<h2>52. Uzupełnij</h2>
+<div class="inline sent">Datteren hennes <input type="text" id="t52" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> henne.</div>
+<div class="row"><button class="btn" onclick="checkText(52,[&quot;hjalp&quot;],&quot;Dobrze. Hjelpe → hjalp (nieregularny).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(52)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f52"></div><div class="sol" id="s52">Wzorcowa odpowiedź: <b>hjalp</b></div>
+</section>
+<section class="task" data-id="53">
+<h2>53. Uzupełnij</h2>
+<div class="inline sent">Om kvelden <input type="text" id="t53" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> de en film og spiste kake.</div>
+<div class="row"><button class="btn" onclick="checkText(53,[&quot;så&quot;],&quot;Dobrze. Se → så.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(53)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f53"></div><div class="sol" id="s53">Wzorcowa odpowiedź: <b>så</b></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 53 / 53</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=53;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
+</script>
+
+</body>
+</html>

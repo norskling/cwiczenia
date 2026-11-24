@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Słownictwo A2 Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · A2 · Lekcja 3</span>
+  <h1>Ting i hverdagen: <span>przedmioty codziennego użytku</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Przedmioty w kuchni, w łazience, do sprzątania i w szkolnym plecaku, z rodzajem i formą określoną. Na końcu kilka zwrotów potocznych i krótki tekst.</p>
+  <div class="meta"><span>Słownictwo</span><span>ok. 30 min</span><span>34 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 34</b></div>
+<h2 class="part">Część A: Kjøkkenet</h2>
+<section class="task" data-id="1">
+<h2>1. Połącz w pary</h2>
+<p class="hint">Wybierz polskie znaczenie dla każdego słowa.</p>
+<div class="match">
+<span class="w">en kjele</span><select id="m1_0"><option value="">wybierz…</option><option>deska do krojenia</option><option>garnek</option><option>nóż</option><option>patelnia</option></select>
+<span class="w">ei stekepanne</span><select id="m1_1"><option value="">wybierz…</option><option>deska do krojenia</option><option>garnek</option><option>nóż</option><option>patelnia</option></select>
+<span class="w">et skjærebrett</span><select id="m1_2"><option value="">wybierz…</option><option>deska do krojenia</option><option>garnek</option><option>nóż</option><option>patelnia</option></select>
+<span class="w">en kniv</span><select id="m1_3"><option value="">wybierz…</option><option>deska do krojenia</option><option>garnek</option><option>nóż</option><option>patelnia</option></select>
+</div>
+<button class="btn" onclick="checkMatch(1,{&quot;m1_0&quot;: &quot;garnek&quot;, &quot;m1_1&quot;: &quot;patelnia&quot;, &quot;m1_2&quot;: &quot;deska do krojenia&quot;, &quot;m1_3&quot;: &quot;nóż&quot;})">Sprawdź</button><div class="fb" id="f1"></div>
+</section>
+<section class="task" data-id="2">
+<h2>2. Połącz w pary</h2>
+<p class="hint">Wybierz polskie znaczenie dla każdego słowa.</p>
+<div class="match">
+<span class="w">et kjøleskap</span><select id="m2_0"><option value="">wybierz…</option><option>czajnik</option><option>lodówka</option><option>mikrofalówka</option><option>zmywarka</option></select>
+<span class="w">en oppvaskmaskin</span><select id="m2_1"><option value="">wybierz…</option><option>czajnik</option><option>lodówka</option><option>mikrofalówka</option><option>zmywarka</option></select>
+<span class="w">en vannkoker</span><select id="m2_2"><option value="">wybierz…</option><option>czajnik</option><option>lodówka</option><option>mikrofalówka</option><option>zmywarka</option></select>
+<span class="w">en mikrobølgeovn</span><select id="m2_3"><option value="">wybierz…</option><option>czajnik</option><option>lodówka</option><option>mikrofalówka</option><option>zmywarka</option></select>
+</div>
+<button class="btn" onclick="checkMatch(2,{&quot;m2_0&quot;: &quot;lodówka&quot;, &quot;m2_1&quot;: &quot;zmywarka&quot;, &quot;m2_2&quot;: &quot;czajnik&quot;, &quot;m2_3&quot;: &quot;mikrofalówka&quot;})">Sprawdź</button><div class="fb" id="f2"></div>
+</section>
+<section class="task" data-id="3">
+<h2>3. Czym to robisz?</h2>
+<p class="hint">Jeg måler mel med ___.</p>
+<div class="opts" data-q="3" data-correct="et målebeger" data-ok="Dobrze. Et målebeger = miarka.">
+<button class="opt">et målebeger</button>
+<button class="opt">en saks</button>
+<button class="opt">et håndkle</button>
+</div><div class="fb" id="f3"></div>
+</section>
+<section class="task" data-id="4">
+<h2>4. Czym to robisz?</h2>
+<p class="hint">Jeg pisker egg med ___.</p>
+<div class="opts" data-q="4" data-correct="en visp" data-ok="Dobrze. En visp = trzepaczka.">
+<button class="opt">en visp</button>
+<button class="opt">en skje</button>
+<button class="opt">en gaffel</button>
+</div><div class="fb" id="f4"></div>
+</section>
+<section class="task" data-id="5">
+<h2>5. Uzupełnij (forma określona)</h2>
+<p class="hint">en kjele</p>
+<div class="inline sent">Sett <input type="text" id="t5" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> på komfyren.</div>
+<div class="row"><button class="btn" onclick="checkText(5,[&quot;kjelen&quot;],&quot;Dobrze. Kjelen.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(5)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f5"></div><div class="sol" id="s5">Wzorcowa odpowiedź: <b>kjelen</b></div>
+</section>
+<section class="task" data-id="6">
+<h2>6. Uzupełnij</h2>
+<p class="hint">blacha do pieczenia (ei …)</p>
+<div class="inline sent">Jeg legger boller på <input type="text" id="t6" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">.</div>
+<div class="row"><button class="btn" onclick="checkText(6,[&quot;stekebrettet&quot;, &quot;et stekebrett&quot;, &quot;bakeplata&quot;, &quot;ei bakeplate&quot;],&quot;Dobrze. Et stekebrett albo ei bakeplate.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(6)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f6"></div><div class="sol" id="s6">Wzorcowa odpowiedź: <b>stekebrettet</b></div>
+</section>
+<h2 class="part">Część B: Badet og soverommet</h2>
+<section class="task" data-id="7">
+<h2>7. Połącz w pary</h2>
+<p class="hint">Wybierz polskie znaczenie dla każdego słowa.</p>
+<div class="match">
+<span class="w">et håndkle</span><select id="m7_0"><option value="">wybierz…</option><option>lustro</option><option>prysznic</option><option>ręcznik</option><option>szczoteczka do zębów</option></select>
+<span class="w">en tannbørste</span><select id="m7_1"><option value="">wybierz…</option><option>lustro</option><option>prysznic</option><option>ręcznik</option><option>szczoteczka do zębów</option></select>
+<span class="w">et speil</span><select id="m7_2"><option value="">wybierz…</option><option>lustro</option><option>prysznic</option><option>ręcznik</option><option>szczoteczka do zębów</option></select>
+<span class="w">en dusj</span><select id="m7_3"><option value="">wybierz…</option><option>lustro</option><option>prysznic</option><option>ręcznik</option><option>szczoteczka do zębów</option></select>
+</div>
+<button class="btn" onclick="checkMatch(7,{&quot;m7_0&quot;: &quot;ręcznik&quot;, &quot;m7_1&quot;: &quot;szczoteczka do zębów&quot;, &quot;m7_2&quot;: &quot;lustro&quot;, &quot;m7_3&quot;: &quot;prysznic&quot;})">Sprawdź</button><div class="fb" id="f7"></div>
+</section>
+<section class="task" data-id="8">
+<h2>8. Połącz w pary</h2>
+<p class="hint">Wybierz polskie znaczenie dla każdego słowa.</p>
+<div class="match">
+<span class="w">en dyne</span><select id="m8_0"><option value="">wybierz…</option><option>kołdra</option><option>poduszka</option><option>prześcieradło</option><option>szafa na ubrania</option></select>
+<span class="w">ei pute</span><select id="m8_1"><option value="">wybierz…</option><option>kołdra</option><option>poduszka</option><option>prześcieradło</option><option>szafa na ubrania</option></select>
+<span class="w">et laken</span><select id="m8_2"><option value="">wybierz…</option><option>kołdra</option><option>poduszka</option><option>prześcieradło</option><option>szafa na ubrania</option></select>
+<span class="w">et klesskap</span><select id="m8_3"><option value="">wybierz…</option><option>kołdra</option><option>poduszka</option><option>prześcieradło</option><option>szafa na ubrania</option></select>
+</div>
+<button class="btn" onclick="checkMatch(8,{&quot;m8_0&quot;: &quot;kołdra&quot;, &quot;m8_1&quot;: &quot;poduszka&quot;, &quot;m8_2&quot;: &quot;prześcieradło&quot;, &quot;m8_3&quot;: &quot;szafa na ubrania&quot;})">Sprawdź</button><div class="fb" id="f8"></div>
+</section>
+<section class="task" data-id="9">
+<h2>9. Uzupełnij (liczba mnoga określona)</h2>
+<p class="hint">et håndkle</p>
+<div class="inline sent">Kan du henge opp <input type="text" id="t9" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> på badet?</div>
+<div class="row"><button class="btn" onclick="checkText(9,[&quot;håndklærne&quot;],&quot;Dobrze. Et håndkle → håndklær → håndklærne (nieregularne).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(9)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f9"></div><div class="sol" id="s9">Wzorcowa odpowiedź: <b>håndklærne</b></div>
+</section>
+<section class="task" data-id="10">
+<h2>10. Wybierz</h2>
+<p class="hint">Jeg skifter ___ hver fredag hos kunden.</p>
+<div class="opts" data-q="10" data-correct="sengetøyet" data-ok="Dobrze. Å skifte sengetøyet = zmienić pościel.">
+<button class="opt">sengetøyet</button>
+<button class="opt">sengetøy en</button>
+<button class="opt">senget</button>
+</div><div class="fb" id="f10"></div>
+</section>
+<section class="task" data-id="11">
+<h2>11. Co to znaczy?</h2>
+<p class="hint"><b>en hårføner</b></p>
+<div class="opts" data-q="11" data-correct="suszarka do włosów" data-ok="Dobrze.">
+<button class="opt">suszarka do włosów</button>
+<button class="opt">szczotka do włosów</button>
+<button class="opt">fryzjer</button>
+</div><div class="fb" id="f11"></div>
+</section>
+<h2 class="part">Część C: Vaskeutstyr</h2>
+<p class="partintro">Rzeczy, których używasz przy sprzątaniu.</p>
+<section class="task" data-id="12">
+<h2>12. Połącz w pary</h2>
+<p class="hint">Wybierz polskie znaczenie dla każdego słowa.</p>
+<div class="match">
+<span class="w">en mopp</span><select id="m12_0"><option value="">wybierz…</option><option>mop</option><option>szmatka</option><option>wiadro</option><option>worek na śmieci</option></select>
+<span class="w">ei bøtte</span><select id="m12_1"><option value="">wybierz…</option><option>mop</option><option>szmatka</option><option>wiadro</option><option>worek na śmieci</option></select>
+<span class="w">en klut</span><select id="m12_2"><option value="">wybierz…</option><option>mop</option><option>szmatka</option><option>wiadro</option><option>worek na śmieci</option></select>
+<span class="w">en søppelsekk</span><select id="m12_3"><option value="">wybierz…</option><option>mop</option><option>szmatka</option><option>wiadro</option><option>worek na śmieci</option></select>
+</div>
+<button class="btn" onclick="checkMatch(12,{&quot;m12_0&quot;: &quot;mop&quot;, &quot;m12_1&quot;: &quot;wiadro&quot;, &quot;m12_2&quot;: &quot;szmatka&quot;, &quot;m12_3&quot;: &quot;worek na śmieci&quot;})">Sprawdź</button><div class="fb" id="f12"></div>
+</section>
+<section class="task" data-id="13">
+<h2>13. Wybierz</h2>
+<p class="hint">Jeg vasker vinduene med ___.</p>
+<div class="opts" data-q="13" data-correct="vindusnal og en klut" data-ok="Dobrze. Vindusnal = ściągaczka do szyb.">
+<button class="opt">vindusnal og en klut</button>
+<button class="opt">en støvsuger</button>
+<button class="opt">en kost</button>
+</div><div class="fb" id="f13"></div>
+</section>
+<section class="task" data-id="14">
+<h2>14. Wybierz</h2>
+<p class="hint">Vi har ikke mer ___. Kan du kjøpe nytt?</p>
+<div class="opts" data-q="14" data-correct="oppvaskmiddel" data-ok="Dobrze. Oppvaskmiddel = płyn do naczyń.">
+<button class="opt">oppvaskmiddel</button>
+<button class="opt">oppvasken</button>
+<button class="opt">oppvaskmaskin</button>
+</div><div class="fb" id="f14"></div>
+</section>
+<section class="task" data-id="15">
+<h2>15. Uzupełnij (forma określona)</h2>
+<p class="hint">en støvsuger</p>
+<div class="inline sent"><input type="text" id="t15" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> står i boden.</div>
+<div class="row"><button class="btn" onclick="checkText(15,[&quot;støvsugeren&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(15)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f15"></div><div class="sol" id="s15">Wzorcowa odpowiedź: <b>støvsugeren</b></div>
+</section>
+<section class="task" data-id="16">
+<h2>16. Uzupełnij (forma określona)</h2>
+<p class="hint">ei bøtte</p>
+<div class="inline sent">Fyll <input type="text" id="t16" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> med varmt vann.</div>
+<div class="row"><button class="btn" onclick="checkText(16,[&quot;bøtta&quot;, &quot;bøtten&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(16)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f16"></div><div class="sol" id="s16">Wzorcowa odpowiedź: <b>bøtta</b></div>
+</section>
+<section class="task" data-id="17">
+<h2>17. Uzupełnij</h2>
+<p class="hint">rękawiczki gumowe (liczba mnoga)</p>
+<div class="inline sent">Jeg bruker alltid <input type="text" id="t17" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> når jeg vasker badet.</div>
+<div class="row"><button class="btn" onclick="checkText(17,[&quot;gummihansker&quot;, &quot;hansker&quot;],&quot;Dobrze. En gummihanske → gummihansker.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(17)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f17"></div><div class="sol" id="s17">Wzorcowa odpowiedź: <b>gummihansker</b></div>
+</section>
+<section class="task" data-id="18">
+<h2>18. Co to znaczy?</h2>
+<p class="hint"><b>Kan du tømme søppelbøtta?</b></p>
+<div class="opts" data-q="18" data-correct="Możesz opróżnić kosz na śmieci?" data-ok="Dobrze. Å tømme = opróżnić.">
+<button class="opt">Możesz opróżnić kosz na śmieci?</button>
+<button class="opt">Możesz umyć kosz na śmieci?</button>
+<button class="opt">Możesz kupić kosz na śmieci?</button>
+</div><div class="fb" id="f18"></div>
+</section>
+<h2 class="part">Część D: I sekken</h2>
+<p class="partintro">Co nosi uczeń w plecaku.</p>
+<section class="task" data-id="19">
+<h2>19. Połącz w pary</h2>
+<p class="hint">Wybierz polskie znaczenie dla każdego słowa.</p>
+<div class="match">
+<span class="w">en blyant</span><select id="m19_0"><option value="">wybierz…</option><option>drugie śniadanie (kanapki)</option><option>gumka</option><option>linijka</option><option>ołówek</option></select>
+<span class="w">et viskelær</span><select id="m19_1"><option value="">wybierz…</option><option>drugie śniadanie (kanapki)</option><option>gumka</option><option>linijka</option><option>ołówek</option></select>
+<span class="w">en linjal</span><select id="m19_2"><option value="">wybierz…</option><option>drugie śniadanie (kanapki)</option><option>gumka</option><option>linijka</option><option>ołówek</option></select>
+<span class="w">ei matpakke</span><select id="m19_3"><option value="">wybierz…</option><option>drugie śniadanie (kanapki)</option><option>gumka</option><option>linijka</option><option>ołówek</option></select>
+</div>
+<button class="btn" onclick="checkMatch(19,{&quot;m19_0&quot;: &quot;ołówek&quot;, &quot;m19_1&quot;: &quot;gumka&quot;, &quot;m19_2&quot;: &quot;linijka&quot;, &quot;m19_3&quot;: &quot;drugie śniadanie (kanapki)&quot;})">Sprawdź</button><div class="fb" id="f19"></div>
+</section>
+<section class="task" data-id="20">
+<h2>20. Uzupełnij (forma określona)</h2>
+<p class="hint">ei matpakke</p>
+<div class="inline sent">Han glemte <input type="text" id="t20" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> hjemme i dag.</div>
+<div class="row"><button class="btn" onclick="checkText(20,[&quot;matpakka&quot;, &quot;matpakken&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(20)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f20"></div><div class="sol" id="s20">Wzorcowa odpowiedź: <b>matpakka</b></div>
+</section>
+<section class="task" data-id="21">
+<h2>21. Uzupełnij (liczba mnoga nieokreślona)</h2>
+<p class="hint">en lader</p>
+<div class="inline sent">Vi har tre <input type="text" id="t21" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> til mobilen hjemme.</div>
+<div class="row"><button class="btn" onclick="checkText(21,[&quot;ladere&quot;],&quot;Dobrze. En lader = ładowarka.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(21)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f21"></div><div class="sol" id="s21">Wzorcowa odpowiedź: <b>ladere</b></div>
+</section>
+<section class="task" data-id="22">
+<h2>22. Wybierz</h2>
+<p class="hint">Han skriver i ___.</p>
+<div class="opts" data-q="22" data-correct="skriveboka" data-ok="Dobrze. Ei skrivebok = zeszyt. Skrivebord = biurko, skriver = drukarka.">
+<button class="opt">skriveboka</button>
+<button class="opt">skrivebordet</button>
+<button class="opt">skriveren</button>
+</div><div class="fb" id="f22"></div>
+</section>
+<h2 class="part">Część E: Zwroty potoczne</h2>
+<section class="task" data-id="23">
+<h2>23. Co to znaczy?</h2>
+<p class="hint"><b>Det ordner seg.</b></p>
+<div class="opts" data-q="23" data-correct="Jakoś to będzie / ułoży się." data-ok="Dobrze.">
+<button class="opt">Jakoś to będzie / ułoży się.</button>
+<button class="opt">To jest w porządku.</button>
+<button class="opt">Trzeba posprzątać.</button>
+</div><div class="fb" id="f23"></div>
+</section>
+<section class="task" data-id="24">
+<h2>24. Co to znaczy?</h2>
+<p class="hint"><b>Så synd!</b></p>
+<div class="opts" data-q="24" data-correct="Szkoda!" data-ok="Dobrze.">
+<button class="opt">Szkoda!</button>
+<button class="opt">Jak słodko!</button>
+<button class="opt">Ale grzech!</button>
+</div><div class="fb" id="f24"></div>
+</section>
+<section class="task" data-id="25">
+<h2>25. Co to znaczy?</h2>
+<p class="hint"><b>God bedring!</b></p>
+<div class="opts" data-q="25" data-correct="Zdrowiej szybko!" data-ok="Dobrze. Mówisz to komuś choremu.">
+<button class="opt">Zdrowiej szybko!</button>
+<button class="opt">Smacznego!</button>
+<button class="opt">Dobrej nocy!</button>
+</div><div class="fb" id="f25"></div>
+</section>
+<section class="task" data-id="26">
+<h2>26. Co to znaczy?</h2>
+<p class="hint"><b>Jeg er helt ferdig.</b></p>
+<div class="opts" data-q="26" data-correct="Jestem kompletnie wykończona." data-ok="Dobrze. W zależności od sytuacji też: całkiem skończyłam (pracę).">
+<button class="opt">Jestem kompletnie wykończona.</button>
+<button class="opt">Jestem gotowa do wyjścia.</button>
+<button class="opt">Skończyłam szkołę.</button>
+</div><div class="fb" id="f26"></div>
+</section>
+<section class="task" data-id="27">
+<h2>27. Co to znaczy?</h2>
+<p class="hint"><b>Nå skjønner jeg!</b></p>
+<div class="opts" data-q="27" data-correct="Teraz rozumiem!" data-ok="Dobrze.">
+<button class="opt">Teraz rozumiem!</button>
+<button class="opt">Teraz skończę!</button>
+<button class="opt">Teraz się spieszę!</button>
+</div><div class="fb" id="f27"></div>
+</section>
+<section class="task" data-id="28">
+<h2>28. Kunde mówi: „Jeg har vondt i hodet i dag.” Co odpowiesz?</h2>
+<div class="opts" data-q="28" data-correct="God bedring!" data-ok="Dobrze.">
+<button class="opt">God bedring!</button>
+<button class="opt">Kos deg!</button>
+<button class="opt">Lykke til!</button>
+</div><div class="fb" id="f28"></div>
+</section>
+<h2 class="part">Część F: Krótki tekst</h2>
+<div class="text"><h2>En travel morgen</h2><p>Klokka sju kom Lars hjem fra nattevakt. Han var helt ferdig. På kjøkkenbordet lå en lapp fra kona: «Melka er tom, og oppvaskmaskinen er full. Matpakka til Emma ligger i kjøleskapet.»</p><p>Lars tømte oppvaskmaskinen og satte kjelen på komfyren. Så ringte Emma: «Pappa, jeg glemte matpakka!» Lars tok matpakka og en banan og kjørte til skolen. Etterpå kjøpte han melk på butikken. Da han kom hjem, sov han i fire timer.</p></div>
+<section class="task" data-id="29">
+<h2>29. Hvorfor var Lars helt ferdig?</h2>
+<div class="opts" data-q="29" data-correct="Han jobbet om natta." data-ok="Dobrze. Nattevakt = nocna zmiana.">
+<button class="opt">Han jobbet om natta.</button>
+<button class="opt">Han var syk.</button>
+<button class="opt">Han kjørte mye.</button>
+</div><div class="fb" id="f29"></div>
+</section>
+<section class="task" data-id="30">
+<h2>30. Hva var tomt?</h2>
+<div class="opts" data-q="30" data-correct="Melka" data-ok="Dobrze. Oppvaskmaskinen var full.">
+<button class="opt">Melka</button>
+<button class="opt">Kjøleskapet</button>
+<button class="opt">Oppvaskmaskinen</button>
+</div><div class="fb" id="f30"></div>
+</section>
+<section class="task" data-id="31">
+<h2>31. Hva glemte Emma?</h2>
+<div class="opts" data-q="31" data-correct="Matpakka" data-ok="Dobrze.">
+<button class="opt">Matpakka</button>
+<button class="opt">Sekken</button>
+<button class="opt">Mobilen</button>
+</div><div class="fb" id="f31"></div>
+</section>
+<section class="task" data-id="32">
+<h2>32. Znajdź w tekście formę określoną</h2>
+<p class="hint">W tekście jest „en lapp”. Wpisz formę określoną.</p>
+<div class="inline sent"><input type="text" id="t32" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> lå på kjøkkenbordet.</div>
+<div class="row"><button class="btn" onclick="checkText(32,[&quot;lappen&quot;],&quot;Dobrze. En lapp → lappen.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(32)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f32"></div><div class="sol" id="s32">Wzorcowa odpowiedź: <b>lappen</b></div>
+</section>
+<section class="task" data-id="33">
+<h2>33. Znajdź w tekście czas przeszły</h2>
+<p class="hint">å tømme</p>
+<div class="inline sent">Lars <input type="text" id="t33" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> oppvaskmaskinen.</div>
+<div class="row"><button class="btn" onclick="checkText(33,[&quot;tømte&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(33)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f33"></div><div class="sol" id="s33">Wzorcowa odpowiedź: <b>tømte</b></div>
+</section>
+<section class="task" data-id="34">
+<h2>34. Znajdź w tekście czas przeszły</h2>
+<p class="hint">å sove</p>
+<div class="inline sent">Da han kom hjem, <input type="text" id="t34" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> han i fire timer.</div>
+<div class="row"><button class="btn" onclick="checkText(34,[&quot;sov&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(34)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f34"></div><div class="sol" id="s34">Wzorcowa odpowiedź: <b>sov</b></div>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 34 / 34</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=34;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
+</script>
+
+</body>
+</html>
