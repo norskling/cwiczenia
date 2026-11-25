@@ -2,7 +2,7 @@
 
 Skrypty, z których Claude korzysta przy tworzeniu ćwiczeń dla kursantów indywidualnych.
 
-- `generuj_cwiczenia.py spec.json c/<slug>.html`: interaktywne ćwiczenia (wybór, uzupełnianie, przekształcanie, dopasowanie, tekst).
+- `generuj_cwiczenia.py spec.json c/<slug>.html`: interaktywne ćwiczenia (wybór, uzupełnianie, przekształcanie, dopasowanie, tekst). Pole „why” w zadaniu dodaje rozwijaną „Podpowiedź: dlaczego?” z wyjaśnieniem poprawnej odpowiedzi.
 - `generuj_prezentacje.py spec.json wynik.pptx`: prezentacja z JSON (slajdy teorii przeplatane slajdami rozmowy).
 - `pomocnicze.py slug` / `pomocnicze.py dokument`: losowy slug i HTML dokumentu na Drive.
 - `RUTYNA.md`: pełna procedura nocnej rutyny.

@@ -11,6 +11,8 @@ Typy zadań:
   match  : {"type":"match","h","hint","pairs":[[lewy,prawy],...],"ok"?}
   order  : {"type":"order","h","hint"?,"words":[słowa w poprawnej kolejności],"answers":[...]?,"ok"}
            kafelki tasowane przy generowaniu; answers = dodatkowe poprawne warianty zdania
+Każde zadanie może mieć "why": wyjaśnienie, dlaczego poprawna odpowiedź jest poprawna.
+  Na stronie pojawia się wtedy rozwijany przycisk „Podpowiedź: dlaczego?”.
 Strona: noindex, tylko imię kursanta, styl z narzedzia/styl.css.
 """
 import json, sys, html, os, random
@@ -64,6 +66,8 @@ def task(n, t):
             key[f"m{n}_{i}"] = r
         o.append('</div>')
         o.append(f'<button class="btn" onclick="checkMatch({n},{js(key)})">Sprawdź</button><div class="fb" id="f{n}"></div>')
+    if t.get("why"):
+        o.append(f'<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>{E(t["why"])}</p></details>')
     o.append('</section>')
     return "\n".join(o)
 
@@ -92,6 +96,7 @@ def main(spec_path, out):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 {style}
+<style>.why{{margin-top:12px}}.why summary{{cursor:pointer;color:var(--fjord);font-weight:600;font-size:.92rem;min-height:32px}}.why p{{background:var(--tint);border-radius:8px;padding:10px 14px;margin:6px 0 0;color:var(--natt)}}</style>
 </head>
 <body>
 <main class="wrap">

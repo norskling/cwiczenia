@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grammatikk B1–B2 Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+</style>
+
+<style>.why{margin-top:12px}.why summary{cursor:pointer;color:var(--fjord);font-weight:600;font-size:.92rem;min-height:32px}.why p{background:var(--tint);border-radius:8px;padding:10px 14px;margin:6px 0 0;color:var(--natt)}</style>
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · B1–B2 · Lekcja 1</span>
+  <h1>Grammatikk: <span>passiv, preposisjoner, pluskvamperfektum, kondisjonalis</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Strona bierna, przyimki til, for, mot i inne, czas zaprzeszły i tryb przypuszczający. Przy każdym zadaniu przycisk „Podpowiedź: dlaczego?” wyjaśnia, dlaczego poprawna odpowiedź jest poprawna.</p>
+  <div class="meta"><span>Gramatyka</span><span>ok. 60 min</span><span>62 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 62</b></div>
+<h2 class="part">Część A: Passiv (strona bierna)</h2>
+<p class="partintro">Bli-passiv: blir/ble/har blitt + imiesłów (Rommet blir vasket). S-passiv: czasownik + -s, zwykle po må/kan/skal i w regulaminach (Rommet må vaskes). Wykonawca czynności po „av”.</p>
+<section class="task" data-id="1">
+<h2>1. Rommene ___ hver dag av renholderne.</h2>
+<div class="opts" data-q="1" data-correct="blir vasket" data-ok="Dobrze.">
+<button class="opt">blir vasket</button>
+<button class="opt">vasker</button>
+<button class="opt">blir vaske</button>
+<button class="opt">har vasket</button>
+</div><div class="fb" id="f1"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Pokoje nie wykonują czynności, tylko ktoś je sprząta, więc strona bierna: bli + imiesłów (perfektum partisipp) = blir vasket. Wykonawcę podajemy po „av”.</p></details>
+</section>
+<section class="task" data-id="2">
+<h2>2. Sengetøyet må ___ før nye gjester kommer.</h2>
+<div class="opts" data-q="2" data-correct="skiftes" data-ok="Dobrze.">
+<button class="opt">skifter</button>
+<button class="opt">skiftet</button>
+<button class="opt">skifte</button>
+<button class="opt">skiftes</button>
+</div><div class="fb" id="f2"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Po czasowniku modalnym (må, kan, skal, bør) w stronie biernej zwykle stoi s-passiv w bezokoliczniku: må skiftes, kan brukes, skal betales.</p></details>
+</section>
+<section class="task" data-id="3">
+<h2>3. Uzupełnij</h2>
+<p class="hint">hente (w stronie biernej, czas teraźniejszy)</p>
+<div class="inline sent">Barna <input type="text" id="t3" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> av foreldrene klokka fire hver dag.</div>
+<div class="row"><button class="btn" onclick="checkText(3,[&quot;blir hentet&quot;, &quot;hentes&quot;],&quot;Dobrze: blir hentet.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(3)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f3"></div><div class="sol" id="s3">Wzorcowa odpowiedź: <b>blir hentet</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Czynność powtarzalna w teraźniejszości: blir hentet. Forma „hentes” też jest poprawna, brzmi bardziej oficjalnie.</p></details>
+</section>
+<section class="task" data-id="4">
+<h2>4. Uzupełnij</h2>
+<p class="hint">bygge (strona bierna, czas przeszły)</p>
+<div class="inline sent">Hotellet <input type="text" id="t4" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i 1985.</div>
+<div class="row"><button class="btn" onclick="checkText(4,[&quot;ble bygget&quot;, &quot;ble bygd&quot;],&quot;Dobrze: ble bygget.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(4)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f4"></div><div class="sol" id="s4">Wzorcowa odpowiedź: <b>ble bygget</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Konkretny moment w przeszłości (i 1985) → ble + imiesłów: ble bygget / ble bygd. Obie formy imiesłowu są poprawne.</p></details>
+</section>
+<section class="task" data-id="5">
+<h2>5. Søknaden din ___ i løpet av neste uke.</h2>
+<div class="opts" data-q="5" data-correct="vil bli behandlet" data-ok="Dobrze.">
+<button class="opt">har behandlet</button>
+<button class="opt">blir behandle</button>
+<button class="opt">vil bli behandlet</button>
+<button class="opt">behandler</button>
+</div><div class="fb" id="f5"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Przyszłość w stronie biernej: vil bli + imiesłów (albo samo „blir behandlet”). „Blir behandle” to błąd: po bli zawsze imiesłów, nie bezokolicznik.</p></details>
+</section>
+<section class="task" data-id="6">
+<h2>6. Uzupełnij</h2>
+<p class="hint">snakke (strona bierna)</p>
+<div class="inline sent">Det <input type="text" id="t6" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> mange språk i barnehagen vår.</div>
+<div class="row"><button class="btn" onclick="checkText(6,[&quot;snakkes&quot;, &quot;blir snakket&quot;],&quot;Dobrze: snakkes.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(6)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f6"></div><div class="sol" id="s6">Wzorcowa odpowiedź: <b>snakkes</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Ogólny fakt, bez konkretnego wykonawcy → często s-passiv: det snakkes. „Det blir snakket” też jest poprawne.</p></details>
+</section>
+<section class="task" data-id="7">
+<h2>7. Varene ___ fra lageret i går.</h2>
+<div class="opts" data-q="7" data-correct="ble sendt" data-ok="Dobrze.">
+<button class="opt">ble sendt</button>
+<button class="opt">sendes</button>
+<button class="opt">blir sendt</button>
+<button class="opt">har sendt</button>
+</div><div class="fb" id="f7"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>„I går” = przeszłość, więc ble + imiesłów. „Har sendt” to strona czynna (ktoś wysłał), a tu podmiotem są towary.</p></details>
+</section>
+<section class="task" data-id="8">
+<h2>8. Przekształć na stronę bierną</h2>
+<p class="given">Renholderen vasker resepsjonen hver morgen.</p>
+<div class="rw"><span>Resepsjonen</span><input type="text" id="t8" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(8,[&quot;blir vasket av renholderen hver morgen&quot;, &quot;vaskes av renholderen hver morgen&quot;, &quot;blir vasket hver morgen av renholderen&quot;, &quot;vaskes hver morgen av renholderen&quot;],&quot;Dobrze. Resepsjonen blir vasket av renholderen hver morgen.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(8)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f8"></div><div class="sol" id="s8">Wzorcowa odpowiedź: <b>Resepsjonen blir vasket av renholderen hver morgen.</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Dopełnienie (resepsjonen) staje się podmiotem, czasownik: blir + imiesłów, a wykonawca przechodzi do części z „av”.</p></details>
+</section>
+<section class="task" data-id="9">
+<h2>9. Przekształć na stronę bierną</h2>
+<p class="given">Kommunen bygde en ny barnehage i fjor.</p>
+<div class="rw"><span>En ny barnehage</span><input type="text" id="t9" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(9,[&quot;ble bygget av kommunen i fjor&quot;, &quot;ble bygd av kommunen i fjor&quot;, &quot;ble bygget i fjor av kommunen&quot;, &quot;ble bygd i fjor av kommunen&quot;],&quot;Dobrze. En ny barnehage ble bygget av kommunen i fjor.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(9)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f9"></div><div class="sol" id="s9">Wzorcowa odpowiedź: <b>En ny barnehage ble bygget av kommunen i fjor.</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Czas przeszły (bygde) → w stronie biernej ble + imiesłów: ble bygget/bygd.</p></details>
+</section>
+<section class="task" data-id="10">
+<h2>10. Przekształć na stronę bierną</h2>
+<p class="given">Staten finansierer sykehusene.</p>
+<div class="rw"><span>Sykehusene</span><input type="text" id="t10" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(10,[&quot;blir finansiert av staten&quot;, &quot;finansieres av staten&quot;],&quot;Dobrze. Sykehusene blir finansiert av staten.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(10)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f10"></div><div class="sol" id="s10">Wzorcowa odpowiedź: <b>Sykehusene blir finansiert av staten.</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Czas teraźniejszy → blir finansiert albo finansieres. Wykonawca: av staten.</p></details>
+</section>
+<section class="task" data-id="11">
+<h2>11. Skatten ___ automatisk fra lønna di.</h2>
+<div class="opts" data-q="11" data-correct="trekkes" data-ok="Dobrze.">
+<button class="opt">trekkes</button>
+<button class="opt">trekke</button>
+<button class="opt">trukket</button>
+<button class="opt">trekker</button>
+</div><div class="fb" id="f11"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Opis stałej procedury, wykonawca nieważny → s-passiv w czasie teraźniejszym: trekkes (od trekke = potrącać).</p></details>
+</section>
+<section class="task" data-id="12">
+<h2>12. Uzupełnij</h2>
+<p class="hint">rydde (strona bierna po må)</p>
+<div class="inline sent">Lekene må <input type="text" id="t12" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> bort før lunsj.</div>
+<div class="row"><button class="btn" onclick="checkText(12,[&quot;ryddes&quot;],&quot;Dobrze: ryddes.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(12)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f12"></div><div class="sol" id="s12">Wzorcowa odpowiedź: <b>ryddes</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Po „må” strona bierna w bezokoliczniku: ryddes (s-passiv).</p></details>
+</section>
+<section class="task" data-id="13">
+<h2>13. Pakken ___ levert i morgen.</h2>
+<div class="opts" data-q="13" data-correct="blir" data-ok="Dobrze.">
+<button class="opt">har</button>
+<button class="opt">var</button>
+<button class="opt">ble</button>
+<button class="opt">blir</button>
+</div><div class="fb" id="f13"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>„I morgen” = przyszłość, więc blir levert. „Ble levert” opisuje przeszłość i nie pasuje do „i morgen”.</p></details>
+</section>
+<section class="task" data-id="14">
+<h2>14. Uzupełnij</h2>
+<p class="hint">bestemme (strona bierna, czas przeszły)</p>
+<div class="inline sent">Det <input type="text" id="t14" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i går at budsjettet skal kuttes.</div>
+<div class="row"><button class="btn" onclick="checkText(14,[&quot;ble bestemt&quot;],&quot;Dobrze: ble bestemt.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(14)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f14"></div><div class="sol" id="s14">Wzorcowa odpowiedź: <b>ble bestemt</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Jednorazowa decyzja w przeszłości (i går) → ble + imiesłów: ble bestemt.</p></details>
+</section>
+<section class="task" data-id="15">
+<h2>15. Røyking ___ ikke på rommene.</h2>
+<div class="opts" data-q="15" data-correct="tillates" data-ok="Dobrze.">
+<button class="opt">tillates</button>
+<button class="opt">tillat</button>
+<button class="opt">tillatt</button>
+<button class="opt">tillater</button>
+</div><div class="fb" id="f15"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Typowy język regulaminów i ogłoszeń: s-passiv w czasie teraźniejszym (tillates = jest dozwolone).</p></details>
+</section>
+<section class="task" data-id="16">
+<h2>16. Uzupełnij</h2>
+<p class="hint">åpne (strona bierna, czas przeszły)</p>
+<div class="inline sent">Barnehagen <input type="text" id="t16" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i 2010.</div>
+<div class="row"><button class="btn" onclick="checkText(16,[&quot;ble åpnet&quot;],&quot;Dobrze: ble åpnet.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(16)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f16"></div><div class="sol" id="s16">Wzorcowa odpowiedź: <b>ble åpnet</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Konkretny rok w przeszłości → ble åpnet.</p></details>
+</section>
+<section class="task" data-id="17">
+<h2>17. Gjestene ___ om å forlate rommet innen klokka tolv.</h2>
+<div class="opts" data-q="17" data-correct="bes" data-ok="Dobrze.">
+<button class="opt">bes</button>
+<button class="opt">be</button>
+<button class="opt">ber</button>
+<button class="opt">bedt</button>
+</div><div class="fb" id="f17"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>S-passiv od „be” (prosić) to „bes”: gjestene bes om … = goście są proszeni o … Typowe w oficjalnych komunikatach.</p></details>
+</section>
+<section class="task" data-id="18">
+<h2>18. Przekształć na stronę bierną</h2>
+<p class="given">Noen stjal sykkelen min.</p>
+<div class="rw"><span>Sykkelen min</span><input type="text" id="t18" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(18,[&quot;ble stjålet&quot;],&quot;Dobrze. Sykkelen min ble stjålet.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(18)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f18"></div><div class="sol" id="s18">Wzorcowa odpowiedź: <b>Sykkelen min ble stjålet.</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Gdy wykonawca jest nieznany (noen), w stronie biernej po prostu go pomijamy. Stjal → ble stjålet.</p></details>
+</section>
+<section class="task" data-id="19">
+<h2>19. Uzupełnij</h2>
+<p class="hint">invitere (strona bierna, czas przeszły)</p>
+<div class="inline sent">Alle ansatte <input type="text" id="t19" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> til julebord i fjor.</div>
+<div class="row"><button class="btn" onclick="checkText(19,[&quot;ble invitert&quot;],&quot;Dobrze: ble invitert.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(19)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f19"></div><div class="sol" id="s19">Wzorcowa odpowiedź: <b>ble invitert</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>„I fjor” = przeszłość → ble invitert.</p></details>
+</section>
+<section class="task" data-id="20">
+<h2>20. Velferdsstaten ___ i stor grad av skatter og avgifter.</h2>
+<div class="opts" data-q="20" data-correct="finansieres" data-ok="Dobrze.">
+<button class="opt">finansiere</button>
+<button class="opt">finansieres</button>
+<button class="opt">finansiert</button>
+<button class="opt">finansierer</button>
+</div><div class="fb" id="f20"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Fakt ogólny, z wykonawcą po „av” → finansieres (= blir finansiert).</p></details>
+</section>
+<section class="task" data-id="21">
+<h2>21. Dokumentene ___ sendt.</h2>
+<div class="opts" data-q="21" data-correct="har blitt" data-ok="Dobrze.">
+<button class="opt">har blitt</button>
+<button class="opt">har bli</button>
+<button class="opt">hadde bli</button>
+<button class="opt">har blir</button>
+</div><div class="fb" id="f21"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Czas perfektum w stronie biernej: har blitt + imiesłów (har blitt sendt). Można też powiedzieć „er blitt sendt”.</p></details>
+</section>
+<section class="task" data-id="22">
+<h2>22. Przekształć na stronę bierną</h2>
+<p class="given">Lærerne har vurdert alle oppgavene.</p>
+<div class="rw"><span>Alle oppgavene</span><input type="text" id="t22" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(22,[&quot;har blitt vurdert av lærerne&quot;, &quot;er blitt vurdert av lærerne&quot;],&quot;Dobrze. Alle oppgavene har blitt vurdert av lærerne.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(22)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f22"></div><div class="sol" id="s22">Wzorcowa odpowiedź: <b>Alle oppgavene har blitt vurdert av lærerne.</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Perfektum (har vurdert) → w stronie biernej har blitt vurdert.</p></details>
+</section>
+<h2 class="part">Część B: Til, for, mot i inne przyimki</h2>
+<p class="partintro">Wiele przyimków trzeba znać razem z czasownikiem lub przymiotnikiem: glede seg til, redd for, allergisk mot. Wybierz przyimek, który pasuje.</p>
+<section class="task" data-id="23">
+<h2>23. Jeg gleder meg ___ ferien.</h2>
+<div class="opts" data-q="23" data-correct="til" data-ok="Dobrze: til.">
+<button class="opt">til</button>
+<button class="opt">for</button>
+<button class="opt">på</button>
+<button class="opt">mot</button>
+</div><div class="fb" id="f23"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Glede seg til = cieszyć się na coś, co dopiero będzie. Til często wskazuje cel lub kierunek w przyszłość.</p></details>
+</section>
+<section class="task" data-id="24">
+<h2>24. Takk ___ hjelpen!</h2>
+<div class="opts" data-q="24" data-correct="for" data-ok="Dobrze: for.">
+<button class="opt">for</button>
+<button class="opt">på</button>
+<button class="opt">til</button>
+<button class="opt">om</button>
+</div><div class="fb" id="f24"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Takk for = dziękuję za. For wskazuje powód (za co).</p></details>
+</section>
+<section class="task" data-id="25">
+<h2>25. Hun er redd ___ å snakke norsk i telefonen.</h2>
+<div class="opts" data-q="25" data-correct="for" data-ok="Dobrze: for.">
+<button class="opt">av</button>
+<button class="opt">mot</button>
+<button class="opt">til</button>
+<button class="opt">for</button>
+</div><div class="fb" id="f25"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Være redd for = bać się czegoś. Stałe połączenie.</p></details>
+</section>
+<section class="task" data-id="26">
+<h2>26. Vi venter ___ svar fra NAV.</h2>
+<div class="opts" data-q="26" data-correct="på" data-ok="Dobrze: på.">
+<button class="opt">for</button>
+<button class="opt">på</button>
+<button class="opt">etter</button>
+<button class="opt">til</button>
+</div><div class="fb" id="f26"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Vente på = czekać na. Stałe połączenie.</p></details>
+</section>
+<section class="task" data-id="27">
+<h2>27. Mange er ___ forslaget om høyere skatt, fordi de vil beholde mer av lønna.</h2>
+<div class="opts" data-q="27" data-correct="mot" data-ok="Dobrze: mot.">
+<button class="opt">mot</button>
+<button class="opt">for</button>
+<button class="opt">til</button>
+<button class="opt">på</button>
+</div><div class="fb" id="f27"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Være mot = być przeciw. Kontekst (chcą zatrzymać więcej pensji) pokazuje sprzeciw. „Være for” = być za.</p></details>
+</section>
+<section class="task" data-id="28">
+<h2>28. Kommunen bruker mye penger ___ eldreomsorg.</h2>
+<div class="opts" data-q="28" data-correct="på" data-ok="Dobrze: på.">
+<button class="opt">i</button>
+<button class="opt">på</button>
+<button class="opt">til</button>
+<button class="opt">for</button>
+</div><div class="fb" id="f28"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Bruke penger på = wydawać pieniądze na coś. W Norskprøve bardzo częste przy temacie budżetu państwa.</p></details>
+</section>
+<section class="task" data-id="29">
+<h2>29. Hun søkte ___ jobb som barnehageassistent.</h2>
+<div class="opts" data-q="29" data-correct="på" data-ok="Dobrze: på.">
+<button class="opt">på</button>
+<button class="opt">til</button>
+<button class="opt">om</button>
+<button class="opt">etter</button>
+</div><div class="fb" id="f29"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Søke på (en jobb, en stilling) = aplikować na stanowisko.</p></details>
+</section>
+<section class="task" data-id="30">
+<h2>30. Han søkte ___ permisjon fra jobben.</h2>
+<div class="opts" data-q="30" data-correct="om" data-ok="Dobrze: om.">
+<button class="opt">for</button>
+<button class="opt">på</button>
+<button class="opt">om</button>
+<button class="opt">til</button>
+</div><div class="fb" id="f30"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Søke om (permisjon, visum, støtte) = ubiegać się o pozwolenie lub świadczenie. Porównaj: søke på jobb.</p></details>
+</section>
+<section class="task" data-id="31">
+<h2>31. Vi må ta hensyn ___ barna med allergi.</h2>
+<div class="opts" data-q="31" data-correct="til" data-ok="Dobrze: til.">
+<button class="opt">til</button>
+<button class="opt">på</button>
+<button class="opt">mot</button>
+<button class="opt">for</button>
+</div><div class="fb" id="f31"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Ta hensyn til = brać pod uwagę, liczyć się z kimś.</p></details>
+</section>
+<section class="task" data-id="32">
+<h2>32. Jeg er så glad ___ at du hjalp meg.</h2>
+<div class="opts" data-q="32" data-correct="for" data-ok="Dobrze: for.">
+<button class="opt">på</button>
+<button class="opt">til</button>
+<button class="opt">i</button>
+<button class="opt">for</button>
+</div><div class="fb" id="f32"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Glad for = zadowolona, wdzięczna za coś. Glad i = lubić, kochać kogoś lub coś.</p></details>
+</section>
+<section class="task" data-id="33">
+<h2>33. Hun er veldig glad ___ jobben sin i barnehagen.</h2>
+<div class="opts" data-q="33" data-correct="i" data-ok="Dobrze: i.">
+<button class="opt">for</button>
+<button class="opt">i</button>
+<button class="opt">til</button>
+<button class="opt">på</button>
+</div><div class="fb" id="f33"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Glad i = lubić, kochać (osobę, rzecz, pracę). Glad for = wdzięczna za konkretną sytuację.</p></details>
+</section>
+<section class="task" data-id="34">
+<h2>34. Han er allergisk ___ nøtter.</h2>
+<div class="opts" data-q="34" data-correct="mot" data-ok="Dobrze: mot.">
+<button class="opt">av</button>
+<button class="opt">for</button>
+<button class="opt">til</button>
+<button class="opt">mot</button>
+</div><div class="fb" id="f34"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Allergisk mot = uczulony na. Mot oznacza reakcję przeciw czemuś.</p></details>
+</section>
+<section class="task" data-id="35">
+<h2>35. Personalet må være høflig ___ gjestene.</h2>
+<div class="opts" data-q="35" data-correct="mot" data-ok="Dobrze: mot.">
+<button class="opt">for</button>
+<button class="opt">på</button>
+<button class="opt">mot</button>
+<button class="opt">til</button>
+</div><div class="fb" id="f35"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Zachowanie wobec kogoś: høflig mot, snill mot, uhøflig mot. Mot = wobec.</p></details>
+</section>
+<section class="task" data-id="36">
+<h2>36. Hvem er ansvarlig ___ lageret?</h2>
+<div class="opts" data-q="36" data-correct="for" data-ok="Dobrze: for.">
+<button class="opt">til</button>
+<button class="opt">på</button>
+<button class="opt">for</button>
+<button class="opt">om</button>
+</div><div class="fb" id="f36"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Ansvarlig for / ansvar for = odpowiedzialny za.</p></details>
+</section>
+<section class="task" data-id="37">
+<h2>37. Alle har rett ___ å si sin mening.</h2>
+<div class="opts" data-q="37" data-correct="til" data-ok="Dobrze: til.">
+<button class="opt">til</button>
+<button class="opt">om</button>
+<button class="opt">for</button>
+<button class="opt">på</button>
+</div><div class="fb" id="f37"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Rett til = prawo do. Częste przy prawach człowieka: rett til utdanning, rett til helsehjelp.</p></details>
+</section>
+<section class="task" data-id="38">
+<h2>38. Hun er flink ___ å organisere.</h2>
+<div class="opts" data-q="38" data-correct="til" data-ok="Dobrze: til.">
+<button class="opt">for</button>
+<button class="opt">til</button>
+<button class="opt">på</button>
+<button class="opt">mot</button>
+</div><div class="fb" id="f38"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Flink til / god til (å gjøre noe) = dobra w robieniu czegoś.</p></details>
+</section>
+<section class="task" data-id="39">
+<h2>39. Vi snakket ___ velferdsstaten i timen.</h2>
+<div class="opts" data-q="39" data-correct="om" data-ok="Dobrze: om.">
+<button class="opt">for</button>
+<button class="opt">på</button>
+<button class="opt">om</button>
+<button class="opt">til</button>
+</div><div class="fb" id="f39"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Snakke om = rozmawiać o. Tak samo: lese om, skrive om, fortelle om.</p></details>
+</section>
+<section class="task" data-id="40">
+<h2>40. Jeg tenker ofte ___ familien min.</h2>
+<div class="opts" data-q="40" data-correct="på" data-ok="Dobrze: på.">
+<button class="opt">til</button>
+<button class="opt">på</button>
+<button class="opt">om</button>
+<button class="opt">for</button>
+</div><div class="fb" id="f40"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Tenke på = myśleć o kimś/czymś. Uwaga: po polsku „o”, po norwesku „på”.</p></details>
+</section>
+<section class="task" data-id="41">
+<h2>41. Hun ble sint ___ kollegaen sin.</h2>
+<div class="opts" data-q="41" data-correct="på" data-ok="Dobrze: på.">
+<button class="opt">mot</button>
+<button class="opt">for</button>
+<button class="opt">på</button>
+<button class="opt">til</button>
+</div><div class="fb" id="f41"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Sint på (en person) = zła na kogoś. Sint for (noe) = zła z powodu czegoś.</p></details>
+</section>
+<section class="task" data-id="42">
+<h2>42. Dette er en gave ___ deg.</h2>
+<div class="opts" data-q="42" data-correct="til" data-ok="Dobrze: til.">
+<button class="opt">for</button>
+<button class="opt">til</button>
+<button class="opt">på</button>
+<button class="opt">mot</button>
+</div><div class="fb" id="f42"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>En gave til noen = prezent dla kogoś (odbiorca). Til wskazuje odbiorcę.</p></details>
+</section>
+<section class="task" data-id="43">
+<h2>43. Mange demonstrerte ___ krigen.</h2>
+<div class="opts" data-q="43" data-correct="mot" data-ok="Dobrze: mot.">
+<button class="opt">til</button>
+<button class="opt">mot</button>
+<button class="opt">på</button>
+<button class="opt">for</button>
+</div><div class="fb" id="f43"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Demonstrere mot = protestować przeciw. Demonstrere for = demonstrować na rzecz czegoś.</p></details>
+</section>
+<section class="task" data-id="44">
+<h2>44. Organisasjonen kjemper ___ religionsfrihet.</h2>
+<div class="opts" data-q="44" data-correct="for" data-ok="Dobrze: for.">
+<button class="opt">til</button>
+<button class="opt">om</button>
+<button class="opt">for</button>
+<button class="opt">mot</button>
+</div><div class="fb" id="f44"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Kjempe for = walczyć o (coś, czego się chce). Kjempe mot = walczyć z (czymś, czego się nie chce).</p></details>
+</section>
+<section class="task" data-id="45">
+<h2>45. Det var snilt ___ deg å hjelpe meg.</h2>
+<div class="opts" data-q="45" data-correct="av" data-ok="Dobrze: av.">
+<button class="opt">av</button>
+<button class="opt">til</button>
+<button class="opt">mot</button>
+<button class="opt">for</button>
+</div><div class="fb" id="f45"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Det er snilt / dumt / pent av deg = to miło / głupio z twojej strony. Stałe połączenie z „av”.</p></details>
+</section>
+<section class="task" data-id="46">
+<h2>46. Han er interessert ___ logistikk.</h2>
+<div class="opts" data-q="46" data-correct="i" data-ok="Dobrze: i.">
+<button class="opt">om</button>
+<button class="opt">i</button>
+<button class="opt">for</button>
+<button class="opt">på</button>
+</div><div class="fb" id="f46"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Interessert i = zainteresowany czymś.</p></details>
+</section>
+<h2 class="part">Część C: Pluskvamperfektum (czas zaprzeszły)</h2>
+<p class="partintro">Hadde + imiesłów: czynność, która wydarzyła się przed inną czynnością w przeszłości. Da jeg kom, hadde de spist.</p>
+<section class="task" data-id="47">
+<h2>47. Wybierz poprawne zdanie: Da jeg kom på jobb, …</h2>
+<div class="opts" data-q="47" data-correct="hadde barna allerede spist frokost." data-ok="Dobrze.">
+<button class="opt">spiste barna allerede frokost.</button>
+<button class="opt">barna hadde allerede spist frokost.</button>
+<button class="opt">hadde barna allerede spist frokost.</button>
+<button class="opt">har barna allerede spist frokost.</button>
+</div><div class="fb" id="f47"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Śniadanie było wcześniej niż moje przyjście → pluskvamperfektum (hadde + imiesłów). Zdanie zaczyna się od zdania podrzędnego (Da jeg kom…), więc dalej inwersja: hadde barna.</p></details>
+</section>
+<section class="task" data-id="48">
+<h2>48. Uzupełnij</h2>
+<p class="hint">jobbe</p>
+<div class="inline sent">Hun var trøtt, fordi hun <input type="text" id="t48" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> natt.</div>
+<div class="row"><button class="btn" onclick="checkText(48,[&quot;hadde jobbet&quot;],&quot;Dobrze: hadde jobbet.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(48)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f48"></div><div class="sol" id="s48">Wzorcowa odpowiedź: <b>hadde jobbet</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Najpierw pracowała w nocy, potem była zmęczona. Wcześniejsza czynność w przeszłości → hadde + imiesłów.</p></details>
+</section>
+<section class="task" data-id="49">
+<h2>49. Uzupełnij</h2>
+<p class="hint">spise</p>
+<div class="inline sent">Etter at vi <input type="text" id="t49" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">, gikk vi en tur.</div>
+<div class="row"><button class="btn" onclick="checkText(49,[&quot;hadde spist&quot;],&quot;Dobrze: hadde spist.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(49)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f49"></div><div class="sol" id="s49">Wzorcowa odpowiedź: <b>hadde spist</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Po „etter at” w opowiadaniu o przeszłości zwykle pluskvamperfektum: etter at vi hadde spist.</p></details>
+</section>
+<section class="task" data-id="50">
+<h2>50. Uzupełnij</h2>
+<p class="hint">sende</p>
+<div class="inline sent">Han fikk ikke jobben, fordi han ikke <input type="text" id="t50" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> søknaden i tide.</div>
+<div class="row"><button class="btn" onclick="checkText(50,[&quot;hadde sendt&quot;],&quot;Dobrze: hadde sendt.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(50)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f50"></div><div class="sol" id="s50">Wzorcowa odpowiedź: <b>hadde sendt</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Wysłanie (nie) nastąpiło przed decyzją o pracy → hadde sendt. W zdaniu podrzędnym „ikke” stoi przed czasownikiem.</p></details>
+</section>
+<section class="task" data-id="51">
+<h2>51. Før jeg flyttet til Norge, ___ jeg aldri sett nordlys.</h2>
+<div class="opts" data-q="51" data-correct="hadde" data-ok="Dobrze.">
+<button class="opt">hadde</button>
+<button class="opt">var</button>
+<button class="opt">ble</button>
+<button class="opt">har</button>
+</div><div class="fb" id="f51"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Punkt odniesienia jest w przeszłości (przeprowadzka). To, co było przed nim → hadde sett. „Har sett” odnosi się do teraźniejszości.</p></details>
+</section>
+<section class="task" data-id="52">
+<h2>52. Połącz zdania (pluskvamperfektum)</h2>
+<p class="given">Gjestene sjekket ut. Etterpå kom renholderen.</p>
+<div class="rw"><span>Da renholderen kom,</span><input type="text" id="t52" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(52,[&quot;hadde gjestene sjekket ut&quot;, &quot;hadde gjestene allerede sjekket ut&quot;],&quot;Dobrze. Da renholderen kom, hadde gjestene sjekket ut.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(52)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f52"></div><div class="sol" id="s52">Wzorcowa odpowiedź: <b>Da renholderen kom, hadde gjestene sjekket ut.</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Wymeldowanie było wcześniej → hadde sjekket ut. Po zdaniu z „da” na początku jest inwersja: hadde gjestene.</p></details>
+</section>
+<section class="task" data-id="53">
+<h2>53. Uzupełnij</h2>
+<p class="hint">lese</p>
+<div class="inline sent">Eksamen gikk bra, fordi jeg <input type="text" id="t53" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> mye på forhånd.</div>
+<div class="row"><button class="btn" onclick="checkText(53,[&quot;hadde lest&quot;],&quot;Dobrze: hadde lest.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(53)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f53"></div><div class="sol" id="s53">Wzorcowa odpowiedź: <b>hadde lest</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Nauka była przed egzaminem → hadde lest (lese – leste – har lest).</p></details>
+</section>
+<section class="task" data-id="54">
+<h2>54. Uzupełnij</h2>
+<p class="hint">bo</p>
+<div class="inline sent">Hun fortalte at hun <input type="text" id="t54" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i Norge i fem år.</div>
+<div class="row"><button class="btn" onclick="checkText(54,[&quot;hadde bodd&quot;],&quot;Dobrze: hadde bodd.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(54)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f54"></div><div class="sol" id="s54">Wzorcowa odpowiedź: <b>hadde bodd</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Mowa zależna w przeszłości: „Jeg har bodd …” zmienia się w „hun hadde bodd …”.</p></details>
+</section>
+<h2 class="part">Część D: Kondisjonalis (tryb przypuszczający)</h2>
+<p class="partintro">Teraźniejszość: Hvis jeg hadde tid, ville jeg reise. Przeszłość: Hvis jeg hadde hatt tid, ville jeg ha reist / hadde jeg reist. Po zdaniu z hvis na początku zawsze inwersja.</p>
+<section class="task" data-id="55">
+<h2>55. Hvis jeg ___ mer tid, ville jeg trene mer.</h2>
+<div class="opts" data-q="55" data-correct="hadde" data-ok="Dobrze.">
+<button class="opt">hadde</button>
+<button class="opt">har</button>
+<button class="opt">ville ha</button>
+<button class="opt">får</button>
+</div><div class="fb" id="f55"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Warunek nierzeczywisty w teraźniejszości: hvis + czas przeszły (hadde), w drugiej części ville + czasownik.</p></details>
+</section>
+<section class="task" data-id="56">
+<h2>56. Uzupełnij</h2>
+<p class="hint">tryb przypuszczający</p>
+<div class="inline sent">Hvis jeg vant i Lotto, <input type="text" id="t56" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> jeg kjøpe et hus.</div>
+<div class="row"><button class="btn" onclick="checkText(56,[&quot;ville&quot;],&quot;Dobrze: ville.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(56)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f56"></div><div class="sol" id="s56">Wzorcowa odpowiedź: <b>ville</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Sytuacja wyobrażona: hvis + preteritum (vant), potem ville + bezokolicznik. Po zdaniu z „hvis” na początku inwersja: ville jeg.</p></details>
+</section>
+<section class="task" data-id="57">
+<h2>57. Hvis jeg hadde visst at butikken var stengt, …</h2>
+<div class="opts" data-q="57" data-correct="ville jeg ikke ha kommet." data-ok="Dobrze.">
+<button class="opt">jeg ville ikke kommet.</button>
+<button class="opt">vil jeg ikke komme.</button>
+<button class="opt">ville jeg ikke ha kommet.</button>
+<button class="opt">ville jeg ikke kommer.</button>
+</div><div class="fb" id="f57"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Nierzeczywista przeszłość: hvis + hadde + imiesłów, druga część: ville ha + imiesłów (albo krócej: hadde jeg ikke kommet). Do tego inwersja po zdaniu z hvis.</p></details>
+</section>
+<section class="task" data-id="58">
+<h2>58. Uzupełnij</h2>
+<p class="hint">tryb przypuszczający</p>
+<div class="inline sent">Hva <input type="text" id="t58" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> du gjøre hvis du var statsminister i én dag?</div>
+<div class="row"><button class="btn" onclick="checkText(58,[&quot;ville&quot;],&quot;Dobrze: ville.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(58)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f58"></div><div class="sol" id="s58">Wzorcowa odpowiedź: <b>ville</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Pytanie o wyobrażoną sytuację: ville + bezokolicznik, a w zdaniu z hvis czas przeszły (var).</p></details>
+</section>
+<section class="task" data-id="59">
+<h2>59. Zamień na zdanie warunkowe</h2>
+<p class="given">Jeg har ikke tid, så jeg kan ikke hjelpe deg.</p>
+<div class="rw"><span>Hvis jeg hadde tid,</span><input type="text" id="t59" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(59,[&quot;kunne jeg hjelpe deg&quot;, &quot;ville jeg hjelpe deg&quot;, &quot;kunne jeg ha hjulpet deg&quot;],&quot;Dobrze. Hvis jeg hadde tid, kunne jeg hjelpe deg.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(59)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f59"></div><div class="sol" id="s59">Wzorcowa odpowiedź: <b>Hvis jeg hadde tid, kunne jeg hjelpe deg.</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Rzeczywistość: nie mam czasu. Wersja nierzeczywista: hvis + hadde, potem kunne/ville + bezokolicznik i inwersja.</p></details>
+</section>
+<section class="task" data-id="60">
+<h2>60. Jeg skulle ønske at jeg ___ bedre norsk.</h2>
+<div class="opts" data-q="60" data-correct="snakket" data-ok="Dobrze.">
+<button class="opt">har snakket</button>
+<button class="opt">snakker</button>
+<button class="opt">snakke</button>
+<button class="opt">snakket</button>
+</div><div class="fb" id="f60"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Po „jeg skulle ønske at” (chciałabym, żeby) stoi czas przeszły, bo to życzenie nierzeczywiste: snakket.</p></details>
+</section>
+<section class="task" data-id="61">
+<h2>61. Uzupełnij</h2>
+<p class="hint">jedno słowo</p>
+<div class="inline sent">Hvis bussen ikke hadde vært forsinket, <input type="text" id="t61" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> jeg kommet i tide.</div>
+<div class="row"><button class="btn" onclick="checkText(61,[&quot;hadde&quot;],&quot;Dobrze: hadde.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(61)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f61"></div><div class="sol" id="s61">Wzorcowa odpowiedź: <b>hadde</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Nierzeczywista przeszłość. Druga część: hadde jeg kommet (albo ville jeg ha kommet). Tutaj miejsce jest tylko na jedno słowo: hadde.</p></details>
+</section>
+<section class="task" data-id="62">
+<h2>62. Ułóż zdanie</h2>
+<p class="hint">Gdybym była tobą, złożyłabym podanie na tę pracę.</p>
+<div class="ord" id="o62"><div class="line" id="l62" aria-label="Twoje zdanie"></div><div class="tiles" id="p62">
+<button class="tile" onclick="pick(62,this)">jeg</button>
+<button class="tile" onclick="pick(62,this)">jobben.</button>
+<button class="tile" onclick="pick(62,this)">Hvis</button>
+<button class="tile" onclick="pick(62,this)">var</button>
+<button class="tile" onclick="pick(62,this)">jeg</button>
+<button class="tile" onclick="pick(62,this)">søke</button>
+<button class="tile" onclick="pick(62,this)">deg,</button>
+<button class="tile" onclick="pick(62,this)">ville</button>
+<button class="tile" onclick="pick(62,this)">på</button>
+</div></div>
+<div class="row"><button class="btn" onclick="checkOrder(62,[&quot;Hvis jeg var deg, ville jeg søke på jobben.&quot;],&quot;Dobrze. Po zdaniu z hvis na początku: ville jeg (inwersja).&quot;)">Sprawdź</button><button class="ghost" onclick="clearOrder(62)">Od nowa</button><button class="ghost" onclick="showSol(62)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f62"></div><div class="sol" id="s62">Wzorcowa odpowiedź: <b>Hvis jeg var deg, ville jeg søke på jobben.</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Najpierw zdanie z hvis (czas przeszły: var), potem czasownik ville, dopiero potem podmiot jeg.</p></details>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 62 / 62</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=62;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ordforråd og lesing B1–B2 Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+</style>
+
+<style>.why{margin-top:12px}.why summary{cursor:pointer;color:var(--fjord);font-weight:600;font-size:.92rem;min-height:32px}.why p{background:var(--tint);border-radius:8px;padding:10px 14px;margin:6px 0 0;color:var(--natt)}</style>
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · B1–B2 · Lekcja 1</span>
+  <h1>Ordforråd og lesing: <span>staten, velferd og menneskerettigheter</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Słownictwo i czytanie w formatach z Norskprøve: Flervalgsoppgaver, Lukeoppgaver, Klikk på riktig ord, Klikk på riktig svar, Klikk på riktig navn, Velg riktig tekst i Flytt avsnitt. Tematy: dochody i wydatki państwa, państwo opiekuńcze, prawa człowieka i wolność religijna. Przy każdym zadaniu „Podpowiedź: dlaczego?” wyjaśnia odpowiedź.</p>
+  <div class="meta"><span>Słownictwo i czytanie</span><span>ok. 40 min</span><span>34 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 34</b></div>
+<h2 class="part">Del 1: Flervalgsoppgaver</h2>
+<p class="partintro">Wybierz wyjaśnienie, które pasuje do słowa.</p>
+<section class="task" data-id="1">
+<h2>1. Hva betyr «skatt»?</h2>
+<p class="hint">Flervalgsoppgave</p>
+<div class="opts" data-q="1" data-correct="penger innbyggerne betaler til stat og kommune av inntekten sin" data-ok="Riktig.">
+<button class="opt">rabatt man får i butikken</button>
+<button class="opt">penger man får fra NAV når man er syk</button>
+<button class="opt">penger innbyggerne betaler til stat og kommune av inntekten sin</button>
+<button class="opt">penger man sparer i banken</button>
+</div><div class="fb" id="f1"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Skatt = podatek od dochodu (lønn, pensjon itd.), płacony państwu i gminie.</p></details>
+</section>
+<section class="task" data-id="2">
+<h2>2. Hva betyr «merverdiavgift» (moms)?</h2>
+<div class="opts" data-q="2" data-correct="en avgift som er lagt på prisen når vi kjøper varer og tjenester" data-ok="Riktig.">
+<button class="opt">en skatt på huset man eier</button>
+<button class="opt">en bot for å kjøre for fort</button>
+<button class="opt">en avgift som er lagt på prisen når vi kjøper varer og tjenester</button>
+<button class="opt">et lån fra staten</button>
+</div><div class="fb" id="f2"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Merverdiavgift (moms) = VAT, wliczony w cenę towarów i usług.</p></details>
+</section>
+<section class="task" data-id="3">
+<h2>3. Hva er «statsbudsjettet»?</h2>
+<div class="opts" data-q="3" data-correct="en plan over statens inntekter og utgifter for ett år" data-ok="Riktig.">
+<button class="opt">en lov om rettighetene til innbyggerne</button>
+<button class="opt">statens sparekonto i utlandet</button>
+<button class="opt">en liste over alle som betaler skatt</button>
+<button class="opt">en plan over statens inntekter og utgifter for ett år</button>
+</div><div class="fb" id="f3"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Statsbudsjett = budżet państwa: ile państwo zarobi i ile wyda w ciągu roku.</p></details>
+</section>
+<section class="task" data-id="4">
+<h2>4. Hva betyr «trygd»?</h2>
+<div class="opts" data-q="4" data-correct="økonomisk støtte fra det offentlige, for eksempel når man er syk eller arbeidsledig" data-ok="Riktig.">
+<button class="opt">en forsikring man kjøper selv i banken</button>
+<button class="opt">økonomisk støtte fra det offentlige, for eksempel når man er syk eller arbeidsledig</button>
+<button class="opt">lønn fra en privat arbeidsgiver</button>
+<button class="opt">en skatt man betaler hver måned</button>
+</div><div class="fb" id="f4"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Trygd = świadczenie publiczne (np. z NAV). Pułapka: „trygg” = bezpieczny, to inne słowo.</p></details>
+</section>
+<section class="task" data-id="5">
+<h2>5. Hva betyr «ytringsfrihet»?</h2>
+<div class="opts" data-q="5" data-correct="retten til å si og skrive hva man mener" data-ok="Riktig.">
+<button class="opt">plikten til å stemme ved valg</button>
+<button class="opt">retten til å velge hvor man vil bo</button>
+<button class="opt">retten til å si og skrive hva man mener</button>
+<button class="opt">friheten til å reise ut av landet</button>
+</div><div class="fb" id="f5"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Ytre seg = wypowiadać się. Ytringsfrihet = wolność słowa.</p></details>
+</section>
+<section class="task" data-id="6">
+<h2>6. Hva betyr «diskriminering»?</h2>
+<div class="opts" data-q="6" data-correct="å behandle noen dårligere på grunn av for eksempel kjønn, religion eller hudfarge" data-ok="Riktig.">
+<button class="opt">å behandle noen dårligere på grunn av for eksempel kjønn, religion eller hudfarge</button>
+<button class="opt">å dele noe likt mellom alle</button>
+<button class="opt">å hjelpe noen som har det vanskelig</button>
+<button class="opt">å diskutere et vanskelig tema</button>
+</div><div class="fb" id="f6"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Diskriminering = gorsze traktowanie z powodu płci, religii, pochodzenia itd.</p></details>
+</section>
+<section class="task" data-id="7">
+<h2>7. Hva betyr «likestilling»?</h2>
+<div class="opts" data-q="7" data-correct="at kvinner og menn har de samme rettighetene og mulighetene" data-ok="Riktig.">
+<button class="opt">at alle må stå i kø</button>
+<button class="opt">at alle har lik lønn uansett jobb</button>
+<button class="opt">at alle religioner er like</button>
+<button class="opt">at kvinner og menn har de samme rettighetene og mulighetene</button>
+</div><div class="fb" id="f7"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Likestilling = równouprawnienie (najczęściej kobiet i mężczyzn).</p></details>
+</section>
+<section class="task" data-id="8">
+<h2>8. Hva betyr «religionsfrihet»?</h2>
+<div class="opts" data-q="8" data-correct="retten til å velge sin egen tro eller å ikke ha noen tro" data-ok="Riktig.">
+<button class="opt">plikten til å være medlem av en kirke</button>
+<button class="opt">et forbud mot religion i skolen</button>
+<button class="opt">retten til å velge sin egen tro eller å ikke ha noen tro</button>
+<button class="opt">retten til å slippe å betale skatt</button>
+</div><div class="fb" id="f8"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Religionsfrihet (trosfrihet) obejmuje też prawo do bycia niewierzącym.</p></details>
+</section>
+<h2 class="part">Del 2: Lukeoppgaver</h2>
+<p class="partintro">Przeczytaj tekst i wybierz słowo do każdej luki.</p>
+<div class="text"><h2>Hvor kommer pengene fra?</h2><p>Staten trenger penger for å betale for skoler, sykehus, veier og pensjoner. En stor del av inntektene (1) ___ fra skatter og avgifter. Alle som jobber, betaler skatt av (2) ___ sin. Når vi handler i butikken, betaler vi også moms, som er (3) ___ i prisen.</p><p>I tillegg har Norge store inntekter fra olje og gass. Disse pengene går inn i Statens pensjonsfond utland, som ofte kalles (4) ___. Politikerne kan bare bruke en liten del av fondet hvert år, slik at også framtidige (5) ___ skal få glede av pengene.</p><p>Hver høst legger regjeringen fram (6) ___ for neste år. Der står det hvor mye penger som skal brukes på helse, skole, forsvar og andre (7) ___.</p></div>
+<section class="task" data-id="9">
+<h2>9. Luke (1)</h2>
+<div class="opts" data-q="9" data-correct="kommer" data-ok="Riktig.">
+<button class="opt">blir</button>
+<button class="opt">går</button>
+<button class="opt">står</button>
+<button class="opt">kommer</button>
+</div><div class="fb" id="f9"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Komme fra = pochodzić z. Inntektene kommer fra skatter = dochody pochodzą z podatków.</p></details>
+</section>
+<section class="task" data-id="10">
+<h2>10. Luke (2)</h2>
+<div class="opts" data-q="10" data-correct="lønna" data-ok="Riktig.">
+<button class="opt">skatten</button>
+<button class="opt">prisen</button>
+<button class="opt">gjelda</button>
+<button class="opt">lønna</button>
+</div><div class="fb" id="f10"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Betale skatt av lønna = płacić podatek od pensji. „Sin” wskazuje, że chodzi o pensję tej osoby.</p></details>
+</section>
+<section class="task" data-id="11">
+<h2>11. Luke (3)</h2>
+<div class="opts" data-q="11" data-correct="inkludert" data-ok="Riktig.">
+<button class="opt">forbudt</button>
+<button class="opt">inkludert</button>
+<button class="opt">redusert</button>
+<button class="opt">utelatt</button>
+</div><div class="fb" id="f11"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Moms er inkludert i prisen = VAT jest wliczony w cenę.</p></details>
+</section>
+<section class="task" data-id="12">
+<h2>12. Luke (4)</h2>
+<div class="opts" data-q="12" data-correct="oljefondet" data-ok="Riktig.">
+<button class="opt">Stortinget</button>
+<button class="opt">oljefondet</button>
+<button class="opt">NAV</button>
+<button class="opt">statsbudsjettet</button>
+</div><div class="fb" id="f12"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Statens pensjonsfond utland potocznie nazywa się „oljefondet”, bo pochodzi z dochodów z ropy.</p></details>
+</section>
+<section class="task" data-id="13">
+<h2>13. Luke (5)</h2>
+<div class="opts" data-q="13" data-correct="generasjoner" data-ok="Riktig.">
+<button class="opt">generasjoner</button>
+<button class="opt">bedrifter</button>
+<button class="opt">kommuner</button>
+<button class="opt">regjeringer</button>
+</div><div class="fb" id="f13"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>„Framtidige generasjoner” = przyszłe pokolenia. Sens: pieniądze mają wystarczyć też dla tych, którzy przyjdą po nas.</p></details>
+</section>
+<section class="task" data-id="14">
+<h2>14. Luke (6)</h2>
+<div class="opts" data-q="14" data-correct="statsbudsjettet" data-ok="Riktig.">
+<button class="opt">valget</button>
+<button class="opt">Grunnloven</button>
+<button class="opt">skattemeldingen</button>
+<button class="opt">statsbudsjettet</button>
+</div><div class="fb" id="f14"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Kolejne zdanie mówi, ile pieniędzy pójdzie na różne obszary: to opis budżetu państwa.</p></details>
+</section>
+<section class="task" data-id="15">
+<h2>15. Luke (7)</h2>
+<div class="opts" data-q="15" data-correct="områder" data-ok="Riktig.">
+<button class="opt">inntekter</button>
+<button class="opt">avgifter</button>
+<button class="opt">områder</button>
+<button class="opt">skatter</button>
+</div><div class="fb" id="f15"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Helse, skole, forsvar to dziedziny (områder), na które idą pieniądze. Skatter i inntekter to pieniądze, które wpływają.</p></details>
+</section>
+<h2 class="part">Del 3: Klikk på riktig ord og riktig svar</h2>
+<p class="partintro">Przeczytaj tekst. Najpierw znajdź słowa o podobnym znaczeniu, potem odpowiedz na pytania. Ostatnie pytania sprawdzają informacje wyrażone nie wprost.</p>
+<div class="text"><h2>Velferdsstaten</h2><p>Norge blir ofte kalt en velferdsstat. Det betyr at det offentlige tar ansvar for at alle innbyggerne skal ha et trygt liv, uansett hvor mye penger de har. Når man blir syk, får man behandling på sykehus nesten gratis, og hvis man mister jobben, kan man få dagpenger fra NAV i en periode.</p><p>Barnefamilier får barnetrygd hver måned, og foreldre kan ta ut foreldrepermisjon når de får barn. Skolen er gratis, og det koster nesten ingenting å studere ved offentlige universiteter og høyskoler.</p><p>Systemet er kostbart. For at det skal fungere, må mange være i arbeid og betale skatt. Noen eksperter er bekymret for framtiden: Befolkningen blir eldre, og det blir færre yrkesaktive per pensjonist. Derfor diskuterer politikerne hvordan velferden kan sikres også om tjue år.</p></div>
+<section class="task" data-id="16">
+<h2>16. Finn ordet i teksten som betyr omtrent det samme som «dyrt».</h2>
+<p class="hint">Klikk på riktig ord</p>
+<div class="opts" data-q="16" data-correct="kostbart" data-ok="Riktig.">
+<button class="opt">gratis</button>
+<button class="opt">trygt</button>
+<button class="opt">kostbart</button>
+<button class="opt">offentlige</button>
+</div><div class="fb" id="f16"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Kostbar = drogi, kosztowny. „Systemet er kostbart” = system jest drogi.</p></details>
+</section>
+<section class="task" data-id="17">
+<h2>17. Finn ordet i teksten som betyr omtrent det samme som «uavhengig av».</h2>
+<p class="hint">Klikk på riktig ord</p>
+<div class="opts" data-q="17" data-correct="uansett" data-ok="Riktig.">
+<button class="opt">ofte</button>
+<button class="opt">også</button>
+<button class="opt">derfor</button>
+<button class="opt">uansett</button>
+</div><div class="fb" id="f17"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Uansett = bez względu na. „Uansett hvor mye penger de har” = niezależnie od tego, ile mają pieniędzy.</p></details>
+</section>
+<section class="task" data-id="18">
+<h2>18. Finn ordet i teksten som betyr omtrent det samme som «personer som jobber».</h2>
+<p class="hint">Klikk på riktig ord</p>
+<div class="opts" data-q="18" data-correct="yrkesaktive" data-ok="Riktig.">
+<button class="opt">yrkesaktive</button>
+<button class="opt">eksperter</button>
+<button class="opt">innbyggerne</button>
+<button class="opt">pensjonist</button>
+</div><div class="fb" id="f18"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Yrkesaktiv = aktywny zawodowo, czyli osoba, która pracuje.</p></details>
+</section>
+<section class="task" data-id="19">
+<h2>19. Finn ordet i teksten som betyr omtrent det samme som «urolige».</h2>
+<p class="hint">Klikk på riktig ord</p>
+<div class="opts" data-q="19" data-correct="bekymret" data-ok="Riktig.">
+<button class="opt">kalt</button>
+<button class="opt">syk</button>
+<button class="opt">bekymret</button>
+<button class="opt">sikret</button>
+</div><div class="fb" id="f19"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Bekymret = zaniepokojony, zmartwiony.</p></details>
+</section>
+<section class="task" data-id="20">
+<h2>20. Finn ordet i teksten som betyr omtrent det samme som «staten og kommunene».</h2>
+<p class="hint">Klikk på riktig ord</p>
+<div class="opts" data-q="20" data-correct="det offentlige" data-ok="Riktig.">
+<button class="opt">systemet</button>
+<button class="opt">det offentlige</button>
+<button class="opt">NAV</button>
+<button class="opt">velferdsstat</button>
+</div><div class="fb" id="f20"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Det offentlige = sektor publiczny: państwo, gminy i ich instytucje.</p></details>
+</section>
+<section class="task" data-id="21">
+<h2>21. Hva kan man få fra NAV hvis man mister jobben?</h2>
+<p class="hint">Klikk på riktig svar</p>
+<div class="opts" data-q="21" data-correct="dagpenger" data-ok="Riktig.">
+<button class="opt">gratis skole</button>
+<button class="opt">dagpenger</button>
+<button class="opt">barnetrygd</button>
+<button class="opt">foreldrepermisjon</button>
+</div><div class="fb" id="f21"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Akapit 1: „hvis man mister jobben, kan man få dagpenger fra NAV”.</p></details>
+</section>
+<section class="task" data-id="22">
+<h2>22. Hvorfor er noen eksperter bekymret?</h2>
+<div class="opts" data-q="22" data-correct="Det blir flere eldre og relativt færre som jobber." data-ok="Riktig.">
+<button class="opt">Barnetrygden er for lav.</button>
+<button class="opt">Sykehusene blir dyrere hvert år.</button>
+<button class="opt">Folk vil ikke lenger betale skatt.</button>
+<button class="opt">Det blir flere eldre og relativt færre som jobber.</button>
+</div><div class="fb" id="f22"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Akapit 3: „Befolkningen blir eldre, og det blir færre yrkesaktive per pensjonist.” Odpowiedź mówi to samo innymi słowami.</p></details>
+</section>
+<section class="task" data-id="23">
+<h2>23. Hva kan vi forstå av teksten, selv om det ikke står direkte?</h2>
+<div class="opts" data-q="23" data-correct="Velferdsstaten er avhengig av at mange er i arbeid." data-ok="Riktig.">
+<button class="opt">Velferdsstaten er avhengig av at mange er i arbeid.</button>
+<button class="opt">Velferdsstaten koster ingenting.</button>
+<button class="opt">Bare rike får hjelp av det offentlige.</button>
+<button class="opt">Alle studenter må betale mye for å studere.</button>
+</div><div class="fb" id="f23"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Tekst mówi: „For at det skal fungere, må mange være i arbeid og betale skatt.” Z tego wynika, że system zależy od pracujących. Informacja nie wprost, typowa dla Norskprøve.</p></details>
+</section>
+<section class="task" data-id="24">
+<h2>24. Hva er hovedtemaet i teksten?</h2>
+<div class="opts" data-q="24" data-correct="Hva velferdsstaten gir innbyggerne, og hvilke utfordringer den har" data-ok="Riktig.">
+<button class="opt">Hva velferdsstaten gir innbyggerne, og hvilke utfordringer den har</button>
+<button class="opt">Hvordan man søker om dagpenger</button>
+<button class="opt">Historien til NAV</button>
+<button class="opt">Hvorfor skolen i Norge er gratis</button>
+</div><div class="fb" id="f24"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Akapity 1–2 opisują świadczenia, akapit 3 problemy na przyszłość. Pozostałe odpowiedzi to tylko szczegóły albo tematy, których nie ma w tekście.</p></details>
+</section>
+<h2 class="part">Del 4: Klikk på riktig navn</h2>
+<p class="partintro">Cztery osoby piszą o wolności religijnej. Kto mówi co?</p>
+<div class="text"><h2>Fire meninger om religionsfrihet</h2><p>Anders: Jeg mener at alle må få tro på det de vil, men religion bør være en privatsak. Skolen bør ikke feire religiøse høytider.</p><p>Fatima: For meg er det viktig å kunne bruke hijab på jobben. Religionsfrihet betyr også at man kan vise troen sin offentlig.</p><p>Kari: Jeg er ikke religiøs selv, men jeg synes det er fint at barna lærer om ulike religioner på skolen. Da forstår de hverandre bedre.</p><p>Jonas: Ytringsfrihet og religionsfrihet kan noen ganger komme i konflikt. Man må få lov til å kritisere religion, men man bør ikke håne mennesker.</p></div>
+<section class="task" data-id="25">
+<h2>25. Hvem mener at det skal være lov å vise troen sin på arbeidsplassen?</h2>
+<p class="hint">Klikk på riktig navn</p>
+<div class="opts" data-q="25" data-correct="Fatima" data-ok="Riktig.">
+<button class="opt">Anders</button>
+<button class="opt">Fatima</button>
+<button class="opt">Kari</button>
+<button class="opt">Jonas</button>
+</div><div class="fb" id="f25"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Fatima: „viktig å kunne bruke hijab på jobben” i „vise troen sin offentlig”.</p></details>
+</section>
+<section class="task" data-id="26">
+<h2>26. Hvem mener at kunnskap om religioner gir bedre forståelse?</h2>
+<p class="hint">Klikk på riktig navn</p>
+<div class="opts" data-q="26" data-correct="Kari" data-ok="Riktig.">
+<button class="opt">Anders</button>
+<button class="opt">Fatima</button>
+<button class="opt">Kari</button>
+<button class="opt">Jonas</button>
+</div><div class="fb" id="f26"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Kari: barna lærer om ulike religioner → „Da forstår de hverandre bedre”.</p></details>
+</section>
+<section class="task" data-id="27">
+<h2>27. Hvem peker på at to rettigheter kan stå mot hverandre?</h2>
+<p class="hint">Klikk på riktig navn</p>
+<div class="opts" data-q="27" data-correct="Jonas" data-ok="Riktig.">
+<button class="opt">Anders</button>
+<button class="opt">Fatima</button>
+<button class="opt">Kari</button>
+<button class="opt">Jonas</button>
+</div><div class="fb" id="f27"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Jonas: ytringsfrihet og religionsfrihet „kan komme i konflikt” = mogą stać ze sobą w sprzeczności.</p></details>
+</section>
+<section class="task" data-id="28">
+<h2>28. Hvem vil holde religiøse feiringer utenfor skolen?</h2>
+<p class="hint">Klikk på riktig navn</p>
+<div class="opts" data-q="28" data-correct="Anders" data-ok="Riktig.">
+<button class="opt">Anders</button>
+<button class="opt">Fatima</button>
+<button class="opt">Kari</button>
+<button class="opt">Jonas</button>
+</div><div class="fb" id="f28"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Anders: „Skolen bør ikke feire religiøse høytider.”</p></details>
+</section>
+<section class="task" data-id="29">
+<h2>29. Hvem har ingen tro selv?</h2>
+<p class="hint">Klikk på riktig navn</p>
+<div class="opts" data-q="29" data-correct="Kari" data-ok="Riktig.">
+<button class="opt">Anders</button>
+<button class="opt">Fatima</button>
+<button class="opt">Kari</button>
+<button class="opt">Jonas</button>
+</div><div class="fb" id="f29"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Kari: „Jeg er ikke religiøs selv.” Anders mówi o religii jako sprawie prywatnej, ale nie mówi, czy sam wierzy.</p></details>
+</section>
+<h2 class="part">Del 5: Velg riktig tekst</h2>
+<p class="partintro">Przeczytaj sytuację i wybierz tekst, który na nią odpowiada.</p>
+<section class="task" data-id="30">
+<h2>30. Du opplever diskriminering på jobben og vil ha gratis råd. Hvilken tekst passer best?</h2>
+<p class="hint">Velg riktig tekst</p>
+<div class="opts" data-q="30" data-correct="Likestillings- og diskrimineringsombudet gir gratis veiledning til alle som opplever diskriminering." data-ok="Riktig.">
+<button class="opt">Likestillings- og diskrimineringsombudet gir gratis veiledning til alle som opplever diskriminering.</button>
+<button class="opt">Kommunen har ansvar for barnehager og grunnskoler.</button>
+<button class="opt">Skatteetaten svarer på spørsmål om skattekort og skattemelding.</button>
+<button class="opt">NAV betaler ut barnetrygd hver måned.</button>
+</div><div class="fb" id="f30"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Sytuacja: dyskryminacja i bezpłatna porada. Tylko pierwszy tekst mówi o obu rzeczach.</p></details>
+</section>
+<section class="task" data-id="31">
+<h2>31. Du har nettopp fått barn og lurer på om du kan få inntekt mens du er hjemme. Hvilken tekst passer best?</h2>
+<p class="hint">Velg riktig tekst</p>
+<div class="opts" data-q="31" data-correct="Foreldrepenger fra NAV gir deg inntekt mens du er hjemme med barnet." data-ok="Riktig.">
+<button class="opt">Sykepenger erstatter inntekt når du er syk.</button>
+<button class="opt">Lånekassen gir lån og stipend til studenter.</button>
+<button class="opt">Foreldrepenger fra NAV gir deg inntekt mens du er hjemme med barnet.</button>
+<button class="opt">Dagpenger kan gis til personer som har mistet jobben.</button>
+</div><div class="fb" id="f31"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Foreldrepenger = świadczenie rodzicielskie, dokładnie ta sytuacja. Pozostałe teksty dotyczą bezrobocia, choroby i studiów.</p></details>
+</section>
+<section class="task" data-id="32">
+<h2>32. Du lurer på hvorfor alkohol er så dyrt i Norge. Hvilken tekst passer best?</h2>
+<p class="hint">Velg riktig tekst</p>
+<div class="opts" data-q="32" data-correct="Staten legger høye avgifter på alkohol og tobakk, blant annet av helsemessige grunner." data-ok="Riktig.">
+<button class="opt">Bompenger brukes til å bygge og vedlikeholde veier.</button>
+<button class="opt">Eiendomsskatt betales til kommunen.</button>
+<button class="opt">Momsen er lavere på matvarer enn på de fleste andre varer.</button>
+<button class="opt">Staten legger høye avgifter på alkohol og tobakk, blant annet av helsemessige grunner.</button>
+</div><div class="fb" id="f32"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Pytanie dotyczy ceny alkoholu, a tylko pierwszy tekst o nim mówi (wysokie avgifter).</p></details>
+</section>
+<h2 class="part">Del 6: Flytt avsnitt</h2>
+<p class="partintro">Tekst ma cztery akapity. Gdzie pasują akapity A i B? Zwróć uwagę na słowa łączące (derfor, også, likevel).</p>
+<div class="text"><h2>Menneskerettigheter</h2><p>[1] Menneskerettighetene er rettigheter som gjelder for alle mennesker, uansett kjønn, alder, religion eller hvor de kommer fra. Etter andre verdenskrig ønsket mange land å hindre at slike grusomheter skulle skje igjen.</p><p>[2] Erklæringen inneholder 30 artikler. Den slår blant annet fast at alle har rett til liv, frihet og personlig sikkerhet, og at ingen skal utsettes for tortur.</p><p>[3] I Norge er flere av rettighetene skrevet inn i Grunnloven. Der står det for eksempel at alle innbyggere har fri religionsutøvelse.</p><p>[4] Likevel er ikke menneskerettighetene en selvfølge overalt. Organisasjoner som Amnesty International arbeider for å avsløre brudd på rettighetene og hjelpe dem som blir forfulgt.</p><p>Avsnitt A: Derfor vedtok FN Verdenserklæringen om menneskerettighetene i 1948.</p><p>Avsnitt B: Grunnloven gir også alle rett til å ytre seg fritt, og staten skal legge til rette for en åpen offentlig samtale.</p></div>
+<section class="task" data-id="33">
+<h2>33. Hvor passer avsnitt A best?</h2>
+<p class="hint">Flytt avsnitt</p>
+<div class="opts" data-q="33" data-correct="Mellom avsnitt 1 og 2" data-ok="Riktig.">
+<button class="opt">Før avsnitt 1</button>
+<button class="opt">Mellom avsnitt 1 og 2</button>
+<button class="opt">Mellom avsnitt 2 og 3</button>
+<button class="opt">Mellom avsnitt 3 og 4</button>
+<button class="opt">Etter avsnitt 4</button>
+</div><div class="fb" id="f33"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>„Derfor” odnosi się do końca akapitu 1 (po wojnie chciano zapobiec okrucieństwom). Akapit 2 zaczyna się od „Erklæringen”, czyli deklaracji, którą wprowadza dopiero akapit A.</p></details>
+</section>
+<section class="task" data-id="34">
+<h2>34. Hvor passer avsnitt B best?</h2>
+<p class="hint">Flytt avsnitt</p>
+<div class="opts" data-q="34" data-correct="Mellom avsnitt 3 og 4" data-ok="Riktig.">
+<button class="opt">Før avsnitt 1</button>
+<button class="opt">Mellom avsnitt 1 og 2</button>
+<button class="opt">Mellom avsnitt 2 og 3</button>
+<button class="opt">Mellom avsnitt 3 og 4</button>
+<button class="opt">Etter avsnitt 4</button>
+</div><div class="fb" id="f34"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Akapit B zaczyna się od „Grunnloven gir også”, więc kontynuuje akapit 3 o norweskiej konstytucji. Akapit 4 („Likevel …”) przechodzi do świata.</p></details>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 34 / 34</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=34;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
+</script>
+
+</body>
+</html>
