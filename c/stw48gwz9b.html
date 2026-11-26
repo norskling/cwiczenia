@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zadanie domowe A2 Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+</style>
+
+<style>.why{margin-top:12px}.why summary{cursor:pointer;color:var(--fjord);font-weight:600;font-size:.92rem;min-height:32px}.why p{background:var(--tint);border-radius:8px;padding:10px 14px;margin:6px 0 0;color:var(--natt)}</style>
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · A2 · Zadanie domowe po lekcji 3</span>
+  <h1>Forma określona <span>i nieokreślona</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Rzeczowniki w formie nieokreślonej i określonej, w liczbie pojedynczej i mnogiej. Na górze mini słowniczek do sprzątania. Najpierw wybór właściwej formy i przyporządkowanie słów do kategorii, potem wybór między trzema wersjami, końcówka -ene w liczbie mnogiej i na końcu luki do samodzielnego uzupełnienia.</p>
+  <div class="meta"><span>Gramatyka</span><span>ok. 55 min</span><span>53 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 53</b></div>
+<h2 class="part">Część A: Która forma pasuje?</h2>
+<p class="partintro">Przeczytaj całe zdanie. Forma określona: o tej rzeczy już była mowa, obie osoby wiedzą, o którą chodzi, albo jest tylko jedna. Forma nieokreślona: jakaś rzecz, pierwszy raz w rozmowie.</p>
+<div class="text"><h2>Mini słowniczek: sprzątanie</h2><p>en mopp, moppen, mopper, moppene: mop</p><p>en klut, kluten, kluter, klutene: ściereczka</p><p>ei bøtte, bøtta (bøtten), bøtter, bøttene: wiadro</p><p>en kost, kosten, koster, kostene: miotła</p><p>en svamp, svampen, svamper, svampene: gąbka</p><p>en hanske, hansken, hansker, hanskene: rękawiczka (gummihansker: rękawice gumowe)</p><p>en støvsuger, støvsugeren: odkurzacz</p><p>et vaskemiddel, vaskemiddelet: płyn do mycia</p><p>en søppelpose, søppelposen, søppelposer, søppelposene: worek na śmieci</p><p>et gulv, gulvet, gulv, gulvene: podłoga</p><p>et speil, speilet, speil, speilene: lustro</p><p>et vindu, vinduet, vinduer, vinduene: okno</p></div>
+<section class="task" data-id="1">
+<h2>1. Wybierz właściwą formę</h2>
+<p class="hint">Kunden ringte: «Kan du ta med ___? Min er ødelagt.»</p>
+<div class="opts" data-q="1" data-correct="en mopp" data-ok="Dobrze. Jakiś mop, rozmówczyni nie wie który: en mopp.">
+<button class="opt">moppen</button>
+<button class="opt">en mopp</button>
+<button class="opt">mopper</button>
+</div><div class="fb" id="f1"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Klientka prosi o jakikolwiek mop, nie o konkretny. Pierwsza wzmianka i rzecz nieznana rozmówcy: forma nieokreślona.</p></details>
+</section>
+<section class="task" data-id="2">
+<h2>2. Wybierz właściwą formę</h2>
+<p class="hint">Jeg kjøpte en ny støvsuger. ___ er veldig stille.</p>
+<div class="opts" data-q="2" data-correct="Støvsugeren" data-ok="Dobrze. Drugi raz mówimy o tym samym odkurzaczu: støvsugeren.">
+<button class="opt">En støvsuger</button>
+<button class="opt">Støvsugere</button>
+<button class="opt">Støvsugeren</button>
+</div><div class="fb" id="f2"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>W pierwszym zdaniu odkurzacz pojawił się po raz pierwszy (en ny støvsuger). W drugim to już ten konkretny odkurzacz, więc forma określona.</p></details>
+</section>
+<section class="task" data-id="3">
+<h2>3. Wybierz właściwą formę</h2>
+<p class="hint">Hvor er ___? Den sto på badet i går.</p>
+<div class="opts" data-q="3" data-correct="bøtta" data-ok="Dobrze. Konkretne wiadro, obie osoby wiedzą które: bøtta (albo bøtten).">
+<button class="opt">bøtta</button>
+<button class="opt">ei bøtte</button>
+<button class="opt">bøtter</button>
+</div><div class="fb" id="f3"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Pytamy o konkretne wiadro, które wczoraj stało w łazience. Obie osoby wiedzą, o które chodzi, więc forma określona.</p></details>
+</section>
+<section class="task" data-id="4">
+<h2>4. Wybierz właściwą formę</h2>
+<p class="hint">På kjøkkenet ligger det tre ___.</p>
+<div class="opts" data-q="4" data-correct="kluter" data-ok="Dobrze. Po liczebniku (tre) i po „det ligger” forma nieokreślona: tre kluter.">
+<button class="opt">klutene</button>
+<button class="opt">kluter</button>
+<button class="opt">klut</button>
+</div><div class="fb" id="f4"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>„Det ligger/står/er” przedstawia coś nowego. Do tego liczebnik tre, więc liczba mnoga nieokreślona.</p></details>
+</section>
+<section class="task" data-id="5">
+<h2>5. Wybierz właściwą formę</h2>
+<p class="hint">Jeg vasket ___ i stua, og nå er det rent.</p>
+<div class="opts" data-q="5" data-correct="gulvet" data-ok="Dobrze. W salonie jest jedna, konkretna podłoga: gulvet.">
+<button class="opt">et gulv</button>
+<button class="opt">gulvet</button>
+<button class="opt">gulver</button>
+</div><div class="fb" id="f5"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>W pokoju jest tylko jedna podłoga i wiadomo, o którą chodzi. Forma określona.</p></details>
+</section>
+<section class="task" data-id="6">
+<h2>6. Wybierz właściwą formę</h2>
+<p class="hint">___ i gangen er skittent. Kan du pusse det?</p>
+<div class="opts" data-q="6" data-correct="Speilet" data-ok="Dobrze. Konkretne lustro w przedpokoju: speilet.">
+<button class="opt">Et speil</button>
+<button class="opt">Speiler</button>
+<button class="opt">Speilet</button>
+</div><div class="fb" id="f6"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Mówimy o lustrze w konkretnym miejscu (i gangen), znanym obu osobom. Forma określona. Uwaga: et speil, l.mn. speil (bez końcówki).</p></details>
+</section>
+<section class="task" data-id="7">
+<h2>7. Wybierz właściwą formę</h2>
+<p class="hint">Jeg trenger ___ når jeg vasker badet.</p>
+<div class="opts" data-q="7" data-correct="hansker" data-ok="Dobrze. Jakieś rękawiczki, ogólnie: hansker.">
+<button class="opt">hanskene</button>
+<button class="opt">hansker</button>
+<button class="opt">hansken</button>
+</div><div class="fb" id="f7"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Mówimy ogólnie: potrzebuję rękawiczek (jakichkolwiek). Liczba mnoga nieokreślona.</p></details>
+</section>
+<section class="task" data-id="8">
+<h2>8. Wybierz właściwą formę</h2>
+<p class="hint">Alle ___ i huset er skitne etter vinteren.</p>
+<div class="opts" data-q="8" data-correct="vinduene" data-ok="Dobrze. Wszystkie okna w tym domu: alle vinduene.">
+<button class="opt">vinduene</button>
+<button class="opt">vinduer</button>
+<button class="opt">vinduet</button>
+</div><div class="fb" id="f8"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Konkretne okna w konkretnym domu (i huset). Liczba mnoga określona: końcówka -ene.</p></details>
+</section>
+<section class="task" data-id="9">
+<h2>9. Wybierz właściwą formę</h2>
+<p class="hint">Sønnen min har ___. Han sykler til skolen hver dag.</p>
+<div class="opts" data-q="9" data-correct="en sykkel" data-ok="Dobrze. Pierwsza wzmianka: han har en sykkel.">
+<button class="opt">sykkelen</button>
+<button class="opt">sykler</button>
+<button class="opt">en sykkel</button>
+</div><div class="fb" id="f9"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>„Ma rower” mówi o rowerze pierwszy raz. Po „har” zwykle stoi forma nieokreślona.</p></details>
+</section>
+<section class="task" data-id="10">
+<h2>10. Wybierz właściwą formę</h2>
+<p class="hint">___ skinner i dag, så jeg åpner vinduene.</p>
+<div class="opts" data-q="10" data-correct="Sola" data-ok="Dobrze. Słońce jest jedno: sola (albo solen).">
+<button class="opt">Sola</button>
+<button class="opt">Sol</button>
+<button class="opt">Ei sol</button>
+</div><div class="fb" id="f10"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Rzeczy jedyne (słońce, księżyc) mają formę określoną, tak jak na slajdzie z lekcji.</p></details>
+</section>
+<section class="task" data-id="11">
+<h2>11. Wybierz właściwą formę</h2>
+<p class="hint">Kan du ta ut ___? Den er full.</p>
+<div class="opts" data-q="11" data-correct="søppelposen" data-ok="Dobrze. Konkretny, pełny worek: søppelposen.">
+<button class="opt">en søppelpose</button>
+<button class="opt">søppelposen</button>
+<button class="opt">søppelposer</button>
+</div><div class="fb" id="f11"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Chodzi o worek, który jest w domu i jest pełny. Obie osoby wiedzą który, więc forma określona.</p></details>
+</section>
+<section class="task" data-id="12">
+<h2>12. Wybierz właściwą formę</h2>
+<p class="hint">Jeg har to ___ hjemme: en til kjøkkenet og en til badet.</p>
+<div class="opts" data-q="12" data-correct="bøtter" data-ok="Dobrze. To bøtter: liczebnik i liczba mnoga nieokreślona.">
+<button class="opt">bøttene</button>
+<button class="opt">bøtte</button>
+<button class="opt">bøtter</button>
+</div><div class="fb" id="f12"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Po liczebniku (to) rzeczownik ma formę nieokreśloną liczby mnogiej.</p></details>
+</section>
+<h2 class="part">Część B: Przyporządkuj do kategorii</h2>
+<p class="partintro">Przy każdym słowie wybierz, jaka to forma.</p>
+<section class="task" data-id="13">
+<h2>13. Jaka to forma?</h2>
+<p class="hint">en leilighet, hotellet, mennesker, koppene</p>
+<div class="match">
+<span class="w">en leilighet</span><select id="m13_0"><option value="">wybierz…</option><option>nieokreślona, l. mnoga</option><option>nieokreślona, l. pojedyncza</option><option>określona, l. mnoga</option><option>określona, l. pojedyncza</option></select>
+<span class="w">hotellet</span><select id="m13_1"><option value="">wybierz…</option><option>nieokreślona, l. mnoga</option><option>nieokreślona, l. pojedyncza</option><option>określona, l. mnoga</option><option>określona, l. pojedyncza</option></select>
+<span class="w">mennesker</span><select id="m13_2"><option value="">wybierz…</option><option>nieokreślona, l. mnoga</option><option>nieokreślona, l. pojedyncza</option><option>określona, l. mnoga</option><option>określona, l. pojedyncza</option></select>
+<span class="w">koppene</span><select id="m13_3"><option value="">wybierz…</option><option>nieokreślona, l. mnoga</option><option>nieokreślona, l. pojedyncza</option><option>określona, l. mnoga</option><option>określona, l. pojedyncza</option></select>
+</div>
+<button class="btn" onclick="checkMatch(13,{&quot;m13_0&quot;: &quot;nieokreślona, l. pojedyncza&quot;, &quot;m13_1&quot;: &quot;określona, l. pojedyncza&quot;, &quot;m13_2&quot;: &quot;nieokreślona, l. mnoga&quot;, &quot;m13_3&quot;: &quot;określona, l. mnoga&quot;})">Sprawdź</button><div class="fb" id="f13"></div>
+</section>
+<section class="task" data-id="14">
+<h2>14. Jaka to forma?</h2>
+<p class="hint">gulvet, kluter, ei bøtte, vinduene</p>
+<div class="match">
+<span class="w">gulvet</span><select id="m14_0"><option value="">wybierz…</option><option>nieokreślona, l. mnoga</option><option>nieokreślona, l. pojedyncza</option><option>określona, l. mnoga</option><option>określona, l. pojedyncza</option></select>
+<span class="w">kluter</span><select id="m14_1"><option value="">wybierz…</option><option>nieokreślona, l. mnoga</option><option>nieokreślona, l. pojedyncza</option><option>określona, l. mnoga</option><option>określona, l. pojedyncza</option></select>
+<span class="w">ei bøtte</span><select id="m14_2"><option value="">wybierz…</option><option>nieokreślona, l. mnoga</option><option>nieokreślona, l. pojedyncza</option><option>określona, l. mnoga</option><option>określona, l. pojedyncza</option></select>
+<span class="w">vinduene</span><select id="m14_3"><option value="">wybierz…</option><option>nieokreślona, l. mnoga</option><option>nieokreślona, l. pojedyncza</option><option>określona, l. mnoga</option><option>określona, l. pojedyncza</option></select>
+</div>
+<button class="btn" onclick="checkMatch(14,{&quot;m14_0&quot;: &quot;określona, l. pojedyncza&quot;, &quot;m14_1&quot;: &quot;nieokreślona, l. mnoga&quot;, &quot;m14_2&quot;: &quot;nieokreślona, l. pojedyncza&quot;, &quot;m14_3&quot;: &quot;określona, l. mnoga&quot;})">Sprawdź</button><div class="fb" id="f14"></div>
+</section>
+<section class="task" data-id="15">
+<h2>15. Jaka to forma?</h2>
+<p class="hint">mopper, et speil, sengene, kunden</p>
+<div class="match">
+<span class="w">mopper</span><select id="m15_0"><option value="">wybierz…</option><option>nieokreślona, l. mnoga</option><option>nieokreślona, l. pojedyncza</option><option>określona, l. mnoga</option><option>określona, l. pojedyncza</option></select>
+<span class="w">et speil</span><select id="m15_1"><option value="">wybierz…</option><option>nieokreślona, l. mnoga</option><option>nieokreślona, l. pojedyncza</option><option>określona, l. mnoga</option><option>określona, l. pojedyncza</option></select>
+<span class="w">sengene</span><select id="m15_2"><option value="">wybierz…</option><option>nieokreślona, l. mnoga</option><option>nieokreślona, l. pojedyncza</option><option>określona, l. mnoga</option><option>określona, l. pojedyncza</option></select>
+<span class="w">kunden</span><select id="m15_3"><option value="">wybierz…</option><option>nieokreślona, l. mnoga</option><option>nieokreślona, l. pojedyncza</option><option>określona, l. mnoga</option><option>określona, l. pojedyncza</option></select>
+</div>
+<button class="btn" onclick="checkMatch(15,{&quot;m15_0&quot;: &quot;nieokreślona, l. mnoga&quot;, &quot;m15_1&quot;: &quot;nieokreślona, l. pojedyncza&quot;, &quot;m15_2&quot;: &quot;określona, l. mnoga&quot;, &quot;m15_3&quot;: &quot;określona, l. pojedyncza&quot;})">Sprawdź</button><div class="fb" id="f15"></div>
+</section>
+<section class="task" data-id="16">
+<h2>16. Jaka to forma?</h2>
+<p class="hint">syklene, døra, et kjøkken, hansker</p>
+<div class="match">
+<span class="w">syklene</span><select id="m16_0"><option value="">wybierz…</option><option>nieokreślona, l. mnoga</option><option>nieokreślona, l. pojedyncza</option><option>określona, l. mnoga</option><option>określona, l. pojedyncza</option></select>
+<span class="w">døra</span><select id="m16_1"><option value="">wybierz…</option><option>nieokreślona, l. mnoga</option><option>nieokreślona, l. pojedyncza</option><option>określona, l. mnoga</option><option>określona, l. pojedyncza</option></select>
+<span class="w">et kjøkken</span><select id="m16_2"><option value="">wybierz…</option><option>nieokreślona, l. mnoga</option><option>nieokreślona, l. pojedyncza</option><option>określona, l. mnoga</option><option>określona, l. pojedyncza</option></select>
+<span class="w">hansker</span><select id="m16_3"><option value="">wybierz…</option><option>nieokreślona, l. mnoga</option><option>nieokreślona, l. pojedyncza</option><option>określona, l. mnoga</option><option>określona, l. pojedyncza</option></select>
+</div>
+<button class="btn" onclick="checkMatch(16,{&quot;m16_0&quot;: &quot;określona, l. mnoga&quot;, &quot;m16_1&quot;: &quot;określona, l. pojedyncza&quot;, &quot;m16_2&quot;: &quot;nieokreślona, l. pojedyncza&quot;, &quot;m16_3&quot;: &quot;nieokreślona, l. mnoga&quot;})">Sprawdź</button><div class="fb" id="f16"></div>
+</section>
+<h2 class="part">Część C: Która z trzech wersji?</h2>
+<p class="partintro">Jedna wersja jest poprawna. Uwaga: „en” razem z końcówką -en nigdy nie występuje.</p>
+<section class="task" data-id="17">
+<h2>17. Wybierz</h2>
+<p class="hint">I går kjøpte jeg ___ til kjøkkenet. Den var billig.</p>
+<div class="opts" data-q="17" data-correct="en svamp" data-ok="Dobrze. Pierwsza wzmianka: en svamp.">
+<button class="opt">svampen</button>
+<button class="opt">en svamp</button>
+<button class="opt">en svampen</button>
+</div><div class="fb" id="f17"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Gąbka pojawia się pierwszy raz, rozmówca nic o niej nie wie. Forma nieokreślona. „En svampen” nie istnieje: albo en przed słowem, albo -en na końcu.</p></details>
+</section>
+<section class="task" data-id="18">
+<h2>18. Wybierz</h2>
+<p class="hint">Jeg kjøpte en mopp og en kost. ___ var dyr, men kosten var billig.</p>
+<div class="opts" data-q="18" data-correct="Moppen" data-ok="Dobrze. Ten mop, o którym już mówiłam: moppen.">
+<button class="opt">En mopp</button>
+<button class="opt">En moppen</button>
+<button class="opt">Moppen</button>
+</div><div class="fb" id="f18"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Mop był już w pierwszej części zdania. Drugi raz mówimy o tym samym mopie, więc forma określona.</p></details>
+</section>
+<section class="task" data-id="19">
+<h2>19. Wybierz</h2>
+<p class="hint">Hvor har du ___? Jeg vil støvsuge stua.</p>
+<div class="opts" data-q="19" data-correct="støvsugeren" data-ok="Dobrze. Pytasz klientkę o jej konkretny odkurzacz.">
+<button class="opt">en støvsugeren</button>
+<button class="opt">støvsugeren</button>
+<button class="opt">en støvsuger</button>
+</div><div class="fb" id="f19"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Klientka ma w domu swój odkurzacz i obie wiecie, o który chodzi. Forma określona.</p></details>
+</section>
+<section class="task" data-id="20">
+<h2>20. Wybierz</h2>
+<p class="hint">Familien Berg har ___ og to katter.</p>
+<div class="opts" data-q="20" data-correct="en hund" data-ok="Dobrze. Har en hund: pierwsza wzmianka.">
+<button class="opt">en hund</button>
+<button class="opt">hunden</button>
+<button class="opt">en hunden</button>
+</div><div class="fb" id="f20"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Po „har” przedstawiamy coś nowego. Forma nieokreślona.</p></details>
+</section>
+<section class="task" data-id="21">
+<h2>21. Wybierz</h2>
+<p class="hint">Fru Berg har en hund. ___ heter Max og er veldig snill.</p>
+<div class="opts" data-q="21" data-correct="Hunden" data-ok="Dobrze. Ten pies, o którym już była mowa: hunden.">
+<button class="opt">Hunden</button>
+<button class="opt">En hund</button>
+<button class="opt">En hunden</button>
+</div><div class="fb" id="f21"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>W pierwszym zdaniu pies pojawił się po raz pierwszy, w drugim już wiemy który. Forma określona.</p></details>
+</section>
+<section class="task" data-id="22">
+<h2>22. Wybierz</h2>
+<p class="hint">Nils har ikke ___, så han tar bussen til jobb.</p>
+<div class="opts" data-q="22" data-correct="bil" data-ok="Dobrze. Har ikke bil: przy posiadaniu ogólnie Norwegowie często pomijają en.">
+<button class="opt">bilen</button>
+<button class="opt">en bilen</button>
+<button class="opt">bil</button>
+</div><div class="fb" id="f22"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Mówimy ogólnie, że Nils nie ma samochodu (żadnego). W takich zdaniach (ha bil, ha hund, ha jobb) często nie ma rodzajnika. Forma określona bilen znaczyłaby konkretny, znany samochód.</p></details>
+</section>
+<section class="task" data-id="23">
+<h2>23. Wybierz</h2>
+<p class="hint">Even kjøpte en bil i fjor. ___ er rød.</p>
+<div class="opts" data-q="23" data-correct="Bilen" data-ok="Dobrze. Bilen: ten samochód, który kupił.">
+<button class="opt">En bil</button>
+<button class="opt">Bilen</button>
+<button class="opt">En bilen</button>
+</div><div class="fb" id="f23"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Drugi raz mówimy o tym samym samochodzie. Forma określona.</p></details>
+</section>
+<section class="task" data-id="24">
+<h2>24. Wybierz</h2>
+<p class="hint">Jeg baker ___ til bursdagen i morgen.</p>
+<div class="opts" data-q="24" data-correct="ei kake" data-ok="Dobrze. Jakieś ciasto, pierwsza wzmianka: ei kake (albo en kake).">
+<button class="opt">kaka</button>
+<button class="opt">ei kake</button>
+<button class="opt">ei kaka</button>
+</div><div class="fb" id="f24"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Ciasto pojawia się pierwszy raz. Forma nieokreślona. „Ei kaka” łączy dwie formy, tak nie wolno.</p></details>
+</section>
+<section class="task" data-id="25">
+<h2>25. Wybierz</h2>
+<p class="hint">___ jeg bakte i går, var veldig god.</p>
+<div class="opts" data-q="25" data-correct="Kaka" data-ok="Dobrze. To konkretne ciasto, które upiekłam: kaka (albo kaken).">
+<button class="opt">Ei kake</button>
+<button class="opt">Ei kaka</button>
+<button class="opt">Kaka</button>
+</div><div class="fb" id="f25"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Dookreślamy, o które ciasto chodzi (to, które upiekłam wczoraj). Forma określona.</p></details>
+</section>
+<section class="task" data-id="26">
+<h2>26. Wybierz</h2>
+<p class="hint">Vi bor i ___ i sentrum. Den har tre rom.</p>
+<div class="opts" data-q="26" data-correct="en leilighet" data-ok="Dobrze. Pierwsza wzmianka: en leilighet.">
+<button class="opt">en leilighet</button>
+<button class="opt">leiligheten</button>
+<button class="opt">en leiligheten</button>
+</div><div class="fb" id="f26"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Mieszkanie pojawia się pierwszy raz, rozmówca go nie zna. Forma nieokreślona.</p></details>
+</section>
+<section class="task" data-id="27">
+<h2>27. Wybierz</h2>
+<p class="hint">Jeg vasket ___ hos fru Berg i dag. Det var veldig skittent.</p>
+<div class="opts" data-q="27" data-correct="kjøkkenet" data-ok="Dobrze. W domu klientki jest jedna kuchnia: kjøkkenet.">
+<button class="opt">et kjøkken</button>
+<button class="opt">et kjøkkenet</button>
+<button class="opt">kjøkkenet</button>
+</div><div class="fb" id="f27"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>W domu jest jedna kuchnia i wiadomo, o którą chodzi. Forma określona.</p></details>
+</section>
+<section class="task" data-id="28">
+<h2>28. Wybierz</h2>
+<p class="hint">Sønnen min ønsker seg ___ til jul.</p>
+<div class="opts" data-q="28" data-correct="en sykkel" data-ok="Dobrze. Jakiś rower, jeszcze go nie ma: en sykkel.">
+<button class="opt">en sykkel</button>
+<button class="opt">sykkelen</button>
+<button class="opt">en sykkelen</button>
+</div><div class="fb" id="f28"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Syn chce jakiś rower na święta, nie konkretny, znany rower. Forma nieokreślona.</p></details>
+</section>
+<section class="task" data-id="29">
+<h2>29. Wybierz</h2>
+<p class="hint">Han fikk en sykkel i fjor. ___ står i garasjen.</p>
+<div class="opts" data-q="29" data-correct="Sykkelen" data-ok="Dobrze. Ten rower, który dostał: sykkelen.">
+<button class="opt">En sykkelen</button>
+<button class="opt">Sykkelen</button>
+<button class="opt">En sykkel</button>
+</div><div class="fb" id="f29"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Drugi raz mówimy o tym samym rowerze. Forma określona.</p></details>
+</section>
+<h2 class="part">Część D: Liczba mnoga określona: -ene</h2>
+<p class="partintro">Konkretne rzeczy w liczbie mnogiej mają końcówkę -ene: koppene, vinduene, hyllene. Wyjątek z lekcji: barn, barna.</p>
+<section class="task" data-id="30">
+<h2>30. Wybierz właściwą formę</h2>
+<p class="hint">Jeg vasket alle ___ etter middagen.</p>
+<div class="opts" data-q="30" data-correct="koppene" data-ok="Dobrze. Alle koppene: wszystkie te konkretne kubki.">
+<button class="opt">kopper</button>
+<button class="opt">koppen</button>
+<button class="opt">koppene</button>
+</div><div class="fb" id="f30"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Po „alle” o konkretnych rzeczach (te kubki po obiedzie) stoi liczba mnoga określona -ene.</p></details>
+</section>
+<section class="task" data-id="31">
+<h2>31. Wybierz właściwą formę</h2>
+<p class="hint">Det står fem ___ på bordet.</p>
+<div class="opts" data-q="31" data-correct="glass" data-ok="Dobrze. Et glass, l.mn. glass (krótkie słowo et bez końcówki).">
+<button class="opt">glass</button>
+<button class="opt">glassene</button>
+<button class="opt">glasset</button>
+</div><div class="fb" id="f31"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Po liczebniku forma nieokreślona. Krótkie rzeczowniki rodzaju et często nie mają końcówki w liczbie mnogiej: et glass, fem glass. Forma określona: glassene.</p></details>
+</section>
+<section class="task" data-id="32">
+<h2>32. Uzupełnij</h2>
+<p class="hint">talerze (en tallerken)</p>
+<div class="inline sent">Kan du sette <input type="text" id="t32" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i skapet?</div>
+<div class="row"><button class="btn" onclick="checkText(32,[&quot;tallerkenene&quot;],&quot;Dobrze. Konkretne talerze: tallerkenene.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(32)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f32"></div><div class="sol" id="s32">Wzorcowa odpowiedź: <b>tallerkenene</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Chodzi o konkretne talerze, które są na stole. Liczba mnoga określona: tallerken, tallerkener, tallerkenene.</p></details>
+</section>
+<section class="task" data-id="33">
+<h2>33. Uzupełnij</h2>
+<p class="hint">buty (en sko)</p>
+<div class="inline sent">Hvor er <input type="text" id="t33" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> til sønnen min? Han finner dem ikke.</div>
+<div class="row"><button class="btn" onclick="checkText(33,[&quot;skoene&quot;],&quot;Dobrze. En sko, sko, skoene.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(33)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f33"></div><div class="sol" id="s33">Wzorcowa odpowiedź: <b>skoene</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Konkretne buty syna. Liczba mnoga określona: skoene.</p></details>
+</section>
+<section class="task" data-id="34">
+<h2>34. Uzupełnij</h2>
+<p class="hint">półki (ei hylle)</p>
+<div class="inline sent">Jeg tørket støv av <input type="text" id="t34" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i stua.</div>
+<div class="row"><button class="btn" onclick="checkText(34,[&quot;hyllene&quot;],&quot;Dobrze. Konkretne półki w salonie: hyllene.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(34)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f34"></div><div class="sol" id="s34">Wzorcowa odpowiedź: <b>hyllene</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Półki w konkretnym pokoju (i stua). Liczba mnoga określona -ene.</p></details>
+</section>
+<section class="task" data-id="35">
+<h2>35. Wybierz właściwą formę</h2>
+<p class="hint">Barna leker ute. ___ er glade.</p>
+<div class="opts" data-q="35" data-correct="Barna" data-ok="Dobrze. Et barn, barn, barna. Wyjątek: barna, nie barnene.">
+<button class="opt">Barnene</button>
+<button class="opt">Barna</button>
+<button class="opt">Barn</button>
+</div><div class="fb" id="f35"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Barn ma nieregularną formę określoną liczby mnogiej: barna.</p></details>
+</section>
+<section class="task" data-id="36">
+<h2>36. Uzupełnij</h2>
+<p class="hint">okna (et vindu)</p>
+<div class="inline sent">Jeg pusset <input type="text" id="t36" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i hele huset.</div>
+<div class="row"><button class="btn" onclick="checkText(36,[&quot;vinduene&quot;],&quot;Dobrze. Vinduer, vinduene.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(36)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f36"></div><div class="sol" id="s36">Wzorcowa odpowiedź: <b>vinduene</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Wszystkie okna w tym konkretnym domu. Liczba mnoga określona -ene.</p></details>
+</section>
+<section class="task" data-id="37">
+<h2>37. Wybierz właściwą formę</h2>
+<p class="hint">___ i byen vår er hyggelige.</p>
+<div class="opts" data-q="37" data-correct="Menneskene" data-ok="Dobrze. Ludzie w naszym mieście: menneskene.">
+<button class="opt">Mennesker</button>
+<button class="opt">Menneskene</button>
+<button class="opt">Menneske</button>
+</div><div class="fb" id="f37"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Konkretna grupa ludzi (w naszym mieście). Liczba mnoga określona -ene.</p></details>
+</section>
+<h2 class="part">Część E: Uzupełnij samodzielnie</h2>
+<p class="partintro">W nawiasie słowo w formie podstawowej. Sama zdecyduj, czy potrzebna jest forma nieokreślona, czy określona, liczba pojedyncza czy mnoga.</p>
+<section class="task" data-id="38">
+<h2>38. Uzupełnij</h2>
+<p class="hint">kuchnia (et kjøkken)</p>
+<div class="inline sent">I dag vasket jeg <input type="text" id="t38" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> hos en ny kunde.</div>
+<div class="row"><button class="btn" onclick="checkText(38,[&quot;kjøkkenet&quot;],&quot;Dobrze. Kjøkkenet: jedyna kuchnia w domu klientki.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(38)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f38"></div><div class="sol" id="s38">Wzorcowa odpowiedź: <b>kjøkkenet</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>W domu jest jedna kuchnia i wiadomo, o którą chodzi.</p></details>
+</section>
+<section class="task" data-id="39">
+<h2>39. Uzupełnij</h2>
+<p class="hint">ściereczka (en klut)</p>
+<div class="inline sent">Jeg trenger <input type="text" id="t39" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> til vinduene. Har du en?</div>
+<div class="row"><button class="btn" onclick="checkText(39,[&quot;en klut&quot;],&quot;Dobrze. Jakaś ściereczka: en klut.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(39)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f39"></div><div class="sol" id="s39">Wzorcowa odpowiedź: <b>en klut</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Potrzebuję jakiejkolwiek ściereczki, pierwsza wzmianka.</p></details>
+</section>
+<section class="task" data-id="40">
+<h2>40. Uzupełnij</h2>
+<p class="hint">prysznic (en dusj)</p>
+<div class="inline sent"><input type="text" id="t40" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> på badet er ødelagt, så kunden ringte en rørlegger.</div>
+<div class="row"><button class="btn" onclick="checkText(40,[&quot;dusjen&quot;],&quot;Dobrze. Konkretny prysznic w łazience: dusjen.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(40)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f40"></div><div class="sol" id="s40">Wzorcowa odpowiedź: <b>dusjen</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Mówimy o prysznicu w konkretnej łazience. Forma określona.</p></details>
+</section>
+<section class="task" data-id="41">
+<h2>41. Uzupełnij</h2>
+<p class="hint">pies (en hund)</p>
+<div class="inline sent">Hjemme har vi <input type="text" id="t41" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">. Han heter Rex.</div>
+<div class="row"><button class="btn" onclick="checkText(41,[&quot;en hund&quot;],&quot;Dobrze. Har en hund: pierwsza wzmianka.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(41)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f41"></div><div class="sol" id="s41">Wzorcowa odpowiedź: <b>en hund</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Po „har” przedstawiamy psa po raz pierwszy.</p></details>
+</section>
+<section class="task" data-id="42">
+<h2>42. Uzupełnij</h2>
+<p class="hint">kurtka (en jakke)</p>
+<div class="inline sent">Sønnen min glemte <input type="text" id="t42" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> sin på skolen.</div>
+<div class="row"><button class="btn" onclick="checkText(42,[&quot;jakken&quot;, &quot;jakka&quot;],&quot;Dobrze. Jakken sin: zaimek po rzeczowniku, rzeczownik w formie określonej.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(42)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f42"></div><div class="sol" id="s42">Wzorcowa odpowiedź: <b>jakken</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Gdy zaimek dzierżawczy stoi po rzeczowniku (jakken sin, sønnen min), rzeczownik ma formę określoną.</p></details>
+</section>
+<section class="task" data-id="43">
+<h2>43. Uzupełnij</h2>
+<p class="hint">syn (en sønn)</p>
+<div class="inline sent"><input type="text" id="t43" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> min er 14 år.</div>
+<div class="row"><button class="btn" onclick="checkText(43,[&quot;sønnen&quot;],&quot;Dobrze. Sønnen min, jak na slajdzie z lekcji.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(43)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f43"></div><div class="sol" id="s43">Wzorcowa odpowiedź: <b>sønnen</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Zaimek min stoi po rzeczowniku, więc rzeczownik w formie określonej.</p></details>
+</section>
+<section class="task" data-id="44">
+<h2>44. Uzupełnij</h2>
+<p class="hint">przyjaciółka (ei venninne)</p>
+<div class="inline sent">Jeg har <input type="text" id="t44" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> som heter Lise.</div>
+<div class="row"><button class="btn" onclick="checkText(44,[&quot;ei venninne&quot;, &quot;en venninne&quot;],&quot;Dobrze. Pierwsza wzmianka: ei venninne (albo en venninne).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(44)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f44"></div><div class="sol" id="s44">Wzorcowa odpowiedź: <b>ei venninne</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Przedstawiamy przyjaciółkę pierwszy raz. Forma nieokreślona.</p></details>
+</section>
+<section class="task" data-id="45">
+<h2>45. Uzupełnij</h2>
+<p class="hint">przyjaciółka (ei venninne)</p>
+<div class="inline sent">Jeg har ei venninne. <input type="text" id="t45" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> bor i Bergen.</div>
+<div class="row"><button class="btn" onclick="checkText(45,[&quot;venninna&quot;, &quot;venninnen&quot;],&quot;Dobrze. Venninna (venninnen): ta przyjaciółka, o której już mówiłam.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(45)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f45"></div><div class="sol" id="s45">Wzorcowa odpowiedź: <b>venninna</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Drugi raz mówimy o tej samej osobie. Forma określona.</p></details>
+</section>
+<section class="task" data-id="46">
+<h2>46. Uzupełnij</h2>
+<p class="hint">pokój (et rom)</p>
+<div class="inline sent">Det er tre <input type="text" id="t46" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i leiligheten.</div>
+<div class="row"><button class="btn" onclick="checkText(46,[&quot;rom&quot;],&quot;Dobrze. Et rom, tre rom (bez końcówki).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(46)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f46"></div><div class="sol" id="s46">Wzorcowa odpowiedź: <b>rom</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Po liczebniku forma nieokreślona. Krótkie słowo et: liczba mnoga bez końcówki.</p></details>
+</section>
+<section class="task" data-id="47">
+<h2>47. Uzupełnij</h2>
+<p class="hint">pokój (et rom)</p>
+<div class="inline sent"><input type="text" id="t47" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i leiligheten er små, men lyse.</div>
+<div class="row"><button class="btn" onclick="checkText(47,[&quot;rommene&quot;],&quot;Dobrze. Konkretne pokoje: rommene.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(47)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f47"></div><div class="sol" id="s47">Wzorcowa odpowiedź: <b>rommene</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Pokoje w konkretnym mieszkaniu. Liczba mnoga określona -ene (podwójne m: rommene).</p></details>
+</section>
+<section class="task" data-id="48">
+<h2>48. Uzupełnij</h2>
+<p class="hint">słońce (ei sol)</p>
+<div class="inline sent">I dag skinner <input type="text" id="t48" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> hele dagen.</div>
+<div class="row"><button class="btn" onclick="checkText(48,[&quot;sola&quot;, &quot;solen&quot;],&quot;Dobrze. Sola (solen): jedyne słońce.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(48)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f48"></div><div class="sol" id="s48">Wzorcowa odpowiedź: <b>sola</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Rzeczy jedyne mają formę określoną.</p></details>
+</section>
+<section class="task" data-id="49">
+<h2>49. Uzupełnij</h2>
+<p class="hint">drzwi (ei dør)</p>
+<div class="inline sent">Kan du lukke <input type="text" id="t49" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">? Det er kaldt.</div>
+<div class="row"><button class="btn" onclick="checkText(49,[&quot;døra&quot;, &quot;døren&quot;],&quot;Dobrze. Konkretne drzwi w tym pokoju: døra (døren).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(49)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f49"></div><div class="sol" id="s49">Wzorcowa odpowiedź: <b>døra</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Obie osoby wiedzą, o które drzwi chodzi. Forma określona.</p></details>
+</section>
+<section class="task" data-id="50">
+<h2>50. Uzupełnij</h2>
+<p class="hint">kanapa (en sofa)</p>
+<div class="inline sent">Vi har <input type="text" id="t50" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i stua, men ingen TV.</div>
+<div class="row"><button class="btn" onclick="checkText(50,[&quot;en sofa&quot;],&quot;Dobrze. Har en sofa: pierwsza wzmianka.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(50)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f50"></div><div class="sol" id="s50">Wzorcowa odpowiedź: <b>en sofa</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Przedstawiamy kanapę pierwszy raz. Forma nieokreślona.</p></details>
+</section>
+<section class="task" data-id="51">
+<h2>51. Uzupełnij</h2>
+<p class="hint">dywan (et teppe)</p>
+<div class="inline sent">Jeg støvsuget <input type="text" id="t51" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i stua.</div>
+<div class="row"><button class="btn" onclick="checkText(51,[&quot;teppet&quot;],&quot;Dobrze. Konkretny dywan w salonie: teppet.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(51)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f51"></div><div class="sol" id="s51">Wzorcowa odpowiedź: <b>teppet</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Dywan w konkretnym pokoju. Forma określona.</p></details>
+</section>
+<section class="task" data-id="52">
+<h2>52. Uzupełnij</h2>
+<p class="hint">ściereczki (en klut)</p>
+<div class="inline sent">Jeg legger alle <input type="text" id="t52" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> i vaskemaskinen.</div>
+<div class="row"><button class="btn" onclick="checkText(52,[&quot;klutene&quot;],&quot;Dobrze. Alle klutene: wszystkie te ściereczki.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(52)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f52"></div><div class="sol" id="s52">Wzorcowa odpowiedź: <b>klutene</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Konkretne ściereczki po sprzątaniu. Liczba mnoga określona -ene.</p></details>
+</section>
+<section class="task" data-id="53">
+<h2>53. Uzupełnij</h2>
+<p class="hint">kot (en katt)</p>
+<div class="inline sent">Fru Berg har to <input type="text" id="t53" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false">. De er hvite.</div>
+<div class="row"><button class="btn" onclick="checkText(53,[&quot;katter&quot;],&quot;Dobrze. To katter: po liczebniku forma nieokreślona.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(53)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f53"></div><div class="sol" id="s53">Wzorcowa odpowiedź: <b>katter</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Po liczebniku (to) liczba mnoga nieokreślona.</p></details>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 53 / 53</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=53;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
+</script>
+
+</body>
+</html>

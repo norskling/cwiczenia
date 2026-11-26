@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zadanie domowe A2 Norskling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0D1F2D;--fjord:#1B4F72;--is:#00B4D8;--polarlys:#90E0EF;--skygge:#4A6070;
+  --border:#E2EDF2;--tint:#EAF7FB;--card:#FFFFFF;--bg1:#F7FBFD;--bg2:#EFF7FA;
+  --ok:#1E7F4F;--okbg:#E6F5EC;--bad:#B3261E;--badbg:#FCEBEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+    --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  --natt:#E8F1F6;--fjord:#7CC4E8;--skygge:#A9BCC8;--border:#24394A;--tint:#16303F;
+  --card:#132331;--bg1:#0B1822;--bg2:#0E1D29;--ok:#6FD39C;--okbg:#14321F;--bad:#F2A19B;--badbg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);background-color:var(--bg1);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;color:var(--skygge);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 64px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:6px 14px;color:var(--natt);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--is)}
+h1{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:clamp(1.8rem,5vw,2.6rem);
+  line-height:1.12;letter-spacing:-.035em;margin:18px 0 10px}
+h1 span{background-image:linear-gradient(transparent 82%,var(--polarlys) 82%,var(--polarlys) 100%,transparent 100%)}
+.bar{width:88px;height:4px;border-radius:2px;background:var(--is);margin:0 0 18px}
+.intro{margin:0 0 28px}
+.progress{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:14px 22px;margin-bottom:20px;color:var(--natt);font-weight:600}
+.progress b{font-family:"Space Grotesk",sans-serif;font-size:1.3rem}
+.task{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.task h2{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--natt);font-size:1.15rem;letter-spacing:-.01em;margin:0 0 4px}
+.task .hint{font-size:.9rem;margin:0 0 14px}
+.sent{color:var(--natt);font-size:1.1rem;margin:0 0 12px}
+input[type=text],select{font:inherit;font-size:1rem;color:var(--natt);background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:8px 12px;min-width:120px}
+input[type=text]:focus,select:focus{outline:2px solid var(--is);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 18px;min-height:44px}
+.opt:hover{border-color:var(--is)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.match{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}
+.match .w{color:var(--natt);font-weight:600}
+.btn{font:inherit;font-weight:600;cursor:pointer;background:var(--fjord);color:#fff;border:0;border-radius:8px;padding:11px 24px;
+  margin-top:14px;min-height:44px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,79,114,.22)}
+:root[data-theme="dark"] .btn{color:#0B1822}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0B1822}}
+.fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{display:block;background:var(--okbg);color:var(--ok)}
+.fb.bad{display:block;background:var(--badbg);color:var(--bad)}
+.inline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.done{display:none;text-align:center;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);
+  border-radius:16px;padding:24px;color:var(--natt)}
+.done h2{font-family:"Space Grotesk",sans-serif;margin:0 0 6px}
+@media (max-width:600px){.wrap{padding-top:28px}.match{grid-template-columns:1fr}.btn{width:100%}}
+
+.sent b{color:var(--natt);text-decoration:underline;text-decoration-color:var(--is);text-decoration-thickness:2px}
+.given{color:var(--natt);font-size:1.05rem;margin:0 0 8px;padding:10px 14px;background:var(--tint);border-radius:8px}
+.rw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--natt);font-size:1.05rem}
+.rw input[type=text]{flex:1 1 260px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{margin-top:14px}
+.ghost{font:inherit;font-size:.95rem;cursor:pointer;background:none;border:1.5px solid var(--border);color:var(--fjord);
+  border-radius:8px;padding:10px 16px;margin-top:14px;min-height:44px}
+.sol{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--natt);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.meta span{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-size:.85rem;color:var(--natt)}
+.text{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--is);border-radius:16px;padding:22px;margin-bottom:20px;color:var(--natt)}
+.text h2{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:1.2rem}
+.text p{margin:0 0 10px}
+.part{font-family:"Space Grotesk",sans-serif;color:var(--natt);font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 6px;padding-top:12px;border-top:2px solid var(--border)}
+.partintro{margin:0 0 16px}
+.progress{position:sticky;top:8px;z-index:5}
+.ord .line{min-height:52px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1.5px dashed var(--border);border-radius:8px;margin-bottom:10px}
+.ord .tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:1rem;cursor:pointer;background:var(--tint);color:var(--natt);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;min-height:44px}
+.tile:hover{border-color:var(--is)}
+.ord .line .tile{background:var(--card);border-color:var(--is)}
+</style>
+
+<style>.why{margin-top:12px}.why summary{cursor:pointer;color:var(--fjord);font-weight:600;font-size:.92rem;min-height:32px}.why p{background:var(--tint);border-radius:8px;padding:10px 14px;margin:6px 0 0;color:var(--natt)}</style>
+</head>
+<body>
+<main class="wrap">
+  <span class="pill">Norskling · A2 · Zadanie domowe po lekcji 3</span>
+  <h1>Preteritum: <span>nowe czasowniki i powtórka</span></h1>
+  <div class="bar"></div>
+  <p class="intro">Czasowniki regularne i nieregularne z poziomu A1–A2 w czasie przeszłym, dużo z nich ze sprzątania. Wybór między podobnymi formami, czasownik podany tylko po polsku, przekształcenia na czas przeszły z szykiem, pary czasowników i krótki tekst.</p>
+  <div class="meta"><span>Gramatyka</span><span>ok. 35 min</span><span>39 zadań</span></div>
+  <div class="progress"><span>Twój wynik</span><b><span id="score">0</span> / 39</b></div>
+<h2 class="part">Część A: Która forma jest poprawna?</h2>
+<p class="partintro">Wszystkie trzy formy wyglądają podobnie. Tylko jedna to poprawny czas przeszły.</p>
+<section class="task" data-id="1">
+<h2>1. Czas przeszły od „å tørke” (wycierać)</h2>
+<p class="hint">I går ___ jeg støv i stua.</p>
+<div class="opts" data-q="1" data-correct="tørket" data-ok="Dobrze. Tørke, tørket, har tørket.">
+<button class="opt">tørkte</button>
+<button class="opt">tørket</button>
+<button class="opt">tørk</button>
+</div><div class="fb" id="f1"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Dwie spółgłoski przed -e (r + k): końcówka -et.</p></details>
+</section>
+<section class="task" data-id="2">
+<h2>2. Czas przeszły od „å tømme” (opróżniać)</h2>
+<p class="hint">Jeg ___ søppelbøtta i morges.</p>
+<div class="opts" data-q="2" data-correct="tømte" data-ok="Dobrze. Tømme, tømte, har tømt.">
+<button class="opt">tømmet</button>
+<button class="opt">tømde</button>
+<button class="opt">tømte</button>
+</div><div class="fb" id="f2"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Czasowniki z podwójnym m (tømme, glemme) dostają -te, a jedno m znika: tømte, glemte.</p></details>
+</section>
+<section class="task" data-id="3">
+<h2>3. Czas przeszły od „å bære” (nieść, nosić)</h2>
+<p class="hint">Even ___ de tunge posene opp trappa.</p>
+<div class="opts" data-q="3" data-correct="bar" data-ok="Dobrze. Bære, bar, har båret (nieregularny).">
+<button class="opt">bar</button>
+<button class="opt">bærte</button>
+<button class="opt">båret</button>
+</div><div class="fb" id="f3"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Bære jest nieregularny: bar w czasie przeszłym, båret po har.</p></details>
+</section>
+<section class="task" data-id="4">
+<h2>4. Czas przeszły od „å henge” (wieszać coś)</h2>
+<p class="hint">Jeg ___ opp klærne etter vasken.</p>
+<div class="opts" data-q="4" data-correct="hengte" data-ok="Dobrze. Henge (coś) → hengte.">
+<button class="opt">hang</button>
+<button class="opt">hengte</button>
+<button class="opt">henget</button>
+</div><div class="fb" id="f4"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Gdy wieszasz coś (klærne), forma to hengte. Hang znaczy „wisiał”: Bildet hang på veggen.</p></details>
+</section>
+<section class="task" data-id="5">
+<h2>5. Czas przeszły od „å finne” (znaleźć)</h2>
+<p class="hint">Jeg ___ en ring under sofaen hos kunden.</p>
+<div class="opts" data-q="5" data-correct="fant" data-ok="Dobrze. Finne, fant, har funnet.">
+<button class="opt">finnet</button>
+<button class="opt">fant</button>
+<button class="opt">fonn</button>
+</div><div class="fb" id="f5"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Finne jest nieregularny: fant, funnet.</p></details>
+</section>
+<section class="task" data-id="6">
+<h2>6. Czas przeszły od „å knuse” (stłuc)</h2>
+<p class="hint">Ingrid ___ et glass på kjøkkenet.</p>
+<div class="opts" data-q="6" data-correct="knuste" data-ok="Dobrze. Knuse, knuste, har knust.">
+<button class="opt">knuste</button>
+<button class="opt">knuset</button>
+<button class="opt">knusde</button>
+</div><div class="fb" id="f6"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Jedna spółgłoska przed -e (s): końcówka -te, jak spise, spiste.</p></details>
+</section>
+<section class="task" data-id="7">
+<h2>7. Czas przeszły od „å velge” (wybrać)</h2>
+<p class="hint">Vi ___ en blå farge til badet.</p>
+<div class="opts" data-q="7" data-correct="valgte" data-ok="Dobrze. Velge, valgte, har valgt.">
+<button class="opt">velget</button>
+<button class="opt">valgte</button>
+<button class="opt">velgte</button>
+</div><div class="fb" id="f7"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>W czasie przeszłym zmienia się samogłoska: e → a. Tak samo selge, solgte (e → o).</p></details>
+</section>
+<section class="task" data-id="8">
+<h2>8. Czas przeszły od „å selge” (sprzedać)</h2>
+<p class="hint">Lars ___ den gamle sykkelen sin.</p>
+<div class="opts" data-q="8" data-correct="solgte" data-ok="Dobrze. Selge, solgte, har solgt.">
+<button class="opt">solgte</button>
+<button class="opt">selgte</button>
+<button class="opt">selget</button>
+</div><div class="fb" id="f8"></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Selge zmienia samogłoskę: e → o. Zapamiętaj parę: velge, valgte i selge, solgte.</p></details>
+</section>
+<h2 class="part">Część B: Czasownik tylko po polsku</h2>
+<p class="partintro">Przypomnij sobie norweski czasownik i od razu wpisz formę przeszłą. Przy czasownikach nieregularnych jest dopisek.</p>
+<section class="task" data-id="9">
+<h2>9. Uzupełnij</h2>
+<p class="hint">wycierać</p>
+<div class="inline sent">Etter middagen <input type="text" id="t9" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> Kari bordet.</div>
+<div class="row"><button class="btn" onclick="checkText(9,[&quot;tørket&quot;],&quot;Dobrze. Å tørke bordet = wytrzeć stół.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(9)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f9"></div><div class="sol" id="s9">Wzorcowa odpowiedź: <b>tørket</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Tørke, tørket (-et).</p></details>
+</section>
+<section class="task" data-id="10">
+<h2>10. Uzupełnij</h2>
+<p class="hint">odkurzać</p>
+<div class="inline sent">På mandag <input type="text" id="t10" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> jeg alle rommene hos familien Berg.</div>
+<div class="row"><button class="btn" onclick="checkText(10,[&quot;støvsuget&quot;, &quot;støvsugde&quot;],&quot;Dobrze. Å støvsuge, støvsuget (albo støvsugde).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(10)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f10"></div><div class="sol" id="s10">Wzorcowa odpowiedź: <b>støvsuget</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Støv (kurz) + suge (ssać). Czas przeszły: støvsuget, rzadziej støvsugde.</p></details>
+</section>
+<section class="task" data-id="11">
+<h2>11. Uzupełnij</h2>
+<p class="hint">zamknąć</p>
+<div class="inline sent">Jeg <input type="text" id="t11" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> døra og gikk hjem.</div>
+<div class="row"><button class="btn" onclick="checkText(11,[&quot;lukket&quot;],&quot;Dobrze. Lukke, lukket.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(11)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f11"></div><div class="sol" id="s11">Wzorcowa odpowiedź: <b>lukket</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Dwie spółgłoski (kk): -et.</p></details>
+</section>
+<section class="task" data-id="12">
+<h2>12. Uzupełnij</h2>
+<p class="hint">otworzyć</p>
+<div class="inline sent">Kunden <input type="text" id="t12" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> vinduet fordi det var varmt.</div>
+<div class="row"><button class="btn" onclick="checkText(12,[&quot;åpnet&quot;],&quot;Dobrze. Åpne, åpnet.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(12)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f12"></div><div class="sol" id="s12">Wzorcowa odpowiedź: <b>åpnet</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Dwie spółgłoski (p + n): -et.</p></details>
+</section>
+<section class="task" data-id="13">
+<h2>13. Uzupełnij</h2>
+<p class="hint">zgubić</p>
+<div class="inline sent">Sønnen min <input type="text" id="t13" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> mobilen sin på bussen.</div>
+<div class="row"><button class="btn" onclick="checkText(13,[&quot;mistet&quot;],&quot;Dobrze. Miste, mistet.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(13)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f13"></div><div class="sol" id="s13">Wzorcowa odpowiedź: <b>mistet</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Dwie spółgłoski (s + t): -et.</p></details>
+</section>
+<section class="task" data-id="14">
+<h2>14. Uzupełnij</h2>
+<p class="hint">zadzwonić</p>
+<div class="inline sent">Fru Berg <input type="text" id="t14" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> meg i går kveld.</div>
+<div class="row"><button class="btn" onclick="checkText(14,[&quot;ringte&quot;],&quot;Dobrze. Ringe, ringte.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(14)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f14"></div><div class="sol" id="s14">Wzorcowa odpowiedź: <b>ringte</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Ringe dostaje -te: ringte. Warto zapamiętać jako wyjątek od reguły dwóch spółgłosek.</p></details>
+</section>
+<section class="task" data-id="15">
+<h2>15. Uzupełnij</h2>
+<p class="hint">wziąć, pojechać (autobusem) (nieregularny)</p>
+<div class="inline sent">Jeg <input type="text" id="t15" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> bussen til jobb i morges.</div>
+<div class="row"><button class="btn" onclick="checkText(15,[&quot;tok&quot;],&quot;Dobrze. Ta, tok, har tatt.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(15)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f15"></div><div class="sol" id="s15">Wzorcowa odpowiedź: <b>tok</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Ta jest nieregularny: tok, tatt.</p></details>
+</section>
+<section class="task" data-id="16">
+<h2>16. Uzupełnij</h2>
+<p class="hint">przyjść (nieregularny)</p>
+<div class="inline sent">Kunden <input type="text" id="t16" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> hjem klokka fire.</div>
+<div class="row"><button class="btn" onclick="checkText(16,[&quot;kom&quot;],&quot;Dobrze. Komme, kom, har kommet.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(16)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f16"></div><div class="sol" id="s16">Wzorcowa odpowiedź: <b>kom</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Komme jest nieregularny: kom.</p></details>
+</section>
+<section class="task" data-id="17">
+<h2>17. Uzupełnij</h2>
+<p class="hint">stać się (nieregularny)</p>
+<div class="inline sent">Etter tre timer <input type="text" id="t17" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> badet helt rent.</div>
+<div class="row"><button class="btn" onclick="checkText(17,[&quot;ble&quot;],&quot;Dobrze. Bli, ble, har blitt.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(17)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f17"></div><div class="sol" id="s17">Wzorcowa odpowiedź: <b>ble</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Bli = stawać się. Czas przeszły: ble.</p></details>
+</section>
+<section class="task" data-id="18">
+<h2>18. Uzupełnij</h2>
+<p class="hint">opowiedzieć (nieregularny)</p>
+<div class="inline sent">Læreren <input type="text" id="t18" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> en morsom historie på foreldremøtet.</div>
+<div class="row"><button class="btn" onclick="checkText(18,[&quot;fortalte&quot;],&quot;Dobrze. Fortelle, fortalte, har fortalt.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(18)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f18"></div><div class="sol" id="s18">Wzorcowa odpowiedź: <b>fortalte</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Fortelle zmienia samogłoskę: e → a, jak velge, valgte.</p></details>
+</section>
+<section class="task" data-id="19">
+<h2>19. Uzupełnij</h2>
+<p class="hint">spotkać</p>
+<div class="inline sent">Jeg <input type="text" id="t19" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> en gammel venninne på butikken.</div>
+<div class="row"><button class="btn" onclick="checkText(19,[&quot;møtte&quot;, &quot;traff&quot;],&quot;Dobrze. Møte, møtte (albo treffe, traff).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(19)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f19"></div><div class="sol" id="s19">Wzorcowa odpowiedź: <b>møtte</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Møte, møtte (-te). Inny czasownik o tym znaczeniu: treffe, traff.</p></details>
+</section>
+<section class="task" data-id="20">
+<h2>20. Uzupełnij</h2>
+<p class="hint">wiedzieć (nieregularny)</p>
+<div class="inline sent">Jeg <input type="text" id="t20" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> ikke at kunden hadde en katt.</div>
+<div class="row"><button class="btn" onclick="checkText(20,[&quot;visste&quot;],&quot;Dobrze. Vite, vet, visste.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(20)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f20"></div><div class="sol" id="s20">Wzorcowa odpowiedź: <b>visste</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Vite: teraz vet, w czasie przeszłym visste (podwójne s).</p></details>
+</section>
+<section class="task" data-id="21">
+<h2>21. Uzupełnij</h2>
+<p class="hint">spaść (nieregularny)</p>
+<div class="inline sent">Bøtta <input type="text" id="t21" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> ned trappa.</div>
+<div class="row"><button class="btn" onclick="checkText(21,[&quot;falt&quot;],&quot;Dobrze. Falle, falt, har falt.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(21)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f21"></div><div class="sol" id="s21">Wzorcowa odpowiedź: <b>falt</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Falle: falt w czasie przeszłym i po har.</p></details>
+</section>
+<section class="task" data-id="22">
+<h2>22. Uzupełnij</h2>
+<p class="hint">zmienić, wymienić (pościel)</p>
+<div class="inline sent">Jeg <input type="text" id="t22" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> sengetøyet i alle rommene.</div>
+<div class="row"><button class="btn" onclick="checkText(22,[&quot;skiftet&quot;, &quot;byttet&quot;],&quot;Dobrze. Skifte, skiftet (albo bytte, byttet).&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(22)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f22"></div><div class="sol" id="s22">Wzorcowa odpowiedź: <b>skiftet</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Dwie spółgłoski: -et. Å skifte sengetøy = zmienić pościel.</p></details>
+</section>
+<h2 class="part">Część C: Napisz w czasie przeszłym</h2>
+<p class="partintro">Przepisz zdanie w czasie przeszłym i zacznij od podanego słowa. Pamiętaj: czasownik na 2. miejscu, potem osoba.</p>
+<section class="task" data-id="23">
+<h2>23. Czas przeszły</h2>
+<p class="given">Jeg tar på meg gummihansker.</p>
+<div class="rw"><span>Først</span><input type="text" id="t23" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(23,[&quot;tok jeg på meg gummihansker&quot;],&quot;Dobrze. Først (1) tok (2) jeg.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(23)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f23"></div><div class="sol" id="s23">Wzorcowa odpowiedź: <b>Først tok jeg på meg gummihansker.</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Ta → tok. Po „først” czasownik na 2. miejscu, osoba za nim.</p></details>
+</section>
+<section class="task" data-id="24">
+<h2>24. Czas przeszły</h2>
+<p class="given">Jeg fyller bøtta med varmt vann.</p>
+<div class="rw"><span>Så</span><input type="text" id="t24" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(24,[&quot;fylte jeg bøtta med varmt vann&quot;],&quot;Dobrze. Fylle → fylte.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(24)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f24"></div><div class="sol" id="s24">Wzorcowa odpowiedź: <b>Så fylte jeg bøtta med varmt vann.</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Podwójne l: -te i jedno l znika (fylte), jak glemme, glemte.</p></details>
+</section>
+<section class="task" data-id="25">
+<h2>25. Czas przeszły</h2>
+<p class="given">Jeg pusser speilet på badet.</p>
+<div class="rw"><span>Etterpå</span><input type="text" id="t25" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(25,[&quot;pusset jeg speilet på badet&quot;],&quot;Dobrze. Pusse → pusset.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(25)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f25"></div><div class="sol" id="s25">Wzorcowa odpowiedź: <b>Etterpå pusset jeg speilet på badet.</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Podwójne s: -et (pusset).</p></details>
+</section>
+<section class="task" data-id="26">
+<h2>26. Czas przeszły</h2>
+<p class="given">Vi drar hjem klokka tre.</p>
+<div class="rw"><span>Klokka tre</span><input type="text" id="t26" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(26,[&quot;dro vi hjem&quot;],&quot;Dobrze. Dra, dro, har dratt.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(26)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f26"></div><div class="sol" id="s26">Wzorcowa odpowiedź: <b>Klokka tre dro vi hjem.</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Dra jest nieregularny: dro.</p></details>
+</section>
+<section class="task" data-id="27">
+<h2>27. Czas przeszły</h2>
+<p class="given">Sønnen min ser ikke på TV.</p>
+<div class="rw"><span>I går</span><input type="text" id="t27" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(27,[&quot;så sønnen min ikke på tv&quot;],&quot;Dobrze. I går (1) så (2) sønnen min, potem ikke.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(27)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f27"></div><div class="sol" id="s27">Wzorcowa odpowiedź: <b>I går så sønnen min ikke på TV.</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Se → så. Po inwersji „ikke” stoi za podmiotem: så sønnen min ikke.</p></details>
+</section>
+<section class="task" data-id="28">
+<h2>28. Czas przeszły</h2>
+<p class="given">Jeg legger klærne i skapet.</p>
+<div class="rw"><span>Etter vasken</span><input type="text" id="t28" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(28,[&quot;la jeg klærne i skapet&quot;],&quot;Dobrze. Legge, la, har lagt.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(28)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f28"></div><div class="sol" id="s28">Wzorcowa odpowiedź: <b>Etter vasken la jeg klærne i skapet.</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Legge (kłaść) → la. Nie myl z ligge (leżeć) → lå.</p></details>
+</section>
+<section class="task" data-id="29">
+<h2>29. Czas przeszły</h2>
+<p class="given">Kunden gir meg nøkkelen.</p>
+<div class="rw"><span>I går</span><input type="text" id="t29" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(29,[&quot;ga kunden meg nøkkelen&quot;],&quot;Dobrze. Gi, ga, har gitt.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(29)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f29"></div><div class="sol" id="s29">Wzorcowa odpowiedź: <b>I går ga kunden meg nøkkelen.</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Gi → ga. Kunden przechodzi za czasownik.</p></details>
+</section>
+<section class="task" data-id="30">
+<h2>30. Czas przeszły</h2>
+<p class="given">Vi synger for Even på bursdagen hans.</p>
+<div class="rw"><span>I helgen</span><input type="text" id="t30" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(30,[&quot;sang vi for even på bursdagen hans&quot;],&quot;Dobrze. Synge, sang, har sunget.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(30)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f30"></div><div class="sol" id="s30">Wzorcowa odpowiedź: <b>I helgen sang vi for Even på bursdagen hans.</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>Synge → sang (i → a), jak drikke → drakk.</p></details>
+</section>
+<h2 class="part">Część D: Pary czasowników</h2>
+<p class="partintro">Połącz bezokolicznik z formą przeszłą.</p>
+<section class="task" data-id="31">
+<h2>31. Połącz w pary</h2>
+<p class="hint">Wybierz formę przeszłą dla każdego czasownika.</p>
+<div class="match">
+<span class="w">å bære</span><select id="m31_0"><option value="">wybierz…</option><option>bar</option><option>dro</option><option>fant</option><option>valgte</option></select>
+<span class="w">å dra</span><select id="m31_1"><option value="">wybierz…</option><option>bar</option><option>dro</option><option>fant</option><option>valgte</option></select>
+<span class="w">å finne</span><select id="m31_2"><option value="">wybierz…</option><option>bar</option><option>dro</option><option>fant</option><option>valgte</option></select>
+<span class="w">å velge</span><select id="m31_3"><option value="">wybierz…</option><option>bar</option><option>dro</option><option>fant</option><option>valgte</option></select>
+</div>
+<button class="btn" onclick="checkMatch(31,{&quot;m31_0&quot;: &quot;bar&quot;, &quot;m31_1&quot;: &quot;dro&quot;, &quot;m31_2&quot;: &quot;fant&quot;, &quot;m31_3&quot;: &quot;valgte&quot;})">Sprawdź</button><div class="fb" id="f31"></div>
+</section>
+<section class="task" data-id="32">
+<h2>32. Połącz w pary</h2>
+<p class="hint">Wybierz formę przeszłą dla każdego czasownika.</p>
+<div class="match">
+<span class="w">å tømme</span><select id="m32_0"><option value="">wybierz…</option><option>feide</option><option>tømte</option><option>tørket</option><option>åpnet</option></select>
+<span class="w">å tørke</span><select id="m32_1"><option value="">wybierz…</option><option>feide</option><option>tømte</option><option>tørket</option><option>åpnet</option></select>
+<span class="w">å feie</span><select id="m32_2"><option value="">wybierz…</option><option>feide</option><option>tømte</option><option>tørket</option><option>åpnet</option></select>
+<span class="w">å åpne</span><select id="m32_3"><option value="">wybierz…</option><option>feide</option><option>tømte</option><option>tørket</option><option>åpnet</option></select>
+</div>
+<button class="btn" onclick="checkMatch(32,{&quot;m32_0&quot;: &quot;tømte&quot;, &quot;m32_1&quot;: &quot;tørket&quot;, &quot;m32_2&quot;: &quot;feide&quot;, &quot;m32_3&quot;: &quot;åpnet&quot;})">Sprawdź</button><div class="fb" id="f32"></div>
+</section>
+<section class="task" data-id="33">
+<h2>33. Połącz w pary</h2>
+<p class="hint">Wybierz formę przeszłą dla każdego czasownika.</p>
+<div class="match">
+<span class="w">å selge</span><select id="m33_0"><option value="">wybierz…</option><option>ble</option><option>fortalte</option><option>solgte</option><option>visste</option></select>
+<span class="w">å fortelle</span><select id="m33_1"><option value="">wybierz…</option><option>ble</option><option>fortalte</option><option>solgte</option><option>visste</option></select>
+<span class="w">å vite</span><select id="m33_2"><option value="">wybierz…</option><option>ble</option><option>fortalte</option><option>solgte</option><option>visste</option></select>
+<span class="w">å bli</span><select id="m33_3"><option value="">wybierz…</option><option>ble</option><option>fortalte</option><option>solgte</option><option>visste</option></select>
+</div>
+<button class="btn" onclick="checkMatch(33,{&quot;m33_0&quot;: &quot;solgte&quot;, &quot;m33_1&quot;: &quot;fortalte&quot;, &quot;m33_2&quot;: &quot;visste&quot;, &quot;m33_3&quot;: &quot;ble&quot;})">Sprawdź</button><div class="fb" id="f33"></div>
+</section>
+<h2 class="part">Część E: Tekst</h2>
+<p class="partintro">Przeczytaj tekst i uzupełnij zdania czasownikami z tekstu.</p>
+<div class="text"><h2>En lang dag hos familien Berg</h2><p>På tirsdag dro Kari til familien Berg klokka åtte. Fru Berg ga henne nøkkelen og kjørte på jobb.</p><p>Først tømte Kari alle søppelbøttene. Så støvsuget hun stua og vasket gulvet på kjøkkenet. På badet fant hun en gammel ring bak vasken. Hun la ringen på bordet i gangen.</p><p>Klokka to kom fru Berg hjem. Hun ble veldig glad da hun så ringen. «Jeg mistet den for to år siden!» sa hun.</p></div>
+<section class="task" data-id="34">
+<h2>34. Uzupełnij według tekstu</h2>
+<p class="hint">pojechać</p>
+<div class="inline sent">Kari <input type="text" id="t34" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> til familien Berg klokka åtte.</div>
+<div class="row"><button class="btn" onclick="checkText(34,[&quot;dro&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(34)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f34"></div><div class="sol" id="s34">Wzorcowa odpowiedź: <b>dro</b></div>
+</section>
+<section class="task" data-id="35">
+<h2>35. Uzupełnij według tekstu</h2>
+<p class="hint">opróżnić</p>
+<div class="inline sent">Først <input type="text" id="t35" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> Kari alle søppelbøttene.</div>
+<div class="row"><button class="btn" onclick="checkText(35,[&quot;tømte&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(35)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f35"></div><div class="sol" id="s35">Wzorcowa odpowiedź: <b>tømte</b></div>
+</section>
+<section class="task" data-id="36">
+<h2>36. Uzupełnij według tekstu</h2>
+<p class="hint">znaleźć</p>
+<div class="inline sent">På badet <input type="text" id="t36" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> Kari en gammel ring.</div>
+<div class="row"><button class="btn" onclick="checkText(36,[&quot;fant&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(36)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f36"></div><div class="sol" id="s36">Wzorcowa odpowiedź: <b>fant</b></div>
+</section>
+<section class="task" data-id="37">
+<h2>37. Uzupełnij według tekstu</h2>
+<p class="hint">stać się</p>
+<div class="inline sent">Fru Berg <input type="text" id="t37" aria-label="Odpowiedź" autocomplete="off" autocapitalize="off" spellcheck="false"> veldig glad.</div>
+<div class="row"><button class="btn" onclick="checkText(37,[&quot;ble&quot;],&quot;Dobrze.&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(37)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f37"></div><div class="sol" id="s37">Wzorcowa odpowiedź: <b>ble</b></div>
+</section>
+<section class="task" data-id="38">
+<h2>38. Når mistet fru Berg ringen?</h2>
+<div class="opts" data-q="38" data-correct="For to år siden" data-ok="Dobrze.">
+<button class="opt">For to uker siden</button>
+<button class="opt">For to år siden</button>
+<button class="opt">I går</button>
+</div><div class="fb" id="f38"></div>
+</section>
+<section class="task" data-id="39">
+<h2>39. Zadaj pytanie: co?</h2>
+<p class="given">Kari fant en ring.</p>
+<div class="rw"><span>Hva</span><input type="text" id="t39" aria-label="Dokończ zdanie" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="row"><button class="btn" onclick="checkText(39,[&quot;fant kari&quot;],&quot;Dobrze. Hva (1) fant (2) Kari?&quot;)">Sprawdź</button><button class="ghost" onclick="showSol(39)">Pokaż odpowiedź</button></div>
+<div class="fb" id="f39"></div><div class="sol" id="s39">Wzorcowa odpowiedź: <b>Hva fant Kari?</b></div>
+<details class="why"><summary>Podpowiedź: dlaczego?</summary><p>W pytaniu ze słowem pytającym czasownik stoi zaraz po nim.</p></details>
+</section>
+  <div class="done" id="done"><h2>Wszystko zrobione: 39 / 39</h2><p>Pokaż ten wynik lektorce na następnej lekcji.</p></div>
+</main>
+<script>
+const TOTAL=39;const solved=new Set();
+function mark(n,ok,msg){
+  const f=document.getElementById('f'+n);
+  f.className='fb '+(ok?'ok':'bad');f.textContent=msg;
+  if(ok)solved.add(n);
+  document.getElementById('score').textContent=solved.size;
+  document.getElementById('done').style.display=solved.size===TOTAL?'block':'none';
+}
+function norm(s){return s.toLowerCase().replace(/[.,!?;:"«»„”'’]/g,' ').replace(/\s+/g,' ').trim()}
+function checkText(n,answers,okMsg){
+  const v=norm(document.getElementById('t'+n).value);
+  if(!v){mark(n,false,'Wpisz odpowiedź.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź formę i szyk, spróbuj ponownie albo kliknij „Pokaż odpowiedź”.');
+}
+function showSol(n){document.getElementById('s'+n).style.display='block'}
+document.querySelectorAll('.opts').forEach(g=>{
+  g.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const n=+g.dataset.q, ok=b.textContent===g.dataset.correct;
+    g.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));
+    b.classList.add(ok?'ok':'bad');
+    if(ok)g.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    mark(n,ok,ok?g.dataset.ok:'Jeszcze nie. Spróbuj inną opcję.');
+  }));
+});
+function checkMatch(n,key){
+  let good=0;const all=Object.keys(key).length;
+  for(const id in key){const s=document.getElementById(id);const ok=s.value===key[id];if(ok)good++;
+    s.style.borderColor=s.value?(ok?'var(--ok)':'var(--bad)'):'var(--border)';}
+  mark(n,good===all,good===all?'Dobrze. Wszystkie pary pasują.':'Poprawnie: '+good+' z '+all+'. Popraw zaznaczone na czerwono.');
+}
+function pick(n,b){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);(b.parentNode===l?p:l).appendChild(b)}
+function clearOrder(n){const l=document.getElementById('l'+n),p=document.getElementById('p'+n);[...l.children].forEach(b=>p.appendChild(b))}
+function checkOrder(n,answers,okMsg){
+  const v=norm([...document.getElementById('l'+n).children].map(b=>b.textContent).join(' '));
+  if(!v){mark(n,false,'Kliknij słowa w poprawnej kolejności.');return}
+  const ok=answers.map(norm).includes(v);
+  mark(n,ok,ok?okMsg:'Jeszcze nie. Sprawdź, gdzie stoi czasownik, i spróbuj ponownie.');
+}
+</script>
+
+</body>
+</html>
