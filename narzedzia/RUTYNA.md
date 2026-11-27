@@ -30,6 +30,17 @@ Narzędzia: Google Drive (connector), repo `norskling/cwiczenia` (ten katalog), 
 6. W raporcie przy każdym kursancie wypisz, które wpisy feedbacku zastosowałeś (nazwa dokumentu). Wpis niejasny albo sprzeczny z notatkami: zapisz to w raporcie.
 7. Treści feedbacku nie kopiuj do repo (repo jest publiczne).
 
+## 1b. Stałe zasady jakości (feedback lektorek, obowiązują zawsze)
+
+Zasady z feedbacku lektorek przeniesione na stałe do procedury. Obowiązują u wszystkich kursantów, także gdy baza na Drive jest pusta.
+
+1. **Bez personalnych wstawek.** Nie komentuj, że materiał jest o zainteresowaniach kursanta (źle: „Wioletta, ten zestaw jest o rzeczach, które lubisz: koty, robienie na drutach…”). Zainteresowania i profil wplataj w treść zdań, bez mówienia o tym. Wstępy do zestawów bez zwracania się po imieniu. (2026-11-27)
+2. **Bez podpowiedzi gramatycznych w poleceniach od A2 wzwyż.** Polecenie nie mówi, jaki rodzaj ma słowo, w jakiej formie (określona/nieokreślona, liczba, czas) je wpisać itp. Kursant ma to wiedzieć sam. Na A1 wolno, oszczędnie. Wyjaśnienie „dlaczego” należy do przycisku podpowiedzi (`why`) po odpowiedzi, nie do polecenia. (2026-11-27)
+3. **Zadania nie za banalne.** Trudność dopasuj do poziomu: unikaj zadań rozwiązywalnych bez znajomości tematu lekcji, zgadywanych z kontekstu albo z jedną oczywistą odpowiedzią. Od B1 przewaga zadań, w których kursant sam tworzy formę (wpisywanie, przekształcanie, układanie zdań), nad prostym wyborem. (2026-11-27)
+4. **Reguły gramatyczne muszą być prawdziwe.** Nie upraszczaj reguły tak, że staje się fałszywa. Źle: „„en” razem z końcówką -en nigdy nie występuje” (są *en morgen*, *en eksamen*). Dobrze: „Nie łączymy rodzajnika nieokreślonego z formą określoną: *en bil* albo *bilen*, nigdy *en bilen*.” Przed wpisaniem reguły do polecenia, podpowiedzi albo slajdu sprawdź, czy nie ma oczywistych wyjątków; jeśli są, sformułuj ją węziej albo pomiń. (2026-11-27)
+
+Nowe stałe zasady dopisuje tu Claude, gdy Monika przekaże feedback lektorki. Bieżący feedback lektorek z Drive (sekcja 1a) uzupełnia te zasady.
+
 ## 2. Odczytaj notatki (`read_file_content`)
 
 Tabele mają 2 kolumny: etykieta WIELKIMI LITERAMI z dwukropkiem, wartość po prawej. Zaznaczenie = `[X]` lub `[x]`, puste = `[ ]`
