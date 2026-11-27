@@ -6,6 +6,7 @@ Narzędzia: Google Drive (connector), repo `norskling/cwiczenia` (ten katalog), 
 ## 0. Stałe
 
 - Shared drive „Automatyczne materiały”, folder **Kursanci indywidualni**: `1QO0JccYarRyCCEx76uD37k5yzI90anhk`
+- Folder **Feedback lektorek** (baza zasad od lektorek): `1zXGjNNPxGWc6zUErT4dtp_gw_7cd80i4` (w katalogu głównym shared drive)
 - Folder **Raporty rutyny** (raport z każdego przebiegu): `1Ij4U5MD2norAN4IRNA7i0JxieoaKEoa-` (w katalogu głównym shared drive)
 - Strony online: `https://norskling.github.io/cwiczenia/c/<slug>.html`
 - Wzorzec jakości (A2, Marta Przykładowa): `narzedzia/przyklady/*.json`, prezentacja Slides `1zpSR6Mgqh2Jfz_B0lNg8NPtm3zA-onQPCMKLIqLBZaM`
@@ -18,6 +19,16 @@ Narzędzia: Google Drive (connector), repo `norskling/cwiczenia` (ten katalog), 
 
 **Gdzie co trafia (Monika, 2026-11-20):** prezentacja i dokument „Lekcja M: materiały na lekcję” → `Folder lektorki / Lekcja M`. Dokument „Lekcja N: słownictwo i zadania” → `Folder kursanta / Lekcja N`. Nic innego nie trafia do folderu kursanta.
 3. Brak dokumentu notatek albo brak któregoś folderu: zapisz w raporcie, przejdź do następnego kursanta.
+
+## 1a. Wczytaj bazę feedbacku lektorek (zawsze, przed kursantami)
+
+1. `search_files` z `parentId = '1zXGjNNPxGWc6zUErT4dtp_gw_7cd80i4'`, tylko dokumenty z nazwą zaczynającą się od „Feedback” (pomiń „_Jak działa baza feedbacku”). Każdy przeczytaj `read_file_content`.
+2. Każdy wpis ma pola: DATA, LEKTORKA, DOTYCZY, MATERIAŁ, CO BYŁO NIE TAK, ZASADA, STATUS. Pomiń wpisy ze STATUS = NIEAKTUALNA.
+3. DOTYCZY = OGÓLNE → stosuj ZASADĘ we wszystkich materiałach (w zakresie pola MATERIAŁ). DOTYCZY = imię kursanta lub nazwa grupy → stosuj tylko u niego/niej.
+4. Kolejność ważności: notatki lektorki z bieżącej lekcji > nowszy wpis feedbacku > starszy wpis > domyślne zasady z tej procedury.
+5. Zasady stosuj przy pisaniu specyfikacji JSON (ćwiczenia, drill, prezentacja, zadanie domowe), zanim uruchomisz generatory. Nie przerabiaj materiałów, które już powstały.
+6. W raporcie przy każdym kursancie wypisz, które wpisy feedbacku zastosowałeś (nazwa dokumentu). Wpis niejasny albo sprzeczny z notatkami: zapisz to w raporcie.
+7. Treści feedbacku nie kopiuj do repo (repo jest publiczne).
 
 ## 2. Odczytaj notatki (`read_file_content`)
 
@@ -106,7 +117,7 @@ Ten dokument tworzysz NA KOŃCU kroku, bo jego istnienie oznacza „zrobione”.
 ## 6. Raport
 
 Na koniec przebiegu utwórz w folderze **Raporty rutyny** dokument „Raport rutyny RRRR-MM-DD” (tylko gdy coś powstało albo wystąpił problem):
-dla każdego kursanta: co powstało (linki), co pominięto i dlaczego (np. brak GOTOWE, pakiet wykorzystany, brak zrzutów, błąd wgrania).
+dla każdego kursanta: co powstało (linki), zastosowane wpisy feedbacku, co pominięto i dlaczego (np. brak GOTOWE, pakiet wykorzystany, brak zrzutów, błąd wgrania).
 Bez danych kontaktowych kursantów.
 
 ## 7. Czego nie robić
